@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\Documents\\Projects\\Basiverse\\Basiverse.csproj",
+      "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\Basiverse\\Basiverse.csproj",
       "projectName": "Basiverse",
-      "projectPath": "C:\\Users\\Alex\\Documents\\Projects\\Basiverse\\Basiverse.csproj",
+      "projectPath": "C:\\Users\\Alex\\source\\repos\\Basiverse\\Basiverse.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alex\\Documents\\Projects\\Basiverse\\obj\\",
+      "outputPath": "C:\\Users\\Alex\\source\\repos\\Basiverse\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
