@@ -13,7 +13,7 @@
 x64/
 [Bb]in/
 [Oo]bj/
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
