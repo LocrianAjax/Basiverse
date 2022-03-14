@@ -1,3 +1,7 @@
+using System;
+using Basiverse;
+using System.Collections.Generic;
+
 // TODO
 /*
 This is a tool to create the .bin files for all of the items in the game. Only needs to be run when items are added
@@ -13,3 +17,7 @@ Engine
 CargoHold
 Cargo
 */
+namespace Basiverse{
+
+    
+}

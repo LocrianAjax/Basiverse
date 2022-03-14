@@ -3,8 +3,7 @@ using System.IO;
 using System.Linq;
 using Basiverse;
 
-namespace Basiverse
-{
+namespace Basiverse{
     class Loader{
         /*
             Data Structure:-
@@ -18,9 +17,9 @@ namespace Basiverse
         private string [] Locations;
         public Loader(){
             Locations = new string[3];
-            Locations[0] = Directory.GetCurrentDirectory() + "\\save1\\";
-            Locations[1] = Directory.GetCurrentDirectory() + "\\save2\\";
-            Locations[2] = Directory.GetCurrentDirectory() + "\\save3\\";
+            Locations[0] = Directory.GetCurrentDirectory() + "\\Saves\\save1\\";
+            Locations[1] = Directory.GetCurrentDirectory() + "\\Saves\\save2\\";
+            Locations[2] = Directory.GetCurrentDirectory() + "\\Saves\\save3\\";
         }
         
         public bool CheckSave(int saveNum){
@@ -57,9 +56,9 @@ namespace Basiverse
 
         public Saver(){
             Locations = new string[3];
-            Locations[0] = Directory.GetCurrentDirectory() + "\\save1\\";
-            Locations[1] = Directory.GetCurrentDirectory() + "\\save2\\";
-            Locations[2] = Directory.GetCurrentDirectory() + "\\save3\\";
+            Locations[0] = Directory.GetCurrentDirectory() + "\\Saves\\save1\\";
+            Locations[1] = Directory.GetCurrentDirectory() + "\\Saves\\save2\\";
+            Locations[2] = Directory.GetCurrentDirectory() + "\\Saves\\save3\\";
         }
 
         public int SaveData(int index, string saveName, Player outPlayer){
