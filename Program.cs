@@ -23,7 +23,7 @@ namespace Basiverse
             // Create the Save/Load menu
             while(true){  
                 PrintHeader();          
-                Console.Write("\nPlease make a selection - \n1. New Game\n2. Load Game\n3. Quit\n4. Debug Menu\n: ");
+                Console.Write("\n\n1. New Game\n2. Load Game\n3. Quit\n4. Debug Menu\nPlease make a selection -: ");
                 string selection = Console.ReadLine();
                 switch(selection){
                     case "1":
@@ -35,7 +35,7 @@ namespace Basiverse
                     case "3":
                         return;
                     case "4":
-                        TestDataAcess();
+                        DebugMenu();
                     break;
                     default:
                     break;
@@ -130,6 +130,31 @@ namespace Basiverse
             Game TestGame = new Game(LoadPlayer);
             TestGame.Dump();
             Console.ReadKey();
+        }
+
+        static void DebugMenu(){
+            while(true){  
+                PrintHeader();
+                Console.WriteLine("DEBUG MENU");
+                Console.Write("\n\n1. Test Data Acess\n2. \n3. \n4. Quit\nPlease make a selection -: ");
+                string selection = Console.ReadLine();
+                switch(selection){
+                    case "1":
+                        TestDataAcess();
+                    break;
+                    case "2":
+                        // Blank
+                    break;
+                    case "3":
+                        // Blank
+                    break;
+                    case "4":
+                        return;
+                    default:
+                        break;
+                }
+            }
+        
         }
 
     }
