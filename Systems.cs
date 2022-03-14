@@ -119,7 +119,7 @@ namespace Basiverse
         private int _currSize = 0;
         public int CurrentSize{ get {return _currSize;} set {_currSize = value;}}
 
-        public List<Cargo> HoldItems;
+        public List<Cargo> HoldItems = new List<Cargo>();
 }
     
     [Serializable]

@@ -50,12 +50,12 @@ namespace Basiverse
             _missiles = new Missile();
             _missiles.Name = "Basicorps Bottle Rockets"; // Set Default Missile
             _missiles.Damage = 10;
-            _missiles.HitChance = .7;
+            _missiles.HitChance = .6;
             _missiles.Stock = 10;
             
             _engine = new Engine();
             _engine.Name = "Basic Manuvering Thrusters"; // Set Default Engine
-            _engine.FleeChance = .5;
+            _engine.FleeChance = .3;
 
             _hold = new CargoHold();
             _hold.Name = "Glovebox"; // Set default cargo hold
