@@ -10,7 +10,7 @@ namespace Basiverse
 {
     class ItemWriterHelper
     {
-        public async void CreateObjects()
+        public void CreateObjects()
         {
             // Hull
             int hullNum = 6;
