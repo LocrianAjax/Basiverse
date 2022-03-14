@@ -35,13 +35,13 @@ namespace Basiverse
 
     [Serializable]
     class Heatsink{ // Heatsinks have a name, a pasive value, an active value, an active flag, and a cost
-        private string _name = "";
+        private string _name = "None";
         public string Name{ get {return _name;} set {_name = value;}}
 
-        private int _passiveval;
+        private int _passiveval = 0;
         public int PassiveVal{ get {return _passiveval;} set {_passiveval = value;}}
 
-        private int _activeval;
+        private int _activeval = 0;
         public int ActiveVal{ get {return _activeval;} set {_activeval = value;}}
 
         private bool _isactive = false;
