@@ -10,5 +10,16 @@ namespace Basiverse{
             Map outMap = new Map();
             return outMap; // Temp
         }
+
+        private List<PointofInterest> GetPointofInterests(){
+            List<PointofInterest> outPoi = new List<PointofInterest>();
+            return outPoi;
+        }
+
+        private List<Location> GetLocations(){
+            List<Location> outLocation = new List<Location>();
+            return outLocation;
+            
+        }
     }
 }
