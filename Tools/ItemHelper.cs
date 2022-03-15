@@ -5,7 +5,7 @@ using System.IO;
 
 // TODO
 /*
-This is a tool to create the .bin files for all of the items in the game. Only needs to be run when items are added
+This is a tool to create the .bin files for all of the items in the game. Additional Debug functionality
 */
 namespace Basiverse
 {
@@ -135,6 +135,66 @@ namespace Basiverse
                 }
             }
             Console.Write("Press any key to continue...");
+            Console.ReadKey();
+        }
+    
+        public void LoadObjTest(){
+            Console.WriteLine("Loading .bin data from files testing\n");
+            List<Hull> Hulls = BinarySerialization.ReadFromBinaryFile<List<Hull>>("Data\\hull.bin");
+            Console.WriteLine("Hull Data");
+            foreach(Hull temp in Hulls){
+                Console.WriteLine($"{temp.Name} {temp.HullMax} {temp.HeatMax}\n");
+            }
+
+            List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+            Console.WriteLine("Armor Data");
+            foreach(Armor temp in Armors){
+                Console.WriteLine($"{temp.Name} {temp.ArmorValue} {temp.Cost}\n");
+            }
+
+            List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+            Console.WriteLine("Heatsink Data");
+            foreach(Heatsink temp in Heatsinks){
+                Console.WriteLine($"{temp.Name} {temp.ActiveVal} {temp.PassiveVal} {temp.Cost}\n");
+            }
+
+            List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+            Console.WriteLine("Shield Data");
+            foreach(Shield temp in Shields){
+                Console.WriteLine($"{temp.Name} {temp.ShieldMax} {temp.Cost}\n");
+            }
+
+            List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+            Console.WriteLine("Laser Data");
+            foreach(Laser temp in Lasers){
+                Console.WriteLine($"{temp.Name} {temp.Damage} {temp.Heat} {temp.Cost}\n");
+            }
+
+            List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+            Console.WriteLine("Missile Data");
+            foreach(Missile temp in Missiles){
+                Console.WriteLine($"{temp.Name} {temp.Damage} {temp.HitChance} {temp.Cost}\n");
+            }
+
+            List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+            Console.WriteLine("Engine Data");
+            foreach(Engine temp in Engines){
+                Console.WriteLine($"{temp.Name} {temp.FleeChance} {temp.Cost}\n");
+            }
+
+            List<CargoHold> CargoHolds = BinarySerialization.ReadFromBinaryFile<List<CargoHold>>("Data\\cargohold.bin");
+            Console.WriteLine("Cargohold Data");
+            foreach(CargoHold temp in CargoHolds){
+                Console.WriteLine($"{temp.Name} {temp.MaxSize}\n");
+            }
+            
+            List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+            Console.WriteLine("Cargo Data");
+            foreach(Cargo temp in Cargos){
+                Console.WriteLine($"{temp.Name} {temp.Size} {temp.Cost}\n");
+            }
+            
+            Console.Write("\nLoad complete. Press any key to continue....");
             Console.ReadKey();
         }
     }
