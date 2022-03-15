@@ -1,0 +1,51 @@
+// Name|Description|Type(0 is empty, 1 is basic POI, 2 is station, 3 is both)
+OHQ 91B|Nothing much to see here.....|0
+BPN 97H|Nothing much to see here.....|0
+QM-002|Nothing much to see here.....|0
+SMI 78I|Nothing much to see here.....|0
+UEO 87H|Nothing much to see here.....|0
+ENY 18I|Nothing much to see here.....|0
+BT-64|Nothing much to see here.....|0
+NZZ 04E|Nothing much to see here.....|0
+IF 21B|Nothing much to see here.....|0
+ENY 18I|Nothing much to see here.....|0
+BT-64|Nothing much to see here.....|0
+NZZ 04E|Nothing much to see here.....|0
+Draco Astraeus|A system with no stations or colonies, but some natural beauty.|1
+Canis Ophiuchi|A system with no stations or colonies, but some natural beauty.|1
+Sagitta Euphorion|A system with no stations or colonies, but some natural beauty.|1
+Aquila Astraeus|A system with no stations or colonies, but some natural beauty.|1
+Aquila Andromeda|A system with no stations or colonies, but some natural beauty.|1
+Proxima Alatheia|A system with no stations or colonies, but some natural beauty.|1
+Aquila Centaurus|A system with no stations or colonies, but some natural beauty.|1
+Beta Polystratus|A system with no stations or colonies, but some natural beauty.|1
+Aldebaran Nebula|A system with no stations or colonies, but some natural beauty.|1
+Beta Polystratus|A system with no stations or colonies, but some natural beauty.|1
+Aldebaran Nebula|A system with no stations or colonies, but some natural beauty.|1
+BWH 20A|A system with no stations or colonies, but some natural beauty.|1
+Epsilon Odysseus|A system with no stations or colonies, but some natural beauty.|1
+IP-231|A system with no stations or colonies, but some natural beauty.|1
+Proxima Aegialeus|A system with no stations or colonies, but some natural beauty.|1
+MU 58I|A system with no stations or colonies, but some natural beauty.|1
+BA-906|A system with no stations or colonies, but some natural beauty.|1
+Draco Leporis|A system with a station where you can dock.|2
+Epsilon Sagittarius|A system with a station where you can dock.|2
+Carina Euphorion|A system with a station where you can dock.|2
+Omicron Hemithea|A system with a station where you can dock.|2
+Ilioneus Galaxy|A system with a station where you can dock.|2
+BR-14|A system with a station where you can dock.|2
+KYW 0A|A system with a station where you can dock.|2
+IFB 54E|A system with a station where you can dock.|2
+Zeta Aurigae|A system with a station where you can dock.|2
+Crown Nebula|A system with a station where you can dock.|2
+NI-435|A system with a station where you can dock.|2
+ZZ-66|A system with a station where you can dock.|2
+Zeta Zagreus|A system with a station where you can dock.|2
+Ursa Asteria|A system with a station where you can dock, and some nice features in the area.|2
+ILP 48I|A system with a station where you can dock, and some nice features in the area.|3
+Zeta Capella|A system with a station where you can dock, and some nice features in the area.|3
+JZO 77H|A system with a station where you can dock, and some nice features in the area.|3
+Virgo Aegimius|A system with a station where you can dock, and some nice features in the area.|3
+Omicron Hemithea|A system with a station where you can dock, and some nice features in the area.|3
+ADO 3K|A system with a station where you can dock, and some nice features in the area.|3
+SV-959|A system with a station where you can dock, and some nice features in the area.|3
