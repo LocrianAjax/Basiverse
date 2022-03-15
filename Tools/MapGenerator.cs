@@ -13,13 +13,18 @@ namespace Basiverse{
 
         private List<PointofInterest> GetPointofInterests(){
             List<PointofInterest> outPoi = new List<PointofInterest>();
+            string [] lines;
+            lines = System.IO.File.ReadAllLines("Map\\poi.data");
+            // TODO parse data in lines and add to list
             return outPoi;
         }
 
         private List<Location> GetLocations(){
             List<Location> outLocation = new List<Location>();
+            string [] lines;
+            lines = System.IO.File.ReadAllLines("Map\\location.data");
+            // TODO parse data in lines and add to list
             return outLocation;
-            
         }
     }
 }
