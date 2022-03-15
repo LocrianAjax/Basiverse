@@ -9,7 +9,7 @@ This is a tool to create the .bin files for all of the items in the game. Only n
 */
 namespace Basiverse
 {
-    class ItemWriterHelper
+    class ItemHelper
     {
         public void CreateObjects()
         {

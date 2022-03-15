@@ -143,7 +143,7 @@ namespace Basiverse
                         TestDataAcess();
                     break;
                     case "2":
-                        ItemWriterHelper Writer1 = new ItemWriterHelper();
+                        ItemHelper Writer1 = new ItemHelper();
                         Writer1.CreateObjects();
                     break;
                     case "3":
