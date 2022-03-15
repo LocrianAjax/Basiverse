@@ -136,14 +136,15 @@ namespace Basiverse
             while(true){  
                 PrintHeader();
                 Console.WriteLine("DEBUG MENU");
-                Console.Write("\n\n1. Test Data Acess\n2. \n3. \n4. Quit\nPlease make a selection -: ");
+                Console.Write("\n\n1. Test Data Acess\n2. Run Object Bin Creator\n3. \n4. Quit\nPlease make a selection -: ");
                 string selection = Console.ReadLine();
                 switch(selection){
                     case "1":
                         TestDataAcess();
                     break;
                     case "2":
-                        // Blank
+                        ItemWriterHelper Writer1 = new ItemWriterHelper();
+                        Writer1.CreateObjects();
                     break;
                     case "3":
                         // Blank

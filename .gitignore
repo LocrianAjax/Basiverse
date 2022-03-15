@@ -25,3 +25,7 @@ x64/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Data storage folders
+Data/
+Saves/*
