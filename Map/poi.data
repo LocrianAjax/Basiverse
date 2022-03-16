@@ -1,17 +1,17 @@
 // Name|Description|Type(1 is basic POI, 2 is station)
-The Colossal Belt|A thick belt of massive asteroids surrounding the major gas giant.|1
-The Lost Asteroid Belt| It's around here somewhere.......|1
-The Majestic Shower|A wide, but slim belt of asteroids that contains shiny gems that glitter in the light.|1
-The Harmony Belt|A belt of asteroids where humanity first saw signs of extraplanetery life.|1
-The Warped Meteors|The asteroids in this belt look like they've been streched and warped like putty.|1
-The Northern Shower|Swinging by the pole of a local planet, you can see the meteors showers streak through the atmosphere even from space.|!
-The Slim Meteorite|A famous asteroid in the system, miles long but only a few feet wide.|1
-The Phantom Comets|You hear micro-meteors ding off the hull, but local radar shows nothing......spooky|1
-The Spires|Gas clouds that reach out and appear to grab at nothing, like giant fingers.|1
-The Clouds of Jortun|A massive gas cloud takes on various shapes as you look at it, extremly pretty.|1
-The Belts|A series of belts that cross the local gas giant like an atom's electrons.|1
-The Giant|The star in this system is enormous, beyond the scale of a regular has giant.|1
-The Blue Marble|A perfectly blue ocean planet, there are no obvious signs of life but you decide leave it alone.|1 
+Colossal Belt|A thick belt of massive asteroids surrounding the major gas giant.|1
+Lost Asteroid Belt| It's around here somewhere.......|1
+Majestic Shower|A wide, but slim belt of asteroids that contains shiny gems that glitter in the light.|1
+Harmony Belt|A belt of asteroids where humanity first saw signs of extraplanetery life.|1
+Warped Meteors|The asteroids in this belt look like they've been streched and warped like putty.|1
+Northern Shower|Swinging by the pole of a local planet, you can see the meteors showers streak through the atmosphere even from space.|!
+Slim Meteorite|A famous asteroid in the system, miles long but only a few feet wide.|1
+Phantom Comets|You hear micro-meteors ding off the hull, but local radar shows nothing......spooky|1
+Spires|Gas clouds that reach out and appear to grab at nothing, like giant fingers.|1
+Clouds of Jortun|A massive gas cloud takes on various shapes as you look at it, extremly pretty.|1
+Belts|A series of belts that cross the local gas giant like an atom's electrons.|1
+Giant|The star in this system is enormous, beyond the scale of a earth's yellow one.|1
+Blue Marble|A perfectly blue ocean planet, there are no obvious signs of life but you decide leave it alone.|1 
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
@@ -32,7 +32,7 @@ White Dwarf System|The system's star is a previously supernova'd white dwarf, ti
 White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
 Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two eyes.|1
 Wormhhole|It keeps dumping out gas and other various things.|1
-The Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings, and you decide to fly away.|1
+Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings, and you decide to fly away.|1
 Canaan Station|The local station, good for a bite to eat and a little trading.|2
 Nemo Station|The local station, good for a bite to eat and a little trading.|2
 Illume Station|The local station, good for a bite to eat and a little trading.|2

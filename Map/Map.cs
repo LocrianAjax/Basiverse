@@ -8,7 +8,7 @@ This will contain the Map object that contains all of the Location Objects
 */
 namespace Basiverse{
     class Map{ // Map contains the Location nodes
-        List<Location> AllNodes;
+        public List<Location> AllNodes;
     }
 
     class Location{ // Locations contain names, descriptors and maybe points of interest
