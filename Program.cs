@@ -133,21 +133,21 @@ namespace Basiverse
         }
 
         static void DebugMenu(){
-            ItemHelper Writer1 = new ItemHelper();
+            ItemHelper helper1 = new ItemHelper();
             while(true){  
                 PrintHeader();
                 Console.WriteLine("DEBUG MENU");
-                Console.Write("\n\n1. Test Data Acess\n2. Run Object Bin Creator\n3. Load Object Test\n4. Quit\nPlease make a selection -: ");
+                Console.Write("\n\n1. Test Data Acess\n2. Run Object Bin Creator\n3. Load Object Test\n4. Return\nPlease make a selection -: ");
                 string selection = Console.ReadLine();
                 switch(selection){
                     case "1":
                         TestDataAcess();
                     break;
                     case "2":
-                        Writer1.CreateObjects();
+                        helper1.CreateObjects();
                     break;
                     case "3":
-                        Writer1.LoadObjTest();
+                        helper1.LoadObjTest();
                     break;
                     case "4":
                         return;

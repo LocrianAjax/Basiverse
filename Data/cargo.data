@@ -1,8 +1,12 @@
 // Name|Size|Cost
 Ration Pack|1|10
 Hydration Pack|3|20
+Cheap Booze|3|50
+Expensive Alcohol|3|150
 Coffee|3|120
+Tea|3|100
 Luxury Goods|5|170
+Industrial Goods|10|100
 Artwork|10|195
 Minerals|15|120
 Space Gems|50|250
