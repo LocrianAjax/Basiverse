@@ -15,7 +15,15 @@ namespace Basiverse{
             List<PointofInterest> outPoi = new List<PointofInterest>();
             string [] lines;
             lines = System.IO.File.ReadAllLines("Map\\poi.data");
-            // TODO parse data in lines and add to list
+            foreach(string line in lines){
+                if(line.Contains("//")){
+                    continue; // Ignore all lines with // in them
+                }
+                else{
+                    string[] subs = line.Split('|');
+                    outPoi.Add(new PointofInterest(){Name = subs[0], Description = subs[1], Type = Int32.Parse(subs[2])});
+                }
+            }
             return outPoi;
         }
 
@@ -23,7 +31,15 @@ namespace Basiverse{
             List<Location> outLocation = new List<Location>();
             string [] lines;
             lines = System.IO.File.ReadAllLines("Map\\location.data");
-            // TODO parse data in lines and add to list
+            foreach(string line in lines){
+                if(line.Contains("//")){
+                    continue; // Ignore all lines with // in them
+                }
+                else{
+                    string[] subs = line.Split('|');
+                    outLocation.Add(new Location(){Name = subs[0], Description = subs[1], Type = Int32.Parse(subs[2])});
+                }
+            }
             return outLocation;
         }
     }

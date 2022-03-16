@@ -12,15 +12,17 @@ namespace Basiverse{
     }
 
     class Location{ // Locations contain names, descriptors and maybe points of interest
-        string Name;
-        string Description;
-        List<PointofInterest> Interests;
-        List<Location> NearbyNodes;
+        public string Name;
+        public string Description;
+        public int Type;
+        public List<PointofInterest> Interests;
+        public List<Location> NearbyNodes;
     }
 
     class PointofInterest{ // Point of Interest Objects that contain descriptors, names, etc
-        string Name;
-        string Description;
+        public string Name;
+        public string Description;
+        public int Type;
 
         /* Possible Additions - 
            NPCs

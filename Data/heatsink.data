@@ -1,0 +1,7 @@
+// Name|Passive|Active|Cost
+None|0|0|0
+A Backwards Heater|1|10|50
+Basicorps therm01|5|50|100
+Genericon Heatsink|10|75|150
+Heat Dissipation System|20|100|175
+Advanced Heat Siphon|40|150|200
