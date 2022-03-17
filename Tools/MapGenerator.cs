@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Basiverse{
     class MapGen{
 
-        public Map Generate(){
+        public void Generate(bool debug){
             Map outMap = new Map();
             /* 
                 To add POIs - 
@@ -21,78 +21,119 @@ namespace Basiverse{
             var rand = new Random(); // Instantiate random number generator using system-supplied value as seed.
 
             // Get all the location data and poi data
-            Console.WriteLine("Getting Locations and POIs");
+            if(debug){Console.WriteLine("Getting Locations and POIs");}
             List<Location> allLocations = GetLocations();
             List<PointofInterest> allPoi = GetPointofInterests();
             
             // Get the size of locations and pois
             int locSize = allLocations.Count;
             int poiSize = allPoi.Count;
-            Console.WriteLine($"Locsize - {locSize} PoiSize - {poiSize}");
+            if(debug){Console.WriteLine($"Locsize - {locSize} PoiSize - {poiSize}");}
             foreach(Location loc in allLocations){ // Fill out locations
                 // Add the POIs
                 if(loc.Type == 1){ // Type 1 gets basic POI only
-                    Console.WriteLine("Type 1");
+                    if(debug){Console.WriteLine("Type 1");}
                     int numPOI = rand.Next(1, 5); // Generates a number between 0-4
-                    Console.WriteLine($"Adding {numPOI} POIs");
+                    if(debug){Console.WriteLine($"Adding {numPOI} POIs");}
                     for(int i = 0; i < numPOI; i++){
                         int randPOI = rand.Next(0, poiSize);
-                        Console.WriteLine($"Getting POI at position {randPOI}");
-                        while(randPOI != 1){ // Get a random POI of type 1
-                            Console.WriteLine("POI wasn't type 1, retrying");
+                        if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
+                        while(allPoi[randPOI].Type != 1){ // Get a random POI of type 1
+                            if(debug){Console.WriteLine("POI wasn't type 1, retrying");}
                             randPOI = rand.Next(0, poiSize);
-                            Console.WriteLine($"Getting POI at position {randPOI}");
+                            if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
                         }
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
-                        Console.WriteLine("Added to the interests list");
+                        if(debug){Console.WriteLine("Added to the interests list");}
                     }
                 }
-                else if(loc.Type == 2){ // Type 2 gets both stations and basics
-                    Console.WriteLine("Type 2");
+                else if(loc.Type == 2){ // Type 2 gets just stations
+                    if(debug){Console.WriteLine("Type 2");}
                     int numPOI = rand.Next(1, 5); // Generates a number between 0-4
-                    Console.WriteLine($"Adding {numPOI} POIs");
+                    if(debug){Console.WriteLine($"Adding {numPOI} POIs");}
                     for(int i = 0; i < numPOI; i++){
                         int randPOI = rand.Next(0, poiSize); // Grab a POI
-                        Console.WriteLine($"Getting POI at position {randPOI}");
+                        if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
+                        while(allPoi[randPOI].Type != 2){ // If it's not a station we try again
+                            if(debug){Console.WriteLine("POI wasn't type 2, retrying");}
+                            randPOI = rand.Next(0, poiSize);
+                            if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
+                        }
+                        if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
+                        loc.Interests.Add(allPoi[randPOI]); // Add it to the list
+                        allPoi.RemoveAt(randPOI);
+                        poiSize = allPoi.Count;
+                    }
+                }
+                else if(loc.Type == 3){ // Type 3 gets both
+                    if(debug){Console.WriteLine("Type 3");}
+                    int numPOI = rand.Next(1, 3); // Generates a number between 1-3 because we're adding a station later
+                    if(debug){Console.WriteLine($"Adding {numPOI} POIs");}
+                    for(int i = 0; i < numPOI; i++){
+                        int randPOI = rand.Next(0, poiSize); // Grab a POI
+                        if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
                         if(allPoi[randPOI].Type == 2){ // If it's a station, remove it from the list and decrease the size to make sure there are no repeats
-                            Console.WriteLine("Adding a station and removing it from the POI list");
+                            if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
                             allPoi.RemoveAt(randPOI);
                             poiSize = allPoi.Count;
                         }
                     }
+                    // Make sure we add at least 1 station
+                    int rand2 = rand.Next(0, poiSize); // Grab a POI
+                    if(debug){Console.WriteLine($"Getting POI at position {rand2}");}
+                    while(allPoi[rand2].Type != 2){ // If it's not a station we try again
+                        if(debug){Console.WriteLine("POI wasn't type 2, retrying");}
+                        rand2 = rand.Next(0, poiSize);
+                        if(debug){Console.WriteLine($"Getting POI at position {rand2}");}
+                    }
+                    if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
+                    loc.Interests.Add(allPoi[rand2]); // Add it to the list
+                    allPoi.RemoveAt(rand2);
+                    poiSize = allPoi.Count;
+                    
                 }
                 else{ // Case 0, null it out
-                    Console.WriteLine("Type 0: Moving on");
+                    if(debug){Console.WriteLine("Type 0: Moving on");}
                     loc.Interests = null;
                 }
 
                 // Add the links to other nodes
                 int numLoc = rand.Next(1, 5); // Generates a number between 0-4
-                Console.WriteLine($"Adding {numLoc} links");
+                if(debug){Console.WriteLine($"Adding {numLoc} links");}
                 for(int i = 0; i < numLoc; i++){
                     int randLoc = rand.Next(0, locSize);
-                    Console.WriteLine($"Checking if Location at index {randLoc}");
+                    if(debug){Console.WriteLine($"Checking if Location at index {randLoc}");}
                     if ((loc.NearbyNodes == null)){
-                        Console.WriteLine($"Nearby is null, linking the two together");
+                        if(debug){Console.WriteLine($"Nearby is null, linking the two together");}
                         // Link them both to each other 
                         loc.NearbyNodes.Add(allLocations[randLoc]);
                         allLocations[randLoc].NearbyNodes.Add(loc);
                     }
                     else if(!(loc.NearbyNodes.Contains(allLocations[randLoc]))){ // Check if it already contains that location and skip if it does
-                        Console.WriteLine($"Linking the two together");
+                        if(debug){Console.WriteLine($"Linking the two together");}
                         // Link them both to each other 
                         loc.NearbyNodes.Add(allLocations[randLoc]);
                         allLocations[randLoc].NearbyNodes.Add(loc);
                     }
                 }
-                Console.WriteLine("Adding the location to the list of nodes");
+                if(debug){Console.WriteLine("Adding the location to the list of nodes");}
                 outMap.AllNodes.Add(loc); // Then add the loc to the map
             }
-            Console.WriteLine("Map gen complete");
-            return outMap; // Temp
+            if(debug){Console.WriteLine("Map gen complete");
+            Console.WriteLine("Press any Key to continue......");
+            Console.ReadKey();}
+            BinarySerialization.WriteToBinaryFile<Map>("Map\\map.bin", outMap);
+            return;
         }
 
+        public void CheckBin(){
+            Map dMap = BinarySerialization.ReadFromBinaryFile<Map>("Map\\map.bin");
+            dMap.dump();
+            Console.WriteLine("Press any Key to continue......");
+            Console.ReadKey();
+        }
+    
         private List<PointofInterest> GetPointofInterests(){
             List<PointofInterest> outPoi = new List<PointofInterest>();
             string [] lines;

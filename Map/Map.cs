@@ -7,22 +7,57 @@ using System.Collections.Generic;
 This will contain the Map object that contains all of the Location Objects
 */
 namespace Basiverse{ // ADD CONSTRUCTIORS
+    [Serializable]
     class Map{ // Map contains the Location nodes
         public List<Location> AllNodes = new List<Location>();
+
+        public void dump(){
+            Console.WriteLine("Dumping Map Data\n");
+            foreach(Location node in AllNodes){
+                node.dump();
+            }
+            Console.WriteLine("Press any Key to continue......");
+            Console.ReadKey();
+        }
     }
 
+
+    [Serializable]
     class Location{ // Locations contain names, descriptors and maybe points of interest
         public string Name = "";
         public string Description = "";
         public int Type = 0;
         public List<PointofInterest> Interests = new List<PointofInterest>();
         public List<Location> NearbyNodes = new List<Location>();
+
+        public void dump(){
+            Console.WriteLine($"\nLocation Name: {Name} Description: {Description} Type: {Type}");
+            Console.WriteLine("Points of Interest:-");
+            if(Interests != null){
+                foreach(PointofInterest poi in Interests){
+                    poi.dump();
+                }
+            }
+            else{
+                Console.WriteLine("No POIs at this location\n");
+            }
+            Console.WriteLine("\nLinked Nodes:-");
+            foreach(Location loc in NearbyNodes){
+                Console.WriteLine($"{loc.Name}");
+            }
+
+        }
     }
 
+    [Serializable]
     class PointofInterest{ // Point of Interest Objects that contain descriptors, names, etc
         public string Name = "";
         public string Description = "";
         public int Type = 0;
+
+        public void dump(){
+            Console.WriteLine($"POI Name: {Name} Description: {Description} Type: {Type}\n");
+        }
 
         /* Possible Additions - 
            NPCs

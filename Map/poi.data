@@ -1,4 +1,5 @@
 // Name|Description|Type(1 is basic POI, 2 is station)
+// Features
 Colossal Belt|A thick belt of massive asteroids surrounding the major gas giant.|1
 Lost Asteroid Belt| It's around here somewhere.......|1
 Majestic Shower|A wide, but slim belt of asteroids that contains shiny gems that glitter in the light.|1
@@ -10,29 +11,36 @@ Phantom Comets|You hear micro-meteors ding off the hull, but local radar shows n
 Spires|Gas clouds that reach out and appear to grab at nothing, like giant fingers.|1
 Clouds of Jortun|A massive gas cloud takes on various shapes as you look at it, extremly pretty.|1
 Belts|A series of belts that cross the local gas giant like an atom's electrons.|1
-Giant|The star in this system is enormous, beyond the scale of a earth's yellow one.|1
+// Planets
 Blue Marble|A perfectly blue ocean planet, there are no obvious signs of life but you decide leave it alone.|1 
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
 Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
-Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
-Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
+// Suns
+Giant|The star in this system is enormous, beyond the scale of a earth's yellow one.|1
 Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
 Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
 Trinary System|The system contains three orbiting stars, you're not sure if you should note this for later, but forget.|1
 Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
 Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
-Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
-Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
 White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
-White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
-White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
-White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+// Other
 Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two eyes.|1
 Wormhhole|It keeps dumping out gas and other various things.|1
 Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings, and you decide to fly away.|1
+// Type 2 "Basic Station"
 Canaan Station|The local station, good for a bite to eat and a little trading.|2
 Nemo Station|The local station, good for a bite to eat and a little trading.|2
 Illume Station|The local station, good for a bite to eat and a little trading.|2
@@ -41,26 +49,54 @@ Phoenix Colony|The local station, good for a bite to eat and a little trading.|2
 Saga Colony|The local station, good for a bite to eat and a little trading.|2
 Aeris Station|The local station, good for a bite to eat and a little trading.|2
 Lumina Station|The local station, good for a bite to eat and a little trading.|2
+Legacy Station|The local station, good for a bite to eat and a little trading.|2
+Epitome Station|The local station, good for a bite to eat and a little trading.|2
+Lagrange Station|The local station, good for a bite to eat and a little trading.|2
+Goddard Station| The local station, good for a bite to eat and a little trading.|2
+Vestige Station| The local station, good for a bite to eat and a little trading.|2
+// Type 2 "Science Station"
 Terminus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
 Aeon Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
 Erebus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
 Outlander Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
 Atlas Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
 Trivia Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Shangris Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Aether Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Goddard Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Newton Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Heinlein Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Prachett Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+// Type 2 "Base"
 Chrono Base|A former military base turned trading post.|2
 Shu Base|A former military base turned trading post.|2
 Rogue Base|A former military base turned trading post.|2
 Vanquish Base|A former military base turned trading post.|2
 Arcadia Base|A former military base turned trading post.|2
+Phantom Base|A former military base turned trading post.|2
+Marvel Base|A former military base turned trading post.|2
+Magi Base|A former military base turned trading post.|2
+// Type 2 "Terminal"
 Artemis Terminal|A trade-hub station, lots of good, services, and people available.|2
 Mammoth Terminal|A trade-hub station, lots of good, services, and people available.|2
 Elyse Terminal|A trade-hub station, lots of good, services, and people available.|2
 Pioneer Terminal|A trade-hub station, lots of good, services, and people available.|2
 Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2
 Nyx Terminal|A trade-hub station, lots of good, services, and people available.|2
+Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2
+// Type 2 " Religous Colony"
 Parable Colony|A religous colony ship, orbited as a spacestation may years ago.|2
 Halo Station|A religous colony ship, orbited as a spacestation may years ago.|2
 Revelation Station|A religous colony ship, orbited as a spacestation may years ago.|2
-Daydream|A former colony ship turned into a spacestation.|2
+Revelation Colony|A religous colony ship, orbited as a spacestation may years ago.|2
+// Type 2 "Colony"
 Nox Colony|A former colony ship turned into a spacestation.|2
+Atlas Colony|A former colony ship turned into a spacestation.|2
+Shangris Colony|A former colony ship turned into a spacestation.|2
+Elyse Colony|A former colony ship turned into a spacestation.|2
+// Type 2 "No descriptor"
+Daydream|A former colony ship turned into a spacestation.|2
 Ancestor|A former colony ship turned into a spacestation.|2
+Felicity|A former colony ship turned into a spacestation.|2
+// Type 2 "Special"
+Blue Moon Colony|A corporate sponsored station.|2
