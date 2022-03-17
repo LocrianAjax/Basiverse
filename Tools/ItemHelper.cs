@@ -176,8 +176,6 @@ namespace Basiverse
                     Console.WriteLine($"Error! {location}.bin not vertified!");
                 }
             }
-            Console.Write("Press any key to continue...");
-            Console.ReadKey();
         }
     
         public void LoadObjTest(){

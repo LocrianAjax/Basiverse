@@ -5,7 +5,9 @@ Will start branching once a basic v0.1 alpha is semi-playable
 
 TODO:
 
-Startup check to generate .bin files
+Error Handling
+
+.ini files and settings
 
 NPCs and NPC Locations
 

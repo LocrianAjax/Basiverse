@@ -1,6 +1,7 @@
 ﻿using System;
 using Basiverse;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Basiverse
 {
@@ -8,10 +9,11 @@ namespace Basiverse
     {
         static void Main(string[] args)
         {
+            Startup();
             // Create the intro
             PrintHeader();
             Console.Write("\nBasicOs Loading");
-            for(int i = 0; i < 10; i++){System.Threading.Thread.Sleep(400); Console.Write(".");}
+            for(int i = 0; i < 10; i++){System.Threading.Thread.Sleep(100); Console.Write(".");}
             Console.WriteLine("\nWelcome USER");
             Console.Clear();
             MainMenu();
@@ -162,6 +164,34 @@ namespace Basiverse
                 }
             }
         
+        }
+
+        static void Startup(){
+            try{
+                Console.WriteLine("Beginning Game Initialization.....");
+                Console.WriteLine("Generating bin files");
+                ItemHelper helper1 = new ItemHelper();
+                helper1.CreateObjects();
+                Console.WriteLine("Complete");
+                Console.WriteLine("Creating Saves Directory if needed");
+                string [] Locations = new string[3];
+                Locations[0] = Directory.GetCurrentDirectory() + "\\Saves\\save1\\";
+                Locations[1] = Directory.GetCurrentDirectory() + "\\Saves\\save2\\";
+                Locations[2] = Directory.GetCurrentDirectory() + "\\Saves\\save3\\";
+                foreach(string loc in Locations){
+                    if(Directory.Exists(loc)){
+                        Console.WriteLine($"Save folder at {loc} already exists");
+                    }
+                    else{
+                        DirectoryInfo di = Directory.CreateDirectory(loc);
+                        Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(loc));
+
+                    }
+                }
+            }
+            catch (Exception e){
+                Console.WriteLine("Setup failed: {0}", e.ToString());
+            }
         }
 
     }
