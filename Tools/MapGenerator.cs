@@ -21,52 +21,75 @@ namespace Basiverse{
             var rand = new Random(); // Instantiate random number generator using system-supplied value as seed.
 
             // Get all the location data and poi data
+            Console.WriteLine("Getting Locations and POIs");
             List<Location> allLocations = GetLocations();
             List<PointofInterest> allPoi = GetPointofInterests();
             
             // Get the size of locations and pois
             int locSize = allLocations.Count;
             int poiSize = allPoi.Count;
-
+            Console.WriteLine($"Locsize - {locSize} PoiSize - {poiSize}");
             foreach(Location loc in allLocations){ // Fill out locations
                 // Add the POIs
                 if(loc.Type == 1){ // Type 1 gets basic POI only
+                    Console.WriteLine("Type 1");
                     int numPOI = rand.Next(1, 5); // Generates a number between 0-4
+                    Console.WriteLine($"Adding {numPOI} POIs");
                     for(int i = 0; i < numPOI; i++){
-                        int randPOI = rand.Next(0, poiSize + 1);
+                        int randPOI = rand.Next(0, poiSize);
+                        Console.WriteLine($"Getting POI at position {randPOI}");
                         while(randPOI != 1){ // Get a random POI of type 1
-                            randPOI = rand.Next(0, poiSize + 1);
+                            Console.WriteLine("POI wasn't type 1, retrying");
+                            randPOI = rand.Next(0, poiSize);
+                            Console.WriteLine($"Getting POI at position {randPOI}");
                         }
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
+                        Console.WriteLine("Added to the interests list");
                     }
                 }
                 else if(loc.Type == 2){ // Type 2 gets both stations and basics
+                    Console.WriteLine("Type 2");
                     int numPOI = rand.Next(1, 5); // Generates a number between 0-4
+                    Console.WriteLine($"Adding {numPOI} POIs");
                     for(int i = 0; i < numPOI; i++){
-                        int randPOI = rand.Next(0, poiSize + 1); // Grab a POI
+                        int randPOI = rand.Next(0, poiSize); // Grab a POI
+                        Console.WriteLine($"Getting POI at position {randPOI}");
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
                         if(allPoi[randPOI].Type == 2){ // If it's a station, remove it from the list and decrease the size to make sure there are no repeats
+                            Console.WriteLine("Adding a station and removing it from the POI list");
                             allPoi.RemoveAt(randPOI);
-                            poiSize--;
+                            poiSize = allPoi.Count;
                         }
                     }
                 }
                 else{ // Case 0, null it out
+                    Console.WriteLine("Type 0: Moving on");
                     loc.Interests = null;
                 }
 
                 // Add the links to other nodes
                 int numLoc = rand.Next(1, 5); // Generates a number between 0-4
+                Console.WriteLine($"Adding {numLoc} links");
                 for(int i = 0; i < numLoc; i++){
-                    int randLoc = rand.Next(0, locSize + 1);
-                    if(!(loc.NearbyNodes.Contains(allLocations[randLoc]))){ // Check if it already contains that location and skip if it does
+                    int randLoc = rand.Next(0, locSize);
+                    Console.WriteLine($"Checking if Location at index {randLoc}");
+                    if ((loc.NearbyNodes == null)){
+                        Console.WriteLine($"Nearby is null, linking the two together");
                         // Link them both to each other 
                         loc.NearbyNodes.Add(allLocations[randLoc]);
                         allLocations[randLoc].NearbyNodes.Add(loc);
                     }
-                } 
+                    else if(!(loc.NearbyNodes.Contains(allLocations[randLoc]))){ // Check if it already contains that location and skip if it does
+                        Console.WriteLine($"Linking the two together");
+                        // Link them both to each other 
+                        loc.NearbyNodes.Add(allLocations[randLoc]);
+                        allLocations[randLoc].NearbyNodes.Add(loc);
+                    }
+                }
+                Console.WriteLine("Adding the location to the list of nodes");
                 outMap.AllNodes.Add(loc); // Then add the loc to the map
             }
+            Console.WriteLine("Map gen complete");
             return outMap; // Temp
         }
 

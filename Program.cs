@@ -8,7 +8,6 @@ namespace Basiverse
     {
         static void Main(string[] args)
         {
-            
             // Create the intro
             PrintHeader();
             Console.Write("\nBasicOs Loading");
@@ -134,10 +133,11 @@ namespace Basiverse
 
         static void DebugMenu(){
             ItemHelper helper1 = new ItemHelper();
+            MapGen mapHelper = new MapGen();
             while(true){  
                 PrintHeader();
                 Console.WriteLine("DEBUG MENU");
-                Console.Write("\n\n1. Test Data Acess\n2. Run Object Bin Creator\n3. Load Object Test\n4. Return\nPlease make a selection -: ");
+                Console.Write("\n\n1. Test Data Acess\n2. Run Object Bin Creator\n3. Load Object Test\n4. Generate Map\n5. Quit\n Please make a selection -: ");
                 string selection = Console.ReadLine();
                 switch(selection){
                     case "1":
@@ -150,6 +150,10 @@ namespace Basiverse
                         helper1.LoadObjTest();
                     break;
                     case "4":
+                        Map testMap = mapHelper.Generate();
+                        Console.WriteLine("TODO: Map dump");
+                    break;
+                    case "5":
                         return;
                     default:
                         break;
