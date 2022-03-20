@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.Configuration;
+using System;
 using Basiverse;
 using System.Collections.Generic;
 using System.IO;
-using System.Configuration;
-using System.Collections.Specialized;
 
 namespace Basiverse
 {
@@ -190,6 +189,9 @@ namespace Basiverse
 
                     }
                 }
+
+                // Read settings and display if needed
+                string sAttr = ConfigurationManager.AppSettings.Get("debugMode");
             }
             catch (Exception e){
                 Console.WriteLine("Setup failed: {0}", e.ToString());
