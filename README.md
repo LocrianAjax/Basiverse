@@ -7,7 +7,7 @@ TODO:
 
 Error Handling
 
-.ini files and settings
+app.config file and settings menu
 
 NPCs and NPC Locations
 

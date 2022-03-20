@@ -2,6 +2,8 @@
 using Basiverse;
 using System.Collections.Generic;
 using System.IO;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace Basiverse
 {
