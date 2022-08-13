@@ -2,7 +2,7 @@ using System;
 using Basiverse;
 using System.Collections.Generic;
 
-// TODO Generate a random map based on data
+// Generates a random map based on locations and POIS from data files
 namespace Basiverse{
     class MapGen{
 

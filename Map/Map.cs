@@ -2,11 +2,10 @@ using System;
 using Basiverse;
 using System.Collections.Generic;
 
-// TODO
 /*
-This will contain the Map object that contains all of the Location Objects
+This contains the Map object that contains all of the Location Objects
 */
-namespace Basiverse{ // ADD CONSTRUCTIORS
+namespace Basiverse{
     [Serializable]
     class Map{ // Map contains the Location nodes
         public List<Location> AllNodes = new List<Location>();
