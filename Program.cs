@@ -20,12 +20,25 @@ namespace Basiverse
 
         static void MainMenu(){
             // Create the Save/Load menu
-            PrintHeader();          
-            string selection = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                .Title("Main Menu")
-                .PageSize(4)
-                .AddChoices(new[] { "New", "Load",  "Quit", "Debug" }));
+            PrintHeader(); 
+            bool debug = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"]);
+            string selection;
+
+            if(debug){
+                selection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("Main Menu")
+                    .PageSize(4)
+                    .AddChoices(new[] { "New", "Load",  "Quit", "Debug" }));
+            }
+            else{
+                selection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("Main Menu")
+                    .PageSize(4)
+                    .AddChoices(new[] { "New", "Load",  "Quit"}));
+            }         
+
             switch(selection){
                 case "New":
                     NewGameMenu();
