@@ -119,20 +119,23 @@ namespace Basiverse
             mainPlayer.Name = "Testing player load and save";
             mainPlayer.PShip = new Ship();
             mainPlayer.PShip.Name = "Testing ship load and save";
-            AnsiConsole.Markup("Creating new Game");
+            AnsiConsole.MarkupLine("Creating new Game");
             Game NewGame = new Game(mainPlayer);
-            AnsiConsole.Markup("\nDumping Original data");
+            AnsiConsole.MarkupLine("Dumping Original data");
             NewGame.Dump();
-            AnsiConsole.Markup("\n\n");
             Player LoadPlayer = new Player(); // Create load player
             LoadPlayer = NewGame.TestSave();
-            AnsiConsole.Markup("\nLoading, dumping loaded Data");
+            AnsiConsole.MarkupLine("Loading, dumping loaded Data");
             Game TestGame = new Game(LoadPlayer);
             TestGame.Dump();
-            var tmp = AnsiConsole.Ask<string>("Press any key to continue");
+            var tmp = AnsiConsole.Prompt(
+                new TextPrompt<string>("Press any key to continue")
+                .AllowEmpty());
+            DebugMenu();
         }
 
         static void DebugMenu(){
+            AnsiConsole.Clear();
             ItemHelper helper1 = new ItemHelper();
             MapGen mapHelper = new MapGen();
             string selection = AnsiConsole.Prompt(
@@ -149,12 +152,15 @@ namespace Basiverse
                 break;
                 case "Test Object Load":
                     helper1.LoadObjTest();
+                    DebugMenu();
                 break;
                 case "Generate Map":
                     mapHelper.Generate(true);
+                    DebugMenu();
                 break;
                 case "Test Map Load":
                     mapHelper.CheckBin();
+                    DebugMenu();
                 break;
                 case "Return":
                     MainMenu();
@@ -181,7 +187,7 @@ namespace Basiverse
                         AnsiConsole.Markup("The directory was created successfully at {0}.", Directory.GetCreationTime(loc));
 
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
             });
             }
             catch (Exception e){

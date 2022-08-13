@@ -1,5 +1,6 @@
 using System;
 using Basiverse;
+using Spectre.Console;
 
 namespace Basiverse{
 
@@ -13,10 +14,10 @@ namespace Basiverse{
         }
 
         public void Dump(){ // Checks to make sure that the data passes in correctly.
-            Console.WriteLine("\n\n\nDumping Data about player for this game instance");
-            Console.WriteLine("Player Name: {0}", mainPlayer.Name);
-            Console.WriteLine("Player Money: {0}", mainPlayer.Money);
-            Console.WriteLine("Player Ship data\n");
+            AnsiConsole.MarkupLine("Dumping Data about player for this game instance");
+            AnsiConsole.MarkupLine("Player Name: {0}", mainPlayer.Name);
+            AnsiConsole.MarkupLine("Player Money: {0}", mainPlayer.Money);
+            AnsiConsole.MarkupLine("Player Ship data\n");
             mainPlayer.PShip.DisplayData();
             mainPlayer.PShip.ShowStats();
         }
@@ -30,7 +31,7 @@ namespace Basiverse{
             Saver MainSave = new Saver(); // Create the Loader
 
             MainSave.SaveData(0, "Test", mainPlayer);
-            Console.WriteLine("Saved {0} to file", mainPlayer.Name);
+            AnsiConsole.MarkupLine("Saved {0} to file", mainPlayer.Name);
 
             return MainLoad.LoadSave();
         }
