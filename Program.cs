@@ -75,9 +75,11 @@ namespace Basiverse
             mainPlayer.PShip.DisplayData();
             Console.WriteLine("\n Good luck!");
             Game NewGame = new Game(mainPlayer);
-            NewGame.Dump();
+            MapGen mapHelper = new MapGen();
+            mainPlayer.PMap = mapHelper.Generate(false);
+            mainPlayer.PLoc = mainPlayer.PMap.AllNodes[0]; // Put the player at node 0
             Console.ReadKey();
-            // Game.Start();
+            NewGame.Start();
         }
 
         static void LoadGameMenu(){
@@ -189,9 +191,6 @@ namespace Basiverse
 
                     }
                 }
-
-                // Read settings and display if needed
-                string sAttr = ConfigurationManager.AppSettings.Get("debugMode");
             }
             catch (Exception e){
                 Console.WriteLine("Setup failed: {0}", e.ToString());

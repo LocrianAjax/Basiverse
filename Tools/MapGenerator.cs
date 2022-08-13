@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Basiverse{
     class MapGen{
 
-        public void Generate(bool debug){
+        public Map Generate(bool debug){
             Map outMap = new Map();
             /* 
                 To add POIs - 
@@ -89,7 +89,9 @@ namespace Basiverse{
                     }
                     if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
                     loc.Interests.Add(allPoi[rand2]); // Add it to the list
-                    allPoi.RemoveAt(rand2);
+                    if(allPoi[rand2].Name != "Derelict"){ // Keep derelict around to fill in gaps
+                        allPoi.RemoveAt(rand2);
+                    }
                     poiSize = allPoi.Count;
                     
                 }
@@ -123,8 +125,7 @@ namespace Basiverse{
             if(debug){Console.WriteLine("Map gen complete");
             Console.WriteLine("Press any Key to continue......");
             Console.ReadKey();}
-            BinarySerialization.WriteToBinaryFile<Map>("Map\\map.bin", outMap);
-            return;
+            return outMap;
         }
 
         public void CheckBin(){

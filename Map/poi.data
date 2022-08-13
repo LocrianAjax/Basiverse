@@ -100,3 +100,5 @@ Ancestor|A former colony ship turned into a spacestation.|2
 Felicity|A former colony ship turned into a spacestation.|2
 // Type 2 "Special"
 Blue Moon Colony|A corporate sponsored station.|2
+// Type 2 "Default" to prevent an infinite loop
+Derelict|A former station now abandoned.|2

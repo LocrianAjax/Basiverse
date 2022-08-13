@@ -27,6 +27,11 @@ namespace Basiverse{
             for(int i = 0; i < Width; i++){
                 Console.Write("-");
             }
+            while(true){
+                Console.Clear();
+                mainPlayer.NavRep();
+                Console.ReadKey();
+            }
 
         }
 
@@ -39,6 +44,7 @@ namespace Basiverse{
 
             return MainLoad.LoadSave(0);
         }
-        // Gameplay loop: 2 actions then check heat, and check for death.
+        
+        // Combat loop: 2 actions then check heat, and check for death.
     }
 }

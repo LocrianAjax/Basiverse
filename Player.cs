@@ -14,6 +14,13 @@ namespace Basiverse
         public int Money{get {return _money;} set {_money = value;}}
 
         public Ship PShip;
-        // Location TODO
+
+        public Map PMap;
+
+        public Location PLoc;
+
+        public void NavRep(){
+            Console.WriteLine($"Navigation Report:\nSystem: {PLoc.Name} - {PLoc.Description}");
+        }
     }
 }

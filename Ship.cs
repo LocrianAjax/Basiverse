@@ -78,6 +78,10 @@ namespace Basiverse
             Console.WriteLine("\nEnd Manifest");
         }
 
+        public void Dashboard(){
+            Console.WriteLine();
+        }
+
         public int FireLaser(){ // Adds heat and returns damage
             _heat += _lasers.Heat; // Just increments heat since it's protected
             return _lasers.Damage; // Return the damage amount
