@@ -23,16 +23,7 @@ namespace Basiverse{
 
         public void Start(){ // Starts a new game, every other method from here on out is private
             Console.Clear(); // Clear the console and write the UI
-            int Width  = Console.WindowWidth;
-            for(int i = 0; i < Width; i++){
-                Console.Write("-");
-            }
-            while(true){
-                Console.Clear();
-                mainPlayer.NavRep();
-                Console.ReadKey();
-            }
-
+            mainPlayer.NavRep();
         }
 
         public Player TestSave(){
@@ -42,7 +33,7 @@ namespace Basiverse{
             MainSave.SaveData(0, "Test", mainPlayer);
             Console.WriteLine("Saved {0} to file", mainPlayer.Name);
 
-            return MainLoad.LoadSave(0);
+            return MainLoad.LoadSave();
         }
         
         // Combat loop: 2 actions then check heat, and check for death.

@@ -14,16 +14,9 @@ namespace Basiverse{
             Then use Binary Data Writer to write player OBJ
             savedata.bin
         */
-        private string [] Locations;
-        public Loader(){
-            Locations = new string[3];
-            Locations[0] = Directory.GetCurrentDirectory() + "\\Saves\\save1\\";
-            Locations[1] = Directory.GetCurrentDirectory() + "\\Saves\\save2\\";
-            Locations[2] = Directory.GetCurrentDirectory() + "\\Saves\\save3\\";
-        }
         
-        public bool CheckSave(int saveNum){
-            if(File.Exists(Locations[saveNum] + "metadata.data") && File.Exists(Locations[0] + "savedata.bin")){ // Check for metadata and save
+        public bool CheckSave(){
+            if(File.Exists(Directory.GetCurrentDirectory() + "\\Save\\metadata.data") && File.Exists(Directory.GetCurrentDirectory() + "\\Save\\savedata.bin")){ // Check for metadata and save
                 return true;
             }
             else{
@@ -31,14 +24,14 @@ namespace Basiverse{
             }
         }
 
-        public string GetName(int saveNum){ // Returns the save name from the metadata file
+        public string GetName(){ // Returns the save name from the metadata file
             string [] lines;
-            lines = System.IO.File.ReadAllLines(Locations[saveNum] + "metadata.data");
+            lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Save\\metadata.data");
             return lines[0];
         }
 
-        public Player LoadSave(int saveNum){ // Returns a fully loaded player obj
-            Player temp = BinarySerialization.ReadFromBinaryFile<Player>(Locations[0] + "savedata.bin");
+        public Player LoadSave(){ // Returns a fully loaded player obj
+            Player temp = BinarySerialization.ReadFromBinaryFile<Player>(Directory.GetCurrentDirectory() + "\\Save\\savedata.bin");
             return temp;
         }
     
@@ -51,22 +44,12 @@ namespace Basiverse{
         Other metadata?
         Then use Binary Data Writer to write player OBJ      
     */
-
-        private string [] Locations;
-
-        public Saver(){
-            Locations = new string[3];
-            Locations[0] = Directory.GetCurrentDirectory() + "\\Saves\\save1\\";
-            Locations[1] = Directory.GetCurrentDirectory() + "\\Saves\\save2\\";
-            Locations[2] = Directory.GetCurrentDirectory() + "\\Saves\\save3\\";
-        }
-
         public int SaveData(int index, string saveName, Player outPlayer){
-            string outLocation = Locations[index] + "metadata.data";
+            string outLocation = Directory.GetCurrentDirectory() + "\\Save\\metadata.data";
             using (StreamWriter sw = new StreamWriter(outLocation)){
                 sw.WriteLine(saveName);
             }
-            string binLocation = Locations[index] + "savedata.bin";
+            string binLocation = Directory.GetCurrentDirectory() + "\\Save\\savedata.bin";
             BinarySerialization.WriteToBinaryFile<Player>(binLocation, outPlayer);
             return 1;
         }
