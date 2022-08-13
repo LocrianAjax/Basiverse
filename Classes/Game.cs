@@ -20,7 +20,6 @@ namespace Basiverse{
             AnsiConsole.MarkupLine("Player Money: {0}", mainPlayer.Money);
             AnsiConsole.MarkupLine("Player Ship data\n");
             mainPlayer.PShip.DisplayData();
-            mainPlayer.PShip.ShowStats();
         }
 
         public Player TestSave(){
@@ -57,26 +56,63 @@ namespace Basiverse{
             if(mainPlayer.PLoc.Interests != null){
                 foreach(PointofInterest poi in mainPlayer.PLoc.Interests){
                 NavScreen.AddRow($"{poi.Name}: {poi.Description}");
+                NavScreen.AddEmptyRow();
                 }
             }
 
             // Add data for status table
             Table StatusScreen = new Table();
             StatusScreen.AddColumn(mainPlayer.PShip.Name);
-            StatusScreen.AddRow(mainPlayer.PShip.StatusStr());
+            // Add rows for Hull/Heat/Shield
+            // Shield Status
+            if(mainPlayer.PShip.ShieldVal() >= 75){
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.ShieldVal() < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [yellow]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.ShieldVal() == 0){
+                StatusScreen.AddRow(new Markup($"Shields [red][rapidblink]OFFLINE[/][/]"));
+            }
+            else{
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [orange]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
+            // Hull Status
+            if(mainPlayer.PShip.HullVal() >= 75){
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [green]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+            else if (mainPlayer.PShip.HullVal() <= 25){
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [red]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+            else{
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [yellow]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+
+            // Heat Status
+            if(mainPlayer.PShip.HeatVal() <= 25){
+                StatusScreen.AddRow(new Markup($"Heat Soak - [green]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.HeatVal() <= 75 && mainPlayer.PShip.HeatVal() > 25){
+                StatusScreen.AddRow(new Markup($"Heat Soak - [yellow]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
+            else{
+                StatusScreen.AddRow(new Markup($"Heat Soak - [red]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
 
             // Add data for nearby table
             Table NearbyScreen = new Table();
             NearbyScreen.AddColumns("Name","Desc");
             foreach(Location nearby in mainPlayer.PLoc.NearbyNodes){
                 NearbyScreen.AddRow(nearby.Name,nearby.Description);
+                NearbyScreen.AddEmptyRow();
             }
 
             // Setup main table
             Table MainScreen = new Table();
-            MainScreen.AddColumns("NAV", "STATUS", "NEARBY");
+            MainScreen.AddColumns("NAVIGATION REPORT", "STATUS REPORT", "NEARBY SYSTEMS");
             MainScreen.AddRow(NavScreen, StatusScreen, NearbyScreen);
             MainScreen.Expand();
+            MainScreen.Border(TableBorder.Ascii);
             AnsiConsole.Write(MainScreen);
         }
         

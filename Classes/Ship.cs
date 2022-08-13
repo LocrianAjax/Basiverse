@@ -23,7 +23,8 @@ namespace Basiverse
 
         public Ship(){ // Set up the starter ship in the constructor
             _type = "Basicorps Runner"; // Set Default type
-            
+            _name = "The Nameless"; // Set Default Name
+
             _hull = new Hull();  // Set Default Hull
             _hull.Name = "Basic Pressure Hull";
             _hull.HeatMax = 25;
@@ -122,19 +123,16 @@ namespace Basiverse
             return 0; // Return 0 for safe range
         }
 
-        public void ShowStats(){ // Shows stats to the user, cut down version of the dump
-            Console.WriteLine("Status Report - {0}", _name);
-            Console.WriteLine("Hull Status - Integrity: {0}% Heat: {1}%", _hull.Health(), HeatPercentage());
-            if(_shield.IsOnline){Console.WriteLine("Shields Online - {0}%", _shield.Health());}
-            else{Console.WriteLine("Shields OFFLINE");}
+        public double HullVal(){
+            return _hull.Health();
         }
 
-        public string StatusStr(){ // Gives stats to table
-            string retstr = "";
-            retstr += $"Hull Status - Integrity: {_hull.Health()}%\nHeat: {HeatPercentage()}%";
-            if(_shield.IsOnline){ retstr += $"\nShields Online - Strength: {_shield.Health()}%";}
-            else{retstr += "\nShields OFFLINE";}
-            return retstr;
+        public double HeatVal(){
+            return HeatPercentage();
+        }
+
+        public double ShieldVal(){
+            return _shield.Health();
         }
     
         public void TakeDamage(int damage){ // Deals the damage to the ship's hull and/or shields

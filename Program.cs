@@ -119,13 +119,7 @@ namespace Basiverse
 
         static void PrintHeader(){
             AnsiConsole.Clear();
-            AnsiConsole.MarkupLine("  ____            _         ____   _____        __   ___  __ ");
-            AnsiConsole.MarkupLine(" |  _ \\          (_)       / __ \\ / ____|      /_ | / _ \\/_ |");
-            AnsiConsole.MarkupLine(" | |_) | __ _ ___ _  ___  | |  | | (___   __   _| || | | || |");
-            AnsiConsole.MarkupLine(" |  _ < / _` / __| |/ __| | |  | |\\___ \\  \\ \\ / / || | | || |");
-            AnsiConsole.MarkupLine(" | |_) | (_| \\__ \\ | (__  | |__| |____) |  \\ V /| || |_| || |");
-            AnsiConsole.MarkupLine(" |____/ \\__,_|___/_|\\___|  \\____/|_____/    \\_/ |_(_)___/ |_|");
-             AnsiConsole.MarkupLine("");
+            AnsiConsole.Write(new FigletText("Basic OS v1.01"));
         }
 
         static void TestDataAcess(){
@@ -157,7 +151,7 @@ namespace Basiverse
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
                 .PageSize(7)
-                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map", "Test Map Load", "Return" }));
+                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map", "Return" }));
             switch(selection){
                 case "Test Data Acess":
                     TestDataAcess();
@@ -169,12 +163,8 @@ namespace Basiverse
                     helper1.LoadObjTest();
                     DebugMenu();
                 break;
-                case "Generate Map":
+                case "Generate Map Test":
                     mapHelper.Generate(true);
-                    DebugMenu();
-                break;
-                case "Test Map Load":
-                    mapHelper.CheckBin();
                     DebugMenu();
                 break;
                 case "Return":
