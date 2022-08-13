@@ -44,10 +44,10 @@ namespace Basiverse{
 
         private void WriteStatus(){ // Create our Default "NAV" Screen
             /*
-                NAV             | STATUS
-                Location info      Shield
-                POIS                Hull
-                                    Etc
+                NAV          | STATUS  | NEARBY
+                Location info  Shield    Name Desc
+                POIS           Hull
+                               Etc
             */
 
             // Add data for nav table
@@ -65,11 +65,17 @@ namespace Basiverse{
             StatusScreen.AddColumn(mainPlayer.PShip.Name);
             StatusScreen.AddRow(mainPlayer.PShip.StatusStr());
 
+            // Add data for nearby table
+            Table NearbyScreen = new Table();
+            NearbyScreen.AddColumns("Name","Desc");
+            foreach(Location nearby in mainPlayer.PLoc.NearbyNodes){
+                NearbyScreen.AddRow(nearby.Name,nearby.Description);
+            }
+
             // Setup main table
             Table MainScreen = new Table();
-            MainScreen.AddColumn("NAV");
-            MainScreen.AddColumn("STATUS");
-            MainScreen.AddRow(NavScreen, StatusScreen);
+            MainScreen.AddColumns("NAV", "STATUS", "NEARBY");
+            MainScreen.AddRow(NavScreen, StatusScreen, NearbyScreen);
             MainScreen.Expand();
             AnsiConsole.Write(MainScreen);
         }

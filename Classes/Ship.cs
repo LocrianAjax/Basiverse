@@ -132,7 +132,7 @@ namespace Basiverse
         public string StatusStr(){ // Gives stats to table
             string retstr = "";
             retstr += $"Hull Status - Integrity: {_hull.Health()}%\nHeat: {HeatPercentage()}%";
-            if(_shield.IsOnline){ retstr += $"\nShields Online - {_shield.Health()}%";}
+            if(_shield.IsOnline){ retstr += $"\nShields Online - Strength: {_shield.Health()}%";}
             else{retstr += "\nShields OFFLINE";}
             return retstr;
         }
