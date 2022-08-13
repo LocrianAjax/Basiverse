@@ -3,7 +3,8 @@ Basiverse pre-alpha. Basic text game to keep me doing something
 Will start branching once a basic v0.1 alpha is semi-playable
 
 
-Completed:
+DONE:
+
 Map Gen with Locations and POIs
 
 Player/Ship classes with customizable systems
