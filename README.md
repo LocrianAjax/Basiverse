@@ -12,3 +12,6 @@ app.config file and settings menu
 NPCs and NPC Locations
 
 Actual gameplay(Important!)
+
+
+[![.NET](https://github.com/Prophetofkirbo/Basiverse/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Prophetofkirbo/Basiverse/actions/workflows/dotnet.yml)
