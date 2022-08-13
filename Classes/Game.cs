@@ -33,12 +33,10 @@ namespace Basiverse{
         }
         // End Debugging stuff
 
-        public void Start(){ // Starts a new game, every other method from here on out is private
+        public void Start(){ // Entry point for the game
             Console.Clear(); // Clear the console and write the UI
             WriteStatus();
-            var tmp = AnsiConsole.Prompt(
-                new TextPrompt<string>("Press any key to continue")
-                .AllowEmpty());
+            MainActionMenu();
         }
 
         private void WriteStatus(){ // Create our Default "NAV" Screen
@@ -64,6 +62,7 @@ namespace Basiverse{
             Table StatusScreen = new Table();
             StatusScreen.AddColumn(mainPlayer.PShip.Name);
             // Add rows for Hull/Heat/Shield
+
             // Shield Status
             if(mainPlayer.PShip.ShieldVal() >= 75){
                 StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
@@ -77,6 +76,7 @@ namespace Basiverse{
             else{
                 StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [orange]{mainPlayer.PShip.ShieldVal()}[/]%"));
             }
+
             // Hull Status
             if(mainPlayer.PShip.HullVal() >= 75){
                 StatusScreen.AddRow(new Markup($"Hull Integrity: [green]{mainPlayer.PShip.HullVal()}[/]%"));
@@ -116,6 +116,62 @@ namespace Basiverse{
             AnsiConsole.Write(MainScreen);
         }
         
+        private void MainActionMenu(){ // Menu for Main Game actions
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Actions:")
+                .PageSize(3)
+                .AddChoices(new[] { "Jump", "Detailed Report",  "Options"}));
+            
+            switch(selection){
+                case "Jump":
+                    JumpMenu();
+                break;
+                case "Detailed Report":
+                    DetailedReportMenu();
+                break;
+                case "Options":
+                    OptionsMenu();
+                break;
+            }
+        }
+
+        private void JumpMenu(){
+
+        }
+        private void OptionsMenu(){
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Options:")
+                .PageSize(4)
+                .AddChoices(new[] { "Settings", "Return", "Save", "Quit"}));
+            
+            switch(selection){
+                case "Settings":
+                    SettingsMenu();
+                break;
+                case "Return":
+                    MainActionMenu();
+                break;
+                case "Save":
+                    SaveGame();
+                break;
+                case "Quit":
+                    return;
+            }
+        }
+
+        private void DetailedReportMenu(){
+
+        }
+
+        private void SettingsMenu(){
+
+        }
+
+        private void SaveGame(){
+
+        }
         // Combat loop: 2 actions then check heat, and check for death.
     }
 }
