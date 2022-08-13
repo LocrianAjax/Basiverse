@@ -128,6 +128,14 @@ namespace Basiverse
             if(_shield.IsOnline){Console.WriteLine("Shields Online - {0}%", _shield.Health());}
             else{Console.WriteLine("Shields OFFLINE");}
         }
+
+        public string StatusStr(){ // Gives stats to table
+            string retstr = "";
+            retstr += $"Hull Status - Integrity: {_hull.Health()}%\nHeat: {HeatPercentage()}%";
+            if(_shield.IsOnline){ retstr += $"\nShields Online - {_shield.Health()}%";}
+            else{retstr += "\nShields OFFLINE";}
+            return retstr;
+        }
     
         public void TakeDamage(int damage){ // Deals the damage to the ship's hull and/or shields
             if(_shield.IsOnline && (_shield.ShieldVal > 0)){ // Check if the shield is online

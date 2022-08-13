@@ -62,7 +62,7 @@ namespace Basiverse
             mainPlayer.PShip.DisplayData(); // Data dump
 
 
-            AnsiConsole.Status().Start("Starting New Game", ctx => {
+            Game NewGame = AnsiConsole.Status().Start("Starting New Game", ctx => {
                 ctx.Spinner(Spinner.Known.Star);
                 ctx.SpinnerStyle(Style.Parse("green"));
                 AnsiConsole.MarkupLine("Setting up...");
@@ -74,8 +74,10 @@ namespace Basiverse
                 mainPlayer.PMap = mapHelper.Generate(false);
                 mainPlayer.PLoc = mainPlayer.PMap.AllNodes[0]; // Put the player at node 0
                 ctx.Status("Good Luck!");
-                NewGame.Start();
+                return NewGame;
             });
+            NewGame.Start(); // Can't have this nested in the status
+
         }
 
         static void LoadGameMenu(){
