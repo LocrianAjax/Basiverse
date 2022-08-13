@@ -1,5 +1,6 @@
 using System;
 using Basiverse;
+using Spectre.Console;
 
 namespace Basiverse
 {
@@ -18,9 +19,5 @@ namespace Basiverse
         public Map PMap;
 
         public Location PLoc;
-
-        public void NavRep(){
-            Console.WriteLine($"Navigation Report:\nSystem: {PLoc.Name} - {PLoc.Description}");
-        }
     }
 }

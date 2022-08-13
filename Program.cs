@@ -24,7 +24,7 @@ namespace Basiverse
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Main Menu")
-                .PageSize(3)
+                .PageSize(4)
                 .AddChoices(new[] { "New", "Load",  "Quit", "Debug" }));
             switch(selection){
                 case "New":

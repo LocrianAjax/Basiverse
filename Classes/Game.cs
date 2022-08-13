@@ -23,7 +23,6 @@ namespace Basiverse{
 
         public void Start(){ // Starts a new game, every other method from here on out is private
             Console.Clear(); // Clear the console and write the UI
-            mainPlayer.NavRep();
         }
 
         public Player TestSave(){
