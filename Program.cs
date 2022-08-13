@@ -196,6 +196,5 @@ namespace Basiverse
                 AnsiConsole.WriteException(e);
             }
         }
-
     }
 }
