@@ -28,4 +28,4 @@ x64/
 *.vsix
 
 # Savedata
-Saves/*
+Save/*

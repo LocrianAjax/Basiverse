@@ -24,9 +24,9 @@ namespace Basiverse{
 
         public Player TestSave(){
             Loader MainLoad = new Loader(); // Create the Loader
-            Saver MainSave = new Saver(); // Create the Loader
+            Saver MainSave = new Saver(); // Create the Saver
 
-            MainSave.SaveData(0, "Test", mainPlayer);
+            MainSave.SaveData(mainPlayer);
             AnsiConsole.MarkupLine("Saved {0} to file", mainPlayer.Name);
 
             return MainLoad.LoadSave();
@@ -137,7 +137,33 @@ namespace Basiverse{
         }
 
         private void JumpMenu(){
+            // Add a list of places to jump
+            // Set Location
+            // Restart cycle
+            string[] Locations = new string[mainPlayer.PLoc.NearbyNodes.Count + 1]; // Set up the array of options to jump
+            Locations[mainPlayer.PLoc.NearbyNodes.Count] = "Return"; // Add to end of options list
+            for(int i = 0; i < mainPlayer.PLoc.NearbyNodes.Count; i++){
+                Locations[i] = mainPlayer.PLoc.NearbyNodes[i].Name;
+            }
 
+            string destination = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Select a Destination:")
+                .PageSize(mainPlayer.PLoc.NearbyNodes.Count + 1)
+                .AddChoices(Locations));
+
+            if(destination == "Return"){
+                MainActionMenu();
+            }
+            else{
+                foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
+                    if(destination == temp.Name){
+                        mainPlayer.PLoc = temp;
+                        Start();
+                    }
+                }
+            }
+            
         }
         private void OptionsMenu(){
             string selection = AnsiConsole.Prompt(
@@ -170,8 +196,18 @@ namespace Basiverse{
         }
 
         private void SaveGame(){
-
+            Saver MainSave = new Saver(); // Create the Saver
+            AnsiConsole.Markup("Saving player data");
+            try{
+                MainSave.SaveData(mainPlayer); // Save player as bin
+            }
+            catch (Exception e){
+                AnsiConsole.WriteException(e);
+            }
+            AnsiConsole.Markup("Save [green]Complete[/]");
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
         }
+
         // Combat loop: 2 actions then check heat, and check for death.
     }
 }

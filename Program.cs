@@ -72,9 +72,6 @@ namespace Basiverse
                 AnsiConsole.MarkupLine("Okay");
             }
 
-            mainPlayer.PShip.DisplayData(); // Data dump
-
-
             Game NewGame = AnsiConsole.Status().Start("Starting New Game", ctx => {
                 ctx.Spinner(Spinner.Known.Star);
                 ctx.SpinnerStyle(Style.Parse("green"));
@@ -105,14 +102,20 @@ namespace Basiverse
                 MainMenu();
             }
             else{
-                string name = MainLoad.GetName();
-                AnsiConsole.MarkupLine("A save exists with the player name {0}", name);
-                if (!AnsiConsole.Confirm("Load Game?"))
-                {
+                if (!AnsiConsole.Confirm("Load Game?")){
                     MainMenu();
                 }
                 else{
-                    // TODO actually load saves and pass into the game   
+                    Loader gameLoad = new Loader();
+                    Player loadPlayer = gameLoad.LoadSave();
+                    Game loadGame = AnsiConsole.Status().Start("Loading Game", ctx => {
+                        ctx.Spinner(Spinner.Known.Star);
+                        ctx.SpinnerStyle(Style.Parse("green"));
+                        Game loadgame = new Game(loadPlayer);
+                        ctx.Status("Good Luck!");
+                        return loadgame;
+                    }); 
+                    loadGame.Start();
                 }
             }
         }
