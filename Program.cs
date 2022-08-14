@@ -20,25 +20,25 @@ namespace Basiverse
 
         static void MainMenu(){
             // Create the Save/Load menu
-            PrintHeader(); 
-            bool debug = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"]);
-            string selection;
-
-            if(debug){
-                selection = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                    .Title("Main Menu")
-                    .PageSize(4)
-                    .AddChoices(new[] { "New", "Load",  "Quit", "Debug" }));
+            PrintHeader();
+            Loader MainLoad = new Loader(); // Create the Loader
+            // Set up choices
+            string choices = "New|";
+            if(MainLoad.CheckSave()){
+                choices += "Load|";
             }
-            else{
-                selection = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                    .Title("Main Menu")
-                    .PageSize(4)
-                    .AddChoices(new[] { "New", "Load",  "Quit"}));
-            }         
-
+            if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
+                choices += "Debug|";
+            }
+            choices += "Quit";
+            // Then split on | to create dynamic menu
+            string[] options = choices.Split('|');
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Main Menu")
+                .PageSize(4)
+                .AddChoices(options));
+                    
             switch(selection){
                 case "New":
                     NewGameMenu();
