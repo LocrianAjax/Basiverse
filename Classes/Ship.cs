@@ -13,13 +13,21 @@ namespace Basiverse
         public string Type{ get {return _type;} set {_type = value;}}
         private int _heat = 0;
         private Hull _hull;
+        public Hull Hull{ get {return _hull;} set {_hull = value;}}
         private Shield _shield;
+        public Shield Shield{ get {return _shield;} set {_shield = value;}}
         private Armor _armor;
+        public Armor Armor{ get {return _armor;} set {_armor = value;}}
         private Heatsink _heatsink;
+        public Heatsink Heatsink{ get {return _heatsink;} set {_heatsink = value;}}
         private Missile _missiles;
+        public Missile Missile{ get {return _missiles;} set {_missiles = value;}}
         private Laser _lasers;
+        public Laser Laser{ get {return _lasers;} set {_lasers = value;}}
         private Engine _engine;
+        public Engine Engine{ get {return _engine;} set {_engine = value;}}
         private CargoHold _hold;
+        public CargoHold Hold{ get {return _hold;} set {_hold = value;}}
 
         public Ship(){ // Set up the starter ship in the constructor
             _type = "Basicorps Runner"; // Set Default type

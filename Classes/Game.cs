@@ -1,6 +1,7 @@
 using System;
 using Basiverse;
 using Spectre.Console;
+using System.Threading;
 
 namespace Basiverse{
 
@@ -49,12 +50,15 @@ namespace Basiverse{
 
             // Add data for nav table
             Table NavScreen = new Table();
-            NavScreen.AddColumn(mainPlayer.PLoc.Name); 
-            NavScreen.AddColumn(mainPlayer.PLoc.Description);
+            NavScreen.AddColumns("Local System", ""); 
+            NavScreen.AddRow(mainPlayer.PLoc.Name, mainPlayer.PLoc.Description);
+
+            Table PoiScreen = new Table();
+            PoiScreen.AddColumns("Point of Intrest", "");
             if(mainPlayer.PLoc.Interests != null){
                 foreach(PointofInterest poi in mainPlayer.PLoc.Interests){
-                NavScreen.AddRow($"{poi.Name}: {poi.Description}");
-                NavScreen.AddEmptyRow();
+                PoiScreen.AddRow($"{poi.Name}", $"{poi.Description}");
+                PoiScreen.AddEmptyRow();
                 }
             }
 
@@ -111,6 +115,7 @@ namespace Basiverse{
             Table MainScreen = new Table();
             MainScreen.AddColumns("NAVIGATION REPORT", "STATUS REPORT", "NEARBY SYSTEMS");
             MainScreen.AddRow(NavScreen, StatusScreen, NearbyScreen);
+            MainScreen.AddRow(PoiScreen);
             MainScreen.Expand();
             MainScreen.Border(TableBorder.Ascii);
             AnsiConsole.Write(MainScreen);
@@ -137,9 +142,6 @@ namespace Basiverse{
         }
 
         private void JumpMenu(){
-            // Add a list of places to jump
-            // Set Location
-            // Restart cycle
             string[] Locations = new string[mainPlayer.PLoc.NearbyNodes.Count + 1]; // Set up the array of options to jump
             Locations[mainPlayer.PLoc.NearbyNodes.Count] = "Return"; // Add to end of options list
             for(int i = 0; i < mainPlayer.PLoc.NearbyNodes.Count; i++){
@@ -159,6 +161,20 @@ namespace Basiverse{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
                     if(destination == temp.Name){
                         mainPlayer.PLoc = temp;
+                        // This is just for show
+                        AnsiConsole.Progress().HideCompleted(false).Start(ctx => {
+                            var warmEngine = ctx.AddTask("[red]Warming warp engine up to operating temperature[/]");
+                            var jumping = ctx.AddTask("[green]Jumping[/]");
+                            while(!warmEngine.IsFinished){
+                                warmEngine.Increment(3);
+                                Thread.Sleep(20);
+                            }
+                            while(!jumping.IsFinished){
+                                jumping.Increment(10);
+                                Thread.Sleep(100);
+                            }
+                        });
+                        // Back to real code
                         Start();
                     }
                 }
@@ -170,7 +186,7 @@ namespace Basiverse{
                 new SelectionPrompt<string>()
                 .Title("Options:")
                 .PageSize(4)
-                .AddChoices(new[] { "Settings", "Return", "Save", "Quit"}));
+                .AddChoices(new[] { "Settings", "Return", "Save and Quit", "Quit without Saving"}));
             
             switch(selection){
                 case "Settings":
@@ -179,20 +195,109 @@ namespace Basiverse{
                 case "Return":
                     MainActionMenu();
                 break;
-                case "Save":
+                case "Save and Quit":
                     SaveGame();
                 break;
-                case "Quit":
+                case "Quit without Saving":
                     return;
             }
         }
 
         private void DetailedReportMenu(){
+            AnsiConsole.Clear();
+            // Add data for Detailed Ship Report
+            /*
+                SYSTEM  |   REPORT
+                Shield  |   info
+                etc.    |   etc.
+            */
+            Table ReportScreen = new Table();
+            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT");
+            //ReportScreen.Expand();
+            ReportScreen.AddColumns("SYSTEM","REPORT");
+            /*
+                Shield 
+                Hull
+                Armor
+                Heatsink
+                Engine
+                Lasers
+                Missiles
+                Cargohold
+            */
+            // Shield Status
+            if(mainPlayer.PShip.ShieldVal() >= 75){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.ShieldVal() < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [yellow]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.ShieldVal() == 0){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[red][rapidblink]OFFLINE[/][/]"));
+            }
+            else{
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [orange]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            }
 
+            // Hull Status
+            if(mainPlayer.PShip.HullVal() >= 75){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [green]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+            else if (mainPlayer.PShip.HullVal() <= 25){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [red]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+            else{
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [yellow]{mainPlayer.PShip.HullVal()}[/]%"));
+            }
+            
+            // Armor Data
+            if(mainPlayer.PShip.Armor.Name != "None"){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Armor.Name}"), new Markup($"Damage Mitigation: {mainPlayer.PShip.Armor.ArmorValue}"));
+            }
+            else{
+                ReportScreen.AddRow(new Markup($"No Armor installed"));
+            }
+
+            // Heat Status
+            string OnlineStat;
+            if(mainPlayer.PShip.Heatsink.IsActive){
+                OnlineStat = "[green]Active Cooling[/]";
+            }
+            else{
+                OnlineStat = "[red]Passive Cooling[/]";
+            }
+            if(mainPlayer.PShip.HeatVal() <= 25){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [green]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
+            else if(mainPlayer.PShip.HeatVal() <= 75 && mainPlayer.PShip.HeatVal() > 25){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [yellow]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
+            else{
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [red]{mainPlayer.PShip.HeatVal()}[/]%"));
+            }
+
+            // Engine Status
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Engine.Name}"), new Markup($"Flee Chance: {mainPlayer.PShip.Engine.FleeChance * 100}%"));
+            // Laser Status
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Laser.Name}"), new Markup($"Damage: {mainPlayer.PShip.Laser.Damage} Heat Generated: {mainPlayer.PShip.Laser.Heat}"));
+            // Missile Status
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Missile.Name}"), new Markup($"Damage: {mainPlayer.PShip.Missile.Damage} Hit Chance: {mainPlayer.PShip.Missile.HitChance}% Stock: {mainPlayer.PShip.Missile.Stock}"));
+            // Cargohold Status
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hold.Name}"), new Markup($"In Use: {mainPlayer.PShip.Hold.CurrentSize}m^3 Free: {mainPlayer.PShip.Hold.MaxSize}m^3"));
+            if(mainPlayer.PShip.Hold.HoldItems != null){
+                foreach(Cargo item in mainPlayer.PShip.Hold.HoldItems){
+                    ReportScreen.AddRow(new Markup(""), new Markup($"Name: {item.Name} Size: {item.Size}m^3 Cost: {item.Cost}"));
+                }
+            }
+
+            AnsiConsole.Write(ReportScreen);
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to return").AllowEmpty());
+            Start();
         }
 
         private void SettingsMenu(){
-
+            // Player / Ship Rename
+            // TODO
         }
 
         private void SaveGame(){
@@ -204,7 +309,7 @@ namespace Basiverse{
             catch (Exception e){
                 AnsiConsole.WriteException(e);
             }
-            AnsiConsole.Markup("Save [green]Complete[/]");
+            AnsiConsole.MarkupLine("Save [green]Complete[/]");
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
         }
 
