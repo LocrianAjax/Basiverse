@@ -194,6 +194,17 @@ namespace Basiverse
             _hold.HoldItems.RemoveAt(index);
         }
 
+        public bool Rename(string newName){
+
+            if(String.IsNullOrEmpty(newName) || String.IsNullOrWhiteSpace(newName)){
+                return false; // Return false if there's no name
+            }
+            else{
+                _name = newName;
+                return true;
+            }
+        }
+
         // Private Methods
         private double HeatPercentage(){ // Returns the math on the heat to get the %
             return (_heat / _hull.HeatMax) * 100;

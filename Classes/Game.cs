@@ -212,7 +212,7 @@ namespace Basiverse{
                 etc.    |   etc.
             */
             Table ReportScreen = new Table();
-            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT");
+            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CAPITAN: {mainPlayer.Name}");
             //ReportScreen.Expand();
             ReportScreen.AddColumns("SYSTEM","REPORT");
             /*
@@ -297,7 +297,45 @@ namespace Basiverse{
 
         private void SettingsMenu(){
             // Player / Ship Rename
-            // TODO
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Settings:")
+                .PageSize(4)
+                .AddChoices(new[] { "Rename Player", "Rename Ship", "Return",}));
+            
+            switch(selection){
+                case "Rename Player":
+                    RenamePlayer();
+                break;
+                case "Rename Ship":
+                    RenameShip();
+                break;
+                case "Return":
+                    OptionsMenu();
+                break;
+            }
+        }
+
+        private void RenamePlayer(){
+            bool res = false;
+            while(res != true){
+                string Name = AnsiConsole.Ask<string>("Please enter your new name:");
+                res = mainPlayer.Rename(Name);
+            }
+            Console.Clear(); // Clear the console and write the UI
+            WriteStatus();
+            SettingsMenu();
+        }
+
+        private void RenameShip(){
+            bool res = false;
+            while(res != true){
+                string Name = AnsiConsole.Ask<string>("Please enter your ship's new name:");
+                res = mainPlayer.PShip.Rename(Name);
+            }
+            Console.Clear(); // Clear the console and write the UI
+            WriteStatus();
+            SettingsMenu();
         }
 
         private void SaveGame(){
@@ -313,6 +351,8 @@ namespace Basiverse{
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
         }
 
-        // Combat loop: 2 actions then check heat, and check for death.
+        private void CombatMenu(){ // Combat loop: 2 actions then check heat, and check for death.
+            // TODO
+        }
     }
 }

@@ -19,5 +19,16 @@ namespace Basiverse
         public Map PMap;
 
         public Location PLoc;
+
+
+        public bool Rename(string newName){
+            if(String.IsNullOrEmpty(newName) || String.IsNullOrWhiteSpace(newName)){
+                return false; // Return false if there's no name
+            }
+            else{
+                _name = newName;
+                return true;
+            }
+        }
     }
 }
