@@ -141,7 +141,7 @@ namespace Basiverse{
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Actions:")
-                .PageSize(3)
+                .PageSize(4)
                 .AddChoices(options));
             
             switch(selection){
@@ -166,11 +166,13 @@ namespace Basiverse{
             for(int i = 0; i < mainPlayer.PLoc.NearbyNodes.Count; i++){
                 Locations[i] = mainPlayer.PLoc.NearbyNodes[i].Name;
             }
+            int pageCount = mainPlayer.PLoc.NearbyNodes.Count + 1;
+            if(pageCount <= 3){pageCount = 4;}
 
             string destination = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Select a Destination:")
-                .PageSize(mainPlayer.PLoc.NearbyNodes.Count + 1)
+                .PageSize(pageCount)
                 .AddChoices(Locations));
 
             if(destination == "Return"){
@@ -232,7 +234,6 @@ namespace Basiverse{
             */
             Table ReportScreen = new Table();
             ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CLASS: {mainPlayer.PShip.Type} CAPITAN: {mainPlayer.Name}");
-            //ReportScreen.Expand();
             ReportScreen.AddColumns("SYSTEM","REPORT");
             /*
                 Shield 
@@ -308,7 +309,7 @@ namespace Basiverse{
                     ReportScreen.AddRow(new Markup(""), new Markup($"Name: {item.Name} Size: {item.Size}m^3 Cost: {item.Cost}"));
                 }
             }
-
+            ReportScreen.Expand();
             AnsiConsole.Write(ReportScreen);
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to return").AllowEmpty());
             Start();
@@ -371,7 +372,34 @@ namespace Basiverse{
         }
 
         private void DockMenu(){
+            string Stations = ""; // Set up the array of options to dock
+            foreach(PointofInterest poi in mainPlayer.PLoc.Interests){
+                if(poi.Type == 2){ // If it's a station add it to the list
+                    Stations += $"{poi.Name}|";
+                }
+            }
+            Stations += "Return";
+            string[] options = Stations.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+            string destination = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Select a Destination:")
+                .PageSize(pageCount)
+                .AddChoices(options));
 
+            if(destination == "Return"){
+                MainActionMenu();
+            }
+            else{
+                foreach(PointofInterest poi in mainPlayer.PLoc.Interests){ // Not effcient, but we're going to a max of 5 things so no biggie
+                    if(poi.Name == destination){
+                        Station newStation = new Station(poi.Name, poi.StationType, poi.Description);
+                        newStation.Dock(mainPlayer);
+                        Start();
+                    }
+                }
+            }
         }
 
         private void CombatMenu(){ // Combat loop: 2 actions then check heat, and check for death.

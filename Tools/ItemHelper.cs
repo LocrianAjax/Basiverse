@@ -159,7 +159,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Cargos.Add(new  Cargo(){Name = subs[0], Size = Int32.Parse(subs[1]), Cost = Int32.Parse(subs[2])});
+                    Cargos.Add(new  Cargo(){Name = subs[0], Size = Int32.Parse(subs[1]), Cost = Int32.Parse(subs[2]), Type = Int32.Parse(subs[3]), Description = subs[4]});
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -230,7 +230,7 @@ namespace Basiverse
             List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
             Console.WriteLine("Cargo Data:-");
             foreach(Cargo temp in Cargos){
-                Console.WriteLine($"{temp.Name} {temp.Size} {temp.Cost}\n");
+                Console.WriteLine($"{temp.Name} {temp.Size} {temp.Cost} {temp.Type} {temp.Description}\n");
             }
             
             Console.Write("\nLoad complete. Press any key to continue....");
