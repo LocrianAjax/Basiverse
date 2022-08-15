@@ -145,7 +145,12 @@ namespace Basiverse{
                 }
                 else{
                     string[] subs = line.Split('|');
-                    outPoi.Add(new PointofInterest(){Name = subs[0], Description = subs[1], Type = Int32.Parse(subs[2])});
+                    if(Int32.Parse(subs[2]) == 2){ // If we have a station type, set it
+                        outPoi.Add(new PointofInterest(){Name = subs[0], Description = subs[1], Type = Int32.Parse(subs[2]), StationType = subs[3]});
+                    }
+                    else{
+                        outPoi.Add(new PointofInterest(){Name = subs[0], Description = subs[1], Type = Int32.Parse(subs[2])});
+                    }
                 }
             }
             return outPoi;

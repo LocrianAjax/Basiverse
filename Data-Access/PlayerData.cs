@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Basiverse;
+using Spectre.Console;
 
 namespace Basiverse{
     class Loader{
@@ -36,6 +37,25 @@ namespace Basiverse{
             string binLocation = Directory.GetCurrentDirectory() + "\\Save\\savedata.bin";
             BinarySerialization.WriteToBinaryFile<Player>(binLocation, outPlayer);
             return 1;
+        }
+    }
+
+    class Deleter{
+        public void DeleteData(){
+            try{
+                System.IO.DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\Save\\");
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete(); 
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true); 
+                }
+            }
+            catch (Exception e){
+                AnsiConsole.WriteException(e);
+            }
         }
     }
 }

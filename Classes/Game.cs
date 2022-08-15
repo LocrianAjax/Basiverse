@@ -122,11 +122,27 @@ namespace Basiverse{
         }
         
         private void MainActionMenu(){ // Menu for Main Game actions
+
+             // Set up choices
+            string choices = "Jump|";
+            // Check and see if we have any stations
+            if(mainPlayer.PLoc.Interests != null){
+                foreach(PointofInterest temp in mainPlayer.PLoc.Interests){
+                    if(temp.Type == 2){
+                        choices += "Dock|";
+                        break;
+                    }
+                }
+            }
+
+            choices += "Detailed Report|Options";
+            // Then split on | to create dynamic menu
+            string[] options = choices.Split('|');
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Actions:")
                 .PageSize(3)
-                .AddChoices(new[] { "Jump", "Detailed Report",  "Options"}));
+                .AddChoices(options));
             
             switch(selection){
                 case "Jump":
@@ -137,6 +153,9 @@ namespace Basiverse{
                 break;
                 case "Options":
                     OptionsMenu();
+                break;
+                case "Dock":
+                    DockMenu();
                 break;
             }
         }
@@ -212,7 +231,7 @@ namespace Basiverse{
                 etc.    |   etc.
             */
             Table ReportScreen = new Table();
-            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CAPITAN: {mainPlayer.Name}");
+            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CLASS: {mainPlayer.PShip.Type} CAPITAN: {mainPlayer.Name}");
             //ReportScreen.Expand();
             ReportScreen.AddColumns("SYSTEM","REPORT");
             /*
@@ -349,6 +368,10 @@ namespace Basiverse{
             }
             AnsiConsole.MarkupLine("Save [green]Complete[/]");
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+        }
+
+        private void DockMenu(){
+
         }
 
         private void CombatMenu(){ // Combat loop: 2 actions then check heat, and check for death.

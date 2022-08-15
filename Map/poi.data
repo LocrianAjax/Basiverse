@@ -39,66 +39,67 @@ Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
 // Other
 Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two eyes.|1
 Wormhhole|It keeps dumping out gas and other various things.|1
-Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings, and you decide to fly away.|1
+Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings.|1
+// Stations contain a 4th category that's a desc of the station type. basic, science, military, terminal, religous, colony, corporate, wreck 
 // Type 2 "Basic Station"
-Canaan Station|The local station, good for a bite to eat and a little trading.|2
-Nemo Station|The local station, good for a bite to eat and a little trading.|2
-Illume Station|The local station, good for a bite to eat and a little trading.|2
-Glory Station|The local station, good for a bite to eat and a little trading.|2
-Phoenix Colony|The local station, good for a bite to eat and a little trading.|2
-Saga Colony|The local station, good for a bite to eat and a little trading.|2
-Aeris Station|The local station, good for a bite to eat and a little trading.|2
-Lumina Station|The local station, good for a bite to eat and a little trading.|2
-Legacy Station|The local station, good for a bite to eat and a little trading.|2
-Epitome Station|The local station, good for a bite to eat and a little trading.|2
-Lagrange Station|The local station, good for a bite to eat and a little trading.|2
-Goddard Station| The local station, good for a bite to eat and a little trading.|2
-Vestige Station| The local station, good for a bite to eat and a little trading.|2
+Canaan Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Nemo Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Illume Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Glory Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Phoenix Colony|The local station, good for a bite to eat and a little trading.|2|Basic
+Saga Colony|The local station, good for a bite to eat and a little trading.|2|Basic
+Aeris Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Lumina Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Legacy Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Epitome Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Lagrange Station|The local station, good for a bite to eat and a little trading.|2|Basic
+Goddard Station| The local station, good for a bite to eat and a little trading.|2|Basic
+Vestige Station| The local station, good for a bite to eat and a little trading.|2|Basic
 // Type 2 "Science Station"
-Terminus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Aeon Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Erebus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Outlander Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Atlas Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Trivia Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Shangris Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Aether Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Goddard Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Newton Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Heinlein Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
-Prachett Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2
+Terminus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Aeon Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Erebus Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Outlander Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Atlas Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Trivia Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Shangris Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Aether Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Goddard Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Newton Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Heinlein Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
+Prachett Station|A scientific research station, little in the way of trade goods but many interesting people to talk too.|2|Science
 // Type 2 "Base"
-Chrono Base|A former military base turned trading post.|2
-Shu Base|A former military base turned trading post.|2
-Rogue Base|A former military base turned trading post.|2
-Vanquish Base|A former military base turned trading post.|2
-Arcadia Base|A former military base turned trading post.|2
-Phantom Base|A former military base turned trading post.|2
-Marvel Base|A former military base turned trading post.|2
-Magi Base|A former military base turned trading post.|2
+Chrono Base|A former military base turned trading post.|2|Military
+Shu Base|A former military base turned trading post.|2|Military
+Rogue Base|A former military base turned trading post.|2|Military
+Vanquish Base|A former military base turned trading post.|2|Military
+Arcadia Base|A former military base turned trading post.|2|Military
+Phantom Base|A former military base turned trading post.|2|Military
+Marvel Base|A former military base turned trading post.|2|Military
+Magi Base|A former military base turned trading post.|2|Military
 // Type 2 "Terminal"
-Artemis Terminal|A trade-hub station, lots of good, services, and people available.|2
-Mammoth Terminal|A trade-hub station, lots of good, services, and people available.|2
-Elyse Terminal|A trade-hub station, lots of good, services, and people available.|2
-Pioneer Terminal|A trade-hub station, lots of good, services, and people available.|2
-Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2
-Nyx Terminal|A trade-hub station, lots of good, services, and people available.|2
-Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2
+Artemis Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Mammoth Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Elyse Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Pioneer Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Nyx Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
+Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
 // Type 2 " Religous Colony"
-Parable Colony|A religous colony ship, orbited as a spacestation may years ago.|2
-Halo Station|A religous colony ship, orbited as a spacestation may years ago.|2
-Revelation Station|A religous colony ship, orbited as a spacestation may years ago.|2
-Revelation Colony|A religous colony ship, orbited as a spacestation may years ago.|2
+Parable Colony|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
+Halo Station|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
+Revelation Station|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
+Revelation Colony|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
 // Type 2 "Colony"
-Nox Colony|A former colony ship turned into a spacestation.|2
-Atlas Colony|A former colony ship turned into a spacestation.|2
-Shangris Colony|A former colony ship turned into a spacestation.|2
-Elyse Colony|A former colony ship turned into a spacestation.|2
+Nox Colony|A former colony ship turned into a spacestation.|2|Colony
+Atlas Colony|A former colony ship turned into a spacestation.|2|Colony
+Shangris Colony|A former colony ship turned into a spacestation.|2|Colony
+Elyse Colony|A former colony ship turned into a spacestation.|2|Colony
 // Type 2 "No descriptor"
-Daydream|A former colony ship turned into a spacestation.|2
-Ancestor|A former colony ship turned into a spacestation.|2
-Felicity|A former colony ship turned into a spacestation.|2
+Daydream|A former colony ship turned into a spacestation.|2|Colony
+Ancestor|A former colony ship turned into a spacestation.|2|Colony
+Felicity|A former colony ship turned into a spacestation.|2|Colony
 // Type 2 "Special"
-Blue Moon Colony|A corporate sponsored station.|2
+Blue Moon Colony|A corporate sponsored station.|2|Corporate
 // Type 2 "Default" to prevent an infinite loop
-Derelict|A former station now abandoned.|2
+Derelict|A former station now abandoned.|2|Wreck

@@ -54,8 +54,15 @@ namespace Basiverse{
         public string Description = "";
         public int Type = 0;
 
+        public string StationType; // Just for stations
+
         public void dump(){
-            Console.WriteLine($"POI Name: {Name} Description: {Description} Type: {Type}\n");
+            if(StationType != null){
+                Console.WriteLine($"POI Name: {Name} Description: {Description} Type: {Type} StationType: {StationType}\n");
+            }
+            else{
+                Console.WriteLine($"POI Name: {Name} Description: {Description} Type: {Type}\n");
+            }
         }
 
         /* Possible Additions - 

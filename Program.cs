@@ -154,7 +154,7 @@ namespace Basiverse
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
                 .PageSize(7)
-                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map", "Return" }));
+                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save","Return" }));
             switch(selection){
                 case "Test Data Acess":
                     TestDataAcess();
@@ -168,6 +168,12 @@ namespace Basiverse
                 break;
                 case "Generate Map Test":
                     mapHelper.Generate(true);
+                    new TextPrompt<string>("Press any key to continue...").AllowEmpty();
+                    DebugMenu();
+                break;
+                case "Delete Save":
+                    Deleter tempDel = new Deleter();
+                    tempDel.DeleteData();
                     DebugMenu();
                 break;
                 case "Return":
