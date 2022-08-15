@@ -13,11 +13,15 @@ Data Access helper classes
 
 .bin files for variations on armor/cargo/cargohold/engine/heatsink/hull/laser/missile/shield systems
 
+app.config file and settings menu
+
+Dockable stations
+
 TODO:
 
 Error Handling
 
-app.config file and settings menu
+Add station Services/NPCs
 
 NPCs and NPC Locations
 
