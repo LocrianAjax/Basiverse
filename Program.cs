@@ -208,5 +208,17 @@ namespace Basiverse
                 AnsiConsole.WriteException(e);
             }
         }
+
+        static void StartupInfo(){
+            var tmp = AnsiConsole.Prompt(
+                new TextPrompt<string>("Press any key to continue")
+                .AllowEmpty());
+        }
+
+        static void GameIntro(){
+            var tmp = AnsiConsole.Prompt(
+                new TextPrompt<string>("Press any key to continue")
+                .AllowEmpty());
+        }
     }
 }

@@ -41,6 +41,20 @@ namespace Basiverse{
         public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Repairs vairy by market cost
         public string[] WreckServices = new string[]{"Nothing, nothing tra-la-la?!", "Undock"}; 
 
+        // Multilplying for buying/selling at stations
+        public double BaseMult = 1;
+        public double T0Mult = 1;
+        public double T1Mult = 1;
+        public double T2Mult = 1;
+        public double T3Mult = 1;
+        public double T4Mult = 1;
+        public double T5Mult = 1;
+        public double T6Mult = 1;
+
+        // Lists of what will buy and sell
+        public List<int> StationBuyList;
+        public List<int> StationSellList;
+
         public Station(){ // Default constructor
             _name = "Derelict";
             _type = "Wreck";
@@ -183,6 +197,9 @@ namespace Basiverse{
             switch(selection){
                 case "Repair":
                     RepairMenu(inPlayer);
+                    for(int i = 0; i < 6; i++){
+
+                    }
                 break;
                 case "Buy":
                     BuyMenu(inPlayer);
@@ -259,12 +276,158 @@ namespace Basiverse{
             
         }
 
-        public void BuyMenu(Player inPlayer){
+        public void BuyMenu(Player inPlayer){ // Buying from the station to the player
+            /*
+                (station name) MARKET - BUY
+            */
             List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+            List<Cargo> forSale = new List<Cargo>();
+            var rand = new Random();
+
+            switch(Type){
+                case "Basic": // Sells Basic/Recreation/Basic Luxury
+                    StationSellList.Add(0);
+                    StationSellList.Add(1);
+                    StationSellList.Add(2);
+                break;
+                case "Science": // Sells Science for a slightly lower cost
+                    StationSellList.Add(6);
+                    T6Mult = .9;
+                break;
+                case "Military": // Sells Basic for an inflated price
+                    StationSellList.Add(0);
+                    T0Mult = 1.2;
+                break;
+                case "Religious": // Sells nothing
+                break;
+                case "Colony": // Sells Industiral for a slighly lower price
+                    StationSellList.Add(5);
+                    T5Mult = .9;
+                break;
+                case "Terminal": // Sells everything at a variable cost
+                    for(int i = 0; i < 6; i++){
+                        StationSellList.Add(i);
+                    }
+                    // Everything has a random chance to be multiplied from .5 to 5
+                    BaseMult = (.5 * rand.Next(1,10));
+                    T0Mult = (.5 * rand.Next(1,10));
+                    T1Mult = (.5 * rand.Next(1,10));
+                    T2Mult = (.5 * rand.Next(1,10));
+                    T3Mult = (.5 * rand.Next(1,10));
+                    T4Mult = (.5 * rand.Next(1,10));
+                    T5Mult = (.5 * rand.Next(1,10));
+                    T6Mult = (.5 * rand.Next(1,10));
+                break;
+                case "Corporate": // Sells everything at a variable cost
+                    for(int i = 0; i < 6; i++){
+                        StationSellList.Add(i);
+                    }
+                    // Everything has a random chance to be multiplied from .5 to 5
+                    BaseMult = (.5 * rand.Next(1,10));
+                    T0Mult = (.5 * rand.Next(1,10));
+                    T1Mult = (.5 * rand.Next(1,10));
+                    T2Mult = (.5 * rand.Next(1,10));
+                    T3Mult = (.5 * rand.Next(1,10));
+                    T4Mult = (.5 * rand.Next(1,10));
+                    T5Mult = (.5 * rand.Next(1,10));
+                    T6Mult = (.5 * rand.Next(1,10));
+                break;
+                default: // Otherwise keep it as default
+                break;
+            }
+
+            foreach(Cargo tmp in Cargos){
+                if(StationSellList.Contains(tmp.Type)){
+                    forSale.Add(tmp);
+                }
+            }
         }
 
-        public void SellMenu(Player inPlayer){
+        public void SellMenu(Player inPlayer){ // Selling from the Player to the station
+            /*
+                (station name) MARKET - SELL
+            */
             List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+            List<Cargo> toBuy = new List<Cargo>();
+            var rand = new Random();
+
+            switch(Type){
+                case "Basic":
+                    BaseMult = .7; // Buys everything for a reduced price
+                    for(int i = 0; i < 6; i++){
+                        StationBuyList.Add(i);
+                    }
+                break;
+                case "Science": // Buys all goods with a premium put on Science/Industiral goods
+                    for(int i = 0; i < 6; i++){
+                        StationBuyList.Add(i);
+                    }
+                    T5Mult = 1.4;
+                    T6Mult = 2.5;
+                break;
+                case "Military": // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreation and even more for drugs/booze
+                    StationBuyList.Add(1);
+                    StationBuyList.Add(2);
+                    StationBuyList.Add(3);
+                    T1Mult = 2;
+                    T2Mult = 1.5;
+                    T3Mult = 3;
+                break;
+                case "Religious": // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreatiuon
+                    StationBuyList.Add(1);
+                    StationBuyList.Add(2);
+                    StationBuyList.Add(3);
+                    T1Mult = 1.75;
+                    T2Mult = 1.4;
+                break;
+                case "Colony": // Does not buy Luxury, with a premium on basic, basic luxury goods, recreatiuon and cheap booze
+                    StationBuyList.Add(1);
+                    StationBuyList.Add(2);
+                    StationBuyList.Add(3);
+                    StationBuyList.Add(5);
+                    StationBuyList.Add(6);
+                    T0Mult = 2.5;
+                    T1Mult = 2;
+                    T2Mult = 1.5;
+                    T3Mult = 3;
+                break;
+                case "Terminal": // Everything at a variable cost
+                    for(int i = 0; i < 6; i++){
+                        StationBuyList.Add(i);
+                    }
+                    // Everything has a random chance to be multiplied from .5 to 5
+                    BaseMult = (.5 * rand.Next(1,10));
+                    T0Mult = (.5 * rand.Next(1,10));
+                    T1Mult = (.5 * rand.Next(1,10));
+                    T2Mult = (.5 * rand.Next(1,10));
+                    T3Mult = (.5 * rand.Next(1,10));
+                    T4Mult = (.5 * rand.Next(1,10));
+                    T5Mult = (.5 * rand.Next(1,10));
+                    T6Mult = (.5 * rand.Next(1,10));
+                break;
+                case "Corporate": // Everything at a variable cost
+                    for(int i = 0; i < 6; i++){
+                            StationBuyList.Add(i);
+                    }
+                    // Everything has a random chance to be multiplied from .5 to 5
+                    BaseMult = (.5 * rand.Next(1,10));
+                    T0Mult = (.5 * rand.Next(1,10));
+                    T1Mult = (.5 * rand.Next(1,10));
+                    T2Mult = (.5 * rand.Next(1,10));
+                    T3Mult = (.5 * rand.Next(1,10));
+                    T4Mult = (.5 * rand.Next(1,10));
+                    T5Mult = (.5 * rand.Next(1,10));
+                    T6Mult = (.5 * rand.Next(1,10));
+                break;
+                default: // Otherwise keep it as default
+                break;
+            }
+
+            foreach(Cargo tmp in Cargos){
+                if(StationBuyList.Contains(tmp.Type)){
+                    toBuy.Add(tmp);
+                }
+            }
         }
 
         public void GoblinKing(){
@@ -274,6 +437,5 @@ namespace Basiverse{
                     new TextPrompt<string>("")
                     .AllowEmpty());
         }
-        // TODO: Service Menus
     }
 }

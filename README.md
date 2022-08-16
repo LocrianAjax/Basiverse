@@ -15,7 +15,7 @@ Data Access helper classes
 
 app.config file and settings menu
 
-Dockable stations
+Dockable stations with repairing
 
 TODO:
 
@@ -27,7 +27,7 @@ NPCs and NPC Locations
 
 Actual gameplay(Important!)
 
-
+Intro screens for the game and on startup
 
 
 Automated Build Status:
