@@ -55,6 +55,7 @@ namespace Basiverse{
 
         public void Dock(Player inPlayer){
             int retval = 0;
+            inPlayer.PShip.RestoreShields(); // Fully restore the shield on docking
             while(retval == 0){
                 AnsiConsole.Clear();
                 DockScreen(inPlayer);
@@ -195,7 +196,7 @@ namespace Basiverse{
                 | Max Repair amount| Cost |
 
             */
-            int repairAmount = (inPlayer.PShip.Hull.HullMax - inPlayer.PShip.Hull.Hullval);
+            double repairAmount = (inPlayer.PShip.Hull.HullMax - inPlayer.PShip.Hull.Hullval);
             var rand = new Random();
 
             switch(Type){
@@ -231,8 +232,9 @@ namespace Basiverse{
                     AnsiConsole.WriteLine("Please select an amount you can afford");
                 }
                 else{
-                    if(AnsiConsole.Confirm($"Would you like to repair your ship {amount} points for ${amount * RepairCost}?")){ // Price Check
+                    if(AnsiConsole.Confirm($"Would you like to repair your ship {amount} points for ${ Math.Floor(amount * RepairCost)}?")){ // Price Check
                         inPlayer.PShip.Repair(amount);
+                        inPlayer.Money -= Convert.ToInt32(Math.Floor(amount * RepairCost));
                         return;   
                     }
                     else{

@@ -68,28 +68,30 @@ namespace Basiverse{
             // Add rows for Hull/Heat/Shield
 
             // Shield Status
-            if(mainPlayer.PShip.ShieldVal() >= 75){
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            double shieldSw = Math.Floor(mainPlayer.PShip.ShieldVal());
+            if( shieldSw >= 75){
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{shieldSw}[/]%"));
             }
-            else if(mainPlayer.PShip.ShieldVal() < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [yellow]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            else if(shieldSw < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [yellow]{shieldSw}[/]%"));
             }
-            else if(mainPlayer.PShip.ShieldVal() == 0){
-                StatusScreen.AddRow(new Markup($"Shields [red][rapidblink]OFFLINE[/][/]"));
+            else if(shieldSw == 0){
+                StatusScreen.AddRow(new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
             else{
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [orange]{mainPlayer.PShip.ShieldVal()}[/]%"));
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [darkorange]{shieldSw}[/]%"));
             }
 
             // Hull Status
-            if(mainPlayer.PShip.HullVal() >= 75){
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [green]{mainPlayer.PShip.HullVal()}[/]%"));
+            double hullSw = Math.Floor(mainPlayer.PShip.HullVal());
+            if(hullSw >= 75){
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [green]{hullSw}[/]%"));
             }
-            else if (mainPlayer.PShip.HullVal() <= 25){
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [red]{mainPlayer.PShip.HullVal()}[/]%"));
+            else if (hullSw <= 25){
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [red]{hullSw}[/]%"));
             }
             else{
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [yellow]{mainPlayer.PShip.HullVal()}[/]%"));
+                StatusScreen.AddRow(new Markup($"Hull Integrity: [yellow]{hullSw}[/]%"));
             }
 
             // Heat Status
@@ -203,11 +205,16 @@ namespace Basiverse{
             
         }
         private void OptionsMenu(){
+            string opts = "Settings|Return|Save|Save and Quit|Quit without Saving";
+            if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
+                opts += "|Debug";
+            }
+            string[] options = opts.Split('|');
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Options:")
-                .PageSize(4)
-                .AddChoices(new[] { "Settings", "Return", "Save and Quit", "Quit without Saving"}));
+                .PageSize(6)
+                .AddChoices(options)); 
             
             switch(selection){
                 case "Settings":
@@ -216,8 +223,15 @@ namespace Basiverse{
                 case "Return":
                     MainActionMenu();
                 break;
+                case "Save":
+                    SaveGame();
+                    MainActionMenu();
+                break;
                 case "Save and Quit":
                     SaveGame();
+                break;
+                case "Debug":
+                    DebugMenu();
                 break;
                 case "Quit without Saving":
                     return;
@@ -245,6 +259,7 @@ namespace Basiverse{
                 Missiles
                 Cargohold
             */
+            ReportScreen.AddRow($"Bank Account",$"{mainPlayer.Money}");
             // Shield Status
             if(mainPlayer.PShip.ShieldVal() >= 75){
                 ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
@@ -360,7 +375,7 @@ namespace Basiverse{
 
         private void SaveGame(){
             Saver MainSave = new Saver(); // Create the Saver
-            AnsiConsole.Markup("Saving player data");
+            AnsiConsole.MarkupLine("Saving player data");
             try{
                 MainSave.SaveData(mainPlayer); // Save player as bin
             }
@@ -404,6 +419,46 @@ namespace Basiverse{
 
         private void CombatMenu(){ // Combat loop: 2 actions then check heat, and check for death.
             // TODO
+        }
+
+        private void DebugMenu(){
+            string selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Debug:")
+            .PageSize(7)
+            .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money","Return"}));
+
+            switch(selection){
+                case "Damage Ship":
+                    int damage = AnsiConsole.Prompt(new TextPrompt<int>("Enter damage amount: "));
+                    mainPlayer.PShip.TakeDamage(damage);
+                    Console.Clear(); // Clear the console and write the UI
+                    WriteStatus();
+                    DebugMenu();
+                break;
+                case "Damage Hull":
+                    int hullDamage = AnsiConsole.Prompt(new TextPrompt<int>("Enter hull damage amount: "));
+                    mainPlayer.PShip.Hull.Hullval -= hullDamage;
+                    Console.Clear(); // Clear the console and write the UI
+                    WriteStatus();
+                    DebugMenu();
+                break;
+                case "Edit Money":
+                    int money = AnsiConsole.Prompt(new TextPrompt<int>("Enter new amount of money"));
+                    mainPlayer.Money = money;
+                    Console.Clear(); // Clear the console and write the UI
+                    WriteStatus();
+                    DebugMenu();
+                break;
+                case "Add Cargo":
+                break;
+                case "Remove Cargo":
+                break;
+                case "Change Systems":
+                break; 
+                case "Return":
+                    OptionsMenu();
+                break;
+            }
         }
     }
 }

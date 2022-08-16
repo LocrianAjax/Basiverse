@@ -40,6 +40,8 @@ namespace Basiverse
             _hull.Hullval = _hull.HullMax;
             
             _armor = new Armor();
+            _armor.Name = "None";
+            _armor.ArmorValue = 0;
 
             _shield = new Shield();
             _shield.Name = "Basicorps Asteroid-B-Gone"; // Set Default Shield
@@ -113,7 +115,7 @@ namespace Basiverse
             }
         }
 
-        public int CheckHeat(){ // Checks heat and deals damage to the hull
+        public double CheckHeat(){ // Checks heat and deals damage to the hull
             if(_heatsink.IsActive){
                 _heat -= _heatsink.ActiveVal;
                 _heatsink.IsActive = false; // Turn it back off it it's on
@@ -125,7 +127,7 @@ namespace Basiverse
 
             if(_heat > _hull.HeatMax){
                 Console.WriteLine("Warning! Excessive heat levels are damaging the hull!");
-                int heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
+                double heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
                 return heatDamage; // Return the amount of damage done to the hull
             }
             return 0; // Return 0 for safe range
@@ -145,9 +147,11 @@ namespace Basiverse
     
         public void TakeDamage(int damage){ // Deals the damage to the ship's hull and/or shields
             if(_shield.IsOnline && (_shield.ShieldVal > 0)){ // Check if the shield is online
-                int hullDamage = damage - _shield.ShieldVal; // Figure out hull damage
+                double hullDamage = damage - _shield.ShieldVal; // Figure out hull damage
                 _shield.ShieldVal -= damage; // Deal damage to the shield, then the hull
-                HullDamage(hullDamage);
+                if(hullDamage > 0){
+                    HullDamage(hullDamage);
+                }
                 if(_shield.ShieldVal <= 0){ // Make sure it's always 0 if it goes negative and set it offline
                     _shield.ShieldVal = 0;
                     _shield.IsOnline = false;
@@ -162,6 +166,11 @@ namespace Basiverse
             _shield.IsOnline = true;
             _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .2); // Round it down to the nearest whole number
             Console.WriteLine("Shields Back Online at {0}%", _shield.Health());
+        }
+
+        public void RestoreShields(){ // Turns on and fully restores the shield
+            _shield.IsOnline = true;
+            _shield.ShieldVal = _shield.ShieldMax;
         }
     
         public void ActivateHeatsink(){// Just accesses the private var
@@ -219,14 +228,9 @@ namespace Basiverse
             return (_heat / _hull.HeatMax) * 100;
         }
 
-        private void HullDamage(int damage){ // Checks armor and damages the hull
-            if(_armor.Name != "none"){
-                int hullDamage = damage - _armor.ArmorValue;
-                _hull.Hullval -= hullDamage;
-            }
-            else{
+        private void HullDamage(double damage){ // Checks armor and damages the hull
+                double hullDamage = damage - _armor.ArmorValue;
                 _hull.Hullval -= damage;
-            }
         }
     }
 }

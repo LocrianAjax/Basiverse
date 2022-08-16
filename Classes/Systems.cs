@@ -9,16 +9,18 @@ namespace Basiverse
         private string _name = "";
         public string Name{ get {return _name;} set {_name = value;}}
 
-        private int _hullval;
-        public int Hullval{ get {return _hullval;} set {_hullval = value;}}
-        private int _maxhull;
-        public int HullMax{ get {return _maxhull;} set {_maxhull = value;}}
+        private double _hullval;
+        public double Hullval{ get {return _hullval;} set {_hullval = value;}}
+        private double _maxhull;
+        public double HullMax{ get {return _maxhull;} set {_maxhull = value;}}
 
-        private int _maxheat;
-        public int HeatMax{ get {return _maxheat;} set {_maxheat = value;}}
+        private double _maxheat;
+        public double HeatMax{ get {return _maxheat;} set {_maxheat = value;}}
 
         public double Health(){
-            return (_hullval/_maxhull) * 100;
+            double tmp = (_hullval/_maxhull);
+            tmp = tmp * 100;
+            return tmp;
         }
     }
 
@@ -55,10 +57,10 @@ namespace Basiverse
         private string _name = "";
         public string Name{ get {return _name;} set {_name = value;}}
 
-        private int _shieldval;
-        public int ShieldVal{ get {return _shieldval;} set {_shieldval = value;}}
-        private int _maxshield;
-        public int ShieldMax{ get {return _maxshield;} set {_maxshield = value;}}
+        private double _shieldval;
+        public double ShieldVal{ get {return _shieldval;} set {_shieldval = value;}}
+        private double _maxshield;
+        public double ShieldMax{ get {return _maxshield;} set {_maxshield = value;}}
         private bool _isonline = true;
         public bool IsOnline{get {return _isonline;} set {_isonline = value;}}
         public double Health(){
