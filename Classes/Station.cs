@@ -2,6 +2,8 @@ using System;
 using Basiverse;
 using Spectre.Console;
 using System.Threading;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Basiverse{
 
@@ -15,7 +17,8 @@ namespace Basiverse{
         private string _description = "";
         public string Description{ get {return _description;} set {_description = value;}}
 
-
+        private double _repairCost = 1; // Default to 1 space dollar per hull point
+        public double RepairCost{ get {return _repairCost;} set {_repairCost = value;}}
         /*
             Services - 
             All stations offer repairing and some shopping, except for wrecks. But the contents differ per location
@@ -30,12 +33,12 @@ namespace Basiverse{
         
         */
         public string[] BasicServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; 
-        public string[] ScienceServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
+        public string[] ScienceServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Cheaper repairs
         public string[] MilitaryServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Weapons Only
-        public string[] TerminalServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Sells ship upgrades too
-        public string[] ReligiousServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
+        public string[] TerminalServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Sells ship upgrades too, repairs vairy by market cost
+        public string[] ReligiousServices = new string[]{"Buy", "Sell", "Undock"}; 
         public string[] ColonyServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
-        public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
+        public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Repairs vairy by market cost
         public string[] WreckServices = new string[]{"Nothing, nothing tra-la-la?!", "Undock"}; 
 
         public Station(){ // Default constructor
@@ -51,10 +54,12 @@ namespace Basiverse{
         }
 
         public void Dock(Player inPlayer){
-            AnsiConsole.Clear();
-            DockScreen(inPlayer);
-            ServicesMenu();
-            return;
+            int retval = 0;
+            while(retval == 0){
+                AnsiConsole.Clear();
+                DockScreen(inPlayer);
+                retval = ServicesMenu(inPlayer);
+            }
         }
 
         public void DockScreen(Player inPlayer){
@@ -99,7 +104,7 @@ namespace Basiverse{
             AnsiConsole.Write(DockingScreen);
         }
 
-        public void ServicesMenu(){
+        public int ServicesMenu(Player inPlayer){
             string selection = "";
             switch(Type){ // basic, science, military, terminal, religous, colony, corporate, wreck 
                 case "Basic":
@@ -162,20 +167,97 @@ namespace Basiverse{
             
             switch(selection){
                 case "Repair":
-                    // RepairMenu()
+                    RepairMenu(inPlayer);
                 break;
                 case "Buy":
-                    //BuyMenu();
+                    BuyMenu(inPlayer);
                 break;
-                case "Sel":
-                    //SellMenu();
+                case "Sell":
+                    SellMenu(inPlayer);
                 break;
                 case "Upgrade":
-                    //UpgradeMenu();
+                    //UpgradeMenu(Player inPlayer);
+                break;
+                case "Nothing, nothing tra-la-la?!":
+                    GoblinKing();
                 break;
                 case "Undock":
-                    return;
+                    return 1;
             }
+            
+            return 0;
         }
+
+        public void RepairMenu(Player inPlayer){
+            /*
+                (station name) REPAIR SERVICES
+                | Ship Name | Hull val / Max|
+                | Max Repair amount| Cost |
+
+            */
+            int repairAmount = (inPlayer.PShip.Hull.HullMax - inPlayer.PShip.Hull.Hullval);
+            var rand = new Random();
+
+            switch(Type){
+                case "Science":
+                    _repairCost = .8;
+                break;
+                case "Terminal": // These two have a random chance to be from .5 to 5
+                    _repairCost = (.5 * rand.Next(1,10));
+                break;
+                case "Corporate":
+                    _repairCost = (.5 * rand.Next(1,10));
+                break;
+                default: // Otherwise keep it as default
+                break;
+            }
+            // Set up repair
+            Table RepairScreen = new Table();
+            RepairScreen.Title = new TableTitle($"{Name} REPAIR SERVICES");
+            RepairScreen.AddColumns("VESSEL", "HULL INFO");
+            RepairScreen.AddRow($"{inPlayer.PShip.Name}", $"Curent Hull Value: {inPlayer.PShip.Hull.Hullval} Maximum: {inPlayer.PShip.Hull.HullMax}");
+            RepairScreen.AddRow($"Maximum Repairable: {repairAmount}", $"Cost: {RepairCost} per Hull Point");
+            AnsiConsole.Write(RepairScreen);
+
+            while(true){
+                int amount = AnsiConsole.Ask<int>("How many points would you like to repair?:");
+                if(amount == 0){
+                    return;
+                }
+                else if(amount > repairAmount || amount < 0){
+                    AnsiConsole.WriteLine("Please choose an amount greater than 0 or less than the max");
+                }
+                else if((amount * RepairCost) > inPlayer.Money){
+                    AnsiConsole.WriteLine("Please select an amount you can afford");
+                }
+                else{
+                    if(AnsiConsole.Confirm($"Would you like to repair your ship {amount} points for ${amount * RepairCost}?")){ // Price Check
+                        inPlayer.PShip.Repair(amount);
+                        return;   
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
+            
+        }
+
+        public void BuyMenu(Player inPlayer){
+            List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+        }
+
+        public void SellMenu(Player inPlayer){
+            List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+        }
+
+        public void GoblinKing(){
+            AnsiConsole.Clear();
+            var image = new CanvasImage("//Data//david-bowie-labyrinth.jpg");
+            var tmp = AnsiConsole.Prompt(
+                    new TextPrompt<string>("")
+                    .AllowEmpty());
+        }
+        // TODO: Service Menus
     }
 }

@@ -205,6 +205,15 @@ namespace Basiverse
             }
         }
 
+        public bool Repair(int value){
+            if((_hull.Hullval + value) > _hull.HullMax){
+                return false;
+            }
+            else{
+                _hull.Hullval += value;
+                return true;
+            }
+        }
         // Private Methods
         private double HeatPercentage(){ // Returns the math on the heat to get the %
             return (_heat / _hull.HeatMax) * 100;
