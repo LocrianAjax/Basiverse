@@ -9,6 +9,8 @@ Video Games|1|150|1|They never go out of fashion.
 Board Games|3|100|1|An old mainstay of dining halls everywhere.
 Sports Equipment|15|25|1|CargoHolds are surprisingly large and can support a lot of games.
 Workout Equipment|15|30|1|Fitness is important! Even in the vaccum of space.
+Movies|1|25|1|No internet out here, so we revert back to videos stored digitally.
+Music|1|15|1|No internet out here, so we revert back to music stored digitally.
 // Type 2 - Basic Luxury
 Coffee|3|120|2|The classic hot brown that powered Earth now powers Space.
 Tea|3|100|2|The British are allowed in space too.
@@ -22,6 +24,7 @@ Space Gems|50|250|4|Gems! In! Space!
 Artwork|10|195|4|Paintings of all sizes and subjects.
 Sculpures|50|500|4|Big, heavy chunks of material. Not practical in space, but still valued.
 Exotic Food|2|100|4|Caviar, Sushi, the finer things.
+Records|5|250|4|Requiring artifical gravity, ancient equipment and a love of music these are prized among collectors.
 // Type 5 - Industrial Goods
 Mining Machenery|10|100|5|Mining is a profitable, but dangerous buisness.
 Raw Minerals|15|120|5|Unprocessed hunks of rock, to be made into stuff.
