@@ -72,15 +72,28 @@ namespace Basiverse{
             Table DockingScreen = new Table(); 
             DockingScreen.Expand();
             DockingScreen.AddColumns("SHIP MANIFEST", "STATION DATA");
+
+            // Set up Capitan Info
+            Table CapitanScreen = new Table();
+            CapitanScreen.AddColumn($"Welcome Capitan {inPlayer.Name}!");
+            CapitanScreen.AddRow($"Available Money: ${inPlayer.Money}");
+            CapitanScreen.AddRow("Log Data:");
+            CapitanScreen.AddRow($"Jumps: {inPlayer.JumpLog}");
+
+            Table ShipInfo = new Table();
+            ShipInfo.AddColumn("SHIP MANIFEST");
+            ShipInfo.AddRow($"Name: {inPlayer.PShip.Shield.Name} Cost: {inPlayer.PShip.Shield.Cost}");
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Armor.Name} Cost: {inPlayer.PShip.Armor.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Heatsink.Name} Cost: {inPlayer.PShip.Heatsink.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
+
             // Ship info
             Table ShipScreen = new Table();
-            ShipScreen.AddColumn("REPLACABLE COMPONENTS");
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Shield.Name} Cost: {inPlayer.PShip.Shield.Cost}"));
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Armor.Name} Cost: {inPlayer.PShip.Armor.Cost}"));
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Heatsink.Name} Cost: {inPlayer.PShip.Heatsink.Cost}"));
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
-            ShipScreen.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
+            ShipScreen.AddColumns("REPLACABLE COMPONENTS", "CAPITAN'S INFO");
+            ShipScreen.AddRow(ShipInfo, CapitanScreen);
+
             // Cargo Table
             Table CargoScreen = new Table();
             CargoScreen.Title = new TableTitle("CARGO MANIFEST");
@@ -93,6 +106,7 @@ namespace Basiverse{
             else{
                 CargoScreen.AddColumn("HOLD EMPTY");
             }
+
             // Set up station info
             Table StationScreen = new Table();
             StationScreen.Title = new TableTitle(Name);

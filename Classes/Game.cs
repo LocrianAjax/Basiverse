@@ -184,6 +184,7 @@ namespace Basiverse{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
                     if(destination == temp.Name){
                         mainPlayer.PLoc = temp;
+                        mainPlayer.JumpLog += 1;
                         // This is just for show
                         AnsiConsole.Progress().HideCompleted(false).Start(ctx => {
                             var warmEngine = ctx.AddTask("[red]Warming warp engine up to operating temperature[/]");
@@ -261,28 +262,30 @@ namespace Basiverse{
             */
             ReportScreen.AddRow($"Bank Account",$"{mainPlayer.Money}");
             // Shield Status
-            if(mainPlayer.PShip.ShieldVal() >= 75){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [green]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            double shieldSw = Math.Floor(mainPlayer.PShip.ShieldVal());
+            if(shieldSw >= 75){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [green]{shieldSw}[/]%"));
             }
-            else if(mainPlayer.PShip.ShieldVal() < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [yellow]{mainPlayer.PShip.ShieldVal()}[/]%"));
+            else if(shieldSw < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [yellow]{shieldSw}[/]%"));
             }
-            else if(mainPlayer.PShip.ShieldVal() == 0){
+            else if(shieldSw == 0){
                 ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[red][rapidblink]OFFLINE[/][/]"));
             }
             else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [orange]{mainPlayer.PShip.ShieldVal()}[/]%"));
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [orange]{shieldSw}[/]%"));
             }
 
             // Hull Status
-            if(mainPlayer.PShip.HullVal() >= 75){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [green]{mainPlayer.PShip.HullVal()}[/]%"));
+            double hullSw = Math.Floor(mainPlayer.PShip.HullVal());
+            if(hullSw >= 75){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [green]{hullSw}[/]%"));
             }
-            else if (mainPlayer.PShip.HullVal() <= 25){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [red]{mainPlayer.PShip.HullVal()}[/]%"));
+            else if (hullSw <= 25){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [red]{hullSw}[/]%"));
             }
             else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [yellow]{mainPlayer.PShip.HullVal()}[/]%"));
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [yellow]{hullSw}[/]%"));
             }
             
             // Armor Data
