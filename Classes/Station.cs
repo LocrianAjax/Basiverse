@@ -42,18 +42,23 @@ namespace Basiverse{
         public string[] WreckServices = new string[]{"Nothing, nothing tra-la-la?!", "Undock"}; 
 
         // Multilplying for buying/selling at stations
-        public double BaseMult = 1;
-        public double T0Mult = 1;
-        public double T1Mult = 1;
-        public double T2Mult = 1;
-        public double T3Mult = 1;
-        public double T4Mult = 1;
-        public double T5Mult = 1;
-        public double T6Mult = 1;
+        public double BaseBuyMult = 1;
+        public double T0BuyMult = 1;
+        public double T1BuyMult = 1;
+        public double T2BuyMult = 1;
+        public double T3BuyMult = 1;
+        public double T4BuyMult = 1;
+        public double T5BuyMult = 1;
+        public double T6BuyMult = 1;
 
-        // Lists of what will buy and sell
-        public List<int> StationBuyList;
-        public List<int> StationSellList;
+        public double BaseSellMult = 1;
+        public double T0SellMult = 1;
+        public double T1SellMult = 1;
+        public double T2SellMult = 1;
+        public double T3SellMult = 1;
+        public double T4SellMult = 1;
+        public double T5SellMult = 1;
+        public double T6SellMult = 1;
 
         public Station(){ // Default constructor
             _name = "Derelict";
@@ -282,6 +287,7 @@ namespace Basiverse{
             */
             List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
             List<Cargo> forSale = new List<Cargo>();
+            List<int> StationSellList = new List<int>();
             var rand = new Random();
 
             switch(Type){
@@ -292,45 +298,45 @@ namespace Basiverse{
                 break;
                 case "Science": // Sells Science for a slightly lower cost
                     StationSellList.Add(6);
-                    T6Mult = .9;
+                    T6SellMult = .9;
                 break;
                 case "Military": // Sells Basic for an inflated price
                     StationSellList.Add(0);
-                    T0Mult = 1.2;
+                    T0SellMult = 1.2;
                 break;
                 case "Religious": // Sells nothing
                 break;
                 case "Colony": // Sells Industiral for a slighly lower price
                     StationSellList.Add(5);
-                    T5Mult = .9;
+                    T5SellMult = .9;
                 break;
                 case "Terminal": // Sells everything at a variable cost
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i <= 6; i++){
                         StationSellList.Add(i);
                     }
                     // Everything has a random chance to be multiplied from .5 to 5
-                    BaseMult = (.5 * rand.Next(1,10));
-                    T0Mult = (.5 * rand.Next(1,10));
-                    T1Mult = (.5 * rand.Next(1,10));
-                    T2Mult = (.5 * rand.Next(1,10));
-                    T3Mult = (.5 * rand.Next(1,10));
-                    T4Mult = (.5 * rand.Next(1,10));
-                    T5Mult = (.5 * rand.Next(1,10));
-                    T6Mult = (.5 * rand.Next(1,10));
+                    BaseSellMult = (.5 * rand.Next(1,10));
+                    T0SellMult = (.5 * rand.Next(1,10));
+                    T1SellMult = (.5 * rand.Next(1,10));
+                    T2SellMult = (.5 * rand.Next(1,10));
+                    T3SellMult = (.5 * rand.Next(1,10));
+                    T4SellMult = (.5 * rand.Next(1,10));
+                    T5SellMult = (.5 * rand.Next(1,10));
+                    T6SellMult = (.5 * rand.Next(1,10));
                 break;
                 case "Corporate": // Sells everything at a variable cost
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i <= 6; i++){
                         StationSellList.Add(i);
                     }
                     // Everything has a random chance to be multiplied from .5 to 5
-                    BaseMult = (.5 * rand.Next(1,10));
-                    T0Mult = (.5 * rand.Next(1,10));
-                    T1Mult = (.5 * rand.Next(1,10));
-                    T2Mult = (.5 * rand.Next(1,10));
-                    T3Mult = (.5 * rand.Next(1,10));
-                    T4Mult = (.5 * rand.Next(1,10));
-                    T5Mult = (.5 * rand.Next(1,10));
-                    T6Mult = (.5 * rand.Next(1,10));
+                    BaseSellMult = (.5 * rand.Next(1,10));
+                    T0SellMult = (.5 * rand.Next(1,10));
+                    T1SellMult = (.5 * rand.Next(1,10));
+                    T2SellMult = (.5 * rand.Next(1,10));
+                    T3SellMult = (.5 * rand.Next(1,10));
+                    T4SellMult = (.5 * rand.Next(1,10));
+                    T5SellMult = (.5 * rand.Next(1,10));
+                    T6SellMult = (.5 * rand.Next(1,10));
                 break;
                 default: // Otherwise keep it as default
                 break;
@@ -349,11 +355,12 @@ namespace Basiverse{
             */
             List<Cargo> Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
             List<Cargo> toBuy = new List<Cargo>();
+            List<int> StationBuyList = new List<int>();
             var rand = new Random();
 
             switch(Type){
                 case "Basic":
-                    BaseMult = .7; // Buys everything for a reduced price
+                    BaseBuyMult = .7; // Buys everything for a reduced price
                     for(int i = 0; i < 6; i++){
                         StationBuyList.Add(i);
                     }
@@ -362,23 +369,23 @@ namespace Basiverse{
                     for(int i = 0; i < 6; i++){
                         StationBuyList.Add(i);
                     }
-                    T5Mult = 1.4;
-                    T6Mult = 2.5;
+                    T5BuyMult = 1.4;
+                    T6BuyMult = 2.5;
                 break;
                 case "Military": // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreation and even more for drugs/booze
                     StationBuyList.Add(1);
                     StationBuyList.Add(2);
                     StationBuyList.Add(3);
-                    T1Mult = 2;
-                    T2Mult = 1.5;
-                    T3Mult = 3;
+                    T1BuyMult = 2;
+                    T2BuyMult = 1.5;
+                    T3BuyMult = 3;
                 break;
                 case "Religious": // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreatiuon
                     StationBuyList.Add(1);
                     StationBuyList.Add(2);
                     StationBuyList.Add(3);
-                    T1Mult = 1.75;
-                    T2Mult = 1.4;
+                    T1BuyMult = 1.75;
+                    T2BuyMult = 1.4;
                 break;
                 case "Colony": // Does not buy Luxury, with a premium on basic, basic luxury goods, recreatiuon and cheap booze
                     StationBuyList.Add(1);
@@ -386,38 +393,38 @@ namespace Basiverse{
                     StationBuyList.Add(3);
                     StationBuyList.Add(5);
                     StationBuyList.Add(6);
-                    T0Mult = 2.5;
-                    T1Mult = 2;
-                    T2Mult = 1.5;
-                    T3Mult = 3;
+                    T0BuyMult = 2.5;
+                    T1BuyMult = 2;
+                    T2BuyMult = 1.5;
+                    T3BuyMult = 3;
                 break;
                 case "Terminal": // Everything at a variable cost
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i <= 6; i++){
                         StationBuyList.Add(i);
                     }
                     // Everything has a random chance to be multiplied from .5 to 5
-                    BaseMult = (.5 * rand.Next(1,10));
-                    T0Mult = (.5 * rand.Next(1,10));
-                    T1Mult = (.5 * rand.Next(1,10));
-                    T2Mult = (.5 * rand.Next(1,10));
-                    T3Mult = (.5 * rand.Next(1,10));
-                    T4Mult = (.5 * rand.Next(1,10));
-                    T5Mult = (.5 * rand.Next(1,10));
-                    T6Mult = (.5 * rand.Next(1,10));
+                    BaseBuyMult = (.5 * rand.Next(1,10));
+                    T0BuyMult = (.5 * rand.Next(1,10));
+                    T1BuyMult = (.5 * rand.Next(1,10));
+                    T2BuyMult = (.5 * rand.Next(1,10));
+                    T3BuyMult = (.5 * rand.Next(1,10));
+                    T4BuyMult = (.5 * rand.Next(1,10));
+                    T5BuyMult = (.5 * rand.Next(1,10));
+                    T6BuyMult = (.5 * rand.Next(1,10));
                 break;
                 case "Corporate": // Everything at a variable cost
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i <= 6; i++){
                             StationBuyList.Add(i);
                     }
                     // Everything has a random chance to be multiplied from .5 to 5
-                    BaseMult = (.5 * rand.Next(1,10));
-                    T0Mult = (.5 * rand.Next(1,10));
-                    T1Mult = (.5 * rand.Next(1,10));
-                    T2Mult = (.5 * rand.Next(1,10));
-                    T3Mult = (.5 * rand.Next(1,10));
-                    T4Mult = (.5 * rand.Next(1,10));
-                    T5Mult = (.5 * rand.Next(1,10));
-                    T6Mult = (.5 * rand.Next(1,10));
+                    BaseBuyMult = (.5 * rand.Next(1,10));
+                    T0BuyMult = (.5 * rand.Next(1,10));
+                    T1BuyMult = (.5 * rand.Next(1,10));
+                    T2BuyMult = (.5 * rand.Next(1,10));
+                    T3BuyMult = (.5 * rand.Next(1,10));
+                    T4BuyMult = (.5 * rand.Next(1,10));
+                    T5BuyMult = (.5 * rand.Next(1,10));
+                    T6BuyMult = (.5 * rand.Next(1,10));
                 break;
                 default: // Otherwise keep it as default
                 break;
