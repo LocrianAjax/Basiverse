@@ -62,7 +62,9 @@ namespace Basiverse{
 
         public List<Cargo> Cargos = new List<Cargo>();
         public List<int> StationSellList = new List<int>();
+        public string buyOpts = "";
         public List<int> StationBuyList = new List<int>();
+        public string sellOpt = "";
         public List<Cargo> forSale = new List<Cargo>();
 
         public List<Cargo> toBuy = new List<Cargo>();
@@ -80,6 +82,16 @@ namespace Basiverse{
 
             Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
             var rand = new Random();
+
+            /*
+            Type 0 - Basic
+            Type 1 - Recreation
+            Type 2 - Basic Luxury
+            Type 3 - Drugs and Booze
+            Type 4 - High End Luxury Goods
+            Type 5 - Industial Goods
+            Type 6 - Science Equipment
+            */
 
             switch(Type){ // Set up buy and sell lists
                 case "Basic":
@@ -209,7 +221,33 @@ namespace Basiverse{
                     toBuy.Add(tmp);
                 }
             }
-            
+
+            foreach(int i in StationSellList){
+                switch(i){
+                    case 0:
+                        buyOpts += "Basic Goods|";
+                    break;
+                    case 1:
+                        buyOpts += "Recreational Goods|";
+                    break;
+                    case 2:
+                        buyOpts += "Luxury Items|";
+                    break;
+                    case 3:
+                        buyOpts += "Drugs and Alcohol|";
+                    break;
+                    case 4:
+                        buyOpts += "High End Luxury|";
+                    break;
+                    case 5:
+                        buyOpts += "Industrial Goods|";
+                    break;
+                    case 6:
+                        buyOpts += "Science Equipment|";
+                    break;
+                }
+            }
+            buyOpts += "Return";
         }
 
         public void Dock(Player inPlayer){
@@ -247,19 +285,21 @@ namespace Basiverse{
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
+            
 
             // Ship info
             Table ShipScreen = new Table();
             ShipScreen.AddColumns("REPLACABLE COMPONENTS", "CAPITAN'S INFO");
             ShipScreen.AddRow(ShipInfo, CapitanScreen);
+            ShipScreen.AddRow($"Cargo Hold: {inPlayer.PShip.Hold.Name} Free Space: {inPlayer.PShip.Hold.MaxSize - inPlayer.PShip.Hold.CurrentSize}M^3 Used Space: {inPlayer.PShip.Hold.CurrentSize}M^3");
 
             // Cargo Table
             Table CargoScreen = new Table();
             CargoScreen.Title = new TableTitle("CARGO MANIFEST");
-            if(inPlayer.PShip.Hold.HoldItems != null){
-                CargoScreen.AddColumns("ITEM","COST");
-                foreach(Cargo item in inPlayer.PShip.Hold.HoldItems){
-                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.Cost}"));
+            if(inPlayer.PShip.CargoHold != null){
+                CargoScreen.AddColumns("ITEM","COST", "SIZE");
+                foreach(Cargo item in inPlayer.PShip.CargoHold){
+                    CargoScreen.AddRow($"Name: {item.Name}", $"Cost: {item.Cost}", $"Size: {item.Size}");
                 }
             }
             else{
@@ -421,16 +461,155 @@ namespace Basiverse{
             
         }
 
-        public void BuyMenu(Player inPlayer){ // Buying from the station to the player
+
+        public void BuyMenu(Player inPlayer){ // Broken into 3 functions, Selecting a type, selecting 
             /*
                 (station name) MARKET - BUY
             */
+            string items = "";
+            AnsiConsole.Clear();
+            Table MarketTable = new Table(); // Table for the "Main" buy menu
+            MarketTable.Title = new TableTitle($"{Name} MARKET - BUY");
+            MarketTable.AddColumns("CARGO MANIFEST","SHOP INFORMATION");
+            
+            // Add Cargo Info
+            Table InfoTable = new Table();
+            InfoTable.Title = new TableTitle($"FREE: {inPlayer.PShip.Hold.MaxSize - inPlayer.PShip.Hold.CurrentSize}M^3 CASH: ${inPlayer.Money}");
+            if(inPlayer.PShip.CargoHold != null){
+                InfoTable.AddColumns("ITEM","COST");
+                foreach(Cargo item in inPlayer.PShip.CargoHold){
+                    InfoTable.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.Cost}"));
+                }
+            }
+            else{
+                InfoTable.AddColumn("HOLD EMPTY");
+            }
+
+            // Add Shop Info
+            Table BuyTable = new Table(); 
+            BuyTable.AddColumns("NAME", "DESCRIPTION", "SIZE", "PRICE");
+            int type = BuyTypeMenu(); // Figure out which page we're going in
+
+            foreach(Cargo tmp in forSale){ // Adjust the price based on the type now to avoid repeating
+                if(tmp.Type == type){
+                    items += tmp.Name + "|";
+                    switch(type){
+                    case 0:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T0BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 1:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T1BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 2:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T2BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 3:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T3BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 4:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T4BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 5:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T5BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    case 6:
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T6BuyMult;
+                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                    break;
+                    }
+                }
+            }
+
+            MarketTable.AddRow(InfoTable, BuyTable);
+            MarketTable.Expand();
+            AnsiConsole.Write(MarketTable);
+
+            items += "Return";
+            string[] options = items.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+
+            string itemName = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Select an Item:")
+            .PageSize(pageCount)
+            .AddChoices(options));
+            
+            if(itemName == "Return"){
+                return;
+            }
+            else{
+                foreach(Cargo buying in forSale){ // Once you select the item to buy, push down into that menu
+                    if(buying.Name == itemName){
+                        inPlayer.BuyItem(buying);
+                    }
+                }
+            }
+            return;
+        }
+
+
+        public int BuyTypeMenu(){ // Use this menu to select the type of items to buy
+            string[] options = buyOpts.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+            string page = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Select a Category:")
+                .PageSize(pageCount)
+                .AddChoices(options));
+
+            if(page == "Return"){
+                return -1;
+            }
+            else{
+                switch(page){
+                    case "Basic Goods":
+                       return 0;
+                    case "Recreational Goods":
+                        return 1;
+                    case "Luxury Items":
+                        return 2;
+                    case "Drugs and Alcohol":
+                        return 3;
+                    case "High End Luxury":
+                        return 4;
+                    case "Industrial Goods":
+                        return 5;
+                    case "Science Equipment":
+                        return 6;
+                    default:
+                        return -1;
+                }
+            }
         }
 
         public void SellMenu(Player inPlayer){ // Selling from the Player to the station
             /*
                 (station name) MARKET - SELL
+                List Cargo on board and price
             */
+            Table SellTable = new Table();
+            // Cargo Table
+            Table CargoScreen = new Table();
+            CargoScreen.Title = new TableTitle("CARGO MANIFEST");
+            if(inPlayer.PShip.CargoHold != null){
+                CargoScreen.AddColumns("ITEM","COST");
+                foreach(Cargo item in inPlayer.PShip.CargoHold){
+                    // Switch on type for price mult
+                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.Cost}"));
+                }
+            }
+            else{
+                CargoScreen.AddColumn("HOLD EMPTY");
+            }
+
+            // Station buy list
         }
 
         public void GoblinKing(){

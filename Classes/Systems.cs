@@ -120,8 +120,6 @@ namespace Basiverse
 
         private int _currSize = 0;
         public int CurrentSize{ get {return _currSize;} set {_currSize = value;}}
-
-        public List<Cargo> HoldItems = new List<Cargo>();
 }
     
     [Serializable]
@@ -132,14 +130,17 @@ namespace Basiverse
         private int _size = 0;
         public int Size{ get {return _size;} set {_size = value;}}
 
-        private int _cost = 0;
-        public int Cost{ get {return _cost;} set {_cost = value;}}
+        private double _cost = 0;
+        public double Cost{ get {return _cost;} set {_cost = value;}}
 
         private int _type = 0;
         public int Type{ get {return _type;} set {_type = value;}}
 
         private string _description = "";
         public string Description{ get {return _description; } set {_description = value;}}
+
+        private double _adjustedPrice = 0;
+        public double AdjustedPrice{ get {return _adjustedPrice; } set {_adjustedPrice = value;}}
     }
 
     /* Future Ideas: 

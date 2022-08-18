@@ -1,5 +1,6 @@
 using System;
 using Basiverse;
+using System.Collections.Generic;
 
 namespace Basiverse
 {
@@ -28,6 +29,8 @@ namespace Basiverse
         public Engine Engine{ get {return _engine;} set {_engine = value;}}
         private CargoHold _hold;
         public CargoHold Hold{ get {return _hold;} set {_hold = value;}}
+
+        public List<Cargo> CargoHold {get; set;}
 
         public Ship(){ // Set up the starter ship in the constructor
             _type = "Basicorps Runner"; // Set Default type
@@ -72,7 +75,8 @@ namespace Basiverse
             _hold.Name = "Glovebox"; // Set default cargo hold
             _hold.MaxSize = 5;
             _hold.CurrentSize = 0;
-            _hold.HoldItems = null;
+            
+            CargoHold = new List<Cargo>(); // Keep this seprate from the CargoHold obj to keep continuity when upgrading ships
         }
 
 
@@ -187,20 +191,31 @@ namespace Basiverse
             }
         }
 
-        public int AddCargo(Cargo incoming){
-            if((_hold.CurrentSize == _hold.MaxSize) || ((_hold.CurrentSize + incoming.Size) >= _hold.MaxSize)){ // Check size
+        public int AddCargo(Cargo incoming, int amount){
+            if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
                 return -1; // Return if it can't fit
             }
             else{
-                _hold.CurrentSize = _hold.CurrentSize + incoming.Size;
-                _hold.HoldItems.Add(new Cargo() {Name = incoming.Name, Size = incoming.Size, Cost = incoming.Cost });
+                for(int i = 0; i < amount; i++){
+                    _hold.CurrentSize = _hold.CurrentSize + incoming.Size;
+                    CargoHold.Add(incoming);
+                }
                 return 1; // Otherwise return 1 for success
             }
         }
 
         public void RemoveCargo(int index){
-            _hold.CurrentSize = _hold.CurrentSize - _hold.HoldItems[3].Size;
-            _hold.HoldItems.RemoveAt(index);
+            _hold.CurrentSize = _hold.CurrentSize - CargoHold[index].Size;
+            CargoHold.RemoveAt(index);
+        }
+
+        public int CheckCargo(Cargo incoming, int amount){
+            if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
+                return -1; // Return if it can't fit
+            }
+            else{
+                return 1; // Otherwise return 1 for a fit
+            }
         }
 
         public bool Rename(string newName){

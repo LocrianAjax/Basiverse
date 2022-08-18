@@ -230,7 +230,7 @@ namespace Basiverse{
                 break;
                 case "Save and Quit":
                     SaveGame();
-                break;
+                    return;
                 case "Debug":
                     DebugMenu();
                 break;
@@ -322,8 +322,8 @@ namespace Basiverse{
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Missile.Name}"), new Markup($"Damage: {mainPlayer.PShip.Missile.Damage} Hit Chance: {mainPlayer.PShip.Missile.HitChance}% Stock: {mainPlayer.PShip.Missile.Stock}"));
             // Cargohold Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hold.Name}"), new Markup($"In Use: {mainPlayer.PShip.Hold.CurrentSize}m^3 Free: {mainPlayer.PShip.Hold.MaxSize}m^3"));
-            if(mainPlayer.PShip.Hold.HoldItems != null){
-                foreach(Cargo item in mainPlayer.PShip.Hold.HoldItems){
+            if(mainPlayer.PShip.CargoHold != null){
+                foreach(Cargo item in mainPlayer.PShip.CargoHold){
                     ReportScreen.AddRow(new Markup(""), new Markup($"Name: {item.Name} Size: {item.Size}m^3 Cost: {item.Cost}"));
                 }
             }
@@ -387,6 +387,7 @@ namespace Basiverse{
             }
             AnsiConsole.MarkupLine("Save [green]Complete[/]");
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            Start();
         }
 
         private void DockMenu(){
