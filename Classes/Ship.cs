@@ -204,9 +204,10 @@ namespace Basiverse
             }
         }
 
-        public void RemoveCargo(int index){
-            _hold.CurrentSize = _hold.CurrentSize - CargoHold[index].Size;
-            CargoHold.RemoveAt(index);
+        public void RemoveCargo(Cargo inCargo, int amount){ // This assumes that the amount you are removing exists
+            for(int i = 0; i < amount; i++){
+                CargoHold.Remove(inCargo);
+            }
         }
 
         public int CheckCargo(Cargo incoming, int amount){

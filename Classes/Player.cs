@@ -65,5 +65,39 @@ namespace Basiverse
                 }
             }
         }
+
+        public void SellItem(Cargo inCargo){
+            Table ItemTable = new Table(); // Table for the "Main" Sell menu
+            ItemTable.Title = new TableTitle($"SELLING {inCargo.Name}");
+            ItemTable.AddColumns("NAME", "DESCRIPTION", "SIZE", "PRICE");
+            ItemTable.AddRow($"{inCargo.Name}", $"{inCargo.Description}", $"{inCargo.Size}", $"{inCargo.AdjustedPrice}");
+            AnsiConsole.Write(ItemTable);
+            int avail = 0;
+            foreach(Cargo tmp in PShip.CargoHold){
+                if(tmp.Name == inCargo.Name){
+                    avail++;
+                }
+            }
+
+            while(true){
+                int amount = AnsiConsole.Ask<int>("How many would you like to sell?:");
+                if(amount == 0){
+                    return;
+                }
+                else if(amount > avail){
+                     AnsiConsole.WriteLine("Please select an amount equal to or less that the amount you have.");
+                }
+                else{
+                    if(AnsiConsole.Confirm($"You would like to sell {amount} of {inCargo.Name} for ${amount * inCargo.AdjustedPrice}?")){ // Price Check
+                        PShip.RemoveCargo(inCargo, amount);
+                        Money += (amount * inCargo.AdjustedPrice);
+                        return;   
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

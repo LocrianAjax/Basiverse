@@ -614,9 +614,9 @@ namespace Basiverse{
             */
             Table SellTable = new Table();
             SellTable.Title = new TableTitle($"{Name} MARKET - SELL");
+            SellTable.AddColumns("CARGO MANIFEST", "STATION WILL BUY");
             // Cargo Table
             Table CargoScreen = new Table();
-            CargoScreen.Title = new TableTitle("CARGO MANIFEST");
             if(inPlayer.PShip.CargoHold != null){
                 CargoScreen.AddColumns("ITEM","COST");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
@@ -654,14 +654,38 @@ namespace Basiverse{
             }
 
             Table ToSell = new Table();
-            ToSell.Title = new TableTitle("STATION WILL BUY");
             ToSell.AddColumns("ITEM","SELL PRICE");
+            string SellOpts = "";
             foreach(Cargo item in inPlayer.PShip.CargoHold){
-                // TODO: Generate a list of sellable, check empty.
-                // If not empty select one to sell and an amount
-                // Create a plyer sell item to go along with the buy item
+                if(StationBuyList.Contains(item.Type)){
+                    SellOpts += item.Name + "|";
+                    ToSell.AddRow($"{item.Name}", $"{item.AdjustedPrice}");
+                }
             }
-            // Station buy list
+            SellOpts += "Return";
+            SellTable.AddRow(CargoScreen, ToSell);
+            AnsiConsole.Write(SellTable);
+
+            string[] options = SellOpts.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+
+            string itemName = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Select an Item to Sell:")
+            .PageSize(pageCount)
+            .AddChoices(options));
+            
+            if(itemName == "Return"){
+                return;
+            }
+            else{
+                foreach(Cargo selling in inPlayer.PShip.CargoHold){ // Once you select the item to sell, push down into that menu
+                    if(selling.Name == itemName){
+                        inPlayer.SellItem(selling);
+                        break;
+                    }
+                }
+            }
         }
 
         public void GoblinKing(){
