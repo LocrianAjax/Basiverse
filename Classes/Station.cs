@@ -299,6 +299,7 @@ namespace Basiverse{
             if(inPlayer.PShip.CargoHold != null){
                 CargoScreen.AddColumns("ITEM","COST", "SIZE");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
+
                     CargoScreen.AddRow($"Name: {item.Name}", $"Cost: {item.Cost}", $"Size: {item.Size}");
                 }
             }
@@ -478,7 +479,30 @@ namespace Basiverse{
             if(inPlayer.PShip.CargoHold != null){
                 InfoTable.AddColumns("ITEM","COST");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
-                    InfoTable.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.Cost}"));
+                    switch(item.Type){ // List the 'Buy' prices here, since that's what the station will pay
+                    case 0:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T0BuyMult;
+                    break;
+                    case 1:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T1BuyMult;
+                    break;
+                    case 2:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T2BuyMult;
+                    break;
+                    case 3:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T3BuyMult;
+                    break;
+                    case 4:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T4BuyMult;
+                    break;
+                    case 5:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T5BuyMult;
+                    break;
+                    case 6:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T6BuyMult;
+                    break;
+                    }
+                    InfoTable.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.AdjustedPrice}"));
                 }
             }
             else{
@@ -495,34 +519,28 @@ namespace Basiverse{
                     items += tmp.Name + "|";
                     switch(type){
                     case 0:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T0BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T0SellMult;
                     break;
                     case 1:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T1BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T1SellMult;
                     break;
                     case 2:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T2BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T2SellMult;
                     break;
                     case 3:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T3BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T3SellMult;
                     break;
                     case 4:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T4BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T4SellMult;
                     break;
                     case 5:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T5BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T5SellMult;
                     break;
                     case 6:
-                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T6BuyMult;
-                        BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
+                        tmp.AdjustedPrice = tmp.Cost * BaseSellMult * T6SellMult;
                     break;
                     }
+                    BuyTable.AddRow($"{tmp.Name}", $"{tmp.Description}", $"{tmp.Size}", $"{tmp.AdjustedPrice}");
                 }
             }
 
@@ -595,20 +613,54 @@ namespace Basiverse{
                 List Cargo on board and price
             */
             Table SellTable = new Table();
+            SellTable.Title = new TableTitle($"{Name} MARKET - SELL");
             // Cargo Table
             Table CargoScreen = new Table();
             CargoScreen.Title = new TableTitle("CARGO MANIFEST");
             if(inPlayer.PShip.CargoHold != null){
                 CargoScreen.AddColumns("ITEM","COST");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
-                    // Switch on type for price mult
-                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.Cost}"));
+                    switch(item.Type){ // List the 'Buy' prices here, since that's what the station will pay
+                    case 0:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T0BuyMult;
+                    break;
+                    case 1:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T1BuyMult;
+                    break;
+                    case 2:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T2BuyMult;
+                    break;
+                    case 3:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T3BuyMult;
+                    break;
+                    case 4:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T4BuyMult;
+                    break;
+                    case 5:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T5BuyMult;
+                    break;
+                    case 6:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T6BuyMult;
+                    break;
+                    }
+                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.AdjustedPrice}"));
                 }
             }
             else{
-                CargoScreen.AddColumn("HOLD EMPTY");
+                var tmp = AnsiConsole.Prompt(
+                    new TextPrompt<string>("[red]Nothing to sell, press any key to continue[/]")
+                    .AllowEmpty());
+                return;
             }
 
+            Table ToSell = new Table();
+            ToSell.Title = new TableTitle("STATION WILL BUY");
+            ToSell.AddColumns("ITEM","SELL PRICE");
+            foreach(Cargo item in inPlayer.PShip.CargoHold){
+                // TODO: Generate a list of sellable, check empty.
+                // If not empty select one to sell and an amount
+                // Create a plyer sell item to go along with the buy item
+            }
             // Station buy list
         }
 
