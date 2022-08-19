@@ -15,20 +15,16 @@ namespace Basiverse
 
         // NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
 
-        public List<Dialoug> Dialougs;
+        public List<Dialoug> Dialouges;
 
         public Ship cShip; // For combat NPCs
     }
 
     [Serializable]
-    class Dialoug{ // Dialouges contain a line, and ???
+    class Dialoug{ // Dialouges contain a set, line and a bool for if it's an intro line
+        public int set;
         public string line;
 
-        public bool isHidden;
-
-        public bool isLocked;
-
-        public int unLocks;
-
+        public bool isIntro;
     }
 }

@@ -41,6 +41,7 @@ Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two e
 Wormhhole|It keeps dumping out gas and other various things.|1
 Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings.|1
 // Stations contain a 4th category that's a desc of the station type. basic, science, military, terminal, religous, colony, corporate, wreck 
+// TODO: Update the descriptions for stations
 // Type 2 "Basic Station"
 Canaan Station|The local station, good for a bite to eat and a little trading.|2|Basic
 Nemo Station|The local station, good for a bite to eat and a little trading.|2|Basic

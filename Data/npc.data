@@ -1,1 +1,34 @@
 // Data File for setting up NPCS
+// NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
+// Ship list index: 0 is none, 1 is easy, etc
+// NAME|TYPE|SHIP LIST INDEX|DIALOUGE LINE SET
+Aarlon Watson
+Hony Jamas
+Teve Hillee
+Dougly Pere
+Rege Perray
+Juany Bertson
+Joshy Cookell
+Arlel Warders
+Sone Millee
+Raymy Wilson
+Vortau Hoda
+Krata
+F'Hani
+Byorma
+G'Tige
+Andros
+Gl'Oran
+T'Sicia
+Zuri
+N'Haly
+Rolia Progarc
+Christy Smason
+Lene Campbarn
+Cara Rogonz
+Sara Grogarc
+Sarea Belley
+Lyne Powis
+Theria Howis
+Ebon Jacksell
+Virgin Greenes
