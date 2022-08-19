@@ -230,12 +230,14 @@ namespace Basiverse{
                 break;
                 case "Save and Quit":
                     SaveGame();
-                    return;
+                    System.Environment.Exit(0);
+                break;
                 case "Debug":
                     DebugMenu();
                 break;
                 case "Quit without Saving":
-                    return;
+                   System.Environment.Exit(0);
+                break;
             }
         }
 
@@ -411,10 +413,9 @@ namespace Basiverse{
                 MainActionMenu();
             }
             else{
-                foreach(PointofInterest poi in mainPlayer.PLoc.Interests){ // Not effcient, but we're going to a max of 5 things so no biggie
-                    if(poi.Name == destination){
-                        Station newStation = new Station(poi.Name, poi.StationType, poi.Description);
-                        newStation.Dock(mainPlayer);
+                foreach(Station tmp in mainPlayer.PLoc.Stations){ // Not effcient, but we're going to a max of 5 things so no biggie
+                    if(tmp.Name == destination){
+                        tmp.Dock(mainPlayer);
                         Start();
                     }
                 }

@@ -15,7 +15,7 @@ Data Access helper classes
 
 app.config file and settings menu
 
-Dockable stations with repairing
+Dockable stations with Repairing/Buying/Selling
 
 TODO:
 
@@ -29,6 +29,7 @@ Actual gameplay(Important!)
 
 Intro screens for the game and on startup
 
+Mining?
 
 Automated Build Status:
 

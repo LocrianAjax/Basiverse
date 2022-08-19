@@ -29,6 +29,8 @@ namespace Basiverse{
         public List<PointofInterest> Interests = new List<PointofInterest>();
         public List<Location> NearbyNodes = new List<Location>();
 
+        public List<Station> Stations = new List<Station>();
+
         public void dump(){
             Console.WriteLine($"\nLocation Name: {Name} Description: {Description} Type: {Type}");
             Console.WriteLine("Points of Interest:-");

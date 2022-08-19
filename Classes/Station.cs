@@ -19,6 +19,10 @@ namespace Basiverse{
 
         private double _repairCost = 1; // Default to 1 space dollar per hull point
         public double RepairCost{ get {return _repairCost;} set {_repairCost = value;}}
+
+        // A station may contain a list of NPCs
+        public List<NPC> NPCList;
+
         /*
             Services - 
             All stations offer repairing and some shopping, except for wrecks. But the contents differ per location

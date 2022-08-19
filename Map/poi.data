@@ -102,4 +102,4 @@ Felicity|A former colony ship turned into a spacestation.|2|Colony
 // Type 2 "Special"
 Blue Moon Colony|A corporate sponsored station.|2|Corporate
 // Type 2 "Default" to prevent an infinite loop
-Derelict|A former station now abandoned.|2|Wreck
+Derelect|A former station now abandoned.|2|Wreck

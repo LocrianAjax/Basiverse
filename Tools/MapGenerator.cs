@@ -61,6 +61,9 @@ namespace Basiverse{
                         }
                         if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
+                        // Then instate the station and add it to the Stations list
+                        Station newStation = new Station(allPoi[randPOI].Name, allPoi[randPOI].StationType, allPoi[randPOI].Description);
+                        loc.Stations.Add(newStation);
                         allPoi.RemoveAt(randPOI);
                         poiSize = allPoi.Count;
                     }
@@ -74,6 +77,9 @@ namespace Basiverse{
                         if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
                         loc.Interests.Add(allPoi[randPOI]); // Add it to the list
                         if(allPoi[randPOI].Type == 2){ // If it's a station, remove it from the list and decrease the size to make sure there are no repeats
+                            // Then instate the station and add it to the Stations list
+                            Station newStation = new Station(allPoi[randPOI].Name, allPoi[randPOI].StationType, allPoi[randPOI].Description);
+                            loc.Stations.Add(newStation);
                             if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
                             allPoi.RemoveAt(randPOI);
                             poiSize = allPoi.Count;
@@ -89,7 +95,10 @@ namespace Basiverse{
                     }
                     if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
                     loc.Interests.Add(allPoi[rand2]); // Add it to the list
-                    if(allPoi[rand2].Name != "Derelict"){ // Keep derelict around to fill in gaps
+                    // Then instate the station and add it to the Stations list
+                    Station newStation2 = new Station(allPoi[rand2].Name, allPoi[rand2].StationType, allPoi[rand2].Description);
+                    loc.Stations.Add(newStation2);
+                    if(allPoi[rand2].Name != "Derelect"){ // Keep derelict around to fill in gaps
                         allPoi.RemoveAt(rand2);
                     }
                     poiSize = allPoi.Count;
