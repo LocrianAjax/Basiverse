@@ -250,7 +250,7 @@ namespace Basiverse{
                 etc.    |   etc.
             */
             Table ReportScreen = new Table();
-            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CLASS: {mainPlayer.PShip.Type} CAPITAN: {mainPlayer.Name}");
+            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CHASSIS: {mainPlayer.PShip.Chassis} CAPITAN: {mainPlayer.Name}");
             ReportScreen.AddColumns("SYSTEM","REPORT");
             /*
                 Shield 

@@ -1,0 +1,22 @@
+// Chassis are a combination of Hulls and Cargoholds
+// They define the type of ship
+//Chassis Names
+//Basic - Birds, with birds of prey for warships and bird size for ship size
+//Midgame - Fish, size correlates to ship size. Predator fish for warships 
+//Late Game - Deities with area lining up with ship type
+// NAME|HULLNAME|CARGOHOLDNAME|COST|DESCRIPTION
+Basicorps Runner|Basic Pressure Hull|Glovebox|0|The most basic chassis you can get, but it works just fine.
+Hummingbird Class Cargo Van|Basic Pressure Hull|Trunk|1000|A slightly roomier but still very basic transport craft.
+Raven Class Monitor|Reinforced Pressure Hull|Personal Locker|1000|A slightly sturdier but still very small fighter craft.
+Penguin Class Tug||
+Eagle Class Cutter||
+Albatross Class Freighter||
+Vulture Class Destroyer||
+Pike Class Runabout||
+Minnow Class Freighter||
+Swordfish Class Cruiser||
+Hammerhead Class Battlecruiser||
+Hermes Class Tanker||
+Apollo Class Long Haul Freighter||
+Hades Class Battleship||
+Ares Class Dreadnought|Dreadnought Hull|Basicorps Cargohold Maxi-100

@@ -164,9 +164,42 @@ namespace Basiverse
             }
             Console.WriteLine("Object list created, writing to .bin");
             BinarySerialization.WriteToBinaryFile<List<Cargo>>("Data\\cargo.bin", Cargos);
+
+            // Chassis
+            Console.WriteLine("Starting Chassis Object Creation");
+            List<Chassis> Chassies = new List<Chassis>();
+            string [] chassisLines;
+            chassisLines = System.IO.File.ReadAllLines("Data\\chassis.data");
+            foreach(string line in chassisLines){
+                if(line.Contains("//")){
+                    continue;
+                }
+                else{
+                    string[] subs = line.Split('|');
+                    Hull tmpHull = new Hull();
+                    foreach(Hull tmp in Hulls){
+                        if(tmp.Name == subs[1]){
+                            tmpHull = tmp;
+                            break;
+                        }
+                    }
+                    
+                    CargoHold tmpHold = new CargoHold();
+                    foreach(CargoHold tmp in CargoHolds){
+                        if(tmp.Name == subs[2]){
+                            tmpHold = tmp;
+                            break;
+                        }
+                    }
+                    Chassies.Add(new Chassis(){Name = subs[0], _Hull = tmpHull, _Cargohold = tmpHold, Cost = Int32.Parse(subs[3]), Description = subs[4]});
+                }
+            }
+            Console.WriteLine("Object list created, writing to .bin");
+            BinarySerialization.WriteToBinaryFile<List<Chassis>>("Data\\chassis.bin", Chassies);
+
             Console.WriteLine("\nComplete, vertifying files exist");
             
-            string[] Locations = new string[] {"hull", "armor", "shield", "heatsink", "laser", "missile", "cargohold", "cargo"};
+            string[] Locations = new string[] {"hull", "armor", "shield", "heatsink", "laser", "missile", "cargohold", "cargo", "chassis"};
             foreach(string location in Locations){
                 if(File.Exists($"Data\\{location}.bin")){
                     Console.WriteLine($"{location}.bin vertified");
@@ -233,6 +266,11 @@ namespace Basiverse
                 Console.WriteLine($"{temp.Name} {temp.Size} {temp.Cost} {temp.Type} {temp.Description}\n");
             }
             
+            List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+            Console.WriteLine("Chassis Data:-");
+            foreach(Chassis temp in Chassies){
+                Console.WriteLine($"{temp.Name} {temp._Hull.Name} {temp._Cargohold.Name} {temp.Cost} {temp.Description}\n");
+            }
             Console.Write("\nLoad complete. Press any key to continue....");
             Console.ReadKey();
         }

@@ -1,7 +1,12 @@
 // Name|Size
 Glovebox|5
 Personal Locker|10
+Trunk|15
 Spare Berth|25
-Basicorps Cargohold Mini-01|50
-Basicorps Cargohold Maxi-10|100
-Basicorps Cargohold Maxi-100|500
+Empty Room|50
+Dedicated Cargo Section|100
+Modified Cargo Berths|150
+Decomissioned Barracks Roon|200
+Basicorps Cargohold Maxi-01|250
+Basicorps Cargohold Maxi-10|500
+Basicorps Cargohold Maxi-100|1000

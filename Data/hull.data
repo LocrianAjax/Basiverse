@@ -1,7 +1,12 @@
 // Name|Max|Heatmax
-Basic Pressure Hull|50|25
-Reinforced Pressure Hull|75|35
-Heat Adapted Hull|75|50
-Destroyer Hull|100|50
-Cruiser Hull|150|75
-Battlecruiser Hull|200|100
+Basic Pressure Hull|25|25
+Reinforced Pressure Hull|50|35
+Heat Adapted Pressure Hull|50|50
+Cargo Vessel Hull|150|25
+Troop Transport Hull|100|75
+Light Assault Craft Hull|100|50
+Destroyer Hull|150|75
+Cruiser Hull|175|100
+Battlecruiser Hull|250|150
+Battleship Hull|400|250
+Dreadnought Hull|800|400

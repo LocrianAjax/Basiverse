@@ -10,8 +10,8 @@ namespace Basiverse
         // A ship has a name, a type, a hull, a armor, a shield, a heat value, a heatsink, missiles, lasers, and a cargo hold
         private string _name = "";
         public string Name{ get {return _name;} set {_name = value;}}
-        private string _type = "";
-        public string Type{ get {return _type;} set {_type = value;}}
+        private string _chassis = "";
+        public string Chassis{ get {return _chassis;} set {_chassis = value;}}
         private int _heat = 0;
         private Hull _hull;
         public Hull Hull{ get {return _hull;} set {_hull = value;}}
@@ -33,7 +33,7 @@ namespace Basiverse
         public List<Cargo> CargoHold {get; set;}
 
         public Ship(){ // Set up the starter ship in the constructor
-            _type = "Basicorps Runner"; // Set Default type
+            _chassis = "Basicorps Runner"; // Set Default type
             _name = "The Nameless"; // Set Default Name
 
             _hull = new Hull();  // Set Default Hull
@@ -83,7 +83,7 @@ namespace Basiverse
         // Public Methods
         public void DisplayData(){ // Big data dump
             Console.WriteLine("\nBegin Ship Manifest:\n");
-            Console.WriteLine("Name: {0}\nClass: {1}\n", _name, _type);
+            Console.WriteLine("Name: {0}\nChassis: {1}\n", _name, _chassis);
             Console.WriteLine("Hull Report -\nName: {0}\nHealth: {1}%\nHeat Limit: {2}\n", _hull.Name, _hull.Health(), _hull.HeatMax);
             if(_shield.IsOnline){Console.WriteLine("Shields -\nName: {0}\nHealth: {1}%\nStatus: Online\n", _shield.Name, _shield.Health());}
             else{Console.WriteLine("Shields -\nName: {0}\nHealth: {1}%\nStatus: Offline\n", _shield.Name, _shield.Health());}
@@ -239,6 +239,11 @@ namespace Basiverse
                 return true;
             }
         }
+        
+        public void Upgrade(){
+
+        }
+        
         // Private Methods
         private double HeatPercentage(){ // Returns the math on the heat to get the %
             return (_heat / _hull.HeatMax) * 100;
