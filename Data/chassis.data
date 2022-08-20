@@ -7,16 +7,17 @@
 // NAME|HULLNAME|CARGOHOLDNAME|COST|DESCRIPTION
 Basicorps Runner|Basic Pressure Hull|Glovebox|0|The most basic chassis you can get, but it works just fine.
 Hummingbird Class Cargo Van|Basic Pressure Hull|Trunk|1000|A slightly roomier but still very basic transport craft.
-Raven Class Monitor|Reinforced Pressure Hull|Personal Locker|1000|A slightly sturdier but still very small fighter craft.
-Penguin Class Tug||
-Eagle Class Cutter||
-Albatross Class Freighter||
-Vulture Class Destroyer||
-Pike Class Runabout||
-Minnow Class Freighter||
-Swordfish Class Cruiser||
-Hammerhead Class Battlecruiser||
-Hermes Class Tanker||
-Apollo Class Long Haul Freighter||
-Hades Class Battleship||
-Ares Class Dreadnought|Dreadnought Hull|Basicorps Cargohold Maxi-100
+Raven Class Fighter|Reinforced Pressure Hull|Personal Locker|1000|A slightly sturdier but still very small personal fighter craft.
+Penguin Class Tug|Reinforced Pressure Hull|Spare Berth|1500|A tugship converted to haul cargo.
+Eagle Class Cutter|Light Assault Craft Hull|Spare Berth|2000|A cutter class Chassis, of a slightly larger size that a fighter.
+Albatross Class Freighter|Cargo Vessel Hull|Dedicated Cargo Section|2500|The first purpose built freighter that ypu can purchase. Poor heat capacity but a strong hull and lots of space.
+Vulture Class Destroyer|Destroyer Hull|Empty Room|5000|A real military class Destroyer chassis, available for civilian use.
+Pike Class Runabout|Troop Transport Hull|Empty Room|3500|Not quite as sturdy as a Destroyer, but has the same amount of storage for a lower price.
+Minnow Class Freighter|Cargo Vessel Hull|Modified Cargo Berths|3500|More storage than the Albatross, but built on the same hull.
+Swordfish Class Cruiser|Cruiser Hull|Dedicated Cargo Section|10000|A large military craft, meant for patrols with Destroyers.
+Barracuda Class Sloop|Desroyer Hull|Basicorps Cargohold Maxi-01|20000|A sturdy craft with a large amount of storage, a good all-round craft.
+Hammerhead Class Battlecruiser|Battlecruiser Hull|Modified Cargo Berths|25000|A military vessel meant for solo patrols in remote systems.
+Hermes Class Tanker|Troop Transport Hull|Basicorps Cargohold Maxi-10|35000|A troop transport modified to haul large amounts of goods.
+Apollo Class Long Haul Freighter|Destroyer Hull|Basicorps Cargohold Maxi-100|50000|A huge freighter meant to cross systems by itself, has a slightly up-armored hull.
+Hades Class Battleship|Battleship Hull|Basicorps Cargohold Maxi-100|100000|A Battleship, what more needs to be said?
+Ares Class Dreadnought|Dreadnought Hull|Basicorps Cargohold Maxi-100|500000|A massive Dreadnought class chassis, built to smash battleships and keep on going.
