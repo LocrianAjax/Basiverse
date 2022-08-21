@@ -240,8 +240,10 @@ namespace Basiverse
             }
         }
         
-        public void Upgrade(){
-
+        public void UpgradeChassis(Chassis inChassis){
+            Hull = inChassis._Hull;
+            Hold = inChassis._Cargohold;
+            _chassis = inChassis.Name;
         }
         
         // Private Methods

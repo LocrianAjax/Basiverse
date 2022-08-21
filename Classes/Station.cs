@@ -40,7 +40,7 @@ namespace Basiverse{
         public string[] ScienceServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Cheaper repairs
         public string[] MilitaryServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Weapons Only
         public string[] TerminalServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Sells ship upgrades too, repairs vairy by market cost
-        public string[] ReligiousServices = new string[]{"Buy", "Sell", "Undock"}; 
+        public string[] ReligiousServices = new string[]{"Sell", "Undock"}; 
         public string[] ColonyServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
         public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Repairs vairy by market cost
         public string[] WreckServices = new string[]{"Nothing, nothing tra-la-la?!", "Undock"}; 
@@ -517,6 +517,8 @@ namespace Basiverse{
             Table BuyTable = new Table(); 
             BuyTable.AddColumns("NAME", "DESCRIPTION", "SIZE", "PRICE");
             int type = BuyTypeMenu(); // Figure out which page we're going in
+
+            if(type == -1){return;}
 
             foreach(Cargo tmp in forSale){ // Adjust the price based on the type now to avoid repeating
                 if(tmp.Type == type){
