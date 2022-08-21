@@ -1,6 +1,7 @@
 using System;
 using Basiverse;
 using Spectre.Console;
+using System.Collections.Generic;
 
 namespace Basiverse
 {
@@ -101,11 +102,287 @@ namespace Basiverse
         }
 
         public void UpgradeChassis(Chassis inChassis){
-            
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inChassis.Name}", $"{inChassis.Description}", $"{inChassis.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your chassis for ${inChassis.Cost}?")){
+                    if(inChassis.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.UpgradeChassis(inChassis);
+                        Money -= inChassis.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
         }
 
+        public void UpgradeShield(Shield inShield){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
+            UpgradeTable.AddRow($"{inShield.Name}", $"{inShield.Cost}");
+            AnsiConsole.Write(UpgradeTable);
 
+                if(AnsiConsole.Confirm($"Would you like to upgrade your shield for ${inShield.Cost}?")){
+                    if(inShield.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your shield, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Shield = inShield;
+                        Money -= inShield.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
 
+        public void UpgradeArmor(Armor inArmor){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inArmor.Name}", $"{inArmor.Cost}");
+            AnsiConsole.Write(UpgradeTable);
 
+                if(AnsiConsole.Confirm($"Would you like to upgrade your armor for ${inArmor.Cost}?")){
+                    if(inArmor.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Armor = inArmor;
+                        Money -= inArmor.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+        public void UpgradeHeatsink(Heatsink inHeatsink){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inHeatsink.Name}", $"{inHeatsink.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your heatsink for ${inHeatsink.Cost}?")){
+                    if(inHeatsink.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Heatsink = inHeatsink;
+                        Money -= inHeatsink.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+        public void UpgradeEngine(Engine inEngine){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inEngine.Name}", $"{inEngine.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your engine for ${inEngine.Cost}?")){
+                    if(inEngine.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Engine = inEngine;
+                        Money -= inEngine.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+        public void UpgradeMissiles(Missile inMissiles){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inMissiles.Name}", $"{inMissiles.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your missiles for ${inMissiles.Cost}?")){
+                    if(inMissiles.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Missile = inMissiles;
+                        Money -= inMissiles.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+        public void UpgradeLasers(Laser inLasers){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.AddRow($"{inLasers.Name}", $"{inLasers.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your lasers for ${inLasers.Cost}?")){
+                    if(inLasers.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        PShip.Laser = inLasers;
+                        Money -= inLasers.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+
+        public void UpgradeSystem(string sysType){
+
+            string buyOpts = "";
+            switch(sysType){
+                case "Chassis":
+                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+                    foreach(Chassis tmp in Chassies){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Shield":
+                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+                    foreach(Shield tmp in Shields){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Armor":
+                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+                    foreach(Armor tmp in Armors){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Heatsink":
+                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+                    foreach(Heatsink tmp in Heatsinks){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Engine":
+                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+                    foreach(Engine tmp in Engines){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Missiles":
+                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+                    foreach(Missile tmp in Missiles){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "Lasers":
+                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+                    foreach(Laser tmp in Lasers){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+            }
+
+            buyOpts += "Return";
+            string[] options = buyOpts.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+
+            string itemName = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Select an Upgrade:")
+            .PageSize(pageCount)
+            .AddChoices(options));
+            
+            switch(sysType){
+                case "Chassis":
+                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+                    foreach(Chassis tmp in Chassies){
+                        if(tmp.Name == itemName){
+                            UpgradeChassis(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Shield":
+                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+                    foreach(Shield tmp in Shields){
+                        if(tmp.Name == itemName){
+                            UpgradeShield(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Armor":
+                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+                    foreach(Armor tmp in Armors){
+                        if(tmp.Name == itemName){
+                            UpgradeArmor(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Heatsink":
+                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+                    foreach(Heatsink tmp in Heatsinks){
+                        if(tmp.Name == itemName){
+                            UpgradeHeatsink(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Engine":
+                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+                    foreach(Engine tmp in Engines){
+                        if(tmp.Name == itemName){
+                            UpgradeEngine(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Missiles":
+                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+                    foreach(Missile tmp in Missiles){
+                        if(tmp.Name == itemName){
+                            UpgradeMissiles(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Lasers":
+                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+                    foreach(Laser tmp in Lasers){
+                        if(tmp.Name == itemName){
+                            UpgradeLasers(tmp);
+                            break;
+                        }
+                    }
+                break;
+                case "Return":
+                    return;
+            }
+        }
     }
 }

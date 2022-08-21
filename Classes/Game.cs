@@ -389,7 +389,7 @@ namespace Basiverse{
             }
             AnsiConsole.MarkupLine("Save [green]Complete[/]");
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            Start();
+            return;
         }
 
         private void DockMenu(){

@@ -36,13 +36,13 @@ namespace Basiverse{
             Wreck - Nothing, Nothing, Tra-la-la?
         
         */
-        public string[] BasicServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; 
+        public string[] BasicServices = new string[]{"Repair", "Buy", "Sell", "Undock"};
         public string[] ScienceServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Cheaper repairs
-        public string[] MilitaryServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Weapons Only
-        public string[] TerminalServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Undock"}; // Sells ship upgrades too, repairs vairy by market cost
+        public string[] MilitaryServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Restock", "Undock"}; // Weapons Only for upgrade
+        public string[] TerminalServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Restock", "Undock"}; // Sells ship upgrades too, repairs vairy by market cost
         public string[] ReligiousServices = new string[]{"Sell", "Undock"}; 
         public string[] ColonyServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; 
-        public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Undock"}; // Repairs vairy by market cost
+        public string[] CorporateServices = new string[]{"Repair", "Buy", "Sell", "Upgrade", "Restock", "Undock"}; // Repairs vairy by market cost
         public string[] WreckServices = new string[]{"Nothing, nothing tra-la-la?!", "Undock"}; 
 
         // Multilplying for buying/selling at stations
@@ -398,7 +398,10 @@ namespace Basiverse{
                     SellMenu(inPlayer);
                 break;
                 case "Upgrade":
-                    //UpgradeMenu(Player inPlayer);
+                    UpgradeMenu(inPlayer);
+                break;
+                case "Restock":
+                    RestockMenu(inPlayer);
                 break;
                 case "Nothing, nothing tra-la-la?!":
                     GoblinKing();
@@ -694,6 +697,40 @@ namespace Basiverse{
             }
         }
 
+        public void UpgradeMenu(Player inPlayer){ // Selects an upgrade and passes it along to the the ship functions
+            Table ShipInfo = new Table();
+            ShipInfo.AddColumn("SHIP MANIFEST");
+            ShipInfo.AddRow($"Chassis: {inPlayer.PShip.Chassis}");
+            ShipInfo.AddRow($"Name: {inPlayer.PShip.Shield.Name} Cost: {inPlayer.PShip.Shield.Cost}");
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Armor.Name} Cost: {inPlayer.PShip.Armor.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Heatsink.Name} Cost: {inPlayer.PShip.Heatsink.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
+            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
+
+            AnsiConsole.Write(ShipInfo);
+            string items = "";
+            if(Type == "Military"){
+                items = "Lasers|Missiles|Return";
+            }
+            else{
+                items = "Chassis|Shield|Armor|Engine|Heatsink|Missiles|Lasers|Return";
+            }
+            string[] options = items.Split('|');
+            int pageCount = options.Length + 1;
+            if(pageCount <= 3){pageCount = 4;}
+            string upgradeCat = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Select an sytem to upgrade:")
+            .PageSize(6)
+            .AddChoices(options));
+
+            if(upgradeCat == "Return"){ return;}
+            else{inPlayer.UpgradeSystem(upgradeCat);}
+        }
+
+        public void RestockMenu(Player inPlayer){
+            // TODO
+        }
         public void GoblinKing(){
             AnsiConsole.Clear();
             var image = new CanvasImage("//Data//david-bowie-labyrinth.jpg");

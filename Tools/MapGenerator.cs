@@ -2,6 +2,8 @@ using System;
 using Basiverse;
 using System.Collections.Generic;
 
+// TODO: Fix mapgen to remove duplicates
+
 // Generates a random map based on locations and POIS from data files
 namespace Basiverse{
     class MapGen{
@@ -109,6 +111,7 @@ namespace Basiverse{
                     loc.Interests = null;
                 }
 
+                // TODO: Make sure this doesn't link nodes to itself
                 // Add the links to other nodes
                 int numLoc = rand.Next(1, 5); // Generates a number between 0-4
                 if(debug){Console.WriteLine($"Adding {numLoc} links");}
