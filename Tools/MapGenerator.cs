@@ -110,25 +110,21 @@ namespace Basiverse{
                     if(debug){Console.WriteLine("Type 0: Moving on");}
                     loc.Interests = null;
                 }
-
-                // TODO: Make sure this doesn't link nodes to itself
+                
                 // Add the links to other nodes
                 int numLoc = rand.Next(1, 5); // Generates a number between 0-4
                 if(debug){Console.WriteLine($"Adding {numLoc} links");}
                 for(int i = 0; i < numLoc; i++){
                     int randLoc = rand.Next(0, locSize);
-                    if(debug){Console.WriteLine($"Checking if Location at index {randLoc}");}
-                    if ((loc.NearbyNodes == null)){
-                        if(debug){Console.WriteLine($"Nearby is null, linking the two together");}
-                        // Link them both to each other 
-                        loc.NearbyNodes.Add(allLocations[randLoc]);
-                        allLocations[randLoc].NearbyNodes.Add(loc);
-                    }
-                    else if(!(loc.NearbyNodes.Contains(allLocations[randLoc]))){ // Check if it already contains that location and skip if it does
+                    if(debug){Console.WriteLine($"Checking if Location at index {randLoc} is in use or ourself");}
+                    if((!loc.NearbyNodes.Contains(allLocations[randLoc])) && (allLocations[randLoc] != loc)){ // Check if it already contains that location and skip if it does
                         if(debug){Console.WriteLine($"Linking the two together");}
                         // Link them both to each other 
                         loc.NearbyNodes.Add(allLocations[randLoc]);
                         allLocations[randLoc].NearbyNodes.Add(loc);
+                    }
+                    else{
+                        Console.WriteLine("Skipping");
                     }
                 }
                 if(debug){Console.WriteLine("Adding the location to the list of nodes");}

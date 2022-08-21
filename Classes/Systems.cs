@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 namespace Basiverse
 {
+    // TODO: Add default constructors
+
     [Serializable]
     class Hull{ // Hulls have a name, a current value, a max value and a heat max
         private string _name = "";
