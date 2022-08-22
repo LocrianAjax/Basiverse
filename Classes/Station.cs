@@ -132,7 +132,7 @@ namespace Basiverse{
                     T2BuyMult = 1.5;
                     T3BuyMult = 3;
                 break;
-                case "Religious": 
+                case "Religous": 
                     // Sells nothing
                     // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreatiuon
                     StationBuyList.Add(1);
