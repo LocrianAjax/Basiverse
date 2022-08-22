@@ -395,6 +395,9 @@ namespace Basiverse
                 else if((amount * missilePrice) > Money){
                     AnsiConsole.WriteLine("Please select an amount you can afford");
                 }
+                else if(amount < 0){
+                    AnsiConsole.WriteLine("Please select a non-negative amount");
+                }
                 else{
                     if(AnsiConsole.Confirm($"You would like to purchase {amount} of missiles for ${amount * missilePrice}?")){ // Price Check
                         PShip.Missile.Stock += amount;
