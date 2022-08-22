@@ -330,56 +330,56 @@ namespace Basiverse{
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(BasicServices));
                 break;
                 case "Science":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(ScienceServices));
                 break;
                 case "Military":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(MilitaryServices));
                 break;
                 case "Terminal":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(TerminalServices));
                 break;
                 case "Religious":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(ReligiousServices));
                 break;
                 case "Colony":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(ColonyServices));
                 break;
                 case "Corporate":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(CorporateServices));
                 break;
                 case "Wreck":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Services:")
-                    .PageSize(5)
+                    .PageSize(6)
                     .AddChoices(WreckServices));
                 break;
             }
