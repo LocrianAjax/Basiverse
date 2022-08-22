@@ -384,5 +384,28 @@ namespace Basiverse
                     return;
             }
         }
+
+        public void RestockMissiles(int missilePrice){
+            while(true){
+                AnsiConsole.WriteLine($"You currently have: {PShip.Missile.Stock} missiles");
+                int amount = AnsiConsole.Ask<int>("How many missiles would you like to purchase?:");
+                if(amount == 0){
+                    return;
+                }
+                else if((amount * missilePrice) > Money){
+                    AnsiConsole.WriteLine("Please select an amount you can afford");
+                }
+                else{
+                    if(AnsiConsole.Confirm($"You would like to purchase {amount} of missiles for ${amount * missilePrice}?")){ // Price Check
+                        PShip.Missile.Stock += amount;
+                        Money -= (amount * missilePrice);
+                        return;   
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

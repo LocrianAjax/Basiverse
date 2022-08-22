@@ -729,7 +729,7 @@ namespace Basiverse{
         }
 
         public void RestockMenu(Player inPlayer){
-            // TODO
+            inPlayer.RestockMissiles(5); // Allow restock for $5 per misssile
         }
         public void GoblinKing(){
             AnsiConsole.Clear();
