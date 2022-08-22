@@ -36,44 +36,22 @@ namespace Basiverse
             _chassis = "Basicorps Runner"; // Set Default type
             _name = "The Nameless"; // Set Default Name
 
-            _hull = new Hull();  // Set Default Hull
-            _hull.Name = "Basic Pressure Hull";
-            _hull.HeatMax = 25;
-            _hull.HullMax = 50;
-            _hull.Hullval = _hull.HullMax;
+            _hull = new Hull("Basic Pressure Hull", 50, 25);  // Set Default Hull
             
-            _armor = new Armor();
-            _armor.Name = "None";
-            _armor.ArmorValue = 0;
+            _armor = new Armor("None", 0, 0);
 
-            _shield = new Shield();
-            _shield.Name = "Basicorps Asteroid-B-Gone"; // Set Default Shield
-            _shield.ShieldMax = 30;
-            _shield.ShieldVal = _shield.ShieldMax;
+            _shield = new Shield("Basicorps Asteroid-B-Gone", 30, 0);
 
-            _heatsink = new Heatsink();
-            _heatsink.Name = "Basicorps therm01"; // Set Default Heatsink
-            _heatsink.PassiveVal = 1;
-            _heatsink.ActiveVal = 10;
+            _heatsink = new Heatsink("Basicorps therm01", 1, 10, 0);
 
-            _lasers = new Laser();
-            _lasers.Name = "Basicorps Presentation Laser"; // Set Default Laser
-            _lasers.Damage = 5;
-            _lasers.Heat = 2;
+            _lasers = new Laser("Basicorps Presentation Laser", 5, 2, 0);
 
-            _missiles = new Missile();
-            _missiles.Name = "Basicorps Bottle Rockets"; // Set Default Missile
-            _missiles.Damage = 10;
-            _missiles.HitChance = .6;
+            _missiles = new Missile("Basicorps Bottle Rockets", 10, .6, 0);
             _missiles.Stock = 10;
             
-            _engine = new Engine();
-            _engine.Name = "Basic Manuvering Thrusters"; // Set Default Engine
-            _engine.FleeChance = .3;
+            _engine = new Engine("Basic Manuvering Thrusters", .3, 0);
 
-            _hold = new CargoHold();
-            _hold.Name = "Glovebox"; // Set default cargo hold
-            _hold.MaxSize = 5;
+            _hold = new CargoHold("Glovebox", 5);
             _hold.CurrentSize = 0;
             
             CargoHold = new List<Cargo>(); // Keep this seprate from the CargoHold obj to keep continuity when upgrading ships

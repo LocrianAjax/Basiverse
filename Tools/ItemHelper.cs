@@ -23,7 +23,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Hulls.Add(new  Hull(){Name = subs[0], HullMax = Int32.Parse(subs[1]), HeatMax = Int32.Parse(subs[2])});
+                    Hulls.Add(new  Hull(subs[0], Double.Parse(subs[1]), Double.Parse(subs[2])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -40,7 +40,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Armors.Add(new  Armor(){Name = subs[0], ArmorValue = Int32.Parse(subs[1]), Cost = Int32.Parse(subs[2])});
+                    Armors.Add(new  Armor(subs[0], Int32.Parse(subs[1]), Int32.Parse(subs[2])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -57,7 +57,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Heatsinks.Add(new  Heatsink(){Name = subs[0], PassiveVal = Int32.Parse(subs[1]), ActiveVal = Int32.Parse(subs[2]), Cost = Int32.Parse(subs[3])});
+                    Heatsinks.Add(new  Heatsink(subs[0], Int32.Parse(subs[1]), Int32.Parse(subs[2]), Int32.Parse(subs[3])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -74,7 +74,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Shields.Add(new  Shield(){Name = subs[0], ShieldMax = Int32.Parse(subs[1]), Cost = Int32.Parse(subs[2])});
+                    Shields.Add(new  Shield(subs[0], Double.Parse(subs[1]), Int32.Parse(subs[2])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -91,7 +91,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Lasers.Add(new  Laser(){Name = subs[0], Damage = Int32.Parse(subs[1]), Heat = Int32.Parse(subs[2]), Cost = Int32.Parse(subs[3])});
+                    Lasers.Add(new  Laser(subs[0], Int32.Parse(subs[1]), Int32.Parse(subs[2]), Int32.Parse(subs[3])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -108,7 +108,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Missiles.Add(new  Missile(){Name = subs[0], Damage = Int32.Parse(subs[1]), HitChance = Double.Parse(subs[2]), Cost = Int32.Parse(subs[3])});
+                    Missiles.Add(new  Missile(subs[0], Int32.Parse(subs[1]), Double.Parse(subs[2]), Int32.Parse(subs[3])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -125,7 +125,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Engines.Add(new  Engine(){Name = subs[0], FleeChance = Double.Parse(subs[1]), Cost = Int32.Parse(subs[2])});
+                    Engines.Add(new Engine(subs[0], Double.Parse(subs[1]), Int32.Parse(subs[2])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -142,7 +142,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    CargoHolds.Add(new  CargoHold(){Name = subs[0], MaxSize = Int32.Parse(subs[1])});
+                    CargoHolds.Add(new  CargoHold(subs[0], Int32.Parse(subs[1])));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -159,7 +159,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Cargos.Add(new  Cargo(){Name = subs[0], Size = Int32.Parse(subs[1]), Cost = Int32.Parse(subs[2]), Type = Int32.Parse(subs[3]), Description = subs[4]});
+                    Cargos.Add(new  Cargo(subs[0], Int32.Parse(subs[1]), Double.Parse(subs[2]), Int32.Parse(subs[3]), subs[4]));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");
@@ -191,7 +191,7 @@ namespace Basiverse
                             break;
                         }
                     }
-                    Chassies.Add(new Chassis(){Name = subs[0], _Hull = tmpHull, _Cargohold = tmpHold, Cost = Int32.Parse(subs[3]), Description = subs[4]});
+                    Chassies.Add(new Chassis(subs[0], subs[4], Int32.Parse(subs[3]), tmpHull, tmpHold));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");

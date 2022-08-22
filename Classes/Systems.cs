@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 namespace Basiverse
 {
-    // TODO: Add default constructors
-
     [Serializable]
     class Hull{ // Hulls have a name, a current value, a max value and a heat max
         private string _name = "";
@@ -24,6 +22,18 @@ namespace Basiverse
             tmp = tmp * 100;
             return tmp;
         }
+
+        public Hull(string inName, double inMax, double inHeatMax){
+            _name = inName;
+            _maxhull = inMax;
+            _hullval = inMax;
+            _maxheat = inHeatMax;
+        }
+
+        public Hull(){
+
+        }
+
     }
 
     [Serializable]
@@ -35,6 +45,16 @@ namespace Basiverse
         public int ArmorValue{ get {return _armorVal;} set {_armorVal = value;}}
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
+
+        public Armor(string inName, int inVal, int inCost){
+            _name = inName;
+            _armorVal = inVal;
+            _cost = inCost;
+        }
+
+        public Armor(){
+
+        }
     }
 
     [Serializable]
@@ -52,6 +72,19 @@ namespace Basiverse
         public bool IsActive{ get {return _isactive;} set {_isactive = value;}}
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
+
+
+        public Heatsink(string inName, int inPassive, int inActive, int inCost){
+            _name = inName;
+            _passiveval = inPassive;
+            _activeval = inActive;
+            _cost = inCost;
+            _isactive = false;
+        }
+
+        public Heatsink(){
+
+        }
     }
     
     [Serializable]
@@ -71,6 +104,19 @@ namespace Basiverse
 
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
+
+
+        public Shield(string inName, double inMax, int inCost){
+            _name = inName;
+            _maxshield = inMax;
+            _shieldval = inMax;
+            _isonline = true;
+            _cost = inCost;
+        }
+
+        public Shield(){
+
+        }
     }
 
     [Serializable]
@@ -83,6 +129,17 @@ namespace Basiverse
         public int Heat{get {return _heat;} set {_heat = value;}}
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
+
+        public Laser(string inName, int inDamage, int inHeat, int inCost){
+            _name = inName;
+            _damage = inDamage;
+            _heat = inHeat;
+            _cost = inCost;
+        }
+
+        public Laser(){
+
+        }
     }
 
     [Serializable]    
@@ -98,6 +155,17 @@ namespace Basiverse
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
 
+        public Missile(string inName, int inDamage, double inHitchance, int inCost){
+            _name = inName;
+            _damage = inDamage;
+            _hitchance = inHitchance;
+            _cost = inCost;
+        }
+
+        public Missile(){
+
+        }
+
     }
 
     [Serializable]
@@ -109,6 +177,16 @@ namespace Basiverse
         public double FleeChance{get {return _fleechance;} set {_fleechance = value;}}
         private int _cost = 0;
         public int Cost{ get {return _cost;} set {_cost = value;}}
+
+        public Engine(string inName, double inFlee, int inCost){
+            _name = inName;
+            _fleechance = inFlee;
+            _cost = inCost;
+        }
+
+        public Engine(){
+
+        }
         
     }
 
@@ -122,7 +200,16 @@ namespace Basiverse
 
         private int _currSize = 0;
         public int CurrentSize{ get {return _currSize;} set {_currSize = value;}}
-}
+
+        public CargoHold(string inName, int inMax){
+            _name = inName;
+            _maxSize = inMax;
+        }
+
+        public CargoHold(){
+
+        }
+    }
     
     [Serializable]
     class Cargo{ // Cargo has a name, a size in m3, a type and a cost
@@ -143,6 +230,19 @@ namespace Basiverse
 
         private double _adjustedPrice = 0;
         public double AdjustedPrice{ get {return _adjustedPrice; } set {_adjustedPrice = value;}}
+    
+        public Cargo(string inName, int inSize, double inCost, int inType, string inDescription){
+            _name = inName;
+            _size = inSize;
+            _cost = inCost;
+            _type = inType;
+            _description = inDescription;
+        }
+
+        public Cargo(){
+
+        }
+    
     }
 
     [Serializable]
@@ -153,8 +253,20 @@ namespace Basiverse
         public string Description{get {return _description;} set {_description = value;}}
         private int _cost = 0;
         public int Cost{get {return _cost;} set {_cost = value;}}
-        public Hull _Hull = new Hull();
-        public CargoHold _Cargohold = new CargoHold();
+        public Hull _Hull;
+        public CargoHold _Cargohold;
+
+        public Chassis(string inName, string inDescription, int inCost, Hull inHull, CargoHold inHold){
+            _name = inName;
+            _description = inDescription;
+            _cost = inCost;
+            _Hull = inHull;
+            _Cargohold = inHold;
+        }
+
+        public Chassis(){
+
+        }
     }
 
     /* Future Ideas: 
