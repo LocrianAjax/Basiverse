@@ -57,6 +57,34 @@ namespace Basiverse
             CargoHold = new List<Cargo>(); // Keep this seprate from the CargoHold obj to keep continuity when upgrading ships
         }
 
+        // Overloaded constuctor that takes chassis
+        public Ship(string inName, Chassis inChassis, Armor inArmor, Shield inShield, Heatsink inHeatsink, Laser inLaser, Missile inMissile, Engine inEngine){
+            _name = inName;
+            _hull = inChassis._Hull;
+            _hold = inChassis._Cargohold;
+            _chassis = inChassis.Name;
+            _armor = inArmor;
+            _shield = inShield;
+            _heatsink = inHeatsink;
+            _lasers = inLaser;
+            _missiles = inMissile;
+            _engine = inEngine;
+        }
+
+        // Overloaded constructor thaat takes Hull/Hold instead
+        public Ship(string inName, string inChassis, Hull inHull, Armor inArmor, Shield inShield, Heatsink inHeatsink, Laser inLaser, Missile inMissile, Engine inEngine, CargoHold inHold){
+            _name = inName;
+            _chassis = inChassis;
+            _hull = inHull;
+            _armor = inArmor;
+            _shield = inShield;
+            _heatsink = inHeatsink;
+            _lasers = inLaser;
+            _missiles = inMissile;
+            _engine = inEngine;
+            _hold = inHold;
+        }
+
 
         // Public Methods
         public void DisplayData(){ // Big data dump

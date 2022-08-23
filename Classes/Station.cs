@@ -731,6 +731,7 @@ namespace Basiverse{
         public void RestockMenu(Player inPlayer){
             inPlayer.RestockMissiles(5); // Allow restock for $5 per misssile
         }
+        
         public void GoblinKing(){
             AnsiConsole.Clear();
             var image = new CanvasImage("//Data//david-bowie-labyrinth.jpg");

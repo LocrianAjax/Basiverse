@@ -2,33 +2,7 @@
 // NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
 // Ship list index: 0 is none, 1 is easy, etc
 // NAME|TYPE|SHIP LIST INDEX|DIALOUGE LINE SET
-Aarlon Watson
-Hony Jamas
-Teve Hillee
-Dougly Pere
-Rege Perray
-Juany Bertson
-Joshy Cookell
-Arlel Warders
-Sone Millee
-Raymy Wilson
-Vortau Hoda
-Krata
-F'Hani
-Byorma
-G'Tige
-Andros
-Gl'Oran
-T'Sicia
-Zuri
-N'Haly
-Rolia Progarc
-Christy Smason
-Lene Campbarn
-Cara Rogonz
-Sara Grogarc
-Sarea Belley
-Lyne Powis
-Theria Howis
-Ebon Jacksell
-Virgin Greenes
+Local Bandit|Combat|1|1
+Marauder|Combat|2|1
+Small Time Pirate|Combat|3|1
+Rouge Naval Group|4|1
