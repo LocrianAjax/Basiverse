@@ -5,6 +5,15 @@ using System.Collections.Generic;
 
 namespace Basiverse
 {
+
+    [Serializable]
+    class Dialoug{ // Dialouges contain a set, line and a bool for if it's an intro line
+        public int set;
+        public string line;
+
+        public bool isIntro;
+    }
+
     [Serializable]
     class NPC{ // An NPC contains has a name, a type, and a list of dialouge
         private string _name;
@@ -18,13 +27,13 @@ namespace Basiverse
         public List<Dialoug> Dialouges;
 
         public Ship cShip; // For combat NPCs
-    }
-
-    [Serializable]
-    class Dialoug{ // Dialouges contain a set, line and a bool for if it's an intro line
-        public int set;
-        public string line;
-
-        public bool isIntro;
+        public int difficulty;
+    
+        public NPC(string inName, int inDifficulty){ // Overloaded constructor for making combat NPCs
+            _name = inName;
+            _type = 1;
+            difficulty = inDifficulty;
+        }
+    
     }
 }

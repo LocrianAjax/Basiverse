@@ -1,8 +1,4 @@
 // Data File for setting up NPCS
 // NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
-// Ship list index: 0 is none, 1 is easy, etc
-// NAME|TYPE|SHIP LIST INDEX|DIALOUGE LINE SET
-Local Bandit|Combat|1|1
-Marauder|Combat|2|1
-Small Time Pirate|Combat|3|1
-Rouge Naval Group|4|1
+// Don't generate combat NPCs, we do that randomly
+// NAME|TYPE|DIALOUGE LINE SET

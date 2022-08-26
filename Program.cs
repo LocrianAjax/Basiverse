@@ -66,7 +66,7 @@ namespace Basiverse
             AnsiConsole.Clear();
             PrintHeader();
             if(AnsiConsole.Confirm("Would you like to name your ship?")){ // Naming Check
-                mainPlayer.PShip.Name = AnsiConsole.Ask<string>("Please enter the new name:");
+                mainPlayer.PShip.Name = AnsiConsole.Ask<string>("Please enter the name: The ");
             }
             else{
                 AnsiConsole.MarkupLine("Okay");
@@ -146,6 +146,30 @@ namespace Basiverse
             DebugMenu();
         }
 
+        static void TestNPCCreation(){
+            Generator testGen = new Generator();
+            NPC testNPC1 = testGen.GenerateCombatNPC("Tester", 1);
+            AnsiConsole.WriteLine("Test 1 Info");
+            testNPC1.cShip.DisplayData();
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            NPC testNPC2 = testGen.GenerateCombatNPC("Tester", 2);
+            AnsiConsole.WriteLine("Test 2 Info");
+            testNPC2.cShip.DisplayData();
+            tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            NPC testNPC3 = testGen.GenerateCombatNPC("Tester", 3);
+            AnsiConsole.WriteLine("Test 3 Info");
+            testNPC3.cShip.DisplayData();
+            tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            NPC testNPC4 = testGen.GenerateCombatNPC("Tester", 4);
+            AnsiConsole.WriteLine("Test 4 Info");
+            testNPC4.cShip.DisplayData();
+            tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            NPC testNPC5 = testGen.GenerateCombatNPC("Tester", 5);
+            AnsiConsole.WriteLine("Test 5 Info");
+            testNPC5.cShip.DisplayData();
+            tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+        }
+
         static void DebugMenu(){
             AnsiConsole.Clear();
             ItemHelper helper1 = new ItemHelper();
@@ -153,8 +177,8 @@ namespace Basiverse
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
-                .PageSize(7)
-                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save","Return" }));
+                .PageSize(8)
+                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Return" }));
             switch(selection){
                 case "Test Data Acess":
                     TestDataAcess();
@@ -175,6 +199,9 @@ namespace Basiverse
                     Deleter tempDel = new Deleter();
                     tempDel.DeleteData();
                     DebugMenu();
+                break;
+                case "Generate NPC Test":
+                    TestNPCCreation();
                 break;
                 case "Return":
                     MainMenu();
