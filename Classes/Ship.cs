@@ -126,6 +126,17 @@ namespace Basiverse
             }
         }
 
+        public bool Flee(){
+             var rand = new Random();
+            double randNumber = rand.NextDouble();
+            if (randNumber <= _engine.FleeChance){ // If the number we generate between 0 and 1 is less than the hit chance we flee
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
         public double CheckHeat(){ // Checks heat and deals damage to the hull
             if(_heatsink.IsActive){
                 _heat -= _heatsink.ActiveVal;
@@ -141,7 +152,7 @@ namespace Basiverse
             if(_heat > _hull.HeatMax){
                 AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
                 double heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
-                return heatDamage; // Return the amount of damage done to the hull
+               _hull.Hullval -= heatDamage;
             }
             return 0; // Return 0 for safe range
         }

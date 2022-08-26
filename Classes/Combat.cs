@@ -2,6 +2,7 @@ using System;
 using Basiverse;
 using Spectre.Console;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Basiverse
 {
@@ -21,10 +22,9 @@ namespace Basiverse
         public void Fight(Player inPlayer){
             // Simmilar setup to the station start/loop
             while(true){
-                // Do stuff
                 AnsiConsole.Clear();
                 CombatScreen(inPlayer);
-                CombatMenu();
+                int res = CombatMenu(inPlayer);
                 inPlayer.PShip.CheckHeat();
                 NPC.cShip.CheckHeat();
                 if(inPlayer.PShip.CheckDestroyed()){
@@ -32,7 +32,12 @@ namespace Basiverse
                 }
                 else if(NPC.cShip.CheckDestroyed()){
                     // Victory();
+                    AnsiConsole.WriteLine("A Winner is you!");
                 }
+                else if(res == 1){
+                    return;
+                }
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty());
             }
         }
 
@@ -98,7 +103,7 @@ namespace Basiverse
             Table EnemyReport = new Table();
             EnemyReport.AddColumn($"ENEMY DATA: BROADCAST NAME {NPC.cShip.Name}");
             // Enemy Shield Status
-            double enemyShieldSw = Math.Floor(inPlayer.PShip.ShieldVal());
+            double enemyShieldSw = Math.Floor(NPC.cShip.ShieldVal());
             if( enemyShieldSw >= 75){
                 EnemyReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{enemyShieldSw}[/]%"));
             }
@@ -106,14 +111,14 @@ namespace Basiverse
                 EnemyReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [yellow]{enemyShieldSw}[/]%"));
             }
             else if(enemyShieldSw == 0){
-                EnemyReport.AddRow(new Markup($"Shields [red]]OFFLINE![/]"));
+                EnemyReport.AddRow(new Markup($"Shields [red]OFFLINE![/]"));
             }
             else{
                 EnemyReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [darkorange]{enemyShieldSw}[/]%"));
             }
 
             // Enemy Hull Status
-            double enemyHullSw = Math.Floor(inPlayer.PShip.HullVal());
+            double enemyHullSw = Math.Floor(NPC.cShip.HullVal());
             if(enemyHullSw >= 75){
                 EnemyReport.AddRow(new Markup($"Hull Integrity: [green]{enemyHullSw}[/]%"));
             }
@@ -130,9 +135,66 @@ namespace Basiverse
             AnsiConsole.Write(MainTable);
         }
 
-        public void CombatMenu(){
-            // TODO: This
-            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to return").AllowEmpty());
+        public int CombatMenu(Player inPlayer){
+            string opts = "";
+            //  Generate options string dynamically
+            if(inPlayer.PShip.Laser != null){
+                opts += "Fire Lasers|";
+            }
+            if(inPlayer.PShip.Missile.Stock > 0){
+                opts += "Fire Missiles|";
+            }
+            if(!inPlayer.PShip.Shield.IsOnline){
+                opts += "Restart Shields|";
+            }
+            if(inPlayer.PShip.Heatsink.Name != "None"){
+                opts += "Activate Heatsink|";
+            }
+            opts += "Flee";
+
+            string[] options = opts.Split('|');
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Options:")
+                .PageSize(5)
+                .AddChoices(options));
+
+            switch(selection){
+                case "Fire Lasers":
+                    int laserDam = inPlayer.PShip.FireLaser();
+                    NPC.cShip.TakeDamage(laserDam);
+                    AnsiConsole.Write(new Markup($"[green]Hit[/] for {laserDam} damage!"));
+                break;
+                case "Fire Missiles":
+                    int missilesDam = inPlayer.PShip.FireMissile();
+                    if(missilesDam == 0){
+                        AnsiConsole.Write(new Markup("[red]Missed![/]"));
+                    }
+                    else{
+                        AnsiConsole.Write(new Markup($"[green]Hit[/] for {missilesDam} damage!"));
+                        NPC.cShip.TakeDamage(missilesDam);
+                    }
+                break;
+                case "Restart Shields":
+                    inPlayer.PShip.RestartShields();
+                    AnsiConsole.Write(new Markup($"[green]Shields Online[/]"));
+                break;
+                case "Activate Heatsink":
+                    inPlayer.PShip.ActivateHeatsink();
+                    AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]"));
+                break;
+                case "Flee":
+                    if(inPlayer.PShip.Flee()){
+                        AnsiConsole.Write(new Markup($"[green]You got away![/]"));
+                        return 1;
+                    }
+                    else{
+                        AnsiConsole.Write(new Markup($"[red]Couldn't get away![/]"));
+                    }
+                break;
+            }
+
+            return 0;
         }
 
     }
