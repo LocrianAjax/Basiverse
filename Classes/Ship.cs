@@ -1,6 +1,7 @@
 using System;
 using Basiverse;
 using System.Collections.Generic;
+using Spectre.Console;
 
 namespace Basiverse
 {
@@ -129,14 +130,14 @@ namespace Basiverse
             if(_heatsink.IsActive){
                 _heat -= _heatsink.ActiveVal;
                 _heatsink.IsActive = false; // Turn it back off it it's on
-                Console.WriteLine("Auxillary Cooling Pumps disengaged");
+                AnsiConsole.MarkupLine("Auxillary Cooling Pumps disengaged");
             }
             else{
                 _heat -= _heatsink.PassiveVal;
             }
 
             if(_heat > _hull.HeatMax){
-                Console.WriteLine("Warning! Excessive heat levels are damaging the hull!");
+                AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
                 double heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
                 return heatDamage; // Return the amount of damage done to the hull
             }

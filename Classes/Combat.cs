@@ -20,12 +20,30 @@ namespace Basiverse
 
         public void Fight(Player inPlayer){
             // Simmilar setup to the station start/loop
-            int retval = 0;
-            while(retval == 0){
+            while(true){
                 // Do stuff
+                AnsiConsole.Clear();
+                CombatScreen(inPlayer);
+                CombatMenu();
+                inPlayer.PShip.CheckHeat();
+                NPC.cShip.CheckHeat();
+                if(inPlayer.PShip.CheckDestroyed()){
+                    // GameOver();
+                }
+                else if(NPC.cShip.CheckDestroyed()){
+                    // Victory();
+                }
             }
         }
-    
+
+        public void CombatScreen(Player inPlayer){
+            // TODO: This
+        }
+
+        public void CombatMenu(){
+            // TODO: This
+        }
+
     }
 
 }
