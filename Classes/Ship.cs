@@ -129,11 +129,13 @@ namespace Basiverse
         public double CheckHeat(){ // Checks heat and deals damage to the hull
             if(_heatsink.IsActive){
                 _heat -= _heatsink.ActiveVal;
+                if(_heat < 0){_heat = 0;}
                 _heatsink.IsActive = false; // Turn it back off it it's on
                 AnsiConsole.MarkupLine("Auxillary Cooling Pumps disengaged");
             }
             else{
                 _heat -= _heatsink.PassiveVal;
+                if(_heat < 0){_heat = 0;}
             }
 
             if(_heat > _hull.HeatMax){

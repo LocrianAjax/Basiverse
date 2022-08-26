@@ -422,15 +422,21 @@ namespace Basiverse{
             }
         }
 
-        private void CombatMenu(){ // Combat loop: 2 actions then check heat, and check for death.
+        private void Combat(){ // Combat loop: 2 actions then check heat, and check for death.
             // TODO
+        }
+
+        private void TestCombat(){
+            Combat tCombat = new Combat(1); // Create a new easy combat
+            tCombat.Fight(mainPlayer);
+
         }
 
         private void DebugMenu(){
             string selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Debug:")
-            .PageSize(7)
-            .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money","Return"}));
+            .PageSize(8)
+            .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money", "Combat Test", "Return"}));
 
             switch(selection){
                 case "Damage Ship":
@@ -460,6 +466,9 @@ namespace Basiverse{
                 break;
                 case "Change Systems":
                 break; 
+                case "Combat Test":
+                    TestCombat();
+                break;
                 case "Return":
                     OptionsMenu();
                 break;
