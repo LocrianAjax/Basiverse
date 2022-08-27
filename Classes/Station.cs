@@ -84,7 +84,7 @@ namespace Basiverse{
             _type = inType;
             _description = inDescription;
 
-            Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data\\cargo.bin");
+            Cargos = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data//cargo.bin");
             var rand = new Random();
 
             /*

@@ -263,43 +263,43 @@ namespace Basiverse
             string buyOpts = "";
             switch(sysType){
                 case "Chassis":
-                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data//chassis.bin");
                     foreach(Chassis tmp in Chassies){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Shield":
-                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data//shield.bin");
                     foreach(Shield tmp in Shields){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Armor":
-                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data//armor.bin");
                     foreach(Armor tmp in Armors){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Heatsink":
-                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data//heatsink.bin");
                     foreach(Heatsink tmp in Heatsinks){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Engine":
-                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data//engine.bin");
                     foreach(Engine tmp in Engines){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Missiles":
-                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data//missile.bin");
                     foreach(Missile tmp in Missiles){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
                 case "Lasers":
-                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data//laser.bin");
                     foreach(Laser tmp in Lasers){
                         buyOpts += tmp.Name + "|";
                     }
@@ -318,7 +318,7 @@ namespace Basiverse
             
             switch(sysType){
                 case "Chassis":
-                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+                    List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data//chassis.bin");
                     foreach(Chassis tmp in Chassies){
                         if(tmp.Name == itemName){
                             UpgradeChassis(tmp);
@@ -327,7 +327,7 @@ namespace Basiverse
                     }
                 break;
                 case "Shield":
-                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+                    List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data//shield.bin");
                     foreach(Shield tmp in Shields){
                         if(tmp.Name == itemName){
                             UpgradeShield(tmp);
@@ -336,7 +336,7 @@ namespace Basiverse
                     }
                 break;
                 case "Armor":
-                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+                    List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data//armor.bin");
                     foreach(Armor tmp in Armors){
                         if(tmp.Name == itemName){
                             UpgradeArmor(tmp);
@@ -345,7 +345,7 @@ namespace Basiverse
                     }
                 break;
                 case "Heatsink":
-                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+                    List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data//heatsink.bin");
                     foreach(Heatsink tmp in Heatsinks){
                         if(tmp.Name == itemName){
                             UpgradeHeatsink(tmp);
@@ -354,7 +354,7 @@ namespace Basiverse
                     }
                 break;
                 case "Engine":
-                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+                    List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data//engine.bin");
                     foreach(Engine tmp in Engines){
                         if(tmp.Name == itemName){
                             UpgradeEngine(tmp);
@@ -363,7 +363,7 @@ namespace Basiverse
                     }
                 break;
                 case "Missiles":
-                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+                    List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data//missile.bin");
                     foreach(Missile tmp in Missiles){
                         if(tmp.Name == itemName){
                             UpgradeMissiles(tmp);
@@ -372,7 +372,7 @@ namespace Basiverse
                     }
                 break;
                 case "Lasers":
-                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+                    List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data//laser.bin");
                     foreach(Laser tmp in Lasers){
                         if(tmp.Name == itemName){
                             UpgradeLasers(tmp);

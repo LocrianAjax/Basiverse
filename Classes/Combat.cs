@@ -15,7 +15,7 @@ namespace Basiverse
             var rand = new Random();
             Generator CombatGen = new Generator();
             string [] NameLines;
-            NameLines = System.IO.File.ReadAllLines("Data\\combatnpcnames.data");
+            NameLines = System.IO.File.ReadAllLines("Data//combatnpcnames.data");
             NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0) + 1))], difficulty);
         }
 

@@ -137,7 +137,7 @@ namespace Basiverse{
         }
 
         public void CheckBin(){
-            Map dMap = BinarySerialization.ReadFromBinaryFile<Map>("Map\\map.bin");
+            Map dMap = BinarySerialization.ReadFromBinaryFile<Map>("Map//map.bin");
             dMap.dump();
             Console.WriteLine("Press any Key to continue......");
             Console.ReadKey();
@@ -146,7 +146,7 @@ namespace Basiverse{
         private List<PointofInterest> GetPointofInterests(){
             List<PointofInterest> outPoi = new List<PointofInterest>();
             string [] lines;
-            lines = System.IO.File.ReadAllLines("Map\\poi.data");
+            lines = System.IO.File.ReadAllLines("Map//poi.data");
             foreach(string line in lines){
                 if(line.Contains("//")){
                     continue; // Ignore all lines with // in them
@@ -167,7 +167,7 @@ namespace Basiverse{
         private List<Location> GetLocations(){
             List<Location> outLocation = new List<Location>();
             string [] lines;
-            lines = System.IO.File.ReadAllLines("Map\\location.data");
+            lines = System.IO.File.ReadAllLines("Map//location.data");
             foreach(string line in lines){
                 if(line.Contains("//")){
                     continue; // Ignore all lines with // in them

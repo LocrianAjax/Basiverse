@@ -65,30 +65,30 @@ namespace Basiverse{
             NPC tempNPC = new NPC(name, difficulty);
             var rand = new Random();
             // Get all item lists
-            List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data\\chassis.bin");
+            List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data//chassis.bin");
             double CSize = Chassies.Count;
             int CNum = 0;
-            List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data\\shield.bin");
+            List<Shield> Shields = BinarySerialization.ReadFromBinaryFile<List<Shield>>("Data//shield.bin");
             double SSize = Shields.Count;
             int SNum = 0;
-            List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data\\armor.bin");
+            List<Armor> Armors = BinarySerialization.ReadFromBinaryFile<List<Armor>>("Data//armor.bin");
             double ASize = Armors.Count;
             int ANum = 0;
-            List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data\\heatsink.bin");
+            List<Heatsink> Heatsinks = BinarySerialization.ReadFromBinaryFile<List<Heatsink>>("Data//heatsink.bin");
             double HSize = Heatsinks.Count;
             int HNum = 0;
-            List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data\\engine.bin");
+            List<Engine> Engines = BinarySerialization.ReadFromBinaryFile<List<Engine>>("Data//engine.bin");
             double ESize = Engines.Count;
             int ENum = 0;
-            List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data\\missile.bin");
+            List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data//missile.bin");
             double MSize = Missiles.Count;
             int MNum = 0;
-            List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data\\laser.bin");
+            List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data//laser.bin");
             double LSize = Lasers.Count;
             int LNum = 0;
 
             string [] NameLines;
-            NameLines = System.IO.File.ReadAllLines("Data\\shipnames.data");
+            NameLines = System.IO.File.ReadAllLines("Data//shipnames.data");
 
             switch(difficulty){
                 case 1: // Get the bottom 20% of the lists
