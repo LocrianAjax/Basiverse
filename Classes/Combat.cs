@@ -197,6 +197,16 @@ namespace Basiverse
             return 0;
         }
 
+        public int NPCTurn(){
+            // If missiles > 0 shoot missiles or laser 50% chance
+            // If missiles = 0 shoot laser until heat is too high
+            // If heat is > 75% 50% chance to shoot or activate heatsink
+            // If heat is > 95% activate heatsink
+            // If hull is < 75% 20% chance to flee, increase chance by 5% for each 5% hull decreace
+            return 0;
+        }
+    
+    
     }
 
 }
