@@ -83,6 +83,7 @@ namespace Basiverse{
             List<Missile> Missiles = BinarySerialization.ReadFromBinaryFile<List<Missile>>("Data//missile.bin");
             double MSize = Missiles.Count;
             int MNum = 0;
+            int MStock = rand.Next(0, (2 * difficulty) + 1);
             List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data//laser.bin");
             double LSize = Lasers.Count;
             int LNum = 0;
@@ -97,7 +98,7 @@ namespace Basiverse{
                     ANum = rand.Next(0, Convert.ToInt32(Math.Ceiling(ASize/5)) + 1);
                     HNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(HSize/5)) + 1);
                     ENum = rand.Next(0, Convert.ToInt32(Math.Ceiling(ESize/5)) + 1);
-                    MNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(MSize/5)) + 1);
+                    MNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(MSize/5)) + 1);                    
                     LNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(LSize/5)) + 1);
                 break;
                 case 2: // Then 20 - 40, etc.
@@ -139,6 +140,7 @@ namespace Basiverse{
             }
             // Generate ship with the random nums we got earlier and a random ship name
             Ship tmpShip = new Ship(NameLines[rand.Next(0, (NameLines.GetLength(0) + 1))], Chassies[CNum], Armors[ANum], Shields[SNum], Heatsinks[HNum], Lasers[LNum], Missiles[MNum], Engines[ENum]);
+            tmpShip.Missile.Stock = MStock;
             tempNPC.cShip = tmpShip;
             return tempNPC;
         }

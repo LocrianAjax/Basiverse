@@ -197,13 +197,29 @@ namespace Basiverse
             return 0;
         }
 
-        public int NPCTurn(){
+        public void NPCTurn(Player inPlayer){
             // If missiles > 0 shoot missiles or laser 50% chance
             // If missiles = 0 shoot laser until heat is too high
             // If heat is > 75% 50% chance to shoot or activate heatsink
             // If heat is > 95% activate heatsink
-            // If hull is < 75% 20% chance to flee, increase chance by 5% for each 5% hull decreace
-            return 0;
+            // If hull is < 75% 20% chance to flee, increase chance by 5% for each 5% hull decrease
+
+            if(NPC.cShip.HullVal() < 75){
+                // Check for flee if not, fall down to the attack section
+            }
+
+            else if(NPC.cShip.Missile.Stock > 0){
+                
+            }
+            else if(NPC.cShip.HeatVal() > 75){
+                if(NPC.cShip.HeatVal() > 95){
+
+                }
+                else{
+
+                }
+            }
+
         }
     
     
