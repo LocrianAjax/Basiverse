@@ -28,16 +28,20 @@ namespace Basiverse
                 inPlayer.PShip.CombatPassive(); // Do the passive stuff that happens each turn
                 NPC.cShip.CombatPassive();
 
-                if(res == 1 || npcRes == 1){ // Check if either of us are fleeing
+                if(res == 1){ // Check if either of us are fleeing
                     var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
                     return 0;
+                }
+                else if(npcRes == 1){
+                    var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
+                    return 1;
                 }
 
                 if(inPlayer.PShip.CheckDestroyed()){ // Check if we're dead
                     return -1;
                 }
                 else if(NPC.cShip.CheckDestroyed()){ // Check if we've won
-                    return 1;
+                    return 2;
                 }
                 var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before next turn
             }

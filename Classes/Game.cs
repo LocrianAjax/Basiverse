@@ -449,11 +449,30 @@ namespace Basiverse{
                 var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Fleeing may not be the most valorous, but you live another day").AllowEmpty());
                 return 0;
             }
-            else if (retval == 1){ // Won
+            else if(retval == 1){ // NPC Fled
+                Console.Clear(); // Clear the console and write the UI
+                WriteStatus();
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("A sudden quiet overcomes the ship, your opponet fled, leaving you alone once again").AllowEmpty());
+                return 0;
+            }
+            else if (retval == 2){ // Won
                 Console.Clear(); // Clear the console and write the UI
                 WriteStatus();
                 AnsiConsole.Write(new Markup("[green]Victory![/]\n"));
-                // Figure out rewards based on difficulty
+                switch(difficulty){ // Figure out rewards based on difficulty
+                    case 0:
+                    break;
+                    case 1:
+                    break;
+                    case 2:
+                    break;
+                    case 3:
+                    break;
+                    case 4:
+                    break;
+                    case 5:
+                    break;
+                }
                 return 0;
             }
             else{ // Died
