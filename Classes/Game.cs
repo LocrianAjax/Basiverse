@@ -459,20 +459,7 @@ namespace Basiverse{
                 Console.Clear(); // Clear the console and write the UI
                 WriteStatus();
                 AnsiConsole.Write(new Markup("[green]Victory![/]\n"));
-                switch(difficulty){ // Figure out rewards based on difficulty
-                    case 0:
-                    break;
-                    case 1:
-                    break;
-                    case 2:
-                    break;
-                    case 3:
-                    break;
-                    case 4:
-                    break;
-                    case 5:
-                    break;
-                }
+                mainPlayer.combatRewards(difficulty);
                 return 0;
             }
             else{ // Died

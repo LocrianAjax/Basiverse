@@ -419,5 +419,31 @@ namespace Basiverse
             }
         }
     
+        public void combatRewards(int difficulty){
+            int rewardsMoney = 0;
+            var rand = new Random();
+            switch(difficulty){
+                case 0:
+                    rewardsMoney = rand.Next(0, 50);
+                break;
+                case 1:
+                    rewardsMoney = rand.Next(0, 150);
+                break;
+                case 2:
+                    rewardsMoney = rand.Next(0, 250);
+                break;
+                case 3:
+                    rewardsMoney = rand.Next(0, 350);
+                break;
+                case 4:
+                    rewardsMoney = rand.Next(0, 500);
+                break;
+                case 5:
+                    rewardsMoney = rand.Next(0, 1000);
+                break;
+            }
+            AnsiConsole.Write($"Bounty cash recieved: {rewardsMoney}$");
+            _money = _money + rewardsMoney;
+        }
     }
 }
