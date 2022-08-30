@@ -114,8 +114,17 @@ namespace Basiverse
             _cost = inCost;
         }
 
-        public Shield(){
+        public Shield(){ // Default constructor
 
+        }
+
+        public void Regen(){ // if the shields are online regen 5%
+            if(_isonline && (_shieldval < _maxshield)){
+                _shieldval = _shieldval * 1.05;
+            }
+            else{
+                return;
+            }
         }
     }
 

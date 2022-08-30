@@ -16,29 +16,30 @@ namespace Basiverse
             Generator CombatGen = new Generator();
             string [] NameLines;
             NameLines = System.IO.File.ReadAllLines("Data//combatnpcnames.data");
-            NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0) + 1))], difficulty);
+            NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0)))], difficulty);
         }
 
-        public void Fight(Player inPlayer){
-            // Simmilar setup to the station start/loop
-            while(true){
+        public int Fight(Player inPlayer){
+            while(true){ // Loop until a ship is destroyed or flees
                 AnsiConsole.Clear();
                 CombatScreen(inPlayer);
-                int res = CombatMenu(inPlayer);
-                int npcRes = NPCTurn(inPlayer);
-                inPlayer.PShip.CheckHeat();
-                NPC.cShip.CheckHeat();
-                if(inPlayer.PShip.CheckDestroyed()){
-                    // GameOver();
+                int res = CombatMenu(inPlayer); // Menu for combat options
+                int npcRes = NPCTurn(inPlayer); // NPC takes it's turn
+                inPlayer.PShip.CombatPassive(); // Do the passive stuff that happens each turn
+                NPC.cShip.CombatPassive();
+
+                if(res == 1 || npcRes == 1){ // Check if either of us are fleeing
+                    var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
+                    return 0;
                 }
-                else if(NPC.cShip.CheckDestroyed()){
-                    // Victory();
-                    AnsiConsole.WriteLine("A Winner is you!");
+
+                if(inPlayer.PShip.CheckDestroyed()){ // Check if we're dead
+                    return -1;
                 }
-                else if(res == 1 || npcRes == 1){
-                    return;
+                else if(NPC.cShip.CheckDestroyed()){ // Check if we've won
+                    return 1;
                 }
-                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty());
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before next turn
             }
         }
 
@@ -85,14 +86,15 @@ namespace Basiverse
             else{
                 OnlineStat = "[red]Passive Cooling[/]";
             }
-            if(inPlayer.PShip.HeatVal() <= 25){
-                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [green]{inPlayer.PShip.HeatVal()}[/]%"));
+            double heatSw = Math.Floor(inPlayer.PShip.HeatVal());
+            if(heatSw <= 25){
+                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [green]{heatSw}[/]%"));
             }
-            else if(inPlayer.PShip.HeatVal() <= 75 && inPlayer.PShip.HeatVal() > 25){
-                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [yellow]{inPlayer.PShip.HeatVal()}[/]%"));
+            else if(heatSw <= 75 && heatSw > 25){
+                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [yellow]{heatSw}[/]%"));
             }
             else{
-                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [red]{inPlayer.PShip.HeatVal()}[/]%"));
+                ShipReport.AddRow(new Markup($"{OnlineStat} Heat Soak - [red]{heatSw}[/]%"));
             }
 
             // Weapon Status
@@ -164,33 +166,33 @@ namespace Basiverse
                 case "Fire Lasers":
                     int laserDam = inPlayer.PShip.FireLaser();
                     NPC.cShip.TakeDamage(laserDam);
-                    AnsiConsole.Write(new Markup($"[green]Hit[/] for {laserDam} damage!"));
+                    AnsiConsole.Write(new Markup($"[green]Hit[/] for {laserDam} damage!\n"));
                 break;
                 case "Fire Missiles":
                     int missilesDam = inPlayer.PShip.FireMissile();
                     if(missilesDam == 0){
-                        AnsiConsole.Write(new Markup("[red]Missed![/]"));
+                        AnsiConsole.Write(new Markup("[red]Missed![/]\n"));
                     }
                     else{
-                        AnsiConsole.Write(new Markup($"[green]Hit[/] for {missilesDam} damage!"));
+                        AnsiConsole.Write(new Markup($"[green]Hit[/] for {missilesDam} damage!\n"));
                         NPC.cShip.TakeDamage(missilesDam);
                     }
                 break;
                 case "Restart Shields":
                     inPlayer.PShip.RestartShields();
-                    AnsiConsole.Write(new Markup($"[green]Shields Online[/]"));
+                    AnsiConsole.Write(new Markup($"[green]Shields Online[/]\n"));
                 break;
                 case "Activate Heatsink":
                     inPlayer.PShip.ActivateHeatsink();
-                    AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]"));
+                    AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]\n"));
                 break;
                 case "Flee":
                     if(inPlayer.PShip.Flee()){
-                        AnsiConsole.Write(new Markup($"[green]You got away![/]"));
+                        AnsiConsole.Write(new Markup($"[green]You got away![/]\n"));
                         return 1;
                     }
                     else{
-                        AnsiConsole.Write(new Markup($"[red]Couldn't get away![/]"));
+                        AnsiConsole.Write(new Markup($"[red]Couldn't get away![/]\n"));
                     }
                 break;
             }
@@ -204,37 +206,44 @@ namespace Basiverse
             switch(choice){
                 case 0:
                     if(NPC.cShip.Flee()){
-                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has fled!");
+                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has fled!\n");
                         return 1;
                     }
                     else{
-                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has attemped to flee, but they couldn't get away!");
+                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has attemped to flee, but they couldn't get away!\n");
                         return 0;
                     }
                 case 1:
                     NPC.cShip.ActivateHeatsink();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} activated it's auxillary cooling pumps");
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} activated it's auxillary cooling pumps\n");
                 break;
                 case 2:
                     int laserDam = NPC.cShip.FireLaser();
                     inPlayer.PShip.TakeDamage(laserDam);
-                    AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {laserDam} damage!"));
+                    AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {laserDam} damage!\n"));
                 break;
                 case 3:
                     int missilesDam = NPC.cShip.FireMissile();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} Fired upon us!");
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} launched missiles!\n");
+                    AnsiConsole.Progress().HideCompleted(false).Start(ctx => {
+                            var evade = ctx.AddTask("[red]Attempting evasive manuevers![/]");
+                            while(!evade.IsFinished){
+                                evade.Increment(10);
+                                Thread.Sleep(100);
+                            }
+                        });
                     if(missilesDam == 0){
-                        AnsiConsole.Write(new Markup($"Evasive manuvers [green]succeded![/]"));
+                        AnsiConsole.Write(new Markup($"Evasive manuvers [green]succeded![/]\n"));
                     }
                     else{
-                        AnsiConsole.Write(new Markup($"Evasive manuvers [red]failed![/]"));
-                        AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {missilesDam} damage!"));
+                        AnsiConsole.Write(new Markup($"Evasive manuvers [red]failed![/]\n"));
+                        AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {missilesDam} damage!\n"));
                         inPlayer.PShip.TakeDamage(missilesDam);
                     }
                 break;
                 case 4:
                     NPC.cShip.RestartShields();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} is restarting it's shield!");
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} is restarting it's shield!\n");
                 break;
             }
             return 0;

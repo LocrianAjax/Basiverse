@@ -19,38 +19,40 @@ namespace Basiverse
         }
 
         static void MainMenu(){
-            // Create the Save/Load menu
-            PrintHeader();
-            Loader MainLoad = new Loader(); // Create the Loader
-            // Set up choices
-            string choices = "New|";
-            if(MainLoad.CheckSave()){
-                choices += "Load|";
-            }
-            if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
-                choices += "Debug|";
-            }
-            choices += "Quit";
-            // Then split on | to create dynamic menu
-            string[] options = choices.Split('|');
-            string selection = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                .Title("Main Menu")
-                .PageSize(4)
-                .AddChoices(options));
-                    
-            switch(selection){
-                case "New":
-                    NewGameMenu();
-                break;
-                case "Load":
-                    LoadGameMenu();
-                break;
-                case "Quit":
-                    return;
-                case "Debug":
-                    DebugMenu();
-                break;
+            while(true){
+                // Create the Save/Load menu
+                PrintHeader();
+                Loader MainLoad = new Loader(); // Create the Loader
+                // Set up choices
+                string choices = "New|";
+                if(MainLoad.CheckSave()){
+                    choices += "Load|";
+                }
+                if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
+                    choices += "Debug|";
+                }
+                choices += "Quit";
+                // Then split on | to create dynamic menu
+                string[] options = choices.Split('|');
+                string selection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("Main Menu")
+                    .PageSize(4)
+                    .AddChoices(options));
+                        
+                switch(selection){
+                    case "New":
+                        NewGameMenu();
+                    break;
+                    case "Load":
+                        LoadGameMenu();
+                    break;
+                    case "Quit":
+                        return;
+                    case "Debug":
+                        DebugMenu();
+                    break;
+                }
             }
         }
 

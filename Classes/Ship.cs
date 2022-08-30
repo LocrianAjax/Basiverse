@@ -137,16 +137,19 @@ namespace Basiverse
             }
         }
 
+        public void CombatPassive(){ // Calls the passive functions that happen each round.
+            CheckHeat();
+            _shield.Regen();
+        }
+
         public double CheckHeat(){ // Checks heat and deals damage to the hull
-            if(_heatsink.IsActive){
+            if(_heatsink.IsActive && (_heat > _heatsink.ActiveVal)){
                 _heat -= _heatsink.ActiveVal;
-                if(_heat < 0){_heat = 0;}
                 _heatsink.IsActive = false; // Turn it back off it it's on
                 AnsiConsole.MarkupLine("Auxillary Cooling Pumps disengaged");
             }
-            else{
+            else if(!_heatsink.IsActive && (_heat > _heatsink.PassiveVal)){
                 _heat -= _heatsink.PassiveVal;
-                if(_heat < 0){_heat = 0;}
             }
 
             if(_heat > _hull.HeatMax){

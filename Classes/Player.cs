@@ -384,7 +384,6 @@ namespace Basiverse
                     return;
             }
         }
-
         public void RestockMissiles(int missilePrice){
             while(true){
                 AnsiConsole.WriteLine($"You currently have: {PShip.Missile.Stock} missiles");
@@ -410,5 +409,15 @@ namespace Basiverse
                 }
             }
         }
+    
+        public int GetDifficulty(){ // Returns the combat difficulty based on number of jumps
+            if(_jumpLog < 100){
+                return 0;
+            }
+            else{
+                return Convert.ToInt32((Math.Floor(Convert.ToDouble(_jumpLog / 100))));
+            }
+        }
+    
     }
 }

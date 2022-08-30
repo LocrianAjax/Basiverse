@@ -183,6 +183,8 @@ namespace Basiverse{
             else{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
                     if(destination == temp.Name){
+                        // Regen shield and cool the ship
+                        mainPlayer.PShip.CombatPassive();
                         mainPlayer.PLoc = temp;
                         mainPlayer.JumpLog += 1;
                         // This is just for show
@@ -198,15 +200,29 @@ namespace Basiverse{
                                 Thread.Sleep(100);
                             }
                         });
-                        // Back to real code
-                        Start();
+                        
+                        // After we jump, check for a random combat encounter
+                        // 10% chance for a random encounter, difficulty scaling with jump numbers
+                        var rand = new Random();
+                        int combatChance = rand.Next(0, 101);
+                        if(combatChance <= 10){
+                            AnsiConsole.Clear();
+                            AnsiConsole.WriteLine("As you exit your jump and prepare to scan the system the shrill sound of an enemy target lock disrupts your thoughts");
+                            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Prepare to fight!").AllowEmpty());
+                            int retval = Combat(mainPlayer.GetDifficulty());
+                            if(retval == -1){
+                                return;
+                            }
+                        }
+                        // If we don't do combat, just go back to the normal loop
+                        Start(); // After that, return to the loop
                     }
                 }
             }
             
         }
         private void OptionsMenu(){
-            string opts = "Settings|Return|Save|Save and Quit|Quit without Saving";
+            string opts = "Settings|Return|Save|Save and Quit|Quit without Saving|Return to Main Menu";
             if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
                 opts += "|Debug";
             }
@@ -235,6 +251,8 @@ namespace Basiverse{
                 case "Debug":
                     DebugMenu();
                 break;
+                case "Return to Main Menu":
+                    return;
                 case "Quit without Saving":
                    System.Environment.Exit(0);
                 break;
@@ -422,14 +440,33 @@ namespace Basiverse{
             }
         }
 
-        private void Combat(){ // Combat loop: 2 actions then check heat, and check for death.
-            // TODO
+        private int Combat(int difficulty){
+            Combat myCombat = new Combat(difficulty);
+            int retval = myCombat.Fight(mainPlayer);
+            if(retval == 0){ // Fled
+                Console.Clear(); // Clear the console and write the UI
+                WriteStatus();
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Fleeing may not be the most valorous, but you live another day").AllowEmpty());
+                return 0;
+            }
+            else if (retval == 1){ // Won
+                Console.Clear(); // Clear the console and write the UI
+                WriteStatus();
+                AnsiConsole.Write(new Markup("[green]Victory![/]\n"));
+                // Figure out rewards based on difficulty
+                return 0;
+            }
+            else{ // Died
+                Console.Clear();
+                AnsiConsole.Write(new Markup("[red]GAME OVER[/]\n"));
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to return to the main menu...........").AllowEmpty());
+                return -1;
+            }
         }
 
         private void TestCombat(){
-            Combat tCombat = new Combat(1); // Create a new easy combat
-            tCombat.Fight(mainPlayer);
-
+            Combat tCombat = new Combat(0); // Create a new very easy combat
+            int retval = tCombat.Fight(mainPlayer);
         }
 
         private void DebugMenu(){

@@ -92,6 +92,15 @@ namespace Basiverse{
             NameLines = System.IO.File.ReadAllLines("Data//shipnames.data");
 
             switch(difficulty){
+                case 0: // 0 is the easiest, with all being default
+                    CNum = 0;
+                    SNum = 0;
+                    ANum = 0;
+                    HNum = 0;
+                    ENum = 0;
+                    MNum = 0;
+                    LNum = 0;
+                break;
                 case 1: // Get the bottom 20% of the lists
                     CNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(CSize/5)) + 1);
                     SNum = rand.Next(0, Convert.ToInt32(Math.Ceiling(SSize/5)) + 1);
