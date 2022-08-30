@@ -25,6 +25,7 @@ namespace Basiverse
                 AnsiConsole.Clear();
                 CombatScreen(inPlayer);
                 int res = CombatMenu(inPlayer);
+                int npcRes = NPCTurn(inPlayer);
                 inPlayer.PShip.CheckHeat();
                 NPC.cShip.CheckHeat();
                 if(inPlayer.PShip.CheckDestroyed()){
@@ -34,7 +35,7 @@ namespace Basiverse
                     // Victory();
                     AnsiConsole.WriteLine("A Winner is you!");
                 }
-                else if(res == 1){
+                else if(res == 1 || npcRes == 1){
                     return;
                 }
                 var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty());
@@ -197,29 +198,46 @@ namespace Basiverse
             return 0;
         }
 
-        public void NPCTurn(Player inPlayer){
-            // If missiles > 0 shoot missiles or laser 50% chance
-            // If missiles = 0 shoot laser until heat is too high
-            // If heat is > 75% 50% chance to shoot or activate heatsink
-            // If heat is > 95% activate heatsink
-            // If hull is < 75% 20% chance to flee, increase chance by 5% for each 5% hull decrease
-
-            if(NPC.cShip.HullVal() < 75){
-                // Check for flee if not, fall down to the attack section
+        public int NPCTurn(Player inPlayer){
+            int choice = NPC.Decide();
+            // 0 for flee, 1 for activate heatsink, 2 for laser, 3 for missiles, 4 for restart shields
+            switch(choice){
+                case 0:
+                    if(NPC.cShip.Flee()){
+                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has fled!");
+                        return 1;
+                    }
+                    else{
+                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has attemped to flee, but they couldn't get away!");
+                        return 0;
+                    }
+                case 1:
+                    NPC.cShip.ActivateHeatsink();
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} activated it's auxillary cooling pumps");
+                break;
+                case 2:
+                    int laserDam = NPC.cShip.FireLaser();
+                    inPlayer.PShip.TakeDamage(laserDam);
+                    AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {laserDam} damage!"));
+                break;
+                case 3:
+                    int missilesDam = NPC.cShip.FireMissile();
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} Fired upon us!");
+                    if(missilesDam == 0){
+                        AnsiConsole.Write(new Markup($"Evasive manuvers [green]succeded![/]"));
+                    }
+                    else{
+                        AnsiConsole.Write(new Markup($"Evasive manuvers [red]failed![/]"));
+                        AnsiConsole.Write(new Markup($"[red]DAMAGE REPORT![/] Sustained {missilesDam} damage!"));
+                        inPlayer.PShip.TakeDamage(missilesDam);
+                    }
+                break;
+                case 4:
+                    NPC.cShip.RestartShields();
+                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} is restarting it's shield!");
+                break;
             }
-
-            else if(NPC.cShip.Missile.Stock > 0){
-                
-            }
-            else if(NPC.cShip.HeatVal() > 75){
-                if(NPC.cShip.HeatVal() > 95){
-
-                }
-                else{
-
-                }
-            }
-
+            return 0;
         }
     
     
