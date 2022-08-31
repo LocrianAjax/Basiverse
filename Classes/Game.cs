@@ -95,14 +95,15 @@ namespace Basiverse{
             }
 
             // Heat Status
-            if(mainPlayer.PShip.HeatVal() <= 25){
-                StatusScreen.AddRow(new Markup($"Heat Soak - [green]{mainPlayer.PShip.HeatVal()}[/]%"));
+            double heatSw = Math.Floor(mainPlayer.PShip.HeatVal());
+            if(heatSw <= 25){
+                StatusScreen.AddRow(new Markup($"Heat Soak - [green]{heatSw}[/]%"));
             }
-            else if(mainPlayer.PShip.HeatVal() <= 75 && mainPlayer.PShip.HeatVal() > 25){
-                StatusScreen.AddRow(new Markup($"Heat Soak - [yellow]{mainPlayer.PShip.HeatVal()}[/]%"));
+            else if(heatSw <= 75 && heatSw > 25){
+                StatusScreen.AddRow(new Markup($"Heat Soak - [yellow]{heatSw}[/]%"));
             }
             else{
-                StatusScreen.AddRow(new Markup($"Heat Soak - [red]{mainPlayer.PShip.HeatVal()}[/]%"));
+                StatusScreen.AddRow(new Markup($"Heat Soak - [red]{heatSw}[/]%"));
             }
 
             // Add data for nearby table
