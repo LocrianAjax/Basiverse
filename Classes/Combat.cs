@@ -53,7 +53,7 @@ namespace Basiverse
 
             // Add data for player ship
             Table ShipReport = new Table();
-            ShipReport.AddColumns($"{inPlayer.PShip.Name} STATUS");
+            ShipReport.AddColumns($"THE {inPlayer.PShip.Name} STATUS");
             // Add rows for Hull/Heat/Shield
             // Shield Status
             double shieldSw = Math.Floor(inPlayer.PShip.ShieldVal());
@@ -108,7 +108,7 @@ namespace Basiverse
 
             // Enemy data
             Table EnemyReport = new Table();
-            EnemyReport.AddColumn($"ENEMY DATA: BROADCAST NAME {NPC.cShip.Name}");
+            EnemyReport.AddColumn($"ENEMY DATA: BROADCAST NAME THE {NPC.cShip.Name}");
             // Enemy Shield Status
             double enemyShieldSw = Math.Floor(NPC.cShip.ShieldVal());
             if( enemyShieldSw >= 75){
@@ -210,16 +210,16 @@ namespace Basiverse
             switch(choice){
                 case 0:
                     if(NPC.cShip.Flee()){
-                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has fled!\n");
+                        AnsiConsole.Write($"Enemy Ship The {NPC.cShip.Name} has fled!\n");
                         return 1;
                     }
                     else{
-                        AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} has attemped to flee, but they couldn't get away!\n");
+                        AnsiConsole.Write($"Enemy Ship The {NPC.cShip.Name} has attemped to flee, but they couldn't get away!\n");
                         return 0;
                     }
                 case 1:
                     NPC.cShip.ActivateHeatsink();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} activated it's auxillary cooling pumps\n");
+                    AnsiConsole.Write($"Enemy Ship The {NPC.cShip.Name} activated it's auxillary cooling pumps\n");
                 break;
                 case 2:
                     int laserDam = NPC.cShip.FireLaser();
@@ -228,11 +228,12 @@ namespace Basiverse
                 break;
                 case 3:
                     int missilesDam = NPC.cShip.FireMissile();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} launched missiles!\n");
+                    AnsiConsole.Write($"Enemy Ship The {NPC.cShip.Name} launched missiles!\n");
                     AnsiConsole.Progress().HideCompleted(false).Start(ctx => {
                             var evade = ctx.AddTask("[red]Attempting evasive manuevers![/]");
+                            var rand = new Random();
                             while(!evade.IsFinished){
-                                evade.Increment(10);
+                                evade.Increment(rand.Next(0, 25));
                                 Thread.Sleep(100);
                             }
                         });
@@ -247,7 +248,7 @@ namespace Basiverse
                 break;
                 case 4:
                     NPC.cShip.RestartShields();
-                    AnsiConsole.Write($"Enemy Ship {NPC.cShip.Name} is restarting it's shield!\n");
+                    AnsiConsole.Write($"Enemy Ship the {NPC.cShip.Name} is restarting it's shield!\n");
                 break;
             }
             return 0;

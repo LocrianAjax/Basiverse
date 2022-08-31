@@ -440,7 +440,7 @@ namespace Basiverse{
             Table RepairScreen = new Table();
             RepairScreen.Title = new TableTitle($"{Name} REPAIR SERVICES");
             RepairScreen.AddColumns("VESSEL", "HULL INFO");
-            RepairScreen.AddRow($"{inPlayer.PShip.Name}", $"Curent Hull Value: {inPlayer.PShip.Hull.Hullval} Maximum: {inPlayer.PShip.Hull.HullMax}");
+            RepairScreen.AddRow($"The {inPlayer.PShip.Name}", $"Curent Hull Value: {inPlayer.PShip.Hull.Hullval} Maximum: {inPlayer.PShip.Hull.HullMax}");
             RepairScreen.AddRow($"Maximum Repairable: {repairAmount}", $"Cost: {RepairCost} per Hull Point");
             AnsiConsole.Write(RepairScreen);
 

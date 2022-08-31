@@ -188,15 +188,16 @@ namespace Basiverse{
                         mainPlayer.PLoc = temp;
                         mainPlayer.JumpLog += 1;
                         // This is just for show
+                        var randProg = new Random();
                         AnsiConsole.Progress().HideCompleted(false).Start(ctx => {
                             var warmEngine = ctx.AddTask("[red]Warming warp engine up to operating temperature[/]");
                             var jumping = ctx.AddTask("[green]Jumping[/]");
                             while(!warmEngine.IsFinished){
-                                warmEngine.Increment(3);
+                                warmEngine.Increment(randProg.Next(1,10));
                                 Thread.Sleep(20);
                             }
                             while(!jumping.IsFinished){
-                                jumping.Increment(10);
+                                jumping.Increment(randProg.Next(5,25));
                                 Thread.Sleep(100);
                             }
                         });
@@ -268,7 +269,7 @@ namespace Basiverse{
                 etc.    |   etc.
             */
             Table ReportScreen = new Table();
-            ReportScreen.Title = new TableTitle($"{mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CHASSIS: {mainPlayer.PShip.Chassis} CAPITAN: {mainPlayer.Name}");
+            ReportScreen.Title = new TableTitle($"The {mainPlayer.PShip.Name} DETAILED SYSTEMS REPORT. CHASSIS: {mainPlayer.PShip.Chassis} CAPITAN: {mainPlayer.Name}");
             ReportScreen.AddColumns("SYSTEM","REPORT");
             /*
                 Shield 
