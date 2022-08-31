@@ -427,19 +427,19 @@ namespace Basiverse
                     rewardsMoney = rand.Next(0, 50);
                 break;
                 case 1:
-                    rewardsMoney = rand.Next(0, 150);
+                    rewardsMoney = rand.Next(50, 150);
                 break;
                 case 2:
-                    rewardsMoney = rand.Next(0, 250);
+                    rewardsMoney = rand.Next(150, 250);
                 break;
                 case 3:
-                    rewardsMoney = rand.Next(0, 350);
+                    rewardsMoney = rand.Next(250, 350);
                 break;
                 case 4:
-                    rewardsMoney = rand.Next(0, 500);
+                    rewardsMoney = rand.Next(350, 500);
                 break;
                 case 5:
-                    rewardsMoney = rand.Next(0, 1000);
+                    rewardsMoney = rand.Next(500, 1000);
                 break;
             }
             AnsiConsole.Write($"Bounty cash recieved: {rewardsMoney}$");

@@ -293,7 +293,7 @@ namespace Basiverse{
                 ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[red][rapidblink]OFFLINE[/][/]"));
             }
             else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [orange]{shieldSw}[/]%"));
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [darkorange]{shieldSw}[/]%"));
             }
 
             // Hull Status
@@ -460,6 +460,7 @@ namespace Basiverse{
                 WriteStatus();
                 AnsiConsole.Write(new Markup("[green]Victory![/]\n"));
                 mainPlayer.combatRewards(difficulty);
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty());
                 return 0;
             }
             else{ // Died

@@ -420,7 +420,7 @@ namespace Basiverse{
                 | Max Repair amount| Cost |
 
             */
-            double repairAmount = (inPlayer.PShip.Hull.HullMax - inPlayer.PShip.Hull.Hullval);
+            double repairAmount = Math.Floor(inPlayer.PShip.Hull.HullMax - inPlayer.PShip.Hull.Hullval);
             var rand = new Random();
 
             switch(Type){
@@ -428,10 +428,10 @@ namespace Basiverse{
                     _repairCost = .8;
                 break;
                 case "Terminal": // These two have a random chance to be from .5 to 5
-                    _repairCost = (.5 * rand.Next(1,10));
+                    _repairCost = Math.Floor(.5 * rand.Next(1,10));
                 break;
                 case "Corporate":
-                    _repairCost = (.5 * rand.Next(1,10));
+                    _repairCost = Math.Floor(.5 * rand.Next(1,10));
                 break;
                 default: // Otherwise keep it as default
                 break;

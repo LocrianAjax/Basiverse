@@ -60,6 +60,7 @@ namespace Basiverse
             AnsiConsole.Clear();
             PrintHeader();
             Player mainPlayer = new Player(); // Create our new player and ship
+            mainPlayer.Money += 100;
             mainPlayer.PShip = new Ship();
             mainPlayer.Name = AnsiConsole.Ask<string>("Please enter your name:"); 
             AnsiConsole.Markup("Welcome {0}", mainPlayer.Name);
