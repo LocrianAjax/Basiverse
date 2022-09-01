@@ -17,11 +17,11 @@ app.config file and settings menu
 
 Dockable stations with Repairing/Buying/Selling
 
+Combat with scaling money rewards
+
 TODO:
 
 Error Handling
-
-Add station Services/NPCs
 
 NPCs and NPC Locations
 
