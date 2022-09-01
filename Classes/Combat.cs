@@ -25,8 +25,8 @@ namespace Basiverse
                 CombatScreen(inPlayer);
                 int res = CombatMenu(inPlayer); // Menu for combat options
                 int npcRes = NPCTurn(inPlayer); // NPC takes it's turn
-                inPlayer.PShip.CombatPassive(); // Do the passive stuff that happens each turn
-                NPC.cShip.CombatPassive();
+                inPlayer.PShip.CombatPassive(true); // Do the passive stuff that happens each turn
+                NPC.cShip.CombatPassive(false);
 
                 if(res == 1){ // Check if either of us are fleeing
                     var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
@@ -183,11 +183,11 @@ namespace Basiverse
                     }
                 break;
                 case "Restart Shields":
-                    inPlayer.PShip.RestartShields();
+                    inPlayer.PShip.RestartShields(true);
                     AnsiConsole.Write(new Markup($"[green]Shields Online[/]\n"));
                 break;
                 case "Activate Heatsink":
-                    inPlayer.PShip.ActivateHeatsink();
+                    inPlayer.PShip.ActivateHeatsink(true);
                     AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]\n"));
                 break;
                 case "Flee":
@@ -218,7 +218,7 @@ namespace Basiverse
                         return 0;
                     }
                 case 1:
-                    NPC.cShip.ActivateHeatsink();
+                    NPC.cShip.ActivateHeatsink(false);
                     AnsiConsole.Write($"Enemy Ship The {NPC.cShip.Name} activated it's auxillary cooling pumps\n");
                 break;
                 case 2:
@@ -247,7 +247,7 @@ namespace Basiverse
                     }
                 break;
                 case 4:
-                    NPC.cShip.RestartShields();
+                    NPC.cShip.RestartShields(false);
                     AnsiConsole.Write($"Enemy Ship the {NPC.cShip.Name} is restarting it's shield!\n");
                 break;
             }

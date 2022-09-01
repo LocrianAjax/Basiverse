@@ -137,8 +137,11 @@ namespace Basiverse
             }
         }
 
-        public void CombatPassive(){ // Calls the passive functions that happen each round.
-            CheckHeat();
+        public void CombatPassive(bool verbose){ // Calls the passive functions that happen each round.
+            double res = CheckHeat();
+            if((res == 1) && verbose){
+                AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
+            }
             _shield.Regen();
         }
 
@@ -146,16 +149,15 @@ namespace Basiverse
             if(_heatsink.IsActive && (_heat > _heatsink.ActiveVal)){
                 _heat -= _heatsink.ActiveVal;
                 _heatsink.IsActive = false; // Turn it back off it it's on
-                AnsiConsole.MarkupLine("Auxillary Cooling Pumps disengaged");
             }
             else if(!_heatsink.IsActive && (_heat > _heatsink.PassiveVal)){
                 _heat -= _heatsink.PassiveVal;
             }
 
             if(_heat > _hull.HeatMax){
-                AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
                 double heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
                _hull.Hullval -= heatDamage;
+               return 1; // Return 1 for damage
             }
             return 0; // Return 0 for safe range
         }
@@ -189,10 +191,12 @@ namespace Basiverse
             }
         }
 
-        public void RestartShields(){ // Accesses the private vars and slightly recharges the shield
+        public void RestartShields(bool verbose){ // Accesses the private vars and slightly recharges the shield
             _shield.IsOnline = true;
             _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .2); // Round it down to the nearest whole number
-            Console.WriteLine("Shields Back Online at {0}%", _shield.Health());
+            if(verbose){
+                AnsiConsole.WriteLine($"Shields Back Online at {_shield.Health()}%");
+            }
         }
 
         public void RestoreShields(){ // Turns on and fully restores the shield
@@ -200,9 +204,11 @@ namespace Basiverse
             _shield.ShieldVal = _shield.ShieldMax;
         }
     
-        public void ActivateHeatsink(){// Just accesses the private var
+        public void ActivateHeatsink(bool verbose){// Just accesses the private var
             _heatsink.IsActive = true;
-            Console.WriteLine("Heatsink Activated - Activating auxillary cooling pumps");
+            if(verbose){
+                AnsiConsole.WriteLine($"Auxillary cooling systems engaged");
+            }
         }
     
         public bool CheckDestroyed(){ // Check and see if the ship is destroyed

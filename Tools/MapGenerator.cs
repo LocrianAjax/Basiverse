@@ -40,8 +40,8 @@ namespace Basiverse{
                     for(int i = 0; i < numPOI; i++){
                         int randPOI = rand.Next(0, poiSize);
                         if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
-                        while(allPoi[randPOI].Type != 1){ // Get a random POI of type 1
-                            if(debug){Console.WriteLine("POI wasn't type 1, retrying");}
+                        while((allPoi[randPOI].Type != 1) && (!loc.Interests.Contains(allPoi[randPOI]))){ // Get a random POI of type 1
+                            if(debug){Console.WriteLine("POI wasn't type 1, or already exists retrying");}
                             randPOI = rand.Next(0, poiSize);
                             if(debug){Console.WriteLine($"Getting POI at position {randPOI}");}
                         }
@@ -66,7 +66,9 @@ namespace Basiverse{
                         // Then instate the station and add it to the Stations list
                         Station newStation = new Station(allPoi[randPOI].Name, allPoi[randPOI].StationType, allPoi[randPOI].Description);
                         loc.Stations.Add(newStation);
-                        allPoi.RemoveAt(randPOI);
+                        if(newStation.Name != "Derelect"){
+                            allPoi.RemoveAt(randPOI);
+                        }
                         poiSize = allPoi.Count;
                     }
                 }
@@ -83,7 +85,9 @@ namespace Basiverse{
                             Station newStation = new Station(allPoi[randPOI].Name, allPoi[randPOI].StationType, allPoi[randPOI].Description);
                             loc.Stations.Add(newStation);
                             if(debug){Console.WriteLine("Adding a station and removing it from the POI list");}
-                            allPoi.RemoveAt(randPOI);
+                            if(newStation.Name != "Derelect"){
+                                allPoi.RemoveAt(randPOI);
+                            }
                             poiSize = allPoi.Count;
                         }
                     }

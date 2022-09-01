@@ -54,12 +54,16 @@ namespace Basiverse{
             NavScreen.AddRow(mainPlayer.PLoc.Name, mainPlayer.PLoc.Description);
 
             Table PoiScreen = new Table();
-            PoiScreen.AddColumns("Point of Intrest", "");
             if(mainPlayer.PLoc.Interests != null){
+                PoiScreen.AddColumns("System Scan Data", "");
                 foreach(PointofInterest poi in mainPlayer.PLoc.Interests){
                 PoiScreen.AddRow($"{poi.Name}", $"{poi.Description}");
                 PoiScreen.AddEmptyRow();
                 }
+            }
+            else{
+                PoiScreen.AddColumn("System Scan Data");
+                PoiScreen.AddRow($"Nothing interesting here");
             }
 
             // Add data for status table
@@ -185,7 +189,7 @@ namespace Basiverse{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
                     if(destination == temp.Name){
                         // Regen shield and cool the ship
-                        mainPlayer.PShip.CombatPassive();
+                        mainPlayer.PShip.CombatPassive(true);
                         mainPlayer.PLoc = temp;
                         mainPlayer.JumpLog += 1;
                         // This is just for show

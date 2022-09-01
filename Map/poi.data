@@ -102,6 +102,7 @@ Daydream|A former colony ship turned into a spacestation.|2|Colony
 Ancestor|A former colony ship turned into a spacestation.|2|Colony
 Felicity|A former colony ship turned into a spacestation.|2|Colony
 // Type 2 "Special"
-Blue Moon Colony|A corporate sponsored station.|2|Corporate
+Blue Moon Colony|A corporate sponsored station, good beer.|2|Corporate
+Basicorps Local Outpost|Basicorps local trading post.|2|Corporate
 // Type 2 "Default" to prevent an infinite loop
 Derelect|A former station now abandoned.|2|Wreck
