@@ -21,7 +21,7 @@ namespace Basiverse{
         public double RepairCost{ get {return _repairCost;} set {_repairCost = value;}}
 
         // A station may contain a list of NPCs
-        public List<NPC> NPCList;
+        // TODO: public List<NPC> NPCList;
 
         /*
             Services - 
