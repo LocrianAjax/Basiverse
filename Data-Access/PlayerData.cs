@@ -61,8 +61,8 @@ namespace Basiverse{
     }
 
     class Generator{
-        public NPC GenerateCombatNPC(string name, int difficulty){ // Genrates a random combat NPC of specified difficulty
-            NPC tempNPC = new NPC(name, difficulty);
+        public NPC GenerateCombatNPC(string name, int difficulty, int attitude){ // Genrates a random combat NPC of specified difficulty
+            NPC tempNPC = new NPC(name, difficulty, attitude);
             var rand = new Random();
             // Get all item lists
             List<Chassis> Chassies = BinarySerialization.ReadFromBinaryFile<List<Chassis>>("Data//chassis.bin");

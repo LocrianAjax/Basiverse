@@ -11,12 +11,21 @@ namespace Basiverse
     class Combat{ // A combat contains an NPC and then classes that take in a player
         public NPC NPC;
     
-        public Combat(int difficulty){ // Generates a new combat with the specified difficulty
+        public Combat(int difficulty, int NPCAttitude){ // Generates a new combat with the specified difficulty and a specific attitude
             var rand = new Random();
             Generator CombatGen = new Generator();
             string [] NameLines;
             NameLines = System.IO.File.ReadAllLines("Data//combatnpcnames.data");
-            NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0)))], difficulty);
+            NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0)))], difficulty, NPCAttitude);
+        }
+
+        public Combat(int difficulty){ // Generates a new combat with the specified difficulty and a random attitude
+            var rand = new Random();
+            Generator CombatGen = new Generator();
+            string [] NameLines;
+            NameLines = System.IO.File.ReadAllLines("Data//combatnpcnames.data");
+            int NPCAttitude = rand.Next(0, 5);
+            NPC = CombatGen.GenerateCombatNPC(NameLines[rand.Next(0, (NameLines.GetLength(0)))], difficulty, NPCAttitude);
         }
 
         public int Fight(Player inPlayer){

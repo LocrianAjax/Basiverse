@@ -445,5 +445,30 @@ namespace Basiverse
             AnsiConsole.Write($"Bounty cash recieved: {rewardsMoney}$");
             _money = _money + rewardsMoney;
         }
+    
+        public void logStart(){
+            CapitansLog += $"Spawned in {PLoc.Name}\n";            
+        }
+
+        public void logJump(string dest){
+            CapitansLog += $"Jumped from {PLoc.Name} to {dest}\n";
+        }
+
+        public void logDock(string stationName){
+            CapitansLog += $"Docked at {stationName}\n";
+        }
+
+        public void logVictory(string enemyName){
+            CapitansLog += $"Defeated The {enemyName} in battle\n";
+        }
+
+        public void logFlee(string enemyName, bool pFled){
+            if(pFled){
+                CapitansLog += $"Fled from a battle with The {enemyName}\n";
+            }
+            else{
+                CapitansLog += $"The {enemyName} fled from battle\n";
+            }
+        }
     }
 }

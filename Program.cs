@@ -151,23 +151,23 @@ namespace Basiverse
 
         static void TestNPCCreation(){
             Generator testGen = new Generator();
-            NPC testNPC1 = testGen.GenerateCombatNPC("Tester", 1);
+            NPC testNPC1 = testGen.GenerateCombatNPC("Tester", 1, 1);
             AnsiConsole.WriteLine("Test 1 Info");
             testNPC1.cShip.DisplayData();
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            NPC testNPC2 = testGen.GenerateCombatNPC("Tester", 2);
+            NPC testNPC2 = testGen.GenerateCombatNPC("Tester", 2, 1);
             AnsiConsole.WriteLine("Test 2 Info");
             testNPC2.cShip.DisplayData();
             tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            NPC testNPC3 = testGen.GenerateCombatNPC("Tester", 3);
+            NPC testNPC3 = testGen.GenerateCombatNPC("Tester", 3, 1);
             AnsiConsole.WriteLine("Test 3 Info");
             testNPC3.cShip.DisplayData();
             tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            NPC testNPC4 = testGen.GenerateCombatNPC("Tester", 4);
+            NPC testNPC4 = testGen.GenerateCombatNPC("Tester", 4, 1);
             AnsiConsole.WriteLine("Test 4 Info");
             testNPC4.cShip.DisplayData();
             tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            NPC testNPC5 = testGen.GenerateCombatNPC("Tester", 5);
+            NPC testNPC5 = testGen.GenerateCombatNPC("Tester", 5, 1);
             AnsiConsole.WriteLine("Test 5 Info");
             testNPC5.cShip.DisplayData();
             tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());

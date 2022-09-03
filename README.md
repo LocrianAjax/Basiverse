@@ -19,6 +19,8 @@ Dockable stations with Repairing/Buying/Selling
 
 Combat with scaling money rewards
 
+4 Different NPC combat attitudes - Default, Defensive, Aggressive, Coward
+
 TODO:
 
 Error Handling

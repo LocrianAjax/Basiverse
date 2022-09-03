@@ -12,35 +12,38 @@ Spires|Gas clouds that reach out and appear to grab at nothing, like giant finge
 Clouds of Jortun|A massive gas cloud takes on various shapes as you look at it, extremly pretty.|1
 Belts|A series of belts that cross the local gas giant like an atom's electrons.|1
 // Planets
-Blue Marble|A perfectly blue ocean planet, there are no obvious signs of life but you decide leave it alone.|1 
-Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
-Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
-Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
-Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
-Gas Gaints|The system contains some large gas giants, pretty to look at but not much to do overall.|1
+Blue Marble|A perfectly blue ocean planet, there are no obvious signs of life and you decide leave it alone.|1 
+Gas Gaint|Pretty to look at but not much to do overall.|1
+Gas Gaint|Pretty to look at but not much to do overall.|1
+Gas Gaint|Pretty to look at but not much to do overall.|1
+Gas Gaint|Pretty to look at but not much to do overall.|1
+Gas Gaint|Pretty to look at but not much to do overall.|1
 // Suns
-Giant|The star in this system is enormous, beyond the scale of a earth's yellow one.|1
-Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
-Binary System|The system contains a pair of orbiting stars, an intersting scientific anomaly.|1
-Trinary System|The system contains three orbiting stars, you're not sure if you should note this for later, but forget.|1
-Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
-Red Giant System|The system's star is a huge red giant, most likely consuming many of the system's planets and features.|1
-White Dwarf System|The system's star is a previously supernova'd white dwarf, tiny but fierce.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
-Yellow Star System|The systems's star is a medium sun, much like Earth's.|1
+Giant Star|An enormous red star, far beyond the scale of a earth's yellow one.|1
+Binary System|A pair of orbiting stars, an intersting scientific anomaly.|1
+Binary System|A pair of orbiting stars, an intersting scientific anomaly.|1
+Trinary System|Three orbiting stars, almost entirely unheard of. You may be the first to ever see this.|1
+Black Hole Star|A black hole and star orbit each other, a trail of plasma being drawn away|1
+Red Giant|A huge red giant, most likely consuming many of the system's planets and features.|1
+Red Giant|A huge red giant, most likely consuming many of the system's planets and features.|1
+White Dwarf|A previously supernova'd white dwarf, tiny but fierce.|1
+Brown Dwarf|To weak to go nova, too small to become a black hole.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
+Yellow Star|A medium size star, much like Earth's.|1
 // Other
 Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two eyes.|1
 Wormhhole|It keeps dumping out gas and other various things.|1
 Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings.|1
-The Anomay|Sensors flare, your eyes don't work properly and you swear you can feel your teeth buzzing. Time to leave.|1
+Anomay|Sensors flare, your eyes don't work properly and you swear you can feel your teeth buzzing. Time to leave.|1
 // Stations contain a 4th category that's a desc of the station type. basic, science, military, terminal, religous, colony, corporate, wreck 
 // TODO: Update the descriptions for stations
 // Type 2 "Basic Station"
