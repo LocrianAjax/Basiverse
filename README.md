@@ -31,7 +31,9 @@ Actual gameplay(Important!)
 
 Intro screens for the game and on startup
 
-Mining?
+Minigame for docking/mining
+
+Fee to auto-dock?
 
 Automated Build Status:
 
