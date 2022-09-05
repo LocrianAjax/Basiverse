@@ -62,5 +62,50 @@ namespace Basiverse
                 return true; // If all of those work, return valid
             }
         }
+
+        public bool moveLeft(){
+            if(IsValid(X - 1, Y)){
+                Clear();
+                X -= 1;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveRight(){
+            if(IsValid(X + 1, Y)){
+                Clear();
+                X += 1;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveUp(){
+            if(IsValid(X, Y - 1)){
+                Clear();
+                Y -= 1;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveDown(){
+            if(IsValid(X, Y + 1)){
+                Clear();
+                Y += 1;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 }
