@@ -6,6 +6,11 @@ using Basiverse;
 using Spectre.Console;
 
 namespace Basiverse{
+
+    /*
+        This Databrokers file contains the Loader, Saver, Deleter, and Generator classes
+    */
+
     class Loader{
         /*
             Data Structure:-
@@ -18,7 +23,7 @@ namespace Basiverse{
         */
         
         public bool CheckSave(){
-            if(File.Exists(Directory.GetCurrentDirectory() + "\\Save\\savedata.bin")){ // Check for metadata and save
+            if(File.Exists(Directory.GetCurrentDirectory() + "\\Save\\savedata.bin")){ // Check for save
                 return true;
             }
             else{
@@ -30,7 +35,6 @@ namespace Basiverse{
             Player temp = BinarySerialization.ReadFromBinaryFile<Player>(Directory.GetCurrentDirectory() + "\\Save\\savedata.bin");
             return temp;
         }
-    
     }
 
     class Saver{

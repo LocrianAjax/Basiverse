@@ -38,7 +38,7 @@ namespace Basiverse
             attitude = inAttitude;
         }
 
-        public int Decide(){ // Decides actions for combat NPCs (Default Attitude)
+        public int Decide(){  // Uses the NPC's attitude to decide what to do in combat
             switch(attitude){
                 case 1:
                     return Default();
@@ -53,7 +53,8 @@ namespace Basiverse
             }
         }
 
-        public int Default(){
+        public int Default(){ // Decides actions for combat NPCs (Default Attitude)
+            // We call this "AI" in huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuge asterisks
             // Return 0 for flee, 1 for activate heatsink, 2 for laser, 3 for missiles, 4 to restart shields
             var rand = new Random();
 
