@@ -188,6 +188,7 @@ namespace Basiverse{
             else{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
                     if(destination == temp.Name){
+                        mainPlayer.logJump(destination); // Log the jump when confirmed
                         // Regen shield and cool the ship
                         mainPlayer.PShip.CombatPassive(true);
                         mainPlayer.PLoc = temp;
@@ -439,6 +440,7 @@ namespace Basiverse{
             else{
                 foreach(Station tmp in mainPlayer.PLoc.Stations){ // Not effcient, but we're going to a max of 5 things so no biggie
                     if(tmp.Name == destination){
+                        mainPlayer.logDock(tmp.Name); // Log Docking 
                         tmp.Dock(mainPlayer);
                         Start();
                     }
@@ -485,8 +487,8 @@ namespace Basiverse{
         private void DebugMenu(){
             string selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Debug:")
-            .PageSize(8)
-            .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money", "Combat Test", "Return"}));
+            .PageSize(9)
+            .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money", "Combat Test", "View Log", "Return"}));
 
             switch(selection){
                 case "Damage Ship":
@@ -518,6 +520,12 @@ namespace Basiverse{
                 break; 
                 case "Combat Test":
                     TestCombat();
+                break;
+                case "View Log":
+                    mainPlayer.displayLog();
+                    Console.Clear(); // Clear the console and write the UI
+                    WriteStatus();
+                    DebugMenu();
                 break;
                 case "Return":
                     OptionsMenu();

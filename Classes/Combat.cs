@@ -39,10 +39,12 @@ namespace Basiverse
 
                 if(res == 1){ // Check if either of us are fleeing
                     var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
+                    inPlayer.logFlee(NPC.cShip.Name, true);
                     return 0;
                 }
                 else if(npcRes == 1){
                     var fleeTmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before returning
+                    inPlayer.logFlee(NPC.cShip.Name, false);
                     return 1;
                 }
 
@@ -50,6 +52,7 @@ namespace Basiverse
                     return -1;
                 }
                 else if(NPC.cShip.CheckDestroyed()){ // Check if we've won
+                    inPlayer.logVictory(NPC.cShip.Name);
                     return 2;
                 }
                 var tmp = AnsiConsole.Prompt(new TextPrompt<string>("").AllowEmpty()); // Pause before next turn

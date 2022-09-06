@@ -86,6 +86,7 @@ namespace Basiverse
                 ctx.Status("Assigning Map to player");
                 mainPlayer.PMap = mapHelper.Generate(false);
                 mainPlayer.PLoc = mainPlayer.PMap.AllNodes[0]; // Put the player at node 0
+                mainPlayer.logStart(); // Log the starting location
                 ctx.Status("Good Luck!");
                 return NewGame;
             });

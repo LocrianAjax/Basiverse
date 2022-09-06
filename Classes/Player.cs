@@ -24,7 +24,7 @@ namespace Basiverse
 
         public Location PLoc;
         
-        public String CapitansLog; // TODO: Add entry to log in starting system, when a jump is made, a combat is completed, and item is bought or sold or a station is visited
+        public string CapitansLog = ""; // TODO: Add entry to log in starting system, when a jump is made, a combat is completed, and item is bought or sold or a station is visited
 
         public bool Rename(string newName){
             if(String.IsNullOrEmpty(newName) || String.IsNullOrWhiteSpace(newName)){
@@ -469,6 +469,18 @@ namespace Basiverse
             else{
                 CapitansLog += $"The {enemyName} fled from battle\n";
             }
+        }
+    
+        public void displayLog(){
+            string[] lines = CapitansLog.Split('\n');
+            Table capitansLog = new Table();
+            capitansLog.AddColumn($"CAPITANS LOG: {Name}");
+            foreach(string line in lines){
+                capitansLog.AddRow(line);
+            }
+            capitansLog.Expand();
+            AnsiConsole.Write(capitansLog);
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue........").AllowEmpty());
         }
     }
 }
