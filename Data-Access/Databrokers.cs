@@ -159,4 +159,16 @@ namespace Basiverse{
         }
     }
 
+    class LoreReader{
+        public string GetNewGameLines(){
+            return System.IO.File.ReadAllText("Data//Lore//intro.txt");
+        }
+
+        public string GetStartupLines(){
+            return System.IO.File.ReadAllText("Data//Lore//startup.txt");
+        }
+
+
+    }
+
 }

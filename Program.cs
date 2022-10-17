@@ -14,6 +14,7 @@ namespace Basiverse
         {
             Startup();
             PrintHeader();
+            StartupInfo();
             MainMenu();
             AnsiConsole.Clear();
         }
@@ -240,15 +241,17 @@ namespace Basiverse
             }
         }
 
-        static void StartupInfo(){
+        static void StartupInfo(){ // Info on program start
+            LoreReader newReader = new LoreReader();
             var tmp = AnsiConsole.Prompt(
-                new TextPrompt<string>("Press any key to continue")
+                new TextPrompt<string>(newReader.GetStartupLines())
                 .AllowEmpty());
         }
 
-        static void GameIntro(){
+        static void GameIntro(){ // Before actually starting the game this is our intro screen
+            LoreReader newReader = new LoreReader();
             var tmp = AnsiConsole.Prompt(
-                new TextPrompt<string>("Press any key to continue")
+                new TextPrompt<string>(newReader.GetNewGameLines())
                 .AllowEmpty());
         }
     }

@@ -35,6 +35,14 @@ Minigame for docking/mining
 
 Fee to auto-dock?
 
+Add Lore data in text files
+
+Move to weapons class and then :-
+
+    Lasers: Extra shield damage and reduced hull damage
+
+    Missiles: Reduced shield damage and extra hull damage
+
 Automated Build Status:
 
 
