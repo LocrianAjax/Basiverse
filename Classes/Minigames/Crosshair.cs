@@ -10,7 +10,6 @@ namespace Basiverse
         public int X { get; set;}
         public int Y { get; set;}
 
-
         public Crosshair(int inX, int inY){ // Constructor sets pos
             X = inX;
             Y = inY;
@@ -55,14 +54,14 @@ namespace Basiverse
             if(inX < 0 || inY < 0){ // Check we don't go negative
                 return false;
             }
-            if(((inX + 5) > Console.WindowWidth) || ((inY + 3) > Console.WindowHeight)){ // Check X and Y
+            if(((inX + 5) > Console.WindowWidth) || ((inY + 2) > Console.WindowHeight)){ // Check X and Y
                 return false;
             }
             else{
                 return true; // If all of those work, return valid
             }
         }
-
+        
         public bool moveLeft(){
             if(IsValid(X - 1, Y)){
                 Clear();
