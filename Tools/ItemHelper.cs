@@ -2,6 +2,7 @@ using System;
 using Basiverse;
 using System.Collections.Generic;
 using System.IO;
+using Spectre.Console;
 
 /*
 This is a tool to create the .bin files for all of the items in the game. Additional Debug functionality
@@ -271,7 +272,7 @@ namespace Basiverse
             foreach(Chassis temp in Chassies){
                 Console.WriteLine($"{temp.Name} {temp._Hull.Name} {temp._Cargohold.Name} {temp.Cost} {temp.Description}\n");
             }
-            Console.Write("\nLoad complete. Press any key to continue....");
+            AnsiConsole.Write("\nLoad complete. Press any key to continue....");
             Console.ReadKey();
         }
     }

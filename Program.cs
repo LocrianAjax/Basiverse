@@ -12,6 +12,7 @@ namespace Basiverse
     {
         static void Main(string[] args)
         {
+            AnsiConsole.Cursor.Hide();
             Startup();
             PrintHeader();
             StartupInfo();
@@ -183,7 +184,7 @@ namespace Basiverse
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
                 .PageSize(8)
-                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Return" }));
+                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Docking Test", "Return" }));
             switch(selection){
                 case "Test Data Acess":
                     TestDataAcess();
@@ -208,10 +209,18 @@ namespace Basiverse
                 case "Generate NPC Test":
                     TestNPCCreation();
                 break;
+                case "Docking Test":
+                    TestDocking();
+                break;
                 case "Return":
                     MainMenu();
                 break;
             }
+        }
+
+        static void TestDocking(){
+            DockingMinigame tester = new DockingMinigame();
+            tester.StartMinigame();
         }
 
         static void Startup(){

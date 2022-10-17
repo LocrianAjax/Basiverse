@@ -15,8 +15,8 @@ namespace Basiverse
 
         public Target(){
             var rand = new Random();
-            int inX = rand.Next(0, Console.WindowWidth + 1);
-            int inY = rand.Next(0, Console.WindowHeight + 1);
+            int inX = rand.Next(0, Console.WindowWidth);
+            int inY = rand.Next(0, Console.WindowHeight);
             if(IsValid(inX, inY)){
                 X = inX;
                 InnerX = X + 6;
@@ -24,8 +24,8 @@ namespace Basiverse
                 InnerY = Y + 1;
             }
             else{ // Default to top left if position is invalid although it should never be
-                X = 0;
-                Y = 0;
+                X = 5;
+                Y = 5;
             }
         }
 
@@ -52,33 +52,33 @@ namespace Basiverse
             */
             //  We draw from the top left of the obj
             //  NOTE: Console coords have 0,0 top left. X increases L -> R and Y increases Top -> Bottom
-            Console.SetCursorPosition(X, Y);
-            Console.Write(".------------------.");
-            Console.SetCursorPosition(X, Y + 1);
-            Console.Write("|     .------.     |");
-            Console.SetCursorPosition(X, Y + 2);
-            Console.Write("|     |      |     |");
-            Console.SetCursorPosition(X, Y + 3);
-            Console.Write("|     `------'     |");
-            Console.SetCursorPosition(X, Y + 4);
-            Console.Write("`------------------'");
+            AnsiConsole.Cursor.SetPosition(X, Y);
+            AnsiConsole.Write(".------------------.");
+            AnsiConsole.Cursor.SetPosition(X, Y + 1);
+            AnsiConsole.Write("|     .------.     |");
+            AnsiConsole.Cursor.SetPosition(X, Y + 2);
+            AnsiConsole.Write("|     |      |     |");
+            AnsiConsole.Cursor.SetPosition(X, Y + 3);
+            AnsiConsole.Write("|     `------'     |");
+            AnsiConsole.Cursor.SetPosition(X, Y + 4);
+            AnsiConsole.Write("`------------------'");
         }
 
         public void Clear(){
-            Console.SetCursorPosition(X, Y);
-            Console.Write("                    ");
-            Console.SetCursorPosition(X, Y + 1);
-            Console.Write("                    ");
-            Console.SetCursorPosition(X, Y + 2);
-            Console.Write("                    ");
-            Console.SetCursorPosition(X, Y + 3);
-            Console.Write("                    ");
-            Console.SetCursorPosition(X, Y + 4);
-            Console.Write("                    ");
+            AnsiConsole.Cursor.SetPosition(X, Y);
+            AnsiConsole.Write("                     ");
+            AnsiConsole.Cursor.SetPosition(X, Y + 1);
+            AnsiConsole.Write("                     ");
+            AnsiConsole.Cursor.SetPosition(X, Y + 2);
+            AnsiConsole.Write("                     ");
+            AnsiConsole.Cursor.SetPosition(X, Y + 3);
+            AnsiConsole.Write("                     ");
+            AnsiConsole.Cursor.SetPosition(X, Y + 4);
+            AnsiConsole.Write("                     ");
         }
 
         public bool IsValid(int inX, int inY){ // Takes in the position and checks to see if it fits on the screen
-            if(inX < 0 || inY < 0){ // Check we don't go negative
+            if(inX < 0 || inY < 1){ // Check we don't go negative
                 return false;
             }
             if(((inX + 20) > Console.WindowWidth) || ((inY + 4) > Console.WindowHeight)){ // Check X and Y
@@ -89,29 +89,82 @@ namespace Basiverse
             }
         }
 
-        public void Drift(){ // Causes a random drift in both axies
-            var rand = new Random();
-            int driftX = rand.Next(-3, 3);
-            int driftY = rand.Next(-3,3);
+        public void Drift(int InertiaX, int InertiaY){ // Causes a random drift in both axies
+
             
-            if(IsValid(X + driftX, Y + driftY)){ // Check for both, then just X or Y
-                X = X + driftX;
+            if(IsValid(X + InertiaX, Y + InertiaY)){ // Check for both, then just X or Y
+                Clear();
+                X = X + InertiaX;
                 InnerX = X + 6;
-                Y = Y + driftY;
+                Y = Y + InertiaY;
                 InnerY = Y + 1;
+                Draw();
             }
-            else if(IsValid(X + driftX, Y)){
-                X = X + driftX;
+            else if(IsValid(X + InertiaX, Y)){
+                Clear();
+                X = X + InertiaX;
                 InnerX = X + 6;
+                Draw();
             }
-            else if(IsValid(X, Y + driftY)){
-                Y = Y + driftY;
+            else if(IsValid(X, Y + InertiaY)){
+                Clear();
+                Y = Y + InertiaY;
                 InnerY = Y + 1;
+                Draw();
             }
         }
 
         public bool IsOnTarget(int TestX, int TestY){
             if(((TestX > InnerX) && (TestX < InnerX + 7)) && ((TestY > InnerY) && (TestY < InnerY + 3))){ // Checking to see if we're in the little space in the center
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        public bool moveLeft(){
+            int movement = -1; // Set up the movement
+            if(IsValid(X + movement, Y)){
+                Clear();
+                X += movement;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveRight(){
+            int movement = 1;
+            if(IsValid(X + movement, Y)){
+                Clear();
+                X += movement;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveUp(){
+            int movement = -1;
+            if(IsValid(X, Y + movement)){
+                Clear();
+                Y += movement;
+                Draw();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        public bool moveDown(){
+            int movement = 1;
+            if(IsValid(X, Y + movement)){
+                Clear();
+                Y += movement;
+                Draw();
                 return true;
             }
             else{

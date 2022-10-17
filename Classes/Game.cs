@@ -487,7 +487,7 @@ namespace Basiverse{
         private void DebugMenu(){
             string selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Debug:")
-            .PageSize(9)
+            .PageSize(10)
             .AddChoices(new[] {"Damage Ship", "Damage Hull", "Add Cargo", "Remove Cargo", "Change Systems", "Edit Money", "Combat Test", "View Log", "Return"}));
 
             switch(selection){
