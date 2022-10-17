@@ -15,8 +15,8 @@ namespace Basiverse
 
         public Target(){
             var rand = new Random();
-            int inX = rand.Next(0, Console.WindowWidth);
-            int inY = rand.Next(0, Console.WindowHeight);
+            int inX = rand.Next(5, Console.WindowWidth);
+            int inY = rand.Next(5, Console.WindowHeight);
             if(IsValid(inX, inY)){
                 X = inX;
                 InnerX = X + 6;
@@ -37,8 +37,8 @@ namespace Basiverse
                 InnerY = Y + 1;
             }
             else{ // Default to top left if position is invalid
-                X = 0;
-                Y = 0;
+                X = 5;
+                Y = 5;
             }
         }
 
