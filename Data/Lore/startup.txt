@@ -1,3 +1,2 @@
 Welcome to Basiverse Pre-Alpha!
-You're probably me, so hi me! 
-Have fun debugging!
+Basic game features are here, but there are no NPCs and no real end-game goal. Have fun!

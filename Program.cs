@@ -92,6 +92,8 @@ namespace Basiverse
                 ctx.Status("Good Luck!");
                 return NewGame;
             });
+            AnsiConsole.Clear();
+            GameIntro();
             NewGame.Start(); // Can't have this nested in the status
 
         }

@@ -7,7 +7,7 @@ namespace Basiverse
 {
 
     [Serializable]
-    class Dialoug{ // Dialouges contain a set, line and a bool for if it's an intro line
+    class Dialouge{ // Dialouges contain a set, line and a bool for if it's an intro line
         public int set;
         public string line;
 
@@ -24,7 +24,7 @@ namespace Basiverse
 
         // NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
 
-        public List<Dialoug> Dialouges;
+        public List<Dialouge> Dialouges;
 
         public Ship cShip; // For combat NPCs
         public int difficulty;

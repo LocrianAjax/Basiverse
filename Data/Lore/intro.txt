@@ -1,4 +1,22 @@
-Hello! This is placeholder text for the new game intro. I'll put something here eventually.
-Test
-Test
-Test
+The year is the future. Don't worry about when.
+The Basicorps Corporation has taken over all commerce on Earth, there is no other employer available for the common man.
+Space used to be the only escape, however Basicorps has expanded to the stars through the Sol System and beyond.
+You were contracted on the Freighter "Profit Margins" sent to collect mined resources from an asteroid miner in an unknown system.
+.
+.
+.
+.
+.
+Awaking you realize you are not in your bunk.
+.
+.
+.
+.
+An escape pod
+.
+.
+.
+.
+The Basicorps Runner: The most basic jump capable craft available, used as an escape pod across the Basicorps Fleet.
+You are lost, alone, and have only a few spacebucks to your name.
+Welcome to the Basiverse
