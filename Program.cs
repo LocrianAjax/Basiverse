@@ -33,13 +33,13 @@ namespace Basiverse
                 if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
                     choices += "Debug|";
                 }
-                choices += "Quit";
+                choices += "Settings|Quit";
                 // Then split on | to create dynamic menu
                 string[] options = choices.Split('|');
                 string selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("Main Menu")
-                    .PageSize(4)
+                    .PageSize(5)
                     .AddChoices(options));
                         
                 switch(selection){
@@ -54,8 +54,35 @@ namespace Basiverse
                     case "Debug":
                         DebugMenu();
                     break;
+                    case "Settings":
+                        SettingsMenu();
+                    break;
                 }
             }
+        }
+
+        static void SettingsMenu(){
+            AnsiConsole.Clear();
+            PrintHeader();
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Settings")
+                .PageSize(5)
+                .AddChoices("Toggle Debug", "Return"));
+                        
+                switch(selection){
+                    case "Toggle Debug":
+                        if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
+                            System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "false";
+                        }
+                        else{
+                            System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "true";
+                        }
+                    break;
+                    case "Return":
+                        MainMenu();
+                    break;
+                }
         }
 
         static void NewGameMenu(){

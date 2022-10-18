@@ -74,10 +74,10 @@ namespace Basiverse
             // Draw a little fake Init screen
             var randProg = new Random();
             AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
-                var DockingInit = ctx.AddTask("[green]Bringing Docking Systems online......[/]");
+                var DockingInit = ctx.AddTask("[green]BRINGING DOCKING SYSTEMS ONLINE.......[/]");
                 while(!DockingInit.IsFinished){
                     DockingInit.Increment(randProg.Next(1,10));
-                    Thread.Sleep(20);
+                    Thread.Sleep(75);
                 }
             });
             Thread.Sleep(300);
@@ -118,13 +118,25 @@ namespace Basiverse
                 AnsiConsole.Cursor.Hide();
 
                 if(DockingTarget.IsOnTarget(DockingCrosshair.CenterX, DockingCrosshair.CenterY)){ // Then check if we're on target
-                    AnsiConsole.Cursor.SetPosition(0,Console.WindowHeight);
-                    var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Success!").AllowEmpty());
+                    AnsiConsole.Cursor.SetPosition(0,3);
+                    AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
+                    var DockingInit = ctx.AddTask("[green]ALIGNMENT SUCCESFUL...PASSING DATA TO DOCKING COMPUTER[/]");
+                    while(!DockingInit.IsFinished){
+                        DockingInit.Increment(randProg.Next(1,10));
+                            Thread.Sleep(200);
+                    }
+                    });
                     return true;
                 }
                 if(Fuel <= 0){
-                    AnsiConsole.Cursor.SetPosition(0,Console.WindowHeight);
-                    var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Docking fuel empty!").AllowEmpty());
+                    AnsiConsole.Cursor.SetPosition(0,3);
+                    AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
+                    var DockingInit = ctx.AddTask("[red]ALIGNMENT FAILURE! ABORTING DOCKING SEQUENCE[/]");
+                    while(!DockingInit.IsFinished){
+                        DockingInit.Increment(randProg.Next(1,10));
+                            Thread.Sleep(200);
+                    }
+                    });
                     return false;
                 }
             }
