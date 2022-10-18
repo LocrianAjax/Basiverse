@@ -440,8 +440,12 @@ namespace Basiverse{
             else{
                 foreach(Station tmp in mainPlayer.PLoc.Stations){ // Not effcient, but we're going to a max of 5 things so no biggie
                     if(tmp.Name == destination){
-                        mainPlayer.logDock(tmp.Name); // Log Docking 
-                        tmp.Dock(mainPlayer);
+                        DockingMinigame Docker = new DockingMinigame();
+                        bool res = Docker.StartMinigame();
+                        if(res){
+                            mainPlayer.logDock(tmp.Name); // Log Docking 
+                            tmp.Dock(mainPlayer);
+                        }
                         Start();
                     }
                 }

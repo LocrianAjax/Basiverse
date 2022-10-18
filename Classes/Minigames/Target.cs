@@ -52,16 +52,20 @@ namespace Basiverse
             */
             //  We draw from the top left of the obj
             //  NOTE: Console coords have 0,0 top left. X increases L -> R and Y increases Top -> Bottom
-            AnsiConsole.Cursor.SetPosition(X, Y);
-            AnsiConsole.Write(".------------------.");
-            AnsiConsole.Cursor.SetPosition(X, Y + 1);
-            AnsiConsole.Write("|     .------.     |");
-            AnsiConsole.Cursor.SetPosition(X, Y + 2);
-            AnsiConsole.Write("|     |      |     |");
-            AnsiConsole.Cursor.SetPosition(X, Y + 3);
-            AnsiConsole.Write("|     `------'     |");
-            AnsiConsole.Cursor.SetPosition(X, Y + 4);
-            AnsiConsole.Write("`------------------'");
+            string[] lines = 
+            {".------------------.",
+             "|     .------.     |", 
+             "|     |      |     |", 
+             "|     `------'     |",
+             "`------------------'"};
+
+            int count = 0;
+            foreach (string line in lines)
+            {
+                AnsiConsole.Cursor.SetPosition(X, Y + count);
+                Console.Write(line);
+                count++;
+            }
         }
 
         public void Clear(){

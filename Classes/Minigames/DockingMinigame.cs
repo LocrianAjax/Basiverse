@@ -41,10 +41,9 @@ namespace Basiverse
     }
 
     class DockingMinigame{
-        // TODO: This
         public Target DockingTarget;
         public Crosshair DockingCrosshair;
-        public int Fuel = 150;
+        public int Fuel = 50;
 
         public DockingMinigame(){ // Default
             DockingCrosshair = new Crosshair();
@@ -61,7 +60,7 @@ namespace Basiverse
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the top row
             AnsiConsole.Write("                                                                                                            ");
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the top row
-            AnsiConsole.Markup($"[green]DOCKING ASSIST ONLINE:  REMAINING FUEL {Fuel}[/]");
+            AnsiConsole.Markup($"[green]DOCKING ASSIST ONLINE -  REMAINING FUEL: {Fuel}u[/]");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
             AnsiConsole.Write("                                                                                                            ");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
@@ -119,10 +118,12 @@ namespace Basiverse
                 AnsiConsole.Cursor.Hide();
 
                 if(DockingTarget.IsOnTarget(DockingCrosshair.CenterX, DockingCrosshair.CenterY)){ // Then check if we're on target
+                    AnsiConsole.Cursor.SetPosition(0,Console.WindowHeight);
                     var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Success!").AllowEmpty());
                     return true;
                 }
                 if(Fuel <= 0){
+                    AnsiConsole.Cursor.SetPosition(0,Console.WindowHeight);
                     var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Docking fuel empty!").AllowEmpty());
                     return false;
                 }

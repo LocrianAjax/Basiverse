@@ -185,7 +185,7 @@ namespace Basiverse
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
-                .PageSize(8)
+                .PageSize(15)
                 .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Docking Test", "Return" }));
             switch(selection){
                 case "Test Data Acess":
