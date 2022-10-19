@@ -50,7 +50,8 @@ namespace Basiverse
                         LoadGameMenu();
                     break;
                     case "Quit":
-                        return;
+                        System.Environment.Exit(0);
+                    break;
                     case "Debug":
                         DebugMenu();
                     break;
