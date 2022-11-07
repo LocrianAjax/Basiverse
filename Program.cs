@@ -214,7 +214,7 @@ namespace Basiverse
                 new SelectionPrompt<string>()
                 .Title("Debug Menu")
                 .PageSize(15)
-                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Docking Test", "Return" }));
+                .AddChoices(new[] { "Test Data Acess", "Run Object Bin Creator", "Test Object Load", "Generate Map Test", "Delete Save", "Generate NPC Test", "Docking Test", "Mining Test", "Return" }));
             switch(selection){
                 case "Test Data Acess":
                     TestDataAcess();
@@ -242,6 +242,9 @@ namespace Basiverse
                 case "Docking Test":
                     TestDocking();
                 break;
+                case "Mining Test":
+                    TestMining();
+                break;
                 case "Return":
                     MainMenu();
                 break;
@@ -250,6 +253,11 @@ namespace Basiverse
 
         static void TestDocking(){
             DockingMinigame tester = new DockingMinigame();
+            tester.StartMinigame();
+        }
+
+        static void TestMining(){
+            MiningMinigame tester = new MiningMinigame();
             tester.StartMinigame();
         }
 

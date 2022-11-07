@@ -98,12 +98,12 @@ namespace Basiverse
                 if(input == ConsoleKey.DownArrow){
                     Fuel--;
                     DockingCrosshair.InertiaY += 1;
-                    DockingTarget.moveDown();
+                    DockingTarget.moveUp();
                 }
                 if(input == ConsoleKey.UpArrow){
                     Fuel--;
                     DockingCrosshair.InertiaY -= 1;
-                    DockingTarget.moveUp();
+                    DockingTarget.moveDown();
                 }
                 if(input == ConsoleKey.LeftArrow){
                     Fuel--;
