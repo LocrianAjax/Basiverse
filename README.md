@@ -3,6 +3,9 @@ Basiverse pre-alpha. Basic text game to keep me doing something
 Will start branching once a basic v0.1 alpha is semi-playable
 
 
+BUGS:
+
+
 DONE:
 
 Map Gen with Locations and POIs
@@ -31,11 +34,13 @@ Actual gameplay(Important!)
 
 Intro screens for the game and on startup
 
-Minigame for docking/mining
+Minigame for mining
 
 Fee to auto-dock?
 
 Add Lore data in text files
+
+UI Tweaks for readability
 
 Move to weapons class and then :-
 

@@ -6,13 +6,13 @@ using System.Collections.Generic;
 namespace Basiverse
 {
 
-    [Serializable]
-    class Dialouge{ // Dialouges contain a set, line and a bool for if it's an intro line
-        public int set;
-        public string line;
+    // [Serializable]
+    // class Dialouge{ // Dialouges contain a set, line and a bool for if it's an intro line
+    //     public int set;
+    //     public string line;
 
-        public bool isIntro;
-    }
+    //     public bool isIntro;
+    // }
 
     [Serializable]
     class NPC{ // An NPC contains has a name, a type, and a list of dialouge
@@ -24,7 +24,7 @@ namespace Basiverse
 
         // NPC Types will be: 0 - Basic, 1 - Combat, 2 - Trade
 
-        public List<Dialouge> Dialouges;
+        // public List<Dialouge> Dialouges;
 
         public Ship cShip; // For combat NPCs
         public int difficulty;

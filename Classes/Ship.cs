@@ -236,6 +236,7 @@ namespace Basiverse
         public void RemoveCargo(Cargo inCargo, int amount){ // This assumes that the amount you are removing exists
             for(int i = 0; i < amount; i++){
                 CargoHold.Remove(inCargo);
+                _hold.CurrentSize -= inCargo.Size;
             }
         }
 
