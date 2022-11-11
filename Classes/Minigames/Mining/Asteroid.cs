@@ -12,12 +12,24 @@ namespace Basiverse
         public List<Tile> Tiles = new List<Tile>();
         public int MaxHealth { get; set; }
         public int CurrHealth { get; set; }
+        public int Size {get; set;}
 
-        public Asteroid(){
+        public Asteroid(){ // Default
             MaxHealth = 100;
             CurrHealth = MaxHealth;
+            Size = 6;
             for(int i = 0; i <= 35; i++){
-                Tile temp = new Tile(i);
+                Tile temp = new Tile(i, Size);
+                Tiles.Add(temp);
+            }
+        }
+
+        public Asteroid(int inSize){ // Specified grid size
+            MaxHealth = 100;
+            CurrHealth = MaxHealth;
+            Size = inSize;
+            for(int i = 0; i <= 35; i++){
+                Tile temp = new Tile(i, Size);
                 Tiles.Add(temp);
             }
         }

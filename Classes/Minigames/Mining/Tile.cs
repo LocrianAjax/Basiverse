@@ -81,6 +81,8 @@ namespace Basiverse
         public int Location { get; set; } // 0 is top left and 35 is bottom right on the 6x6 grid
         public State CurrState { get; set; } 
         public bool Loot { get; set; }
+        public bool isSelected { get; set; }
+        public int Size { get; set; } // Passed in from above, that we we know how big of a grid we have
         public enum State{
             LootA,
             LootB,
@@ -94,19 +96,21 @@ namespace Basiverse
         }
 
     
-        public Tile(int inLoc){ // Default constructor
+        public Tile(int inLoc, int inSize){ // Default constructor
             Width = 9;
             Height = 4;
             Location = inLoc;
             CurrState = State.Empty;
             Loot = false;
+            Size = inSize;
         }
         
-        public Tile(int inLoc, State inState){ // Overloaded
+        public Tile(int inLoc, State inState, int inSize){ // Overloaded
             Width = 9;
             Height = 4;
             Location = inLoc;
             CurrState = inState;
+            Size = inSize;
             if(CurrState == State.LootA || CurrState == State.LootB){
                 Loot = true;
             }
@@ -115,25 +119,18 @@ namespace Basiverse
             }
         }
 
-        public Tile(int inLoc, State inState, bool inLoot){ // Overloaded
+        public Tile(int inLoc, State inState, bool inLoot, int inSize){ // Overloaded
             Width = 9;
             Height = 4;
             Location = inLoc;
             CurrState = inState;
             Loot = inLoot;
+            Size = inSize;
         }
 
         public void Draw(){
             /* We have to make some assumptions
                1: All tiles are the same size
-               2: We're on the 6x6 grid, with 0 being top left, 5 being top right etc
-            
-                Row 0: 0 - 5
-                Row 1: 6 - 11
-                Row 2: 12-17
-                Row 3: 18 - 23
-                Row 4: 24 - 29
-                Row 5: 30 - 35
             */
             string[] lines;
             switch(CurrState){
@@ -173,10 +170,10 @@ namespace Basiverse
             int TLY = (Console.WindowHeight / 2) - (3 * Height);
 
             // Then we adjust for our tile's location on Y
-            int row = Location / 6;
+            int row = Location / Size;
             int currY = TLY + (row * Height);
             // And on X
-            int col = Location % 6;
+            int col = Location % Size;
             int currX = TLX + (col * Width);
 
             // Then we go to the position and clear the tile

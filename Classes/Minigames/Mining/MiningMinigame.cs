@@ -7,7 +7,7 @@ using System.Threading;
 namespace Basiverse
 {
     class MiningMinigame{
-        public Asteroid MiningAsteroid = new Asteroid();
+        public Asteroid MiningAsteroid = new Asteroid(); // Using a default size of 6
     
         public bool StartMinigame(){
             AnsiConsole.Cursor.Hide();
