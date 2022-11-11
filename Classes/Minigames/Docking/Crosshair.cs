@@ -38,9 +38,9 @@ namespace Basiverse
 
         public void Draw(){
             /*
-                  |
-                --O--
-                  |
+                  │
+                ──O──
+                  │
             */
 
             /* 
@@ -51,11 +51,11 @@ namespace Basiverse
             */ 
             Console.ForegroundColor = ConsoleColor.Green; // Set Color to green for the crosshair and reset after the draw
             AnsiConsole.Cursor.SetPosition(X + 2,Y);
-            AnsiConsole.Write("|");
+            AnsiConsole.Write("│");
             AnsiConsole.Cursor.SetPosition(X, Y + 1);
-            AnsiConsole.Write("--O--");
+            AnsiConsole.Write("──O──");
             AnsiConsole.Cursor.SetPosition(X + 2,Y + 2);
-            AnsiConsole.Write("|");
+            AnsiConsole.Write("│");
             Console.ForegroundColor = ConsoleColor.White;
         }
 

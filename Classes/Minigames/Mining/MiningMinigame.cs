@@ -22,12 +22,13 @@ namespace Basiverse
                         MiningInit.Increment(randProg.Next(1,10));
                         Thread.Sleep(75);
                     }
-                    var LaserInit = ctx.AddTask("[green]CALIBRATING LASERS FOR MINING FREQUENCIES.......[/]");
+                    var LaserInit = ctx.AddTask("[green]TUNING LASERS TO MINING FREQUENCIES.......[/]");
                     while(MiningInit.IsFinished && !LaserInit.IsFinished){
                         LaserInit.Increment(randProg.Next(1,10));
                         Thread.Sleep(75);
                     }
                 });
+                
                 Thread.Sleep(300);
                 AnsiConsole.Clear();
                 DrawMiningAssist();
@@ -61,15 +62,24 @@ namespace Basiverse
             }
     
             public void DrawMiningAssist(){
+                // Use ▀ char in green and red to show the heat
                 AnsiConsole.Cursor.Hide();
-                AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row
+                AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row 
                 AnsiConsole.Write("                                                                                                            ");
                 AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row
-                AnsiConsole.Markup($"[green][/]");
+                AnsiConsole.Markup($"[green]ASTEROID STRUCTURAL INTEGRITY[/]");
                 AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
                 AnsiConsole.Write("                                                                                                            ");
                 AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
-                AnsiConsole.Markup($"[green][/]");
+                // Draw the "Health Indicator"
+                int RedSquares = (MiningAsteroid.MaxHealth / 4) - (MiningAsteroid.CurrHealth / 4);
+                int GreenSquares = (MiningAsteroid.MaxHealth / 4) - RedSquares;
+                for(int i = 0; i < GreenSquares; i++){
+                    AnsiConsole.Markup($"[green]▀[/]");
+                }
+                for(int j = 0; j < RedSquares; j++){
+                    AnsiConsole.Markup($"[red]▀[/]");
+                }
         }
     }
 
