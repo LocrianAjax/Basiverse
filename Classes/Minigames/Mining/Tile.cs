@@ -189,7 +189,12 @@ namespace Basiverse
             foreach (string line in lines)
             {
                 AnsiConsole.Cursor.SetPosition(currX, currY + count);
-                Console.Write(line);
+                if(isSelected){
+                    AnsiConsole.Markup($"[green]{line}[/]");
+                }
+                else{
+                    AnsiConsole.Write(line);
+                }
                 count++;
             }
         }

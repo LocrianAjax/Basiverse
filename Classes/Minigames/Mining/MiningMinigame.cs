@@ -7,8 +7,19 @@ using System.Threading;
 namespace Basiverse
 {
     class MiningMinigame{
-        public Asteroid MiningAsteroid = new Asteroid(); // Using a default size of 6
+        public Asteroid MiningAsteroid; // Using a default size of 6
+        public int Size {get; set;}
     
+        public MiningMinigame(){
+            Size = 6;
+            MiningAsteroid = new Asteroid(Size);
+        }
+
+        public MiningMinigame(int inSize){
+            Size = inSize;
+            MiningAsteroid = new Asteroid(Size);
+        }
+
         public bool StartMinigame(){
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Clear();
@@ -32,6 +43,8 @@ namespace Basiverse
             AnsiConsole.Clear();
             DrawMiningAssist();
             AnsiConsole.Cursor.Hide();
+            int selected = 0;
+            MiningAsteroid.Tiles[selected].isSelected = true;
             MiningAsteroid.Draw();
             AnsiConsole.Cursor.Hide();
             //  Now that we're set up, start the loop
@@ -39,18 +52,31 @@ namespace Basiverse
                 DrawMiningAssist();
 
                 ConsoleKey input = TimedReader.ReadKey(250);
+                MiningAsteroid.Tiles[selected].isSelected = false;
                 if(input == ConsoleKey.DownArrow){
-
+                    selected += Size;
                 }
                 if(input == ConsoleKey.UpArrow){
-
+                    selected -= Size;
                 }
-                if(input == ConsoleKey.LeftArrow){
-
+                if(input == ConsoleKey.LeftArrow){         
+                    selected -= 1;
                 }
                 if(input == ConsoleKey.RightArrow){
-
+                    selected += 1;
                 }
+
+                // Validate selection
+                if(selected > (Size * Size) - 1){
+                    selected = (Size * Size) - 1;
+                }
+                else if(selected < 0){
+                    selected = 0;
+                }
+                
+                // Then draw
+                MiningAsteroid.Tiles[selected].isSelected = true;
+                MiningAsteroid.Draw();
                 AnsiConsole.Cursor.Hide();
             }
         }
