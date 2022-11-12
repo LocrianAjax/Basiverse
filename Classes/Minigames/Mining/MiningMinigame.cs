@@ -95,10 +95,14 @@ namespace Basiverse
         }
 
         public void HightlightAndDamage(int inSelection){
+            // Change to a highlight
             MiningAsteroid.Tiles[inSelection].isSelected = false;
             MiningAsteroid.Tiles[inSelection].isHighlighted = true;
             MiningAsteroid.DrawAt(inSelection);
-            Thread.Sleep(100);
+
+            Thread.Sleep(100); // Pause for flair
+
+            // Then Un-hilight and damage
             MiningAsteroid.Tiles[inSelection].Damage(); // TODO: Check for loot and add something for that here.
             MiningAsteroid.Tiles[inSelection].isHighlighted = false;
             MiningAsteroid.Tiles[inSelection].isSelected = true;
