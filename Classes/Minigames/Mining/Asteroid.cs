@@ -40,7 +40,7 @@ namespace Basiverse
             var rand = new Random();
             
             for(int i = 0; i <= (Size * Size - 1); i++){
-                int Type = rand.Next(2,9);
+                int Type = rand.Next(3,9);
                 Tile temp = new Tile(i, Type, Size);
                 Tiles.Add(temp);
             }

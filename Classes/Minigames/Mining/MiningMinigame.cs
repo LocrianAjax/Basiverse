@@ -40,7 +40,6 @@ namespace Basiverse
                     Thread.Sleep(75);
                 }
             });
-            
             // Set up the inital screen
             Thread.Sleep(300);
             AnsiConsole.Clear();
@@ -127,8 +126,13 @@ namespace Basiverse
         }
     
         public void DrawMiningAssist(){
-            // Use ▀ char in green and red to show the heat
             AnsiConsole.Cursor.Hide();
+            // Header in the middle
+            string HeaderMsg = "MINING PROTOCOLS ACTIVE - TRACKING TARGET INTEGRITY";
+            AnsiConsole.Cursor.SetPosition((Console.WindowWidth / 2) - (HeaderMsg.Length / 2),0);
+            AnsiConsole.Markup($"[green]{HeaderMsg}[/]");
+
+            // Then draw heat display info
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row 
             AnsiConsole.Write("                                         ");
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row
@@ -136,10 +140,11 @@ namespace Basiverse
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
             AnsiConsole.Write("                                         ");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
+
             // Draw the "Health Indicator"
             int RedSquares = (MiningAsteroid.MaxHealth / 4) - (MiningAsteroid.CurrHealth / 4);
             int GreenSquares = (MiningAsteroid.MaxHealth / 4) - RedSquares;
-            for(int i = 0; i < GreenSquares; i++){
+            for(int i = 0; i < GreenSquares; i++){// Use ▀ char in green and red to show the heat
                 AnsiConsole.Markup($"[green]▀[/]");
             }
             for(int j = 0; j < RedSquares; j++){

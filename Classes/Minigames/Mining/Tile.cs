@@ -87,13 +87,13 @@ namespace Basiverse
         public enum State{
             LootA,
             LootB,
-            Empty,
             Stage4,
             Stage3,
             Stage2,
             Stage1,
             Base,
-            Impossible
+            Impossible,
+            Empty
         }
 
     
