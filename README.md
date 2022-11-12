@@ -47,8 +47,3 @@ Move to weapons class and then :-
     Lasers: Extra shield damage and reduced hull damage
 
     Missiles: Reduced shield damage and extra hull damage
-
-Automated Build Status:
-
-
-[![.NET](https://github.com/Prophetofkirbo/Basiverse/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Prophetofkirbo/Basiverse/actions/workflows/dotnet.yml)
