@@ -257,7 +257,7 @@ namespace Basiverse
         }
 
         static void TestMining(){
-            MiningMinigame tester = new MiningMinigame();
+            MiningMinigame tester = new MiningMinigame(6);
             tester.StartMinigame();
         }
 

@@ -13,11 +13,13 @@ namespace Basiverse
         public MiningMinigame(){
             Size = 6;
             MiningAsteroid = new Asteroid(Size);
+            MiningAsteroid.GenerateTiles();
         }
 
         public MiningMinigame(int inSize){
             Size = inSize;
             MiningAsteroid = new Asteroid(Size);
+            MiningAsteroid.GenerateTiles();
         }
 
         public bool StartMinigame(){
@@ -46,7 +48,7 @@ namespace Basiverse
             AnsiConsole.Cursor.Hide();
             int selected = 0;
             MiningAsteroid.Tiles[selected].isSelected = true;
-            MiningAsteroid.Draw();
+            MiningAsteroid.DrawAll();
             AnsiConsole.Cursor.Hide();
 
             //  Now that we're set up, start the loop
@@ -73,11 +75,22 @@ namespace Basiverse
                     selected = ValidateAndDraw(selected, oldSelected);
                 }
                 if(input == ConsoleKey.Spacebar){
-                    // Damage the tile
+                    // Damage the tile and change it's version
                     // TODO: That
                     // For now just highlight it and remove health
                     HightlightAndDamage(selected);
+                }
 
+                // Check for game over case
+                if(MiningAsteroid.CurrHealth <= 0){
+                    DrawMiningAssist();
+                    AnsiConsole.Cursor.SetPosition(0,3);
+                    AnsiConsole.Write("Asteroid disintegration!");
+                    AnsiConsole.Cursor.SetPosition(0,5);
+                    var tmp = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Press any key to continue")
+                    .AllowEmpty());
+                    return false;
                 }
             }
         }
@@ -86,10 +99,12 @@ namespace Basiverse
             MiningAsteroid.Tiles[inSelection].isSelected = false;
             MiningAsteroid.Tiles[inSelection].isHighlighted = true;
             MiningAsteroid.DrawAt(inSelection);
-            Thread.Sleep(300);
+            Thread.Sleep(100);
+            MiningAsteroid.Tiles[inSelection].Damage(); // TODO: Check for loot and add something for that here.
             MiningAsteroid.Tiles[inSelection].isHighlighted = false;
             MiningAsteroid.Tiles[inSelection].isSelected = true;
             MiningAsteroid.DrawAt(inSelection);
+            MiningAsteroid.CurrHealth -= 5;
         }
 
         public int ValidateAndDraw(int inSelection, int oldSelection){
@@ -115,11 +130,11 @@ namespace Basiverse
             // Use ▀ char in green and red to show the heat
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row 
-            AnsiConsole.Write("                                                                                                            ");
+            AnsiConsole.Write("                                         ");
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the row
             AnsiConsole.Markup($"[green]ASTEROID STRUCTURAL INTEGRITY[/]");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
-            AnsiConsole.Write("                                                                                                            ");
+            AnsiConsole.Write("                                         ");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the row
             // Draw the "Health Indicator"
             int RedSquares = (MiningAsteroid.MaxHealth / 4) - (MiningAsteroid.CurrHealth / 4);

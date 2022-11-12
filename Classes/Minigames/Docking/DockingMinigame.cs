@@ -118,6 +118,7 @@ namespace Basiverse
                 AnsiConsole.Cursor.Hide();
 
                 if(DockingTarget.IsOnTarget(DockingCrosshair.CenterX, DockingCrosshair.CenterY)){ // Then check if we're on target
+                    DrawDockingAssist();
                     AnsiConsole.Cursor.SetPosition(0,3);
                     AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
                     var DockingInit = ctx.AddTask("[green]ALIGNMENT SUCCESFUL...PASSING DATA TO DOCKING COMPUTER[/]");
@@ -129,6 +130,7 @@ namespace Basiverse
                     return true;
                 }
                 if(Fuel <= 0){
+                    DrawDockingAssist();
                     AnsiConsole.Cursor.SetPosition(0,3);
                     AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
                     var DockingInit = ctx.AddTask("[red]ALIGNMENT FAILURE! ABORTING DOCKING SEQUENCE[/]");

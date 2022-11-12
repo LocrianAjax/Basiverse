@@ -22,43 +22,43 @@ namespace Basiverse
 
         string[] LootATile = 
         {"┌───────┐",
-         "│  ▽ ▽ │",
-         "│ ▽ ▽  │",
+         "│  * %  │",
+         "│ & * @ │",
          "└───────┘"
          };
 
         string[] LootBTile = 
         {"┌───────┐",
-         "│ ▽ ▽  │",
-         "│  ▽ ▽ │",
+         "│ ^ * # │",
+         "│  $ *  │",
          "└───────┘"
          };
 
         string[] Stage4Tile = 
         {"┌───────┐",
-         "│▚▚▚▚│",
-         "│▚▚▚▚│",
+         "│XXXXXXX│",
+         "│XXXXXXX│",
          "└───────┘"
          };
 
          string[] Stage3Tile = 
         {"┌───────┐",
-         "│▚▚▚  │",
-         "│▚▚▚  │",
+         "│XXXXX┐ │",
+         "│XXXXX┘ │",
          "└───────┘"
          };     
             
          string[] Stage2Tile = 
         {"┌───────┐",
-         "│▚▚─┐ │",
-         "│▚▚─┐ │",
+         "│XXXX─┐ │",
+         "│XXXX─┘ │",
          "└───────┘"
          };      
 
          string[] Stage1Tile = 
         {"┌───────┐",
-         "│▚┐┌─┐ │",
-         "│▚┘└─┘ │",
+         "│XX┐┌─┐ │",
+         "│XX┘└─┘ │",
          "└───────┘"
          };     
 
@@ -71,8 +71,8 @@ namespace Basiverse
         
         string[] ImpossibleTile = 
         {"┌───────┐",
-         "│╳╳╳╳╳╳╳│",
-         "│╳╳╳╳╳╳╳│",
+         "│+++++++│",
+         "│+++++++│",
          "└───────┘"
          };
 
@@ -106,25 +106,31 @@ namespace Basiverse
             Size = inSize;
         }
         
-        public Tile(int inLoc, State inState, int inSize){ // Overloaded
+        public Tile(int inLoc, int inState, int inSize){ // Overloaded
             Width = 9;
             Height = 4;
             Location = inLoc;
-            CurrState = inState;
+            CurrState = (State)inState;
             Size = inSize;
-            if(CurrState == State.LootA || CurrState == State.LootB){
+            if(CurrState == State.LootA || CurrState == State.LootB){ // Always loot
                 Loot = true;
             }
-            else{
+            else if(CurrState == State.Impossible || CurrState == State.Empty){ // Never loot
                 Loot = false;
+            }
+            else{ // Otherwise 20% chance
+                var rand = new Random();
+                int flip = rand.Next(0,4);
+                if(flip == 1){ Loot = true; }
+                else{ Loot = false; }
             }
         }
 
-        public Tile(int inLoc, State inState, bool inLoot, int inSize){ // Overloaded
+        public Tile(int inLoc, int inState, bool inLoot, int inSize){ // Overloaded
             Width = 9;
             Height = 4;
             Location = inLoc;
-            CurrState = inState;
+            CurrState = (State)inState;
             Loot = inLoot;
             Size = inSize;
         }
@@ -167,8 +173,8 @@ namespace Basiverse
                 break;
             }
             // First we find the center and align our Top Left (our 0,0)
-            int TLX = (Console.WindowWidth / 2) - (3 * Width);
-            int TLY = (Console.WindowHeight / 2) - (3 * Height);
+            int TLX = (Console.WindowWidth / 2) - ((Size / 2) * Width);
+            int TLY = (Console.WindowHeight / 2) - ((Size / 2) * Height);
 
             // Then we adjust for our tile's location on Y
             int row = Location / Size;
@@ -196,11 +202,49 @@ namespace Basiverse
                 else if(isHighlighted){
                     AnsiConsole.Markup($"[red]{line}[/]");
                 }
-                else{
-                    AnsiConsole.Write(line);
+                else if(CurrState == State.LootA || CurrState == State.LootB){
+                    AnsiConsole.Markup($"[gold1]{line}[/]");
+                }
+                else{ // 50% chance rosybrown or sandybrown
+                    var rand = new Random();
+                    int flip = rand.Next(0,2);
+                    if(flip == 1){ AnsiConsole.Markup($"[sandybrown]{line}[/]"); }
+                    else{ AnsiConsole.Markup($"[rosybrown]{line}[/]"); }
                 }
                 count++;
             }
+        }
+    
+        public bool Damage(){
+            switch(CurrState){
+                case State.Base:
+                    CurrState = State.Stage1;
+                break;
+                case State.Stage1:
+                    CurrState = State.Stage2;
+                break;
+                case State.Stage2:
+                    CurrState = State.Stage3;
+                break;
+                case State.Stage3:
+                    CurrState = State.Stage4;
+                break;
+                case State.Stage4:
+                    if(Loot){
+                        var rand = new Random();
+                        int flip = rand.Next(0,2);
+                        if(flip == 1){ CurrState = State.LootA; }
+                        else{CurrState = State.LootB;}
+                        return true;
+                    }
+                    else{
+                        CurrState = State.Empty;
+                        return false;
+                    }
+                default:
+                    return false;
+            }
+            return false;
         }
     }
 }

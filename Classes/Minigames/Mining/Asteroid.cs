@@ -18,30 +18,32 @@ namespace Basiverse
             MaxHealth = 100;
             CurrHealth = MaxHealth;
             Size = 6;
-            for(int i = 0; i <= 35; i++){
-                Tile temp = new Tile(i, Size);
-                Tiles.Add(temp);
-            }
         }
 
         public Asteroid(int inSize){ // Specified grid size
             MaxHealth = 100;
             CurrHealth = MaxHealth;
             Size = inSize;
-            for(int i = 0; i <= 35; i++){
-                Tile temp = new Tile(i, Size);
-                Tiles.Add(temp);
-            }
         }
 
-        public void Draw(){
-            foreach(Tile temp in Tiles){
-                temp.Draw();
+        public void DrawAll(){
+            foreach(Tile tile in Tiles){
+                tile.Draw();
             }
         }
 
         public void DrawAt(int index){
             Tiles[index].Draw();
+        }
+
+        public void GenerateTiles(){
+            var rand = new Random();
+            
+            for(int i = 0; i <= (Size * Size - 1); i++){
+                int Type = rand.Next(2,9);
+                Tile temp = new Tile(i, Type, Size);
+                Tiles.Add(temp);
+            }
         }
     }
 }
