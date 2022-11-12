@@ -39,5 +39,9 @@ namespace Basiverse
                 temp.Draw();
             }
         }
+
+        public void DrawAt(int index){
+            Tiles[index].Draw();
+        }
     }
 }

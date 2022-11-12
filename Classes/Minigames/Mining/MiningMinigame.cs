@@ -39,6 +39,7 @@ namespace Basiverse
                 }
             });
             
+            // Set up the inital screen
             Thread.Sleep(300);
             AnsiConsole.Clear();
             DrawMiningAssist();
@@ -47,38 +48,67 @@ namespace Basiverse
             MiningAsteroid.Tiles[selected].isSelected = true;
             MiningAsteroid.Draw();
             AnsiConsole.Cursor.Hide();
+
             //  Now that we're set up, start the loop
             while(true){
                 DrawMiningAssist();
-
                 ConsoleKey input = TimedReader.ReadKey(250);
-                MiningAsteroid.Tiles[selected].isSelected = false;
+                int oldSelected = selected;
                 if(input == ConsoleKey.DownArrow){
-                    selected += Size;
+                    if((selected + Size) > (Size * Size) - 1) {} // Do nothing
+                    else{selected += Size;}
+                    selected = ValidateAndDraw(selected, oldSelected);
                 }
                 if(input == ConsoleKey.UpArrow){
-                    selected -= Size;
+                    if((selected - Size) < 0) {} // Do nothing
+                    else{selected -= Size;}
+                    selected = ValidateAndDraw(selected, oldSelected);
                 }
-                if(input == ConsoleKey.LeftArrow){         
+                if(input == ConsoleKey.LeftArrow){       
                     selected -= 1;
+                    selected = ValidateAndDraw(selected, oldSelected);
                 }
                 if(input == ConsoleKey.RightArrow){
                     selected += 1;
+                    selected = ValidateAndDraw(selected, oldSelected);
                 }
+                if(input == ConsoleKey.Spacebar){
+                    // Damage the tile
+                    // TODO: That
+                    // For now just highlight it and remove health
+                    HightlightAndDamage(selected);
 
-                // Validate selection
-                if(selected > (Size * Size) - 1){
-                    selected = (Size * Size) - 1;
                 }
-                else if(selected < 0){
-                    selected = 0;
-                }
-                
-                // Then draw
-                MiningAsteroid.Tiles[selected].isSelected = true;
-                MiningAsteroid.Draw();
-                AnsiConsole.Cursor.Hide();
             }
+        }
+
+        public void HightlightAndDamage(int inSelection){
+            MiningAsteroid.Tiles[inSelection].isSelected = false;
+            MiningAsteroid.Tiles[inSelection].isHighlighted = true;
+            MiningAsteroid.DrawAt(inSelection);
+            Thread.Sleep(300);
+            MiningAsteroid.Tiles[inSelection].isHighlighted = false;
+            MiningAsteroid.Tiles[inSelection].isSelected = true;
+            MiningAsteroid.DrawAt(inSelection);
+        }
+
+        public int ValidateAndDraw(int inSelection, int oldSelection){
+            MiningAsteroid.Tiles[oldSelection].isSelected = false;
+            MiningAsteroid.DrawAt(oldSelection);
+            int selected = inSelection;
+            // Validate selection
+            if(selected > (Size * Size) - 1){
+                selected = (Size * Size) - 1;
+            }
+            else if(selected < 0){
+                selected = 0;
+            }
+
+            // Then draw
+            MiningAsteroid.Tiles[selected].isSelected = true;
+            MiningAsteroid.DrawAt(selected);
+            AnsiConsole.Cursor.Hide();
+            return selected;
         }
     
         public void DrawMiningAssist(){
@@ -102,5 +132,4 @@ namespace Basiverse
             }
         }
     }
-
 }

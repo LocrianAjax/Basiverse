@@ -82,6 +82,7 @@ namespace Basiverse
         public State CurrState { get; set; } 
         public bool Loot { get; set; }
         public bool isSelected { get; set; }
+        public bool isHighlighted { get; set; }
         public int Size { get; set; } // Passed in from above, that we we know how big of a grid we have
         public enum State{
             LootA,
@@ -191,6 +192,9 @@ namespace Basiverse
                 AnsiConsole.Cursor.SetPosition(currX, currY + count);
                 if(isSelected){
                     AnsiConsole.Markup($"[green]{line}[/]");
+                }
+                else if(isHighlighted){
+                    AnsiConsole.Markup($"[red]{line}[/]");
                 }
                 else{
                     AnsiConsole.Write(line);
