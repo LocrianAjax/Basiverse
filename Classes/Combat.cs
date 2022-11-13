@@ -60,6 +60,14 @@ namespace Basiverse
         }
 
         public void CombatScreen(Player inPlayer){
+            /*
+                   __
+                  |  \
+                =}[   `--._____
+                =}[  ,---------'-
+                  |_/
+            */
+            
             // Create main table
             Table MainTable = new Table();
 

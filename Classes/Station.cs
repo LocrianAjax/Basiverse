@@ -54,6 +54,7 @@ namespace Basiverse{
         public double T4BuyMult = 1;
         public double T5BuyMult = 1;
         public double T6BuyMult = 1;
+        public double T7BuyMult = 1; // Can only be sold
 
         public double BaseSellMult = 1;
         public double T0SellMult = 1;
@@ -105,7 +106,7 @@ namespace Basiverse{
                     StationSellList.Add(2);
                     // Buys everything for a reduced price
                     BaseBuyMult = .7;
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i < 7; i++){
                         StationBuyList.Add(i);
                     }
                 break;
@@ -114,11 +115,12 @@ namespace Basiverse{
                     StationSellList.Add(6);
                     T6SellMult = .9;
                     // Buys all goods with a premium put on Science/Industiral goods
-                    for(int i = 0; i < 6; i++){
+                    for(int i = 0; i < 7; i++){
                         StationBuyList.Add(i);
                     }
                     T5BuyMult = 1.4;
                     T6BuyMult = 2.5;
+                    T7BuyMult = 2.5;
                 break;
                 case "Military":
                     // Sells Basic for an inflated price
@@ -145,12 +147,13 @@ namespace Basiverse{
                     // Sells Industiral for a slighly lower price
                     StationSellList.Add(5);
                     T5SellMult = .9;
-                    // Does not buy Luxury, with a premium on basic, basic luxury goods, recreatiuon and cheap booze
+                    // Does not buy Luxury, with a premium on basic, basic luxury goods, recreation and cheap booze
                     StationBuyList.Add(1);
                     StationBuyList.Add(2);
                     StationBuyList.Add(3);
                     StationBuyList.Add(5);
                     StationBuyList.Add(6);
+                    StationBuyList.Add(7);
                     T0BuyMult = 2.5;
                     T1BuyMult = 2;
                     T2BuyMult = 1.5;
@@ -171,7 +174,7 @@ namespace Basiverse{
                     T5SellMult = (.5 * rand.Next(1,10));
                     T6SellMult = (.5 * rand.Next(1,10));
                     // Buys everything at a variable cost
-                    for(int i = 0; i <= 6; i++){
+                    for(int i = 0; i <= 7; i++){
                         StationBuyList.Add(i);
                     }
                     // Everything has a random chance to be multiplied from .5 to 5
@@ -183,6 +186,7 @@ namespace Basiverse{
                     T4BuyMult = (.5 * rand.Next(1,10));
                     T5BuyMult = (.5 * rand.Next(1,10));
                     T6BuyMult = (.5 * rand.Next(1,10));
+                    T7BuyMult = (.5 * rand.Next(1,10));
                 break;
                 case "Corporate":
                     // Sells everything at a variable cost
@@ -211,6 +215,7 @@ namespace Basiverse{
                     T4BuyMult = (.5 * rand.Next(1,10));
                     T5BuyMult = (.5 * rand.Next(1,10));
                     T6BuyMult = (.5 * rand.Next(1,10));
+                    T7BuyMult = (.5 * rand.Next(1,10));
                 break;
                 default: // Otherwise keep it as default
                 break;
@@ -650,6 +655,9 @@ namespace Basiverse{
                     break;
                     case 6:
                         item.AdjustedPrice = item.Cost * BaseBuyMult * T6BuyMult;
+                    break;
+                    case 7:
+                        item.AdjustedPrice = item.Cost * BaseBuyMult * T7BuyMult;
                     break;
                     }
                     CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.AdjustedPrice}"));

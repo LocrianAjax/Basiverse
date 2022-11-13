@@ -16,7 +16,7 @@ Coffee|3|120|2|The classic hot brown that powered Earth now powers Space.
 Tea|3|100|2|The British are allowed in space too.
 Decent Food|2|100|2|Food that resembles food! What a concept.
 // Type 3 - Drugs and Booze
-Expensive Alcohol|3|150|3|Burbon, Scotch, and Whiskey! Oh my!
+Expensive Alcohol|3|150|3|Burbon, Scotch, and Whiskey Oh my!
 Craft Beer|3|80|3|Nicer Beer that actaully tastes of something.
 // Type 4 - High End Luxury Goods
 Luxury Goods|5|170|4|Assorted rich people shit.
@@ -33,3 +33,8 @@ Raw Ores|50|120|5|The lifeblood of the space economy, Iron, Aluminum, Copper and
 Construction Materials|100|1200|5|Incredibly valuble for building new stations but heavy and bulky.
 // Type 6 - Science Equipment
 Centrifuges|5|200|6|Useful for zero-G experiments.
+// Type 7 - Loot From Mining. Can only be sold
+Asteroid Grit|1|10|7|Loose bits of ore and minerals mined using a combat laser. 
+Mined Minerals|5|15|7|Mined chunks of minerals, slightly scorched.
+Mined Ores|10|25|7|Mined chunks of raw ores, slightly scorched.
+Raw Mined Gems|1|50|7|Uncut and unprocessed gemstones from asteroids.

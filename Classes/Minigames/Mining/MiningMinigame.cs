@@ -164,6 +164,62 @@ namespace Basiverse
                     LootCount++;
                 }
             }
+            
+            if(LootCount == 0){ // Check for 0 loot
+                AnsiConsole.Clear();
+                AnsiConsole.Markup($"[red]ASTEROID INTEGRITY LOST - NOTHING RECOVERABLE[/]");
+                var tmp = AnsiConsole.Prompt(
+                new TextPrompt<string>("Press any key to continue.....")
+                .AllowEmpty());
+                return;
+            }
+            else{ // Otherwise we have loot
+                AnsiConsole.Clear();
+                AnsiConsole.Markup($"[green]ASTEROID INTEGRITY LOST - RECOVERABLE: [/]");
+                // Then grab all Cargo of type 7 (Mining Loot)
+                List<Cargo> temp = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data//cargo.bin");
+                int GemsIndex = 0;
+                int OresIndex = 0;
+                int MineralsIndex = 0;
+                int GritIndex = 0;
+
+                int count = 0;
+                foreach(Cargo cargo in temp){ // Find the Loot
+                    if(cargo.Name == "Raw Mined Gems"){
+                        GemsIndex = count;
+                    }
+                    else if(cargo.Name == "Mined Ores"){
+                        OresIndex = count;
+                    }
+                    else if(cargo.Name == "Mined Minerals"){
+                        MineralsIndex = count;
+                    }
+                    else if(cargo.Name == "Asteroid Grit"){
+                        GritIndex = count;
+                    }
+                    count++;
+                }
+
+                List<Cargo> loot = new List<Cargo>();
+                var rand = new Random();
+                for(int i = 0; i <= LootCount; i++){ // Set up loot pool
+                    int roll = rand.Next(0, 101);
+                    if(roll >= 90){ // Gems
+                        loot.Add(temp[GemsIndex]);
+                    }
+                    else if(roll >= 75 && roll < 90){ // Ores
+                        loot.Add(temp[OresIndex]);
+                    }
+                    else if(roll >= 50 && roll < 75){ // Minerals
+                        loot.Add(temp[MineralsIndex]);
+                    }
+                    else{ // Grit
+                        loot.Add(temp[GritIndex]);
+                    }
+                }
+                
+                // TODO: Add to hold
+            }
         }
     }
 }
