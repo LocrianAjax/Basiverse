@@ -246,5 +246,14 @@ namespace Basiverse
             }
             return false;
         }
+
+        public bool WasLooted(){
+            if(CurrState == State.LootA || CurrState == State.LootB){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 }

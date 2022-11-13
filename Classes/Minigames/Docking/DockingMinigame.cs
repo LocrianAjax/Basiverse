@@ -43,26 +43,30 @@ namespace Basiverse
     class DockingMinigame{
         public Target DockingTarget;
         public Crosshair DockingCrosshair;
+
+        public Starfield Background;
         public int Fuel = 50;
 
         public DockingMinigame(){ // Default
             DockingCrosshair = new Crosshair();
             DockingTarget = new Target();
+            Background = new Starfield();
         }
 
         public DockingMinigame(int TargetX, int TargetY){ // Specified locations
             DockingCrosshair = new Crosshair();
             DockingTarget = new Target(TargetX, TargetY);
+            Background = new Starfield();
         }
 
         public void DrawDockingAssist(){
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the top row
-            AnsiConsole.Write("                                                                                                            ");
+            AnsiConsole.Write("                                 ");
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the top row
             AnsiConsole.Markup($"[green]DOCKING ASSIST ONLINE -  REMAINING FUEL: {Fuel}u[/]");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
-            AnsiConsole.Write("                                                                                                            ");
+            AnsiConsole.Write("                                           ");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
             AnsiConsole.Markup($"[green]RELATIVE SPEEDS - YAW SPEED: {DockingCrosshair.InertiaX}m/s PITCH SPEED: {DockingCrosshair.InertiaY}m/s[/]");
         }
@@ -71,6 +75,7 @@ namespace Basiverse
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Clear();
             Console.CursorVisible = false;
+            Background.Generate();
             // Draw a little fake Init screen
             var randProg = new Random();
             AnsiConsole.Progress().HideCompleted(true).Start(ctx => {
@@ -82,6 +87,7 @@ namespace Basiverse
             });
             Thread.Sleep(300);
             AnsiConsole.Clear();
+            Background.Draw();
             DrawDockingAssist();
             DockingTarget.Draw();
             AnsiConsole.Cursor.Hide();
@@ -89,10 +95,10 @@ namespace Basiverse
             AnsiConsole.Cursor.Hide();
             //  Now that we're set up, start the loop
             while(true){
+                Background.Draw();
                 DrawDockingAssist();
                 DockingTarget.Drift(DockingCrosshair.InertiaX, DockingCrosshair.InertiaY); // Drift with inertia
                 DockingCrosshair.Draw();
-
                 ConsoleKey input = TimedReader.ReadKey(250);
                 // Once we get the input (if any) we reduce fuel, move and increase the inertia. Regardless of if we move or not we drift according to the inertia
                 if(input == ConsoleKey.DownArrow){

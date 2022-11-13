@@ -155,5 +155,15 @@ namespace Basiverse
                 AnsiConsole.Markup($"[red]▀[/]");
             }
         }
+
+        public void EndMinigame(){
+            int LootCount = 0;
+            // Figure out how many tiles contain loot
+            foreach(Tile tile in MiningAsteroid.Tiles){
+                if(tile.WasLooted()){
+                    LootCount++;
+                }
+            }
+        }
     }
 }
