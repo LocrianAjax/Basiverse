@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Basiverse
 {
+
     class MiningMinigame{
         public Asteroid MiningAsteroid; // Using a default size of 6
         public int Size {get; set;}
@@ -22,7 +23,7 @@ namespace Basiverse
             MiningAsteroid.GenerateTiles();
         }
 
-        public bool StartMinigame(){
+        public void StartMinigame(){
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Clear();
             Console.CursorVisible = false;
@@ -75,8 +76,6 @@ namespace Basiverse
                 }
                 if(input == ConsoleKey.Spacebar){
                     // Damage the tile and change it's version
-                    // TODO: That
-                    // For now just highlight it and remove health
                     HightlightAndDamage(selected);
                 }
 
@@ -85,11 +84,8 @@ namespace Basiverse
                     DrawMiningAssist();
                     AnsiConsole.Cursor.SetPosition(0,3);
                     AnsiConsole.Write("Asteroid disintegration!");
-                    AnsiConsole.Cursor.SetPosition(0,5);
-                    var tmp = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Press any key to continue")
-                    .AllowEmpty());
-                    return false;
+                    EndMinigame();
+                    return;
                 }
             }
         }
@@ -175,7 +171,7 @@ namespace Basiverse
             }
             else{ // Otherwise we have loot
                 AnsiConsole.Clear();
-                AnsiConsole.Markup($"[green]ASTEROID INTEGRITY LOST - RECOVERABLE: [/]");
+                AnsiConsole.MarkupLine($"[green]ASTEROID INTEGRITY LOST - RECOVERABLE: [/]");
                 // Then grab all Cargo of type 7 (Mining Loot)
                 List<Cargo> temp = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data//cargo.bin");
                 int GemsIndex = 0;
@@ -200,25 +196,48 @@ namespace Basiverse
                     count++;
                 }
 
-                List<Cargo> loot = new List<Cargo>();
+                List<Cargo> lootList = new List<Cargo>();
                 var rand = new Random();
-                for(int i = 0; i <= LootCount; i++){ // Set up loot pool
+                for(int i = 0; i < LootCount; i++){ // Set up loot pool
                     int roll = rand.Next(0, 101);
                     if(roll >= 90){ // Gems
-                        loot.Add(temp[GemsIndex]);
+                        if(lootList.Contains(temp[GemsIndex])){
+                            lootList[lootList.IndexOf(temp[GemsIndex])].Count++;
+                        }
+                        else{
+                            lootList.Add(temp[GemsIndex]);
+                        }
                     }
                     else if(roll >= 75 && roll < 90){ // Ores
-                        loot.Add(temp[OresIndex]);
+                        if(lootList.Contains(temp[OresIndex])){
+                            lootList[lootList.IndexOf(temp[OresIndex])].Count++;
+                        }
+                        else{
+                            lootList.Add(temp[GemsIndex]);
+                        }
                     }
                     else if(roll >= 50 && roll < 75){ // Minerals
-                        loot.Add(temp[MineralsIndex]);
+                        if(lootList.Contains(temp[MineralsIndex])){
+                            lootList[lootList.IndexOf(temp[MineralsIndex])].Count++;
+                        }
+                        else{
+                            lootList.Add(temp[MineralsIndex]);
+                        }
                     }
                     else{ // Grit
-                        loot.Add(temp[GritIndex]);
+                        if(lootList.Contains(temp[GritIndex])){
+                            lootList[lootList.IndexOf(temp[GritIndex])].Count++;
+                        }
+                        else{
+                            lootList.Add(temp[GritIndex]);
+                        }
                     }
                 }
-                
+                foreach(Cargo item in lootList){
+                    AnsiConsole.WriteLine($"{item.Name}: {item.Description} VALUE: {item.Cost} x{item.Count}");
+                }
                 // TODO: Add to hold
+                AnsiConsole.Write("H");
             }
         }
     }

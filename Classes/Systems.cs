@@ -221,7 +221,7 @@ namespace Basiverse
     }
     
     [Serializable]
-    class Cargo{ // Cargo has a name, a size in m3, a type and a cost
+    class Cargo{ // Cargo has a name, a size in m3, a type, a count and a cost
         private string _name = "";
         public string Name{ get {return _name; } set {_name = value;}}
 
@@ -239,6 +239,9 @@ namespace Basiverse
 
         private double _adjustedPrice = 0;
         public double AdjustedPrice{ get {return _adjustedPrice; } set {_adjustedPrice = value;}}
+
+        private int _count = 1;
+        public int Count{ get {return _count; } set {_count = value;}}
     
         public Cargo(string inName, int inSize, double inCost, int inType, string inDescription){
             _name = inName;

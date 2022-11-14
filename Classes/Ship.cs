@@ -220,32 +220,42 @@ namespace Basiverse
             }
         }
 
-        public int AddCargo(Cargo incoming, int amount){
-            if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
-                return -1; // Return if it can't fit
+        public bool AddCargo(Cargo incoming, int amount){
+            if(CheckCargo(incoming, amount)){ // Check size
+                return false; // Return if it can't fit
             }
             else{
                 for(int i = 0; i < amount; i++){
                     _hold.CurrentSize = _hold.CurrentSize + incoming.Size;
-                    CargoHold.Add(incoming);
+                    if(CargoHold.Contains(incoming)){
+                        CargoHold[CargoHold.IndexOf(incoming)].Count++;
+                    }
+                    else{
+                        CargoHold.Add(incoming);
+                    }
                 }
-                return 1; // Otherwise return 1 for success
+                return true; // Otherwise return 1 for success
             }
         }
 
         public void RemoveCargo(Cargo inCargo, int amount){ // This assumes that the amount you are removing exists
             for(int i = 0; i < amount; i++){
-                CargoHold.Remove(inCargo);
+                if(CargoHold[CargoHold.IndexOf(inCargo)].Count > 1){
+                    CargoHold[CargoHold.IndexOf(inCargo)].Count--;
+                }
+                else{
+                    CargoHold.Remove(inCargo);
+                }
                 _hold.CurrentSize -= inCargo.Size;
             }
         }
 
-        public int CheckCargo(Cargo incoming, int amount){
+        public bool CheckCargo(Cargo incoming, int amount){
             if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
-                return -1; // Return if it can't fit
+                return false; // Return false if it can't fit
             }
             else{
-                return 1; // Otherwise return 1 for a fit
+                return true; // Otherwise return true for a fit
             }
         }
 

@@ -676,7 +676,7 @@ namespace Basiverse{
             foreach(Cargo item in inPlayer.PShip.CargoHold){
                 if(StationBuyList.Contains(item.Type)){
                     SellOpts += item.Name + "|";
-                    ToSell.AddRow($"{item.Name}", $"{item.AdjustedPrice}");
+                    ToSell.AddRow($"{item.Name}", $"{item.AdjustedPrice}", $"{item.Count}");
                 }
             }
             SellOpts += "Return";

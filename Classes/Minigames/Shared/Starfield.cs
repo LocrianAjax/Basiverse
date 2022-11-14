@@ -32,6 +32,10 @@ namespace Basiverse{
                 Coords temp = new Coords();
                 temp.x = rand.Next(0, Console.WindowWidth);
                 temp.y = rand.Next(0, Console.WindowHeight);
+                // Check and clear the area where the info lines are
+                if(temp.y <= 2 && temp.x <= 40){
+                    temp.x += 40; 
+                }
                 temp.star = opts[opt];
                 starLocs.Add(temp);
             }

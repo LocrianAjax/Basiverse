@@ -51,7 +51,7 @@ namespace Basiverse
                 else if((amount * inCargo.AdjustedPrice) > Money){
                     AnsiConsole.WriteLine("Please select an amount you can afford");
                 }
-                else if(PShip.CheckCargo(inCargo, amount) == -1){
+                else if(PShip.CheckCargo(inCargo, amount)){
                     AnsiConsole.WriteLine("Please select an amount that fits in your hold");
                 }
                 else{
