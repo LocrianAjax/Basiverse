@@ -23,7 +23,7 @@ namespace Basiverse
             MiningAsteroid.GenerateTiles();
         }
 
-        public void StartMinigame(){
+        public void StartMinigame(Player inPlayer){
             AnsiConsole.Cursor.Hide();
             AnsiConsole.Clear();
             Console.CursorVisible = false;
@@ -84,7 +84,7 @@ namespace Basiverse
                     DrawMiningAssist();
                     AnsiConsole.Cursor.SetPosition(0,3);
                     AnsiConsole.Write("Asteroid disintegration!");
-                    EndMinigame();
+                    EndMinigame(inPlayer);
                     return;
                 }
             }
@@ -152,7 +152,7 @@ namespace Basiverse
             }
         }
 
-        public void EndMinigame(){
+        public void EndMinigame(Player inPlayer){
             int LootCount = 0;
             // Figure out how many tiles contain loot
             foreach(Tile tile in MiningAsteroid.Tiles){
@@ -163,16 +163,13 @@ namespace Basiverse
             
             if(LootCount == 0){ // Check for 0 loot
                 AnsiConsole.Clear();
-                AnsiConsole.Markup($"[red]ASTEROID INTEGRITY LOST - NOTHING RECOVERABLE[/]");
+                AnsiConsole.MarkupLine($"[red]ASTEROID INTEGRITY LOST - NOTHING RECOVERABLE[/]");
                 var tmp = AnsiConsole.Prompt(
                 new TextPrompt<string>("Press any key to continue.....")
                 .AllowEmpty());
                 return;
             }
             else{ // Otherwise we have loot
-                AnsiConsole.Clear();
-                AnsiConsole.MarkupLine($"[green]ASTEROID INTEGRITY LOST - RECOVERABLE: [/]");
-                // Then grab all Cargo of type 7 (Mining Loot)
                 List<Cargo> temp = BinarySerialization.ReadFromBinaryFile<List<Cargo>>("Data//cargo.bin");
                 int GemsIndex = 0;
                 int OresIndex = 0;
@@ -233,11 +230,58 @@ namespace Basiverse
                         }
                     }
                 }
-                foreach(Cargo item in lootList){
-                    AnsiConsole.WriteLine($"{item.Name}: {item.Description} VALUE: {item.Cost} x{item.Count}");
+               
+                
+                while(true){
+                    AnsiConsole.Clear();
+                    AnsiConsole.MarkupLine($"[green]ASTEROID INTEGRITY LOST - RECOVERABLE: [/]");
+
+                    foreach(Cargo item in lootList){
+                        AnsiConsole.WriteLine($"{item.Name}: {item.Description} VALUE: {item.Cost} SIZE: {item.Size}m^3 (x){item.Count}");
+                    }
+                    AnsiConsole.WriteLine($"AVAILABLE CARGO SPACE: {inPlayer.PShip.Hold.Available()}m^3");
+
+                    string innerOpts = "";
+                    foreach(Cargo item in lootList){
+                        innerOpts += $"{item.Name}|";
+                    }
+                    innerOpts += "Dump|Exit";
+                    string[] options = innerOpts.Split("|");
+
+                    string selection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("Pick up Loot?")
+                    .PageSize(options.Length + 1)
+                    .AddChoices(options));
+                    
+                    if(selection == "Dump"){
+                        inPlayer.PShip.DumpCargo();
+                    }
+                    else if(selection == "Exit"){
+                        return;
+                    }
+                    else{
+                        Cargo tempCargo = new Cargo();
+                        foreach(Cargo item in lootList){
+                            if(item.Name == selection){
+                                tempCargo = item;
+                                break;
+                            }
+                        }
+                        if(inPlayer.PShip.CheckCargo(lootList[lootList.IndexOf(tempCargo)], 1)){
+                            inPlayer.PShip.AddCargo(tempCargo, 1);
+                            if(lootList[lootList.IndexOf(tempCargo)].Count > 1){
+                                lootList[lootList.IndexOf(tempCargo)].Count--;
+                            }
+                            else{
+                                lootList.Remove(tempCargo);
+                            }
+                        }
+                        else{
+                            AnsiConsole.WriteLine("[red]Does not fit! Please free up some space[/]");
+                        }
+                    }
                 }
-                // TODO: Add to hold
-                AnsiConsole.Write("H");
             }
         }
     }

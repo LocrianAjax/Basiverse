@@ -92,7 +92,7 @@ namespace Basiverse
             Player mainPlayer = new Player(); // Create our new player and ship
             mainPlayer.Money += 100;
             mainPlayer.PShip = new Ship();
-            mainPlayer.Name = AnsiConsole.Ask<string>("Please enter your name:"); 
+            mainPlayer.Name = AnsiConsole.Ask<string>("Welcome USER, please enter your identifier:"); 
             AnsiConsole.Markup("Welcome {0}", mainPlayer.Name);
             System.Threading.Thread.Sleep(1000);
 
@@ -258,7 +258,9 @@ namespace Basiverse
 
         static void TestMining(){
             MiningMinigame tester = new MiningMinigame(6);
-            tester.StartMinigame();
+            Player TestPlayer = new Player();
+            TestPlayer.PShip = new Ship();
+            tester.StartMinigame(TestPlayer);
         }
 
         static void Startup(){

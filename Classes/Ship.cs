@@ -222,9 +222,6 @@ namespace Basiverse
 
         public bool AddCargo(Cargo incoming, int amount){
             if(CheckCargo(incoming, amount)){ // Check size
-                return false; // Return if it can't fit
-            }
-            else{
                 for(int i = 0; i < amount; i++){
                     _hold.CurrentSize = _hold.CurrentSize + incoming.Size;
                     if(CargoHold.Contains(incoming)){
@@ -235,6 +232,9 @@ namespace Basiverse
                     }
                 }
                 return true; // Otherwise return 1 for success
+            }
+            else{
+                return false; // Return if it can't fit
             }
         }
 
@@ -259,8 +259,55 @@ namespace Basiverse
             }
         }
 
-        public bool Rename(string newName){
+        public void DumpCargo(){
+            string options = "";
+            foreach(Cargo item in CargoHold){
+                 options += item.Name + "|";
+            }
+            options += "Return";
+            string[] DumpOpts = options.Split('|');
+            int length = DumpOpts.Length + 1;
+            if(length < 3){ length = 3;}
 
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Dump which item?")
+                .PageSize(length)
+                .AddChoices(DumpOpts));
+
+            if(selection == "Return"){
+                return;
+            } 
+            else{
+                Cargo tempCargo = new Cargo();
+                foreach(Cargo item in CargoHold){
+                    if(item.Name == selection){
+                        tempCargo = item;
+                        break;
+                    }
+                }
+                while(true){
+                    AnsiConsole.WriteLine($"You have {tempCargo.Count} {tempCargo.Name} in the hold");
+                    int dumpAmount = AnsiConsole.Ask<int>("How many would you like to dump?: ");
+                    if(dumpAmount == 0){
+                        return;
+                    }
+                    if(dumpAmount > tempCargo.Count){
+                        AnsiConsole.WriteLine("Cannot dump more than you have");
+                    }
+                    if(dumpAmount < 0){
+                        AnsiConsole.WriteLine("Cannot dump a negftive amount");
+                    }
+                    else{
+                        RemoveCargo(tempCargo, dumpAmount);
+                        return;
+                    }
+                }
+
+            }
+        }
+
+        public bool Rename(string newName){
             if(String.IsNullOrEmpty(newName) || String.IsNullOrWhiteSpace(newName)){
                 return false; // Return false if there's no name
             }

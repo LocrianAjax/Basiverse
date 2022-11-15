@@ -288,13 +288,12 @@ namespace Basiverse{
 
             Table ShipInfo = new Table();
             ShipInfo.AddColumn("SHIP MANIFEST");
-            ShipInfo.AddRow($"Name: {inPlayer.PShip.Shield.Name} Cost: {inPlayer.PShip.Shield.Cost}");
-            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Armor.Name} Cost: {inPlayer.PShip.Armor.Cost}"));
-            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Heatsink.Name} Cost: {inPlayer.PShip.Heatsink.Cost}"));
-            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
-            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
-            ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
-            
+            ShipInfo.AddRow($"SHIELD: {inPlayer.PShip.Shield.Name}");
+            ShipInfo.AddRow(new Markup($"ARMOR: {inPlayer.PShip.Armor.Name}"));
+            ShipInfo.AddRow(new Markup($"HEATSINK: {inPlayer.PShip.Heatsink.Name}"));
+            ShipInfo.AddRow(new Markup($"ENGINE: {inPlayer.PShip.Engine.Name}"));
+            ShipInfo.AddRow(new Markup($"LASERS: {inPlayer.PShip.Laser.Name}"));
+            ShipInfo.AddRow(new Markup($"MISSILES: {inPlayer.PShip.Missile.Name}"));         
 
             // Ship info
             Table ShipScreen = new Table();
@@ -308,7 +307,6 @@ namespace Basiverse{
             if(inPlayer.PShip.CargoHold != null){
                 CargoScreen.AddColumns("ITEM","COST", "SIZE");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
-
                     CargoScreen.AddRow($"Name: {item.Name}", $"Cost: {item.Cost}", $"Size: {item.Size}");
                 }
             }

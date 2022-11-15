@@ -139,6 +139,9 @@ namespace Basiverse{
                         choices += "Dock|";
                         break;
                     }
+                    if(temp.Name == "Mineable Asteroids"){
+                        choices += "Mine|";
+                    }
                 }
             }
 
@@ -164,7 +167,16 @@ namespace Basiverse{
                 case "Dock":
                     DockMenu();
                 break;
+                case "Mine":
+                    MiningMenu();
+                break;
             }
+        }
+
+        private void MiningMenu(){
+            MiningMinigame NewGame = new MiningMinigame();
+            NewGame.StartMinigame(mainPlayer);
+            Start();
         }
 
         private void JumpMenu(){

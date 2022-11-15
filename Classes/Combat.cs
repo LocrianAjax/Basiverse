@@ -10,7 +10,50 @@ namespace Basiverse
     [Serializable]
     class Combat{ // A combat contains an NPC and then classes that take in a player
         public NPC NPC;
+        private string[] DisplayShipLines = {
+        "   __",
+        "  |  \\",
+        "=}    `--._____",
+        "=}   ,---------'-",
+        "  |_/"
+        };
+
+        private string[] DispayShipLinesWithShield = {
+        "[cyan]         , ~ ~ ~ ,[/]",
+        "[cyan]     , '           ' ,[/]",
+        "[cyan]   ,                   ,[/]",
+        "[cyan]  ,[/]       __             [cyan],[/]",
+        "[cyan] ,[/]       |  \\             [cyan],[/]",
+        "[cyan] ,[/]      =}    `--._____    [cyan],[/]",
+        "[cyan] ,[/]      =}  ,---------'-   [cyan],[/]",
+        "[cyan]  ,[/]      |_/              [cyan],[/]",
+        "[cyan]   ,                     ,[/]",
+        "[cyan]     ,                 ,'[/]",
+        "[cyan]       ' - , _ _ _  , '[/]"    
+        };
     
+        private string[] DisplayShipLinesOpp = {
+        "            __",
+        "           /  |",
+        "  _____.--`   {=",
+        "-'---------,  {=",
+        "            \\_|"
+        };
+
+        private string[] DispayShipLinesWithShieldOpp = {
+        "[cyan]         , ~ ~ ~ ,[/]",
+        "[cyan]     , '           ' ,[/]",
+        "[cyan]   ,                   ,[/]",
+        "[cyan]  ,[/]             __       [cyan],[/]",
+        "[cyan] ,[/]             /  |        [cyan],[/]",
+        "[cyan] ,[/]    _____.--`    {=      [cyan],[/]",
+        "[cyan] ,[/]  -'---------,   {=      [cyan],[/]",
+        "[cyan]  ,[/]             \\_|       [cyan],[/]",
+        "[cyan]   ,                     ,[/]",
+        "[cyan]     ,                 ,'[/]",
+        "[cyan]       ' - , _ _ _  , '[/]"    
+        };
+
         public Combat(int difficulty, int NPCAttitude){ // Generates a new combat with the specified difficulty and a specific attitude
             var rand = new Random();
             Generator CombatGen = new Generator();
@@ -60,14 +103,6 @@ namespace Basiverse
         }
 
         public void CombatScreen(Player inPlayer){
-            /*
-                   __
-                  |  \
-                =}[   `--._____
-                =}[  ,---------'-
-                  |_/
-            */
-            
             // Create main table
             Table MainTable = new Table();
 
@@ -125,6 +160,17 @@ namespace Basiverse
             ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.Laser.Damage} Heat Generation {inPlayer.PShip.Laser.Heat}");
             ShipReport.AddRow($"Missiles Damage {inPlayer.PShip.Missile.Damage} Hit Chance {inPlayer.PShip.Missile.HitChance * 100}% Stock {inPlayer.PShip.Missile.Stock}");
             
+            if(inPlayer.PShip.Shield.IsOnline){
+                foreach(string line in DispayShipLinesWithShield){
+                    ShipReport.AddRow(line);
+                }
+            }
+            else{
+                foreach(string line in DisplayShipLines){
+                    ShipReport.AddRow(line);
+                }
+            }
+            
 
             // Enemy data
             Table EnemyReport = new Table();
@@ -154,6 +200,17 @@ namespace Basiverse
             }
             else{
                 EnemyReport.AddRow(new Markup($"Hull Integrity: [yellow]{enemyHullSw}[/]%"));
+            }
+            
+            if(NPC.cShip.Shield.IsOnline){
+                foreach(string line in DispayShipLinesWithShieldOpp){
+                    EnemyReport.AddRow(line);
+                }
+            }
+            else{
+                foreach(string line in DisplayShipLinesOpp){
+                    EnemyReport.AddRow(line);
+                }
             }
 
             MainTable.AddColumns("SHIP DATA", "COMBAT SENSORS");

@@ -218,6 +218,10 @@ namespace Basiverse
         public CargoHold(){
 
         }
+
+        public int Available(){
+            return _maxSize - _currSize;
+        }
     }
     
     [Serializable]
