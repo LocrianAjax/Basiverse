@@ -8,25 +8,35 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Tool setup'
 
 - task: NuGetCommand@2
+  displayName: 'Dotnet Restore'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Dotnet Build'
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- powershell: Get-ChildItem -Recurse
-
 - task: PowerShell@2
+  displayName: 'Pack for Release'
   inputs:
-    filePath: 'Tools\Release.ps1'
-    arguments: $(Build.BuildNumber)
+    targetType: 'inline'
+    script: |
+      # Copy all to a release folder
+      mkdir Release
+      Copy-Item -Path "bin\Any CPU\Release\net6.0\*" -Destination "Release"
+      Copy-Item -Path "Data" -Destination "Release" -Recurse
+
+      # Compress and rename
+      Compress-Archive -Path "Release\*" -DestinationPath "$(Build.BuildNumber).zip"
 
 - task: PublishPipelineArtifact@1
+  displayName: 'Publish'
   inputs:
     targetPath: '$(Build.BuildNumber).zip'
     artifactType: 'pipeline'

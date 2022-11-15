@@ -7,6 +7,9 @@ param(
      [string]$Version = "TestRelease"
  )
 
+# Build Solution
+dotnet build
+
 # Copy all to a release folder
 mkdir Release
 Copy-Item -Path "bin\Release\net6.0\*" -Destination "Release"

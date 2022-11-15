@@ -13,12 +13,15 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Tool setup'
 
 - task: NuGetCommand@2
+  displayName: 'Dotnet Restore'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Dotnet Build'
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
