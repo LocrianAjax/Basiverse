@@ -220,37 +220,94 @@ namespace Basiverse
             }
         }
 
-        public int AddCargo(Cargo incoming, int amount){
-            if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
-                return -1; // Return if it can't fit
-            }
-            else{
+        public bool AddCargo(Cargo incoming, int amount){
+            if(CheckCargo(incoming, amount)){ // Check size
                 for(int i = 0; i < amount; i++){
                     _hold.CurrentSize = _hold.CurrentSize + incoming.Size;
-                    CargoHold.Add(incoming);
+                    if(CargoHold.Contains(incoming)){
+                        CargoHold[CargoHold.IndexOf(incoming)].Count++;
+                    }
+                    else{
+                        CargoHold.Add(incoming);
+                    }
                 }
-                return 1; // Otherwise return 1 for success
+                return true; // Otherwise return 1 for success
+            }
+            else{
+                return false; // Return if it can't fit
             }
         }
 
         public void RemoveCargo(Cargo inCargo, int amount){ // This assumes that the amount you are removing exists
             for(int i = 0; i < amount; i++){
-                CargoHold.Remove(inCargo);
+                if(CargoHold[CargoHold.IndexOf(inCargo)].Count > 1){
+                    CargoHold[CargoHold.IndexOf(inCargo)].Count--;
+                }
+                else{
+                    CargoHold.Remove(inCargo);
+                }
                 _hold.CurrentSize -= inCargo.Size;
             }
         }
 
-        public int CheckCargo(Cargo incoming, int amount){
+        public bool CheckCargo(Cargo incoming, int amount){
             if((_hold.CurrentSize == _hold.MaxSize) || (((_hold.CurrentSize + incoming.Size) * amount) > _hold.MaxSize)){ // Check size
-                return -1; // Return if it can't fit
+                return false; // Return false if it can't fit
             }
             else{
-                return 1; // Otherwise return 1 for a fit
+                return true; // Otherwise return true for a fit
+            }
+        }
+
+        public void DumpCargo(){
+            string options = "";
+            foreach(Cargo item in CargoHold){
+                 options += item.Name + "|";
+            }
+            options += "Return";
+            string[] DumpOpts = options.Split('|');
+            int length = DumpOpts.Length + 1;
+            if(length < 3){ length = 3;}
+
+            string selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Dump which item?")
+                .PageSize(length)
+                .AddChoices(DumpOpts));
+
+            if(selection == "Return"){
+                return;
+            } 
+            else{
+                Cargo tempCargo = new Cargo();
+                foreach(Cargo item in CargoHold){
+                    if(item.Name == selection){
+                        tempCargo = item;
+                        break;
+                    }
+                }
+                while(true){
+                    AnsiConsole.WriteLine($"You have {tempCargo.Count} {tempCargo.Name} in the hold");
+                    int dumpAmount = AnsiConsole.Ask<int>("How many would you like to dump?: ");
+                    if(dumpAmount == 0){
+                        return;
+                    }
+                    if(dumpAmount > tempCargo.Count){
+                        AnsiConsole.WriteLine("Cannot dump more than you have");
+                    }
+                    if(dumpAmount < 0){
+                        AnsiConsole.WriteLine("Cannot dump a negftive amount");
+                    }
+                    else{
+                        RemoveCargo(tempCargo, dumpAmount);
+                        return;
+                    }
+                }
+
             }
         }
 
         public bool Rename(string newName){
-
             if(String.IsNullOrEmpty(newName) || String.IsNullOrWhiteSpace(newName)){
                 return false; // Return false if there's no name
             }
