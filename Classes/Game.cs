@@ -73,14 +73,14 @@ namespace Basiverse{
             // Add rows for Hull/Heat/Shield
             // Shield Status
              if(mainPlayer.PShip.Shield.IsOnline){
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor}]{mainPlayer.PShip.ShieldVal()}[/]%"));
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor()}]{mainPlayer.PShip.ShieldVal()}[/]%"));
             }
             else{
                 StatusScreen.AddRow(new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
 
-            // Hull Status
-            StatusScreen.AddRow(new Markup($"Hull Integrity: [{mainPlayer.PShip.HullVal()}]{mainPlayer.PShip.Hull.GetHullColor()}[/]%"));
+            // Hull Status 
+            StatusScreen.AddRow(new Markup($"Hull Integrity: [{mainPlayer.PShip.Hull.GetHullColor()}]{mainPlayer.PShip.HullVal()}[/]%"));
 
             // Heat Status
             StatusScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{mainPlayer.PShip.Heatsink.GetHeatColor(mainPlayer.PShip.HeatVal())}]{mainPlayer.PShip.HeatVal()}[/]%"));
@@ -284,7 +284,7 @@ namespace Basiverse{
             }
 
             // Hull Status
-            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Hull Integrity: [{mainPlayer.PShip.HullVal()}]{mainPlayer.PShip.Hull.GetHullColor()}[/]%"));
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Hull Integrity: [{mainPlayer.PShip.Hull.GetHullColor()}]{mainPlayer.PShip.HullVal()}[/]%"));
             
             // Armor Data
             if(mainPlayer.PShip.Armor.Name != "None"){
