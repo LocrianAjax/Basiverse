@@ -66,7 +66,7 @@ namespace Basiverse
             AnsiConsole.Cursor.SetPosition(0,1); // Reset to the top row
             AnsiConsole.Markup($"[green]DOCKING ASSIST ONLINE -  REMAINING FUEL: {Fuel}u[/]");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
-            AnsiConsole.Write("                                           ");
+            AnsiConsole.Write("                                              ");
             AnsiConsole.Cursor.SetPosition(0,2); // Reset to the top row
             AnsiConsole.Markup($"[green]RELATIVE SPEEDS - YAW SPEED: {DockingCrosshair.InertiaX}m/s PITCH SPEED: {DockingCrosshair.InertiaY}m/s[/]");
         }
