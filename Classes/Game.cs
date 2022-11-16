@@ -69,46 +69,21 @@ namespace Basiverse{
             // Add data for status table
             Table StatusScreen = new Table();
             StatusScreen.AddColumn(mainPlayer.PShip.Name);
-            // Add rows for Hull/Heat/Shield
 
+            // Add rows for Hull/Heat/Shield
             // Shield Status
-            double shieldSw = Math.Floor(mainPlayer.PShip.ShieldVal());
-            if( shieldSw >= 75){
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [green]{shieldSw}[/]%"));
+             if(mainPlayer.PShip.Shield.IsOnline){
+                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor()}]{mainPlayer.PShip.ShieldVal()}[/]%"));
             }
-            else if(shieldSw < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [yellow]{shieldSw}[/]%"));
-            }
-            else if(shieldSw == 0){
+            else{
                 StatusScreen.AddRow(new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
-            else{
-                StatusScreen.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [darkorange]{shieldSw}[/]%"));
-            }
 
-            // Hull Status
-            double hullSw = Math.Floor(mainPlayer.PShip.HullVal());
-            if(hullSw >= 75){
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [green]{hullSw}[/]%"));
-            }
-            else if (hullSw <= 25){
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [red]{hullSw}[/]%"));
-            }
-            else{
-                StatusScreen.AddRow(new Markup($"Hull Integrity: [yellow]{hullSw}[/]%"));
-            }
+            // Hull Status 
+            StatusScreen.AddRow(new Markup($"Hull Integrity: [{mainPlayer.PShip.Hull.GetHullColor()}]{mainPlayer.PShip.HullVal()}[/]%"));
 
             // Heat Status
-            double heatSw = Math.Floor(mainPlayer.PShip.HeatVal());
-            if(heatSw <= 25){
-                StatusScreen.AddRow(new Markup($"Heat Soak - [green]{heatSw}[/]%"));
-            }
-            else if(heatSw <= 75 && heatSw > 25){
-                StatusScreen.AddRow(new Markup($"Heat Soak - [yellow]{heatSw}[/]%"));
-            }
-            else{
-                StatusScreen.AddRow(new Markup($"Heat Soak - [red]{heatSw}[/]%"));
-            }
+            StatusScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{mainPlayer.PShip.Heatsink.GetHeatColor(mainPlayer.PShip.HeatVal())}]{mainPlayer.PShip.HeatVal()}[/]%"));
 
             // Add data for nearby table
             Table NearbyScreen = new Table();
@@ -301,31 +276,15 @@ namespace Basiverse{
             */
             ReportScreen.AddRow($"Bank Account",$"{mainPlayer.Money}");
             // Shield Status
-            double shieldSw = Math.Floor(mainPlayer.PShip.ShieldVal());
-            if(shieldSw >= 75){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [green]{shieldSw}[/]%"));
-            }
-            else if(shieldSw < 75 && mainPlayer.PShip.ShieldVal() > 25 ){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [yellow]{shieldSw}[/]%"));
-            }
-            else if(shieldSw == 0){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[red][rapidblink]OFFLINE[/][/]"));
+            if(mainPlayer.PShip.Shield.IsOnline){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor}]{mainPlayer.PShip.ShieldVal()}[/]%"));
             }
             else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"[cyan]ONLINE[/] - Strength: [darkorange]{shieldSw}[/]%"));
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
 
             // Hull Status
-            double hullSw = Math.Floor(mainPlayer.PShip.HullVal());
-            if(hullSw >= 75){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [green]{hullSw}[/]%"));
-            }
-            else if (hullSw <= 25){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [red]{hullSw}[/]%"));
-            }
-            else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Integrity: [yellow]{hullSw}[/]%"));
-            }
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Hull.Name}"), new Markup($"Hull Integrity: [{mainPlayer.PShip.Hull.GetHullColor()}]{mainPlayer.PShip.HullVal()}[/]%"));
             
             // Armor Data
             if(mainPlayer.PShip.Armor.Name != "None"){
@@ -336,22 +295,8 @@ namespace Basiverse{
             }
 
             // Heat Status
-            string OnlineStat;
-            if(mainPlayer.PShip.Heatsink.IsActive){
-                OnlineStat = "[green]Active Cooling[/]";
-            }
-            else{
-                OnlineStat = "[red]Passive Cooling[/]";
-            }
-            if(mainPlayer.PShip.HeatVal() <= 25){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [green]{mainPlayer.PShip.HeatVal()}[/]%"));
-            }
-            else if(mainPlayer.PShip.HeatVal() <= 75 && mainPlayer.PShip.HeatVal() > 25){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [yellow]{mainPlayer.PShip.HeatVal()}[/]%"));
-            }
-            else{
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{OnlineStat} Heat Soak - [red]{mainPlayer.PShip.HeatVal()}[/]%"));
-            }
+            ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{mainPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{mainPlayer.PShip.Heatsink.GetHeatColor(mainPlayer.PShip.HeatVal())}]{mainPlayer.PShip.HeatVal()}[/]%"));
+
 
             // Engine Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Engine.Name}"), new Markup($"Flee Chance: {mainPlayer.PShip.Engine.FleeChance * 100}%"));

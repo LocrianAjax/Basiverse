@@ -34,6 +34,19 @@ namespace Basiverse
 
         }
 
+        public string GetHullColor(){
+            double hullSw = Math.Floor(_hullval);
+            if(hullSw >= 75){
+                return "green";
+            }
+            else if (hullSw <= 25){
+                return "red";
+            }
+            else{
+                return "yellow";
+            }
+        }
+
     }
 
     [Serializable]
@@ -85,6 +98,29 @@ namespace Basiverse
         public Heatsink(){
 
         }
+
+        public string GetOnlineStr(){
+            if (_isactive){
+
+                return "[green]Active Cooling[/]";
+            }
+            else{
+                return "[red]Passive Cooling[/]";
+            }
+        }
+
+        public string GetHeatColor(double HeatVal){
+            double heatSw = Math.Floor(HeatVal);
+            if(heatSw <= 25){
+                return "green";
+            }
+            else if(heatSw <= 75 && heatSw > 25){
+                return "yellow";
+            }
+            else{
+                return "red";
+            }
+        }
     }
     
     [Serializable]
@@ -124,6 +160,22 @@ namespace Basiverse
             }
             else{
                 return;
+            }
+        }
+
+        public string GetShieldColor(){ 
+            double shieldSw = Math.Floor(_shieldval);
+            if( shieldSw >= 75){
+                return "green";
+            }
+            else if(shieldSw < 75 && shieldSw > 25 ){
+                return "yellow";
+            }
+            else if(shieldSw == 0){
+                return "red";
+            }
+            else{
+                return "darkorange";
             }
         }
     }

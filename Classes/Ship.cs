@@ -163,15 +163,15 @@ namespace Basiverse
         }
 
         public double HullVal(){
-            return _hull.Health();
+            return Math.Floor(_hull.Health());
         }
 
         public double HeatVal(){
-            return HeatPercentage();
+            return Math.Floor(HeatPercentage());
         }
 
         public double ShieldVal(){
-            return _shield.Health();
+            return Math.Floor(_shield.Health());
         }
     
         public void TakeDamage(int damage){ // Deals the damage to the ship's hull and/or shields
