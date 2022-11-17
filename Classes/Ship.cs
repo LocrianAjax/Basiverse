@@ -138,28 +138,41 @@ namespace Basiverse
         }
 
         public void CombatPassive(bool verbose){ // Calls the passive functions that happen each round.
-            double res = CheckHeat();
-            if((res == 1) && verbose){
+            if(CheckHeat() && verbose){
                 AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
             }
             _shield.Regen();
         }
 
-        public double CheckHeat(){ // Checks heat and deals damage to the hull
+        public void TravelPassive(){
+            if(CheckHeat()){
+                AnsiConsole.MarkupLine("[red]Warning! Excessive heat levels are damaging the hull![/]");
+            }
+            if(!_shield.IsOnline){
+                RestartShields(false);
+            }
+            else{
+                _shield.Regen();
+            }
+        }
+
+        public bool CheckHeat(){ // Checks heat and deals damage to the hull
             if(_heatsink.IsActive && (_heat > _heatsink.ActiveVal)){
                 _heat -= _heatsink.ActiveVal;
                 _heatsink.IsActive = false; // Turn it back off it it's on
             }
-            else if(!_heatsink.IsActive && (_heat > _heatsink.PassiveVal)){
+            else if(!_heatsink.IsActive){
                 _heat -= _heatsink.PassiveVal;
             }
 
             if(_heat > _hull.HeatMax){
                 double heatDamage = _heat - _hull.HeatMax; // Damage is equal to the damage amount over the hull's max
                _hull.Hullval -= heatDamage;
-               return 1; // Return 1 for damage
+               return true; // Return 1 for damage
             }
-            return 0; // Return 0 for safe range
+
+            if(_heat < 0){ _heat = 0; } // Make sure we don't drop below 0
+            return false; // Return 0 for safe range
         }
 
         public double HullVal(){
@@ -196,6 +209,15 @@ namespace Basiverse
             _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .2); // Round it down to the nearest whole number
             if(verbose){
                 AnsiConsole.WriteLine($"Shields Back Online at {_shield.Health()}%");
+            }
+        }
+
+        public void OverloadShield(bool verbose){ // Boosts the shield value at the expense of heat
+            _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .2); // Round it down to the nearest whole number
+            _heat += (int)Math.Floor(_shield.ShieldVal * .2);
+
+            if(verbose){
+                AnsiConsole.WriteLine($"Overloaded shield! Routing extra coolant to shield system");
             }
         }
 

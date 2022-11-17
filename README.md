@@ -24,7 +24,17 @@ Combat with scaling money rewards
 
 4 Different NPC combat attitudes - Default, Defensive, Aggressive, Coward
 
+Intro screens for the game and on startup
+
+Minigame for mining
+
+UI Tweaks for readability
+
+"Manual" for various things
+
 TODO:
+
+Variable asteroid sizes and health values
 
 Error Handling
 
@@ -32,18 +42,8 @@ NPCs and NPC Locations
 
 Actual gameplay(Important!)
 
-Intro screens for the game and on startup
-
-Minigame for mining
-
 Fee to auto-dock?
 
 Add Lore data in text files
 
-UI Tweaks for readability
-
-Move to weapons class and then :-
-
-    Lasers: Extra shield damage and reduced hull damage
-
-    Missiles: Reduced shield damage and extra hull damage
+Add more system types for combat and non-combat use

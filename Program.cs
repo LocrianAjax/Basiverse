@@ -33,7 +33,7 @@ namespace Basiverse
                 if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
                     choices += "Debug|";
                 }
-                choices += "Settings|Quit";
+                choices += "Manual|Settings|Quit";
                 // Then split on | to create dynamic menu
                 string[] options = choices.Split('|');
                 string selection = AnsiConsole.Prompt(
@@ -58,8 +58,17 @@ namespace Basiverse
                     case "Settings":
                         SettingsMenu();
                     break;
+                    case "Manual":
+                        ManualMenu();
+                    break;
                 }
             }
+        }
+
+        static void ManualMenu(){
+            Manual MainMenu = new Manual();
+            MainMenu.Load("Data//Manuals//main.data");
+            MainMenu.Display();
         }
 
         static void SettingsMenu(){
@@ -182,7 +191,7 @@ namespace Basiverse
             DebugMenu();
         }
 
-        static void TestNPCCreation(){
+        static void TestNPCCreation(){ // This is gross debug functionality, don't look at this please
             Generator testGen = new Generator();
             NPC testNPC1 = testGen.GenerateCombatNPC("Tester", 1, 1);
             AnsiConsole.WriteLine("Test 1 Info");
@@ -282,10 +291,10 @@ namespace Basiverse
                         AnsiConsole.Markup("The directory was created successfully at {0}.", Directory.GetCreationTime(loc));
 
                     }
-                    Thread.Sleep(500);
-            });
+                });
             }
             catch (Exception e){
+                AnsiConsole.WriteLine($"[red]Error during initialization: [/]");
                 AnsiConsole.WriteException(e);
             }
         }

@@ -167,8 +167,6 @@ namespace Basiverse{
         public string GetStartupLines(){
             return System.IO.File.ReadAllText("Data//Lore//startup.txt");
         }
-
-
     }
 
 }
