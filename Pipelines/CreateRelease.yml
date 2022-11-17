@@ -6,6 +6,17 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+parameters:
+  - name: ReleaseName
+    displayName: Release Name
+    type: string
+    default: Beta
+    
+  - name: ReleaseNumber
+    displayName: Release Number
+    type: number
+    default: 0.01
+
 steps:
 - task: NuGetToolInstaller@1
   displayName: 'Tool setup'
@@ -33,11 +44,11 @@ steps:
       Copy-Item -Path "Data" -Destination "Release" -Recurse
 
       # Compress and rename
-      Compress-Archive -Path "Release\*" -DestinationPath "$(Build.BuildNumber).zip"
+      Compress-Archive -Path "Release\*" -DestinationPath "${{ parameters.ReleaseName }}${{ parameters.ReleaseNumber }}.zip"
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish'
+  displayName: 'Publish Release'
   inputs:
-    targetPath: '$(Build.BuildNumber).zip'
+    targetPath: '${{ parameters.ReleaseName }}${{ parameters.ReleaseNumber }}.zip'
     artifactType: 'pipeline'
     artifactName: 'Release'
