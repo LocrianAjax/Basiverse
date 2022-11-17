@@ -33,11 +33,11 @@ steps:
       Copy-Item -Path "Data" -Destination "Release" -Recurse
 
       # Compress and rename
-      Compress-Archive -Path "Release\*" -DestinationPath "$(Build.BuildNumber).zip"
+      Compress-Archive -Path "Release\*" -DestinationPath "${env:RELEASE_NAME}.zip"
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish'
+  displayName: 'Publish Release'
   inputs:
-    targetPath: '$(Build.BuildNumber).zip'
+    targetPath: '${env:RELEASE_NAME}.zip'
     artifactType: 'pipeline'
     artifactName: 'Release'
