@@ -740,7 +740,7 @@ namespace Basiverse{
         
         public void GoblinKing(){
             AnsiConsole.Clear();
-            var image = new CanvasImage("//Data//david-bowie-labyrinth.jpg");
+            var image = new CanvasImage("Data//david-bowie-labyrinth.jpg");
             var tmp = AnsiConsole.Prompt(
                     new TextPrompt<string>("")
                     .AllowEmpty());

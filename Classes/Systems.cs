@@ -35,7 +35,7 @@ namespace Basiverse
         }
 
         public string GetHullColor(){
-            double hullSw = Math.Floor(_hullval);
+            double hullSw = Math.Floor(Health());
             if(hullSw >= 75){
                 return "green";
             }
@@ -156,7 +156,7 @@ namespace Basiverse
 
         public void Regen(){ // if the shields are online regen 5%
             if(_isonline && (_shieldval < _maxshield)){
-                _shieldval = _shieldval * 1.05;
+                _shieldval = _shieldval * 1.2;
             }
             else{
                 return;
@@ -164,7 +164,7 @@ namespace Basiverse
         }
 
         public string GetShieldColor(){ 
-            double shieldSw = Math.Floor(_shieldval);
+            double shieldSw = Math.Floor(Health());
             if( shieldSw >= 75){
                 return "green";
             }

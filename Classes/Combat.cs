@@ -113,14 +113,14 @@ namespace Basiverse
 
             // Shield Status
             if(inPlayer.PShip.Shield.IsOnline){
-                ShipReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{inPlayer.PShip.Shield.GetShieldColor}]{inPlayer.PShip.ShieldVal()}[/]%"));
+                ShipReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{inPlayer.PShip.Shield.GetShieldColor()}]{inPlayer.PShip.ShieldVal()}[/]%"));
             }
             else{
                 ShipReport.AddRow(new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
 
             // Hull Status
-            ShipReport.AddRow(new Markup($"Hull Integrity: [{inPlayer.PShip.HullVal()}]{inPlayer.PShip.Hull.GetHullColor()}[/]%"));
+            ShipReport.AddRow(new Markup($"Hull Integrity: [{inPlayer.PShip.Hull.GetHullColor()}]{inPlayer.PShip.HullVal()}[/]%"));
 
             // Heat Status
             ShipReport.AddRow(new Markup($"{inPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{inPlayer.PShip.Heatsink.GetHeatColor(inPlayer.PShip.HeatVal())}]{inPlayer.PShip.HeatVal()}[/]%"));
@@ -148,14 +148,14 @@ namespace Basiverse
 
             // Enemy Shield Status
             if(inPlayer.PShip.Shield.IsOnline){
-                EnemyReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{NPC.cShip.Shield.GetShieldColor}]{NPC.cShip.ShieldVal()}[/]%"));
+                EnemyReport.AddRow(new Markup($"Shields [cyan]ONLINE[/] - Strength: [{NPC.cShip.Shield.GetShieldColor()}]{NPC.cShip.ShieldVal()}[/]%"));
             }
             else{
                 EnemyReport.AddRow(new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));
             }
 
-            // Enemy Hull Status
-            EnemyReport.AddRow(new Markup($"Hull Integrity: [{NPC.cShip.HullVal()}]{NPC.cShip.Hull.GetHullColor()}[/]%"));
+            // Enemy Hull Status 
+            EnemyReport.AddRow(new Markup($"Hull Integrity: [{NPC.cShip.Hull.GetHullColor()}]{NPC.cShip.HullVal()}[/]%"));
             
             // Draw the enemy ship
             if(NPC.cShip.Shield.IsOnline){
@@ -187,6 +187,9 @@ namespace Basiverse
             if(!inPlayer.PShip.Shield.IsOnline){
                 opts += "Restart Shields|";
             }
+            if(inPlayer.PShip.Shield.IsOnline){
+                opts += "Overload Shields|";
+            }
             if(inPlayer.PShip.Heatsink.Name != "None"){
                 opts += "Activate Heatsink|";
             }
@@ -196,7 +199,7 @@ namespace Basiverse
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Options:")
-                .PageSize(5)
+                .PageSize(options.Length + 3)
                 .AddChoices(options));
 
             switch(selection){
@@ -218,6 +221,10 @@ namespace Basiverse
                 case "Restart Shields":
                     inPlayer.PShip.RestartShields(true);
                     AnsiConsole.Write(new Markup($"[green]Shields Online[/]\n"));
+                break;
+                case "Overload Shields":
+                    inPlayer.PShip.OverloadShield(true);
+                    AnsiConsole.Write(new Markup($"[yellow]System Overloaded![/]\n"));
                 break;
                 case "Activate Heatsink":
                     inPlayer.PShip.ActivateHeatsink(true);

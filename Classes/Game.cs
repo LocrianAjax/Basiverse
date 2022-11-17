@@ -120,13 +120,13 @@ namespace Basiverse{
                 }
             }
 
-            choices += "Detailed Report|Options";
+            choices += "Detailed Report|Options|Manual";
             // Then split on | to create dynamic menu
             string[] options = choices.Split('|');
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Actions:")
-                .PageSize(4)
+                .PageSize(options.Length + 3)
                 .AddChoices(options));
             
             switch(selection){
@@ -145,9 +145,19 @@ namespace Basiverse{
                 case "Mine":
                     MiningMenu();
                 break;
+                case "Manual":
+                    ManualMenu();
+                break;
             }
+            Start();
         }
 
+        void ManualMenu(){
+            Manual MainMenu = new Manual();
+            MainMenu.Load("Data//Manuals//main.data");
+            MainMenu.Display();
+            return;
+        }
         private void MiningMenu(){
             MiningMinigame NewGame = new MiningMinigame();
             NewGame.StartMinigame(mainPlayer);
@@ -177,7 +187,7 @@ namespace Basiverse{
                     if(destination == temp.Name){
                         mainPlayer.logJump(destination); // Log the jump when confirmed
                         // Regen shield and cool the ship
-                        mainPlayer.PShip.CombatPassive(true);
+                        mainPlayer.PShip.TravelPassive();
                         mainPlayer.PLoc = temp;
                         mainPlayer.JumpLog += 1;
                         // This is just for show
@@ -232,12 +242,10 @@ namespace Basiverse{
                     SettingsMenu();
                 break;
                 case "Return":
-                    MainActionMenu();
-                break;
+                    return;
                 case "Save":
                     SaveGame();
-                    MainActionMenu();
-                break;
+                    return;
                 case "Save and Quit":
                     SaveGame();
                     System.Environment.Exit(0);

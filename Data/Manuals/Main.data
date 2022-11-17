@@ -1,0 +1,68 @@
+// Comments are ignored when '//' is used
+// : Defines a Title for the page, :: for the entire manual
+// Pages are broken up by the \ character or by exceeding the maximum height of the window. If you hit the window height limit the page title will be maintained
+::BASIVERSE COMPREHENSIVE MANUAL
+:Introduction
+
+Welcome to Basiverse! 
+
+This is a little game that I've been kicking around for a long time, but could never commit to finishing. This is the most "Complete" version of the game I've ever made.
+
+I've worked on this 100% by myself(Even this Manual system), with the only package I'm using is Spectre Console to make the menu creation easier.
+
+As a result, there's some jankiness and buginess in the game that I'm still working on. If you find a bug, let me know please! 
+
+The next few pages go over the basics of the game and it's little mini-games, have fun!
+\
+:Basics
+
+In the main game menu you'll find a overview of the system you're in on the far left of the screen, it's name and any points of interest (POIs) it contains.
+
+In the middle of the screen you'll find information on your ship, shield strength, hull strength, and heat.
+
+On the right of the screen you'll find information on systems withing your jump range, names and brief description of what they might contain.
+
+Below that display is the main action menu. Here you'll find option that vary based on what's in the area. 
+
+Additionally you can save, quit, and get detailed information on your ship, incuding your cargo!
+
+Be careful jumping around wildly, there are bandits around and you could be attacked at any time.........
+\
+:Combat
+
+You win combat by not dying, dying is game over. 
+
+The combat display is similar to the main game display, but with some combat specific information.
+
+You have a handful of main actions in the combat menu.
+
+You can fire lasers, that create heat but are garunteed to do damage.
+
+You can fire missiles, that deal more damage than lasers, but might miss and have limited stock.
+
+You can activate your heatsink, giving a temporary bonus to heat dissipation.
+
+If your shields are offline, you can reactivate them giving you 20% capacity back.
+
+You can also overload your shield at the cost of adding heat to the hull.
+
+Finally you can attempt to flee. 
+
+Your opponent has the exact same options as you do, but some enemies behave differently than others. Be wary of trying to memorize attack patterns.
+\ 
+:Docking
+
+When you go to dock at a station, you need to manually adjust the ship to point properly at the station.
+
+You have 50u of fuel to make it happen, so be careful! If you fail to dock you'll have to go around and try again.
+
+At the top left of the screen, you'll have a display of your remaining fuel and your relative speed.
+\
+:Mining
+
+Some Systems have mineable asteroids in them, by tuning your combat lasers to the right frequencies you can clumsily rip some ores out of the asteroid!
+
+You'll be presented with a array of Asteroid locations, with your selection in green. By pressing the spacebar you can pulse your laser at the location, possibly revealing some nice loot!
+
+In the top left of the screen, you'll find the asteroid's remaining health. 
+\
