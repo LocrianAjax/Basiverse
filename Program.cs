@@ -12,12 +12,21 @@ namespace Basiverse
     {
         static void Main(string[] args)
         {
-            AnsiConsole.Cursor.Hide();
-            Startup();
-            PrintHeader();
-            StartupInfo();
-            MainMenu();
-            AnsiConsole.Clear();
+            try{
+                AnsiConsole.Cursor.Hide();
+                Startup();
+                PrintHeader();
+                StartupInfo();
+                MainMenu();
+                AnsiConsole.Clear();
+            }
+            catch(Exception e){
+                AnsiConsole.WriteException(e);
+                var tmp = AnsiConsole.Prompt(
+                new TextPrompt<string>("Press any key to continue")
+                .AllowEmpty());
+                Environment.Exit(1);
+            }
         }
 
         static void MainMenu(){
@@ -111,7 +120,7 @@ namespace Basiverse
                 mainPlayer.PShip.Name = AnsiConsole.Ask<string>("Please enter the name: The ");
             }
             else{
-                AnsiConsole.MarkupLine("Okay");
+                AnsiConsole.MarkupLine("DEFAULT");
             }
 
             Game NewGame = AnsiConsole.Status().Start("Starting New Game", ctx => {
