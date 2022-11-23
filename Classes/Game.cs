@@ -35,9 +35,12 @@ namespace Basiverse{
         // End Debugging stuff
 
         public void Start(){ // Entry point for the game
-            Console.Clear(); // Clear the console and write the UI
-            WriteStatus();
-            MainActionMenu();
+            int retval = 0;
+            while(retval == 0){
+                Console.Clear(); // Clear the console and write the UI
+                WriteStatus();
+                retval = MainActionMenu();
+            }  
         }
 
         private void WriteStatus(){ // Create our Default "NAV" Screen
@@ -103,7 +106,7 @@ namespace Basiverse{
             AnsiConsole.Write(MainScreen);
         }
         
-        private void MainActionMenu(){ // Menu for Main Game actions
+        private int MainActionMenu(){ // Menu for Main Game actions
 
              // Set up choices
             string choices = "Jump|";
@@ -131,40 +134,34 @@ namespace Basiverse{
             
             switch(selection){
                 case "Jump":
-                    JumpMenu();
-                break;
+                    return JumpMenu();
                 case "Detailed Report":
-                    DetailedReportMenu();
-                break;
+                    return DetailedReportMenu();
                 case "Options":
-                    OptionsMenu();
-                break;
+                    return OptionsMenu();
                 case "Dock":
-                    DockMenu();
-                break;
+                    return DockMenu();
                 case "Mine":
-                    MiningMenu();
-                break;
+                    return MiningMenu();
                 case "Manual":
-                    ManualMenu();
-                break;
+                    return ManualMenu();
             }
-            Start();
+            return 0;
         }
 
-        void ManualMenu(){
+        private int ManualMenu(){
             Manual MainMenu = new Manual();
             MainMenu.Load("Data//Manuals//main.data");
             MainMenu.Display();
-            return;
+            return 0;
         }
-        private void MiningMenu(){
+        private int MiningMenu(){
             MiningMinigame NewGame = new MiningMinigame();
             NewGame.StartMinigame(mainPlayer);
-            Start();
+            return 0;
         }
 
-        private void JumpMenu(){
+        private int JumpMenu(){
             string[] Locations = new string[mainPlayer.PLoc.NearbyNodes.Count + 1]; // Set up the array of options to jump
             Locations[mainPlayer.PLoc.NearbyNodes.Count] = "Return"; // Add to end of options list
             for(int i = 0; i < mainPlayer.PLoc.NearbyNodes.Count; i++){
@@ -180,7 +177,7 @@ namespace Basiverse{
                 .AddChoices(Locations));
 
             if(destination == "Return"){
-                MainActionMenu();
+                return 0;
             }
             else{
                 foreach(Location temp in mainPlayer.PLoc.NearbyNodes){
@@ -215,17 +212,18 @@ namespace Basiverse{
                             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Prepare to fight!").AllowEmpty());
                             int retval = Combat(mainPlayer.GetDifficulty());
                             if(retval == -1){
-                                return;
+                                return 0;
                             }
                         }
                         // If we don't do combat, just go back to the normal loop
-                        Start(); // After that, return to the loop
+                        return 0; // After that, return to the loop
                     }
                 }
             }
-            
+            return 0;
         }
-        private void OptionsMenu(){
+
+        private int OptionsMenu(){
             string opts = "Settings|Return|Save|Save and Quit|Quit without Saving|Return to Main Menu";
             if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
                 opts += "|Debug";
@@ -242,10 +240,10 @@ namespace Basiverse{
                     SettingsMenu();
                 break;
                 case "Return":
-                    return;
+                    return 0;
                 case "Save":
                     SaveGame();
-                    return;
+                    return 0;
                 case "Save and Quit":
                     SaveGame();
                     System.Environment.Exit(0);
@@ -254,14 +252,15 @@ namespace Basiverse{
                     DebugMenu();
                 break;
                 case "Return to Main Menu":
-                    return;
+                    return 1;
                 case "Quit without Saving":
                    System.Environment.Exit(0);
                 break;
             }
+            return 0;
         }
 
-        private void DetailedReportMenu(){
+        private int DetailedReportMenu(){
             AnsiConsole.Clear();
             // Add data for Detailed Ship Report
             /*
@@ -322,7 +321,7 @@ namespace Basiverse{
             ReportScreen.Expand();
             AnsiConsole.Write(ReportScreen);
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to return").AllowEmpty());
-            Start();
+            return 0;
         }
 
         private void SettingsMenu(){
@@ -354,7 +353,7 @@ namespace Basiverse{
             }
             Console.Clear(); // Clear the console and write the UI
             WriteStatus();
-            SettingsMenu();
+            return;
         }
 
         private void RenameShip(){
@@ -365,10 +364,10 @@ namespace Basiverse{
             }
             Console.Clear(); // Clear the console and write the UI
             WriteStatus();
-            SettingsMenu();
+            return;
         }
 
-        private void SaveGame(){
+        private int SaveGame(){
             Saver MainSave = new Saver(); // Create the Saver
             AnsiConsole.MarkupLine("Saving player data");
             try{
@@ -379,10 +378,10 @@ namespace Basiverse{
             }
             AnsiConsole.MarkupLine("Save [green]Complete[/]");
             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
-            return;
+            return 0;
         }
 
-        private void DockMenu(){
+        private int DockMenu(){
             string Stations = ""; // Set up the array of options to dock
             foreach(PointofInterest poi in mainPlayer.PLoc.Interests){
                 if(poi.Type == 2){ // If it's a station add it to the list
@@ -400,7 +399,7 @@ namespace Basiverse{
                 .AddChoices(options));
 
             if(destination == "Return"){
-                MainActionMenu();
+                return 0;
             }
             else{
                 foreach(Station tmp in mainPlayer.PLoc.Stations){ // Not effcient, but we're going to a max of 5 things so no biggie
@@ -411,10 +410,11 @@ namespace Basiverse{
                             mainPlayer.logDock(tmp.Name); // Log Docking 
                             tmp.Dock(mainPlayer);
                         }
-                        Start();
+                        return 0;
                     }
                 }
             }
+            return 0;
         }
 
         private int Combat(int difficulty){
