@@ -165,7 +165,7 @@ namespace Basiverse
                 AnsiConsole.Clear();
                 AnsiConsole.MarkupLine($"[red]ASTEROID INTEGRITY LOST - NOTHING RECOVERABLE[/]");
                 var tmp = AnsiConsole.Prompt(
-                new TextPrompt<string>("Press any key to continue.....")
+                new TextPrompt<string>("Press Enter to continue.....")
                 .AllowEmpty());
                 return;
             }

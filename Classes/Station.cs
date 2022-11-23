@@ -663,7 +663,7 @@ namespace Basiverse{
             }
             else{
                 var tmp = AnsiConsole.Prompt(
-                    new TextPrompt<string>("[red]Nothing to sell, press any key to continue[/]")
+                    new TextPrompt<string>("[red]Nothing to sell, Press Enter to continue[/]")
                     .AllowEmpty());
                 return;
             }

@@ -15,7 +15,7 @@ namespace Basiverse{
             foreach(Location node in AllNodes){
                 node.dump();
             }
-            Console.WriteLine("Press any Key to continue......");
+            Console.WriteLine("Press Enter to continue......");
             Console.ReadKey();
         }
     }
