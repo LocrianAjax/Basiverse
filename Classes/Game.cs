@@ -156,7 +156,8 @@ namespace Basiverse{
             return 0;
         }
         private int MiningMenu(){
-            MiningMinigame NewGame = new MiningMinigame();
+            var rand = new Random();
+            MiningMinigame NewGame = new MiningMinigame(rand.Next(3, 11)); // Generate a random sized asteroid
             NewGame.StartMinigame(mainPlayer);
             return 0;
         }
