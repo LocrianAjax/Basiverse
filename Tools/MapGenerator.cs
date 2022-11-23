@@ -135,7 +135,7 @@ namespace Basiverse{
                 outMap.AllNodes.Add(loc); // Then add the loc to the map
             }
             if(debug){Console.WriteLine("Map gen complete");
-            Console.WriteLine("Press any Key to continue......");
+            Console.WriteLine("Press Enter to continue......");
             Console.ReadKey();}
             return outMap;
         }
@@ -143,7 +143,7 @@ namespace Basiverse{
         public void CheckBin(){
             Map dMap = BinarySerialization.ReadFromBinaryFile<Map>("Map//map.bin");
             dMap.dump();
-            Console.WriteLine("Press any Key to continue......");
+            Console.WriteLine("Press Enter to continue......");
             Console.ReadKey();
         }
     

@@ -156,7 +156,8 @@ namespace Basiverse{
             return 0;
         }
         private int MiningMenu(){
-            MiningMinigame NewGame = new MiningMinigame();
+            var rand = new Random();
+            MiningMinigame NewGame = new MiningMinigame(rand.Next(3, 11)); // Generate a random sized asteroid
             NewGame.StartMinigame(mainPlayer);
             return 0;
         }
@@ -377,7 +378,7 @@ namespace Basiverse{
                 AnsiConsole.WriteException(e);
             }
             AnsiConsole.MarkupLine("Save [green]Complete[/]");
-            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue").AllowEmpty());
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press Enter to continue").AllowEmpty());
             return 0;
         }
 

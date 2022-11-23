@@ -272,7 +272,7 @@ namespace Basiverse
             foreach(Chassis temp in Chassies){
                 Console.WriteLine($"{temp.Name} {temp._Hull.Name} {temp._Cargohold.Name} {temp.Cost} {temp.Description}\n");
             }
-            AnsiConsole.Write("\nLoad complete. Press any key to continue....");
+            AnsiConsole.Write("\nLoad complete. Press Enter to continue....");
             Console.ReadKey();
         }
     }

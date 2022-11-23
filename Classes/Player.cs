@@ -110,7 +110,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your chassis for ${inChassis.Cost}?")){
                     if(inChassis.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -133,7 +133,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your shield for ${inShield.Cost}?")){
                     if(inShield.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your shield, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your shield, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -156,7 +156,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your armor for ${inArmor.Cost}?")){
                     if(inArmor.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -178,7 +178,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your heatsink for ${inHeatsink.Cost}?")){
                     if(inHeatsink.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -200,7 +200,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your engine for ${inEngine.Cost}?")){
                     if(inEngine.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -222,7 +222,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your missiles for ${inMissiles.Cost}?")){
                     if(inMissiles.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -244,7 +244,7 @@ namespace Basiverse
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your lasers for ${inLasers.Cost}?")){
                     if(inLasers.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, press any key to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -480,7 +480,7 @@ namespace Basiverse
             }
             capitansLog.Expand();
             AnsiConsole.Write(capitansLog);
-            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press any key to continue........").AllowEmpty());
+            var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Press Enter to continue........").AllowEmpty());
         }
     }
 }

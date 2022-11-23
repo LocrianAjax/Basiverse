@@ -21,9 +21,10 @@ namespace Basiverse
         }
 
         public Asteroid(int inSize){ // Specified grid size
-            MaxHealth = 100;
-            CurrHealth = MaxHealth;
+            var rand = new Random();
             Size = inSize;
+            MaxHealth = (15 * Size) + rand.Next(-25, 26); // Update the health based on the size plus a random modifier
+            CurrHealth = MaxHealth;
         }
 
         public void DrawAll(){
