@@ -3,8 +3,7 @@ using Basiverse;
 using Spectre.Console;
 using System.Collections.Generic;
 
-namespace Basiverse
-{
+namespace Basiverse{
 
     // [Serializable]
     // class Dialouge{ // Dialouges contain a set, line and a bool for if it's an intro line

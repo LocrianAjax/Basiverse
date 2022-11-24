@@ -8,10 +8,8 @@ using System.Threading;
 
 namespace Basiverse
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    class Program{
+        static void Main(string[] args){
             try{
                 AnsiConsole.Cursor.Hide();
                 Startup();
@@ -89,19 +87,19 @@ namespace Basiverse
                 .PageSize(5)
                 .AddChoices("Toggle Debug", "Return"));
                         
-                switch(selection){
-                    case "Toggle Debug":
-                        if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
-                            System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "false";
-                        }
-                        else{
-                            System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "true";
-                        }
-                    break;
-                    case "Return":
-                        MainMenu();
-                    break;
-                }
+            switch(selection){
+                case "Toggle Debug":
+                    if(Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["debugMode"])){
+                        System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "false";
+                    }
+                    else{
+                        System.Configuration.ConfigurationManager.AppSettings["debugMode"] = "true";
+                    }
+                break;
+                case "Return":
+                    MainMenu();
+                break;
+            }
         }
 
         static void NewGameMenu(){
@@ -141,7 +139,6 @@ namespace Basiverse
             AnsiConsole.Clear();
             GameIntro();
             NewGame.Start(); // Can't have this nested in the status
-
         }
 
         static void LoadGameMenu(){
@@ -179,7 +176,7 @@ namespace Basiverse
             AnsiConsole.Write(new FigletText("Basic OS v1.01"));
         }
 
-        static void TestDataAcess(){
+        static void TestDataAcess(){ // This is gross debug functionality, don't look at this please
             AnsiConsole.Markup("Creating Test Player");
             Player mainPlayer = new Player(); // Create our test player and ship
             mainPlayer.Name = "Testing player load and save";
@@ -269,12 +266,12 @@ namespace Basiverse
             }
         }
 
-        static void TestDocking(){
+        static void TestDocking(){ // This is gross debug functionality, don't look at this please
             DockingMinigame tester = new DockingMinigame();
             tester.StartMinigame();
         }
 
-        static void TestMining(){
+        static void TestMining(){ // This is gross debug functionality, don't look at this please
             MiningMinigame tester = new MiningMinigame(6);
             Player TestPlayer = new Player();
             TestPlayer.PShip = new Ship();
