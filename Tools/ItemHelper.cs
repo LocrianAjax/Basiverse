@@ -160,7 +160,7 @@ namespace Basiverse
                 }
                 else{
                     string[] subs = line.Split('|');
-                    Cargos.Add(new  Cargo(subs[0], Int32.Parse(subs[1]), Double.Parse(subs[2]), Int32.Parse(subs[3]), subs[4]));
+                    Cargos.Add(new  Cargo(subs[0], Int32.Parse(subs[1]), int.Parse(subs[2]), Int32.Parse(subs[3]), subs[4]));
                 }
             }
             Console.WriteLine("Object list created, writing to .bin");

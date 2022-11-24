@@ -3,10 +3,7 @@ using System;
 namespace Basiverse{
     
     [Serializable]
-    class Heatsink{ // Heatsinks have a name, a pasive value, an active value, an active flag, and a cost
-        private string _name = "None";
-        public string Name{ get {return _name;} set {_name = value;}}
-
+    class Heatsink:BaseSystem{ // Heatsinks have a name, a pasive value, an active value, an active flag, and a cost
         private int _passiveval = 0;
         public int PassiveVal{ get {return _passiveval;} set {_passiveval = value;}}
 
@@ -15,15 +12,12 @@ namespace Basiverse{
 
         private bool _isactive = false;
         public bool IsActive{ get {return _isactive;} set {_isactive = value;}}
-        private int _cost = 0;
-        public int Cost{ get {return _cost;} set {_cost = value;}}
-
 
         public Heatsink(string inName, int inPassive, int inActive, int inCost){
-            _name = inName;
+            Name = inName;
+            Cost = inCost;
             _passiveval = inPassive;
             _activeval = inActive;
-            _cost = inCost;
             _isactive = false;
         }
 

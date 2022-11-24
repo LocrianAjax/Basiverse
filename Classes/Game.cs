@@ -286,7 +286,7 @@ namespace Basiverse{
             ReportScreen.AddRow($"Bank Account",$"{mainPlayer.Money}");
             // Shield Status
             if(mainPlayer.PShip.Shield.IsOnline){
-                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor}]{mainPlayer.PShip.ShieldVal()}[/]%"));
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"Shields [cyan]ONLINE[/] - Strength: [{mainPlayer.PShip.Shield.GetShieldColor()}]{mainPlayer.PShip.ShieldVal()}[/]%"));
             }
             else{
                 ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Shield.Name}"), new Markup($"Shields [red][slowblink]OFFLINE[/][/]"));

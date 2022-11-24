@@ -3,10 +3,7 @@ using System;
 namespace Basiverse{
 
     [Serializable]
-    class Shield{ // Shield have a name, a value, a max value, an online flag and a cost
-        private string _name = "";
-        public string Name{ get {return _name;} set {_name = value;}}
-
+    class Shield:BaseSystem{ // Shield have a name, a value, a max value, an online flag and a cost
         private double _shieldval;
         public double ShieldVal{ get {return _shieldval;} set {_shieldval = value;}}
         private double _maxshield;
@@ -17,16 +14,12 @@ namespace Basiverse{
             return (_shieldval/_maxshield) * 100;
         }
 
-        private int _cost = 0;
-        public int Cost{ get {return _cost;} set {_cost = value;}}
-
-
         public Shield(string inName, double inMax, int inCost){
-            _name = inName;
+            Name = inName;
             _maxshield = inMax;
             _shieldval = inMax;
             _isonline = true;
-            _cost = inCost;
+            Cost = inCost;
         }
 
         public Shield(){ // Default constructor

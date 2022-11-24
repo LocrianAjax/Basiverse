@@ -3,9 +3,7 @@ using System;
 namespace Basiverse{
     
     [Serializable]
-    class Hull{ // Hulls have a name, a current value, a max value and a heat max
-        private string _name = "";
-        public string Name{ get {return _name;} set {_name = value;}}
+    class Hull:BaseSystem{ // Hulls have a name, a current value, a max value and a heat max
 
         private double _hullval;
         public double Hullval{ get {return _hullval;} set {_hullval = value;}}
@@ -22,7 +20,7 @@ namespace Basiverse{
         }
 
         public Hull(string inName, double inMax, double inHeatMax){
-            _name = inName;
+            Name = inName;
             _maxhull = inMax;
             _hullval = inMax;
             _maxheat = inHeatMax;
