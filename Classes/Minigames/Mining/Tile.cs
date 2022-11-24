@@ -140,7 +140,7 @@ namespace Basiverse
                1: All tiles are the same size
             */
             string[] lines;
-            switch(CurrState){
+            switch(CurrState){ // Don't look at this. I'm sorry
                 case State.LootA:
                     lines = LootATile;
                 break;
@@ -196,20 +196,22 @@ namespace Basiverse
             foreach (string line in lines)
             {
                 AnsiConsole.Cursor.SetPosition(currX, currY + count);
-                if(isSelected){
-                    AnsiConsole.Markup($"[green]{line}[/]");
-                }
-                else if(isHighlighted){
-                    AnsiConsole.Markup($"[red]{line}[/]");
-                }
-                else if(CurrState == State.LootA || CurrState == State.LootB){
-                    AnsiConsole.Markup($"[gold1]{line}[/]");
-                }
-                else{ // 50% chance rosybrown or sandybrown
-                    var rand = new Random();
-                    int flip = rand.Next(0,2);
-                    if(flip == 1){ AnsiConsole.Markup($"[sandybrown]{line}[/]"); }
-                    else{ AnsiConsole.Markup($"[rosybrown]{line}[/]"); }
+                foreach(char c in line){
+                    if(isSelected){
+                        AnsiConsole.Markup($"[green]{c}[/]");
+                    }
+                    else if(isHighlighted){
+                        AnsiConsole.Markup($"[red]{c}[/]");
+                    }
+                    else if(CurrState == State.LootA || CurrState == State.LootB){
+                        AnsiConsole.Markup($"[gold1]{c}[/]");
+                    }
+                    else{ // 50% chance rosybrown or sandybrown
+                        var rand = new Random();
+                        int flip = rand.Next(0,2);
+                        if(flip == 1){ AnsiConsole.Markup($"[sandybrown]{c}[/]"); }
+                        else{ AnsiConsole.Markup($"[rosybrown]{c}[/]"); }
+                    }
                 }
                 count++;
             }
