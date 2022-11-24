@@ -17,11 +17,4 @@ namespace Basiverse{
 
         }
     }
-
-    /* Future Ideas: 
-        Cloaking Device
-        Weapons Jammer
-    */
-
-
 }

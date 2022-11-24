@@ -14,3 +14,8 @@ namespace Basiverse{
         public string Description{get {return _description;} set {_description = value;}}
     }
 }
+
+/* Future Ideas: 
+    Cloaking Device
+    Weapons Jammer
+*/
