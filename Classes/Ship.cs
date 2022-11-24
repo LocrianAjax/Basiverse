@@ -204,7 +204,7 @@ namespace Basiverse{
 
         public void RestartShields(bool verbose){ // Accesses the private vars and slightly recharges the shield
             _shield.IsOnline = true;
-            _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .2); // Round it down to the nearest whole number
+            _shield.ShieldVal = (int)Math.Floor(_shield.ShieldMax * .5); // Round it down to the nearest whole number
             if(verbose){
                 AnsiConsole.WriteLine($"Shields Back Online at {_shield.Health()}%");
             }
