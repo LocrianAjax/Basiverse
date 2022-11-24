@@ -408,6 +408,32 @@ namespace Basiverse{
                 }
             }
         }
+
+        public void RestockHeatCores(int Price){
+            while(true){
+                AnsiConsole.WriteLine($"You currently have: {PShip.Heatsink.CoreCount} HeatCores");
+                int amount = AnsiConsole.Ask<int>("How many HeatCores would you like to purchase?:");
+                if(amount == 0){
+                    return;
+                }
+                else if((amount * Price) > Money){
+                    AnsiConsole.WriteLine("Please select an amount you can afford");
+                }
+                else if(amount < 0){
+                    AnsiConsole.WriteLine("Please select a non-negative amount");
+                }
+                else{
+                    if(AnsiConsole.Confirm($"You would like to purchase {amount} of HeatCores for ${amount * Price}?")){ // Price Check
+                        PShip.Heatsink.CoreCount += amount;
+                        Money -= (amount * Price);
+                        return;   
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
+        }
     
         public int GetDifficulty(){ // Returns the combat difficulty based on number of jumps
             if(_jumpLog < 100){

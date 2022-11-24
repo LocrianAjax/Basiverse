@@ -123,6 +123,7 @@ namespace Basiverse{
 
             // Heat Status
             ShipReport.AddRow(new Markup($"{inPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{inPlayer.PShip.Heatsink.GetHeatColor(inPlayer.PShip.HeatVal())}]{inPlayer.PShip.HeatVal()}[/]%"));
+            ShipReport.AddRow($"Remaining HeatCores: {inPlayer.PShip.Heatsink.CoreCount}");
 
             // Weapon Status
             ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.Laser.Damage} Heat Generation {inPlayer.PShip.Laser.Heat}");
@@ -192,6 +193,9 @@ namespace Basiverse{
             if(inPlayer.PShip.Heatsink.Name != "None"){
                 opts += "Activate Heatsink|";
             }
+            if(inPlayer.PShip.Heatsink.CoreCount > 0){
+                opts += "Eject HeatCore|";
+            }
             opts += "Flee";
 
             string[] options = opts.Split('|');
@@ -228,6 +232,9 @@ namespace Basiverse{
                 case "Activate Heatsink":
                     inPlayer.PShip.ActivateHeatsink(true);
                     AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]\n"));
+                break;
+                case "Eject HeatCore":
+                    inPlayer.PShip.EjectHeatCore(true);
                 break;
                 case "Flee":
                     if(inPlayer.PShip.Flee()){

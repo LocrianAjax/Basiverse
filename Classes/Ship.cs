@@ -230,6 +230,19 @@ namespace Basiverse{
                 AnsiConsole.WriteLine($"Auxillary cooling systems engaged");
             }
         }
+
+        public void EjectHeatCore(bool verbose){ // Clears the heat and subtracts core count
+            if(_heatsink.CoreCount < 1){
+                return;
+            }
+            else{
+                _heatsink.CoreCount--;
+                _heat = 0;
+                if(verbose){
+                    AnsiConsole.WriteLine($"Ejecting heat core! Remaining cores: {_heatsink.CoreCount}");
+                }
+            }
+        }
     
         public bool CheckDestroyed(){ // Check and see if the ship is destroyed
             if(_hull.Hullval <= 0){

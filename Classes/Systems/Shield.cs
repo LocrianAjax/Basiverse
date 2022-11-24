@@ -26,9 +26,9 @@ namespace Basiverse{
 
         }
 
-        public void Regen(){ // if the shields are online regen 5%
+        public void Regen(){ // if the shields are online regen 10%
             if(_isonline && (_shieldval < _maxshield)){
-                _shieldval = _shieldval * 1.2;
+                _shieldval = _shieldval * 1.1;
             }
             else{
                 return;

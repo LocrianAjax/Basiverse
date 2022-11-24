@@ -42,6 +42,8 @@ You can fire missiles, that deal more damage than lasers, but might miss and hav
 
 You can activate your heatsink, giving a temporary bonus to heat dissipation.
 
+Additionally you can eject a heat core, a limited use action that completely clears your heat.
+
 If your shields are offline, you can reactivate them giving you 20% capacity back.
 
 You can also overload your shield at the cost of adding heat to the hull.

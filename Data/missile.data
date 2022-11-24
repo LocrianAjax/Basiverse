@@ -1,7 +1,7 @@
 // Name|Damage|Hit Chance|Cost
-Basicorps Bottle Rockets|10|.5|0
-Basicorps Mortars|15|.6|70
-Unguided Mil-Spec Rocket|25|.7|120
+Basicorps Bottle Rockets|15|.5|0
+Basicorps Mortars|25|.6|70
+Unguided Mil-Spec Rocket|35|.7|120
 Heatseaking Missiles|25|.85|170
-Radar Guided Cruise Missiles|50|.8|195
-Space ICBM|75|.8|250
+Radar Guided Cruise Missiles|75|.8|195
+Space ICBM|100|.8|250
