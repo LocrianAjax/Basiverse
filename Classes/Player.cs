@@ -3,8 +3,7 @@ using Basiverse;
 using Spectre.Console;
 using System.Collections.Generic;
 
-namespace Basiverse
-{
+namespace Basiverse{
     [Serializable]
     class Player
     {

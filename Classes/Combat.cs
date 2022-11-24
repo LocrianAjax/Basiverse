@@ -4,8 +4,7 @@ using Spectre.Console;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Basiverse
-{
+namespace Basiverse{
 
     [Serializable]
     class Combat{ // A combat contains an NPC and then classes that take in a player

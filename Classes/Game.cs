@@ -108,7 +108,7 @@ namespace Basiverse{
         
         private int MainActionMenu(){ // Menu for Main Game actions
 
-             // Set up choices
+            // Set up choices
             string choices = "Jump|";
             // Check and see if we have any stations
             if(mainPlayer.PLoc.Interests != null){
@@ -155,6 +155,7 @@ namespace Basiverse{
             MainMenu.Display();
             return 0;
         }
+
         private int MiningMenu(){
             var rand = new Random();
             MiningMinigame NewGame = new MiningMinigame(rand.Next(3, 11)); // Generate a random sized asteroid

@@ -3,11 +3,9 @@ using Basiverse;
 using System.Collections.Generic;
 using Spectre.Console;
 
-namespace Basiverse
-{
+namespace Basiverse{
     [Serializable]
-    class Ship
-    {
+    class Ship{
         // A ship has a name, a type, a hull, a armor, a shield, a heat value, a heatsink, missiles, lasers, and a cargo hold
         private string _name = "";
         public string Name{ get {return _name;} set {_name = value;}}
