@@ -46,11 +46,11 @@ Yellow Star|A medium size star, much like Earth's.|1
 Yellow Star|A medium size star, much like Earth's.|1
 Yellow Star|A medium size star, much like Earth's.|1
 // Other
-Black Hole|Pereviously theorized by Steven Hawking, now seen with your own two eyes.|1
+Black Hole|Previously theorized by Steven Hawking, now seen with your own two eyes.|1
 Wormhhole|It keeps dumping out gas and other various things.|1
 Slow Nova|The local star appears to be frozen mid-nova. Sensors give off weird readings.|1
 Anomay|Sensors flare, your eyes don't work properly and you swear you can feel your teeth buzzing. Time to leave.|1
-// Stations contain a 4th category that's a desc of the station type. basic, science, military, terminal, religous, colony, corporate, wreck 
+// Stations contain a 4th category that's a desc of the station type. basic, science, military, terminal, Religious, colony, corporate, wreck 
 // TODO: Update the descriptions for stations
 // Type 2 "Basic Station"
 Canaan Station|The local station, good for a bite to eat and a little trading.|2|Basic
@@ -96,11 +96,11 @@ Pioneer Terminal|A trade-hub station, lots of good, services, and people availab
 Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
 Nyx Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
 Frontier Terminal|A trade-hub station, lots of good, services, and people available.|2|Terminal
-// Type 2 " Religous Colony"
-Parable Colony|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
-Halo Station|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
-Revelation Station|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
-Revelation Colony|A religous colony ship, orbited as a spacestation may years ago.|2|Religous
+// Type 2 " Religious Colony"
+Parable Colony|A Religious colony ship, orbited as a spacestation may years ago.|2|Religious
+Halo Station|A Religious colony ship, orbited as a spacestation may years ago.|2|Religious
+Revelation Station|A Religious colony ship, orbited as a spacestation may years ago.|2|Religious
+Revelation Colony|A Religious colony ship, orbited as a spacestation may years ago.|2|Religious
 // Type 2 "Colony"
 Nox Colony|A former colony ship turned into a spacestation.|2|Colony
 Atlas Colony|A former colony ship turned into a spacestation.|2|Colony

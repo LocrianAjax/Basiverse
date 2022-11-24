@@ -12,7 +12,7 @@ namespace Basiverse{
         // A station has a name, a type, a list of NPCs
         private string _name = "";
         public string Name{ get {return _name;} set {_name = value;}}
-        private string _type = ""; // basic, science, military, terminal, religous, colony, corporate, wreck 
+        private string _type = ""; // basic, science, military, terminal, Religious, colony, corporate, wreck 
         public string Type{ get {return _type;} set {_type = value;}}
         private string _description = "";
         public string Description{ get {return _description;} set {_description = value;}}
@@ -134,7 +134,7 @@ namespace Basiverse{
                     T2BuyMult = 1.5;
                     T3BuyMult = 3;
                 break;
-                case "Religous": 
+                case "Religious": 
                     // Sells nothing
                     // Does not buy Science/Basic/Industrial/Luxury, with a premium on basic luxury goods and recreatiuon
                     StationBuyList.Add(1);
@@ -328,7 +328,7 @@ namespace Basiverse{
 
         public int ServicesMenu(Player inPlayer){
             string selection = "";
-            switch(Type){ // basic, science, military, terminal, religous, colony, corporate, wreck 
+            switch(Type){ // basic, science, military, terminal, Religious, colony, corporate, wreck 
                 case "Basic":
                     selection = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
@@ -740,7 +740,7 @@ namespace Basiverse{
         
         public void GoblinKing(){
             AnsiConsole.Clear();
-            var image = new CanvasImage("Data//david-bowie-labyrinth.jpg");
+            AnsiConsole.WriteLine("I don't know what you expected.......");
             var tmp = AnsiConsole.Prompt(
                     new TextPrompt<string>("")
                     .AllowEmpty());
