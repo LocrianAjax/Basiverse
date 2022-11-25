@@ -1,0 +1,7 @@
+// Line | Type
+// Type 1 is no combat, type 2 is combat
+An alarm sounds! You scramble to combat stations but see only debris floating by|1
+Nearby explosions rock the ship! To Battlestations!|2
+An enemy target lock! Prepare for a fight|2
+You scan for enemy signatures but find no matches|1
+A randar blip reveals a ship running without a broadcast beacon. Before you can hail them a target lokk reveals their intentions.|2

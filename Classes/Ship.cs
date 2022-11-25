@@ -33,7 +33,7 @@ namespace Basiverse{
 
         public Ship(){ // Set up the starter ship in the constructor
             _chassis = "Basicorps Runner"; // Set Default type
-            _name = "The Nameless"; // Set Default Name
+            _name = "Nameless"; // Set Default Name
 
             _hull = new Hull("Basic Pressure Hull", 50, 25);  // Set Default Hull
             
