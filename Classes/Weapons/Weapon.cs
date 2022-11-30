@@ -15,3 +15,10 @@ namespace Basiverse{
         public int Cost{ get {return _cost;} set {_cost = value;}}
     }
 }
+
+
+    /* Future Ideas: 
+        "EMP Weapon" that only deals sheild damage
+        Cloaking Device
+        Weapons Jammer
+    */

@@ -125,7 +125,7 @@ namespace Basiverse{
 
         public void UpgradeShield(Shield inShield){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.Title = new TableTitle($"SHIELD UPGRADE");
             UpgradeTable.AddColumns("NAME", "PRICE");
             UpgradeTable.AddRow($"{inShield.Name}", $"{inShield.Cost}");
             AnsiConsole.Write(UpgradeTable);
@@ -148,14 +148,14 @@ namespace Basiverse{
 
         public void UpgradeArmor(Armor inArmor){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
-            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.Title = new TableTitle($"ARMOR UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
             UpgradeTable.AddRow($"{inArmor.Name}", $"{inArmor.Cost}");
             AnsiConsole.Write(UpgradeTable);
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your armor for ${inArmor.Cost}?")){
                     if(inArmor.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your armor, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -170,14 +170,14 @@ namespace Basiverse{
         }
         public void UpgradeHeatsink(Heatsink inHeatsink){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
-            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.Title = new TableTitle($"HEATSINK UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
             UpgradeTable.AddRow($"{inHeatsink.Name}", $"{inHeatsink.Cost}");
             AnsiConsole.Write(UpgradeTable);
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your heatsink for ${inHeatsink.Cost}?")){
                     if(inHeatsink.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your heatsink, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -192,14 +192,14 @@ namespace Basiverse{
         }
         public void UpgradeEngine(Engine inEngine){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
+            UpgradeTable.Title = new TableTitle($"ENGINE UPGRADE");
             UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
             UpgradeTable.AddRow($"{inEngine.Name}", $"{inEngine.Cost}");
             AnsiConsole.Write(UpgradeTable);
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your engine for ${inEngine.Cost}?")){
                     if(inEngine.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your engine, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -214,14 +214,14 @@ namespace Basiverse{
         }
         public void UpgradeMissiles(Missile inMissiles){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
-            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.Title = new TableTitle($"MISSILE UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
             UpgradeTable.AddRow($"{inMissiles.Name}", $"{inMissiles.Cost}");
             AnsiConsole.Write(UpgradeTable);
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your missiles for ${inMissiles.Cost}?")){
                     if(inMissiles.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your missiles, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
@@ -236,19 +236,45 @@ namespace Basiverse{
         }
         public void UpgradeLasers(Laser inLasers){
             Table UpgradeTable = new Table(); // Table for the "Main" buy menu
-            UpgradeTable.Title = new TableTitle($"CHASSIS UPGRADE");
-            UpgradeTable.AddColumns("NAME", "DESCRIPTION", "PRICE");
+            UpgradeTable.Title = new TableTitle($"LASER UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
             UpgradeTable.AddRow($"{inLasers.Name}", $"{inLasers.Cost}");
             AnsiConsole.Write(UpgradeTable);
 
                 if(AnsiConsole.Confirm($"Would you like to upgrade your lasers for ${inLasers.Cost}?")){
                     if(inLasers.Cost > Money){
-                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your chassis, Press Enter to continue...").AllowEmpty());
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your laser, Press Enter to continue...").AllowEmpty());
                         return;
                     }
                     else{
                         PShip.Laser = inLasers;
                         Money -= inLasers.Cost;
+                        return;   
+                    }
+                }
+                else{
+                    return;
+                }
+        }
+
+        public void UpgradeEMP(EMP inEMP){
+            Table UpgradeTable = new Table(); // Table for the "Main" buy menu
+            UpgradeTable.Title = new TableTitle($"EMP UPGRADE");
+            UpgradeTable.AddColumns("NAME", "PRICE");
+            UpgradeTable.AddRow($"{inEMP.Name}", $"{inEMP.Cost}");
+            AnsiConsole.Write(UpgradeTable);
+
+                if(AnsiConsole.Confirm($"Would you like to upgrade your EMP for ${inEMP.Cost}?")){
+                    if(inEMP.Cost > Money){
+                        AnsiConsole.Prompt(new TextPrompt<string>("You cannot afford to upgrade your EMP, Press Enter to continue...").AllowEmpty());
+                        return;
+                    }
+                    else{
+                        if(PShip.EMP == null){
+                            PShip.EMP = new EMP();
+                        }
+                        PShip.EMP = inEMP;
+                        Money -= inEMP.Cost;
                         return;   
                     }
                 }
@@ -300,6 +326,12 @@ namespace Basiverse{
                 case "Lasers":
                     List<Laser> Lasers = BinarySerialization.ReadFromBinaryFile<List<Laser>>("Data//laser.bin");
                     foreach(Laser tmp in Lasers){
+                        buyOpts += tmp.Name + "|";
+                    }
+                break;
+                case "EMP":
+                    List<EMP> EMPs = BinarySerialization.ReadFromBinaryFile<List<EMP>>("Data//EMP.bin");
+                    foreach(EMP tmp in EMPs){
                         buyOpts += tmp.Name + "|";
                     }
                 break;
@@ -379,6 +411,15 @@ namespace Basiverse{
                         }
                     }
                 break;
+                case "EMP":
+                    List<EMP> EMPs = BinarySerialization.ReadFromBinaryFile<List<EMP>>("Data//EMP.bin");
+                    foreach(EMP tmp in EMPs){
+                        if(tmp.Name == itemName){
+                            UpgradeEMP(tmp);
+                            break;
+                        }
+                    }
+                break;
                 case "Return":
                     return;
             }
@@ -400,6 +441,32 @@ namespace Basiverse{
                     if(AnsiConsole.Confirm($"You would like to purchase {amount} of missiles for ${amount * missilePrice}?")){ // Price Check
                         PShip.Missile.Stock += amount;
                         Money -= (amount * missilePrice);
+                        return;   
+                    }
+                    else{
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void RestockHeatCores(int Price){
+            while(true){
+                AnsiConsole.WriteLine($"You currently have: {PShip.Heatsink.CoreCount} HeatCores");
+                int amount = AnsiConsole.Ask<int>("How many HeatCores would you like to purchase?:");
+                if(amount == 0){
+                    return;
+                }
+                else if((amount * Price) > Money){
+                    AnsiConsole.WriteLine("Please select an amount you can afford");
+                }
+                else if(amount < 0){
+                    AnsiConsole.WriteLine("Please select a non-negative amount");
+                }
+                else{
+                    if(AnsiConsole.Confirm($"You would like to purchase {amount} of HeatCores for ${amount * Price}?")){ // Price Check
+                        PShip.Heatsink.CoreCount += amount;
+                        Money -= (amount * Price);
                         return;   
                     }
                     else{

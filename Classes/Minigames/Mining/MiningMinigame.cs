@@ -273,7 +273,7 @@ namespace Basiverse
                             if(lootList[lootList.IndexOf(tempCargo)].Count > 1){
                                 lootList[lootList.IndexOf(tempCargo)].Count--;
                             }
-                            else{
+                            if(lootList[lootList.IndexOf(tempCargo)].Count == 1){
                                 lootList.Remove(tempCargo);
                             }
                         }

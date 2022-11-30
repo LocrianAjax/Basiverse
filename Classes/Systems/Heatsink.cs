@@ -13,12 +13,16 @@ namespace Basiverse{
         private bool _isactive = false;
         public bool IsActive{ get {return _isactive;} set {_isactive = value;}}
 
+        private int _corecount = 0;
+        public int CoreCount{ get {return _corecount;} set {_corecount = value;}}
+
         public Heatsink(string inName, int inPassive, int inActive, int inCost){
             Name = inName;
             Cost = inCost;
             _passiveval = inPassive;
             _activeval = inActive;
             _isactive = false;
+            _corecount = 3;
         }
 
         public Heatsink(){

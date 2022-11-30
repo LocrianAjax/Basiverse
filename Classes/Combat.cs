@@ -123,10 +123,15 @@ namespace Basiverse{
 
             // Heat Status
             ShipReport.AddRow(new Markup($"{inPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{inPlayer.PShip.Heatsink.GetHeatColor(inPlayer.PShip.HeatVal())}]{inPlayer.PShip.HeatVal()}[/]%"));
+            ShipReport.AddRow($"Remaining HeatCores: {inPlayer.PShip.Heatsink.CoreCount}");
 
             // Weapon Status
             ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.Laser.Damage} Heat Generation {inPlayer.PShip.Laser.Heat}");
             ShipReport.AddRow($"Missiles Damage {inPlayer.PShip.Missile.Damage} Hit Chance {inPlayer.PShip.Missile.HitChance * 100}% Stock {inPlayer.PShip.Missile.Stock}");
+
+            if(inPlayer.PShip.EMP != null){
+                ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.EMP.Damage}");
+            }
             
             // Draw the player ship
             if(inPlayer.PShip.Shield.IsOnline){
@@ -180,6 +185,9 @@ namespace Basiverse{
             if(inPlayer.PShip.Laser != null){
                 opts += "Fire Lasers|";
             }
+            if(inPlayer.PShip.EMP != null){
+                opts += "Fire EMP|";
+            }
             if(inPlayer.PShip.Missile.Stock > 0){
                 opts += "Fire Missiles|";
             }
@@ -191,6 +199,9 @@ namespace Basiverse{
             }
             if(inPlayer.PShip.Heatsink.Name != "None"){
                 opts += "Activate Heatsink|";
+            }
+            if(inPlayer.PShip.Heatsink.CoreCount > 0){
+                opts += "Eject HeatCore|";
             }
             opts += "Flee";
 
@@ -228,6 +239,13 @@ namespace Basiverse{
                 case "Activate Heatsink":
                     inPlayer.PShip.ActivateHeatsink(true);
                     AnsiConsole.Write(new Markup($"[green]Heatsink Online[/]\n"));
+                break;
+                case "Eject HeatCore":
+                    inPlayer.PShip.EjectHeatCore(true);
+                break;
+                case "Fire EMP":
+                    NPC.cShip.TakeShieldDamage(inPlayer.PShip.EMP.Damage);
+                    AnsiConsole.Write(new Markup($"Dealt {inPlayer.PShip.EMP.Damage} shield damage!\n"));
                 break;
                 case "Flee":
                     if(inPlayer.PShip.Flee()){

@@ -109,13 +109,13 @@ namespace Basiverse
             mainPlayer.Money += 100;
             mainPlayer.PShip = new Ship();
             mainPlayer.Name = AnsiConsole.Ask<string>("Welcome USER, please enter your identifier:"); 
-            AnsiConsole.Markup("Welcome {0}", mainPlayer.Name);
+            AnsiConsole.Markup("Identifier accepted: {0} is now systems primary", mainPlayer.Name);
             System.Threading.Thread.Sleep(1000);
 
             AnsiConsole.Clear();
             PrintHeader();
             if(AnsiConsole.Confirm("Would you like to name your ship?")){ // Naming Check
-                mainPlayer.PShip.Name = AnsiConsole.Ask<string>("Please enter the name: The ");
+                mainPlayer.PShip.Name = AnsiConsole.Ask<string>("Please enter the broadcast ID: The ");
             }
             else{
                 AnsiConsole.MarkupLine("DEFAULT");

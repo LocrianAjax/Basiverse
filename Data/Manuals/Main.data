@@ -40,7 +40,11 @@ You can fire lasers, that create heat but are garunteed to do damage.
 
 You can fire missiles, that deal more damage than lasers, but might miss and have limited stock.
 
+You can use an EMP Device (If you purchase one) that produces no heat, and does massive shield damage, but cannot hurt the hull
+
 You can activate your heatsink, giving a temporary bonus to heat dissipation.
+
+Additionally you can eject a heat core, a limited use action that completely clears your heat.
 
 If your shields are offline, you can reactivate them giving you 20% capacity back.
 

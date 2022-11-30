@@ -2,7 +2,7 @@ using System;
 using Basiverse;
 using Spectre.Console;
 using System.Threading;
-
+using System.Collections.Generic;
 namespace Basiverse{
 
     class Game{
@@ -123,7 +123,7 @@ namespace Basiverse{
                 }
             }
 
-            choices += "Detailed Report|Options|Manual";
+            choices += "Bounty Hunt|Detailed Report|Options|Manual";
             // Then split on | to create dynamic menu
             string[] options = choices.Split('|');
             string selection = AnsiConsole.Prompt(
@@ -145,8 +145,21 @@ namespace Basiverse{
                     return MiningMenu();
                 case "Manual":
                     return ManualMenu();
+                case "Bounty Hunt":
+                    return HuntingMenu();
             }
             return 0;
+        }
+
+        private int HuntingMenu(){
+            if(FlipACoin()){
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>(GetCombatString(true)).AllowEmpty());
+                return Combat(mainPlayer.GetDifficulty() + 1); // Bounty hunts are more difficult than base
+            }
+            else{
+                var tmp = AnsiConsole.Prompt(new TextPrompt<string>(GetCombatString(false)).AllowEmpty());
+                return 0;
+            }
         }
 
         private int ManualMenu(){
@@ -212,10 +225,8 @@ namespace Basiverse{
                             AnsiConsole.Clear();
                             AnsiConsole.WriteLine("As you exit your jump and prepare to scan the system the shrill sound of an enemy target lock disrupts your thoughts");
                             var tmp = AnsiConsole.Prompt(new TextPrompt<string>("Prepare to fight!").AllowEmpty());
-                            int retval = Combat(mainPlayer.GetDifficulty());
-                            if(retval == -1){
-                                return 0;
-                            }
+                            return Combat(mainPlayer.GetDifficulty());
+
                         }
                         // If we don't do combat, just go back to the normal loop
                         return 0; // After that, return to the loop
@@ -306,7 +317,10 @@ namespace Basiverse{
             // Heat Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{mainPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{mainPlayer.PShip.Heatsink.GetHeatColor(mainPlayer.PShip.HeatVal())}]{mainPlayer.PShip.HeatVal()}[/]%"));
 
-
+            if(mainPlayer.PShip.EMP != null){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.EMP.Name}"), new Markup($"Damage: {mainPlayer.PShip.EMP.Damage}"));
+            }
+            
             // Engine Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Engine.Name}"), new Markup($"Flee Chance: {mainPlayer.PShip.Engine.FleeChance * 100}%"));
             // Laser Status
@@ -345,6 +359,25 @@ namespace Basiverse{
                     OptionsMenu();
                 break;
             }
+        }
+
+        private string GetCombatString(bool sucess){
+            string [] Lines;
+            string type = "1";
+            if(sucess){type = "2";}
+            List<string> selected = new List<string>();
+            Lines = System.IO.File.ReadAllLines("Data//Lore//CombatLines.txt");
+            foreach(string line in Lines){
+                if(!line.Contains("//")){
+                    string[] subs = line.Split('|');
+                    if(subs[1] == type){
+                        selected.Add(subs[0]);
+                    }
+                }
+
+            }
+            var rand = new Random();
+            return selected[rand.Next(0, selected.Count)];
         }
 
         private void RenamePlayer(){
@@ -501,6 +534,17 @@ namespace Basiverse{
                 case "Return":
                     OptionsMenu();
                 break;
+            }
+        }
+
+        private bool FlipACoin(){
+            var Rand = new Random();
+            int temp = Rand.Next(0,2);
+            if(temp == 1){
+                return true;
+            }
+            else{
+                return false;
             }
         }
     }

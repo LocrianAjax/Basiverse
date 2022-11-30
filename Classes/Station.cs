@@ -293,7 +293,10 @@ namespace Basiverse{
             ShipInfo.AddRow(new Markup($"HEATSINK: {inPlayer.PShip.Heatsink.Name}"));
             ShipInfo.AddRow(new Markup($"ENGINE: {inPlayer.PShip.Engine.Name}"));
             ShipInfo.AddRow(new Markup($"LASERS: {inPlayer.PShip.Laser.Name}"));
-            ShipInfo.AddRow(new Markup($"MISSILES: {inPlayer.PShip.Missile.Name}"));         
+            ShipInfo.AddRow(new Markup($"MISSILES: {inPlayer.PShip.Missile.Name}")); 
+            if(inPlayer.PShip.EMP != null){
+                ShipInfo.AddRow(new Markup($"EMP: {inPlayer.PShip.EMP.Name}")); 
+            }        
 
             // Ship info
             Table ShipScreen = new Table();
@@ -305,7 +308,7 @@ namespace Basiverse{
             Table CargoScreen = new Table();
             CargoScreen.Title = new TableTitle("CARGO MANIFEST");
             if(inPlayer.PShip.CargoHold != null){
-                CargoScreen.AddColumns("ITEM","COST", "SIZE");
+                CargoScreen.AddColumns("ITEM","BASE VALUE", "SIZE");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
                     CargoScreen.AddRow($"Name: {item.Name}", $"Cost: {item.Cost}", $"Size: {item.Size}");
                 }
@@ -630,7 +633,7 @@ namespace Basiverse{
             // Cargo Table
             Table CargoScreen = new Table();
             if(inPlayer.PShip.CargoHold != null){
-                CargoScreen.AddColumns("ITEM","COST");
+                CargoScreen.AddColumns("ITEM","COST", "AMOUNT");
                 foreach(Cargo item in inPlayer.PShip.CargoHold){
                     switch(item.Type){ // List the 'Buy' prices here, since that's what the station will pay
                     case 0:
@@ -658,7 +661,7 @@ namespace Basiverse{
                         item.AdjustedPrice = item.Cost * BaseBuyMult * T7BuyMult;
                     break;
                     }
-                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.AdjustedPrice}"));
+                    CargoScreen.AddRow(new Markup($"Name: {item.Name}"), new Markup($"Cost: {item.AdjustedPrice}"), new Markup($"{item.Count}"));
                 }
             }
             else{
@@ -674,7 +677,7 @@ namespace Basiverse{
             foreach(Cargo item in inPlayer.PShip.CargoHold){
                 if(StationBuyList.Contains(item.Type)){
                     SellOpts += item.Name + "|";
-                    ToSell.AddRow($"{item.Name}", $"{item.AdjustedPrice}", $"{item.Count}");
+                    ToSell.AddRow($"{item.Name}", $"{item.AdjustedPrice}");
                 }
             }
             SellOpts += "Return";
@@ -713,21 +716,24 @@ namespace Basiverse{
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Engine.Name} Cost: {inPlayer.PShip.Engine.Cost}"));
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Laser.Name} Cost: {inPlayer.PShip.Laser.Cost}"));
             ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.Missile.Name} Cost: {inPlayer.PShip.Missile.Cost}"));
+            if(inPlayer.PShip.EMP != null){
+                ShipInfo.AddRow(new Markup($"Name: {inPlayer.PShip.EMP.Name} Cost: {inPlayer.PShip.EMP.Cost}"));
+            }
 
             AnsiConsole.Write(ShipInfo);
             string items = "";
             if(Type == "Military"){
-                items = "Lasers|Missiles|Return";
+                items = "Lasers|Missiles|EMP|Return";
             }
             else{
-                items = "Chassis|Shield|Armor|Engine|Heatsink|Missiles|Lasers|Return";
+                items = "Chassis|Shield|Armor|Engine|Heatsink|Missiles|Lasers|EMP|Return";
             }
             string[] options = items.Split('|');
             int pageCount = options.Length + 1;
             if(pageCount <= 3){pageCount = 4;}
             string upgradeCat = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Select an sytem to upgrade:")
-            .PageSize(6)
+            .PageSize(9)
             .AddChoices(options));
 
             if(upgradeCat == "Return"){ return;}
@@ -736,6 +742,10 @@ namespace Basiverse{
 
         public void RestockMenu(Player inPlayer){
             inPlayer.RestockMissiles(5); // Allow restock for $5 per misssile
+        }
+
+        public void RestockHeatCores(Player inPlayer){
+            inPlayer.RestockHeatCores(50);
         }
         
         public void GoblinKing(){
