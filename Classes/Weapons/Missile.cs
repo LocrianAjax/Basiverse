@@ -20,13 +20,5 @@ namespace Basiverse{
         public Missile(){
 
         }
-
     }
-
-    /* Future Ideas: 
-        Cloaking Device
-        Weapons Jammer
-    */
-
-
 }

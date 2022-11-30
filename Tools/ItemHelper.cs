@@ -198,9 +198,27 @@ namespace Basiverse
             Console.WriteLine("Object list created, writing to .bin");
             BinarySerialization.WriteToBinaryFile<List<Chassis>>("Data//chassis.bin", Chassies);
 
+            // EMP
+            Console.WriteLine("Starting EMP Object Creation");
+            List<EMP> EMPs = new List<EMP>();
+            string [] emplines;
+            emplines = System.IO.File.ReadAllLines("Data//EMP.data");
+            foreach(string line in emplines){
+                if(line.Contains("//")){
+                    continue; // Ignore all lines with // in them
+                }
+                else{
+                    string[] subs = line.Split('|');
+                    EMPs.Add(new  EMP(subs[0], Int32.Parse(subs[1]), int.Parse(subs[2])));
+                }
+            }
+            Console.WriteLine("Object list created, writing to .bin");
+            BinarySerialization.WriteToBinaryFile<List<EMP>>("Data//EMP.bin", EMPs);
+
+
             Console.WriteLine("\nComplete, vertifying files exist");
             
-            string[] Locations = new string[] {"hull", "armor", "shield", "heatsink", "laser", "missile", "cargohold", "cargo", "chassis"};
+            string[] Locations = new string[] {"hull", "armor", "shield", "heatsink", "laser", "missile", "cargohold", "cargo", "chassis", "EMP"};
             foreach(string location in Locations){
                 if(File.Exists($"Data//{location}.bin")){
                     Console.WriteLine($"{location}.bin vertified");
@@ -272,6 +290,13 @@ namespace Basiverse
             foreach(Chassis temp in Chassies){
                 Console.WriteLine($"{temp.Name} {temp._Hull.Name} {temp._Cargohold.Name} {temp.Cost} {temp.Description}\n");
             }
+
+            List<EMP> EMPs = BinarySerialization.ReadFromBinaryFile<List<EMP>>("Data//EMP.bin");
+            Console.WriteLine("EMP Data:-");
+            foreach(EMP temp in EMPs){
+                Console.WriteLine($"{temp.Name} {temp.Damage} {temp.Cost}\n");
+            }
+
             AnsiConsole.Write("\nLoad complete. Press Enter to continue....");
             Console.ReadKey();
         }

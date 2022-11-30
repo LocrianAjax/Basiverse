@@ -128,6 +128,10 @@ namespace Basiverse{
             // Weapon Status
             ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.Laser.Damage} Heat Generation {inPlayer.PShip.Laser.Heat}");
             ShipReport.AddRow($"Missiles Damage {inPlayer.PShip.Missile.Damage} Hit Chance {inPlayer.PShip.Missile.HitChance * 100}% Stock {inPlayer.PShip.Missile.Stock}");
+
+            if(inPlayer.PShip.EMP != null){
+                ShipReport.AddRow($"Lasers Damage {inPlayer.PShip.EMP.Damage}");
+            }
             
             // Draw the player ship
             if(inPlayer.PShip.Shield.IsOnline){

@@ -24,6 +24,8 @@ namespace Basiverse{
         public Missile Missile{ get {return _missiles;} set {_missiles = value;}}
         private Laser _lasers;
         public Laser Laser{ get {return _lasers;} set {_lasers = value;}}
+        private EMP _emp;
+        public EMP EMP{ get {return _emp;} set {_emp = value;}}
         private Engine _engine;
         public Engine Engine{ get {return _engine;} set {_engine = value;}}
         private CargoHold _hold;
@@ -38,6 +40,8 @@ namespace Basiverse{
             _hull = new Hull("Basic Pressure Hull", 50, 25);  // Set Default Hull
             
             _armor = new Armor("None", 0, 0);
+
+            _emp = null;
 
             _shield = new Shield("Basicorps Asteroid-B-Gone", 30, 0);
 
@@ -96,10 +100,6 @@ namespace Basiverse{
             Console.WriteLine("Weapons Report -\n\nLasers:\nName: {0}\nDamage: {1}\nHeat Production: {2}\n\nMissiles:\nName: {3}\nHit Chance: {4}%\nStock: {5}\n", _lasers.Name, _lasers.Damage, _lasers.Heat, _missiles.Name, _missiles.HitChance * 100, _missiles.Stock);
             Console.WriteLine("Cargo Manifest - \nName: {0}\nSize: {1}m3\nAvailable Space: {2}m3\n", _hold.Name, _hold.MaxSize, (_hold.MaxSize - _hold.CurrentSize));
             Console.WriteLine("\nEnd Manifest");
-        }
-
-        public void Dashboard(){
-            Console.WriteLine();
         }
 
         public int FireLaser(){ // Adds heat and returns damage
@@ -199,6 +199,14 @@ namespace Basiverse{
             }
             else{ // Otherwise just deal damage to the hull directly
                 HullDamage(damage);
+            }
+        }
+
+        public void TakeShieldDamage(int damage){ // Damages just the shield, no overflow to the hull
+            _shield.ShieldVal -= damage;
+            if(_shield.ShieldVal <= 0){
+                _shield.ShieldVal = 0;
+                _shield.IsOnline = false;
             }
         }
 
