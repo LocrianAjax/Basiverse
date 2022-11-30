@@ -270,6 +270,9 @@ namespace Basiverse{
                         return;
                     }
                     else{
+                        if(PShip.EMP == null){
+                            PShip.EMP = new EMP();
+                        }
                         PShip.EMP = inEMP;
                         Money -= inEMP.Cost;
                         return;   

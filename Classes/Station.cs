@@ -293,7 +293,10 @@ namespace Basiverse{
             ShipInfo.AddRow(new Markup($"HEATSINK: {inPlayer.PShip.Heatsink.Name}"));
             ShipInfo.AddRow(new Markup($"ENGINE: {inPlayer.PShip.Engine.Name}"));
             ShipInfo.AddRow(new Markup($"LASERS: {inPlayer.PShip.Laser.Name}"));
-            ShipInfo.AddRow(new Markup($"MISSILES: {inPlayer.PShip.Missile.Name}"));         
+            ShipInfo.AddRow(new Markup($"MISSILES: {inPlayer.PShip.Missile.Name}")); 
+            if(inPlayer.PShip.EMP != null){
+                ShipInfo.AddRow(new Markup($"EMP: {inPlayer.PShip.EMP.Name}")); 
+            }        
 
             // Ship info
             Table ShipScreen = new Table();

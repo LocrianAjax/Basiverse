@@ -185,6 +185,9 @@ namespace Basiverse{
             if(inPlayer.PShip.Laser != null){
                 opts += "Fire Lasers|";
             }
+            if(inPlayer.PShip.EMP != null){
+                opts += "Fire EMP|";
+            }
             if(inPlayer.PShip.Missile.Stock > 0){
                 opts += "Fire Missiles|";
             }
@@ -239,6 +242,10 @@ namespace Basiverse{
                 break;
                 case "Eject HeatCore":
                     inPlayer.PShip.EjectHeatCore(true);
+                break;
+                case "Fire EMP":
+                    NPC.cShip.TakeShieldDamage(inPlayer.PShip.EMP.Damage);
+                    AnsiConsole.Write(new Markup($"Dealt {inPlayer.PShip.EMP.Damage} shield damage!\n"));
                 break;
                 case "Flee":
                     if(inPlayer.PShip.Flee()){

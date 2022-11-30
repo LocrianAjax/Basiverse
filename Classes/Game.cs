@@ -317,7 +317,10 @@ namespace Basiverse{
             // Heat Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Heatsink.Name}"), new Markup($"{mainPlayer.PShip.Heatsink.GetOnlineStr()} Heat Soak - [{mainPlayer.PShip.Heatsink.GetHeatColor(mainPlayer.PShip.HeatVal())}]{mainPlayer.PShip.HeatVal()}[/]%"));
 
-
+            if(mainPlayer.PShip.EMP != null){
+                ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.EMP.Name}"), new Markup($"Damage: {mainPlayer.PShip.EMP.Damage}"));
+            }
+            
             // Engine Status
             ReportScreen.AddRow(new Markup($"{mainPlayer.PShip.Engine.Name}"), new Markup($"Flee Chance: {mainPlayer.PShip.Engine.FleeChance * 100}%"));
             // Laser Status
