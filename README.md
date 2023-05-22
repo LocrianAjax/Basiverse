@@ -28,13 +28,13 @@ Intro screens for the game and on startup
 
 Minigame for mining
 
+Variable asteroid sizes and health values
+
 UI Tweaks for readability
 
 "Manual" for various things
 
 TODO:
-
-Variable asteroid sizes and health values
 
 Error Handling
 
