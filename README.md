@@ -1,8 +1,3 @@
-Basiverse pre-alpha. Basic text game to keep me doing something
-
-Will start branching once a basic v0.1 alpha is semi-playable
-
-
 BUGS:
 
 
@@ -33,6 +28,8 @@ Variable asteroid sizes and health values
 UI Tweaks for readability
 
 "Manual" for various things
+
+Variable asteroid sizes and health values
 
 TODO:
 
